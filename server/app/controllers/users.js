@@ -13,8 +13,8 @@ function firemail(reqdata) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'hardiktestmail24@gmail.com',
-            pass: 'hardiktest'
+            user: '',//yourmailaddress
+            pass: ''//yourmailpassword
         }
     });
     rand = Math.floor((Math.random() * 100) + 54);
@@ -22,7 +22,7 @@ function firemail(reqdata) {
     link = "http://" + host + "/api/users/verify?id=" + rand+'&email='+reqdata.body.username;
 
     var mailOptions = {
-        from: 'hardiktestmail24@gmail.com',
+        from: 'yourmailaddress',
         to: reqdata.body.username,
         subject: 'Sending Email using Node.js',
         //text: 'That was easy!'

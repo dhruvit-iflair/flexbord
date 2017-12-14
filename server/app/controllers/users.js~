@@ -1,3 +1,6 @@
+/*
+Created By : Hardik Lakhani(hardik.lakhani@iflair.com)
+*/
 var mongoose = require('mongoose');
 var Users = mongoose.model('users');
 var passport = require('passport');
