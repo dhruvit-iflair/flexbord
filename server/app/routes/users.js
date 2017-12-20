@@ -13,6 +13,8 @@ module.exports=function(app){
     .post(users.upload);
     usersRoute.route('/verify')
     .get(users.verify);
+    usersRoute.route('/resetpwd')
+    .post(users.resetpwd);
     usersRoute.route('/:id')
     .get(users.getbyuser)
     .patch(users.update)

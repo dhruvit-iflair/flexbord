@@ -13,8 +13,8 @@ function firemail(reqdata) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: '',//yourmailaddress
-            pass: ''//yourmailpassword
+            user: '',//http://192.168.1.101:4200yourmailaddress
+            pass: ''//hardiktestyourmailpassword
         }
     });
     rand = Math.floor((Math.random() * 100) + 54);
@@ -22,7 +22,7 @@ function firemail(reqdata) {
     link = "http://" + host + "/api/users/verify?id=" + rand+'&email='+reqdata.body.username;
 
     var mailOptions = {
-        from: 'yourmailaddress',
+        from: '',
         to: reqdata.body.username,
         subject: 'Sending Email using Node.js',
         //text: 'That was easy!'
@@ -142,6 +142,22 @@ usersctrl.prototype.update = function (req, res) {
     });
 }
 
+usersctrl.prototype.resetpwd = function (req,res) {
+    Users.findByUsername(req.body.username).then(function(sanitizedUsr){
+        if(sanitizedUsr){
+            var newPwd='1234567';
+            sanitizedUsr.setPassword(newPwd,function(){
+                sanitizedUsr.save();
+                res.json('Password Reset Successfully.');
+            });
+        }
+        else{
+            res.json('This User does not exist!');
+        }
+    },function(errpt){
+        console.log(errpt);
+    });
+}
 usersctrl.prototype.delete = function (req, res) {
     Users.findByIdAndRemove({ _id: req.params.id }, function (er, dt) {
         if (er) {

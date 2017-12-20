@@ -1,0 +1,28 @@
+  <div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div>
+    <select class="form-control" [(ngModel)]="rUser.role" name="role">  
+    <option selected="true" value="">Select Role</option>  
+    <option value="{{k._id}}" *ngFor="let k of roleList">
+    {{k.title}}  
+    </option>  
+  </select>
+  </div>
+  <div style="margin-top:20%;">
+    <table border="1px solid gray;" style="margin-left:20%;">
+        <tr>
+          <td>Overall</td>
+          <td *ngFor="let i of roleList"><span>{{i.title}}</span></td>
+        </tr>
+        <tbody>
+        <tr *ngFor="let p of pages;let x=index;">
+          <td>{{p.title}}</td>
+          <td><input type="checkbox" [(ngModel)]="perms.create" value="" /></td>
+          <td><input type="checkbox" [(ngModel)]="perms.read" value="" /></td>
+        </tr>
+        </tbody>
+    </table>
+  </div>
+  <div style="margin-top:5%;">
+    <button type="submit" (click)="fired(perms)">submit</button>
+  </div>
+</div>

@@ -8424,6 +8424,12 @@ body.md-skin {
   position: fixed;
   display: none;
 }
+
+.gologo{
+  font-size: 70px !important;
+  letter-spacing: -4px !important;
+}
+
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
