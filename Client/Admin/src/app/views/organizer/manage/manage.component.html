@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-12">
+    <label><h2>Manage Organizer</h2></label>
+  </div>
+
+      <div class="man col-md-6">
+          <div class="col-md-3"><h4 class="text-right">Full Name<a style="color:#f00 !important;">*</a></h4></div>
+          <div class="col-md-3">
+            <input class="text-col-md-3" type="text" name="" id="">
+          </div>
+      </div>
+      <div class="man col-md-6">
+          <div class="col-md-3"><h4 class="text-right">Sub domain<a style="color:#f00 !important;">*</a></h4></div>
+          <div class="col-md-3">
+            <input class="text-col-md-3" type="text" name="" id="">
+          </div>
+      </div>
+      <div class="man col-md-6">
+          <div class="col-md-3"><h4 class="text-right">Abbreviation<a style="color:#f00 !important;">*</a></h4></div>
+          <div class="col-md-3">
+            <input class="text-col-md-3" type="text" name="" id="">
+          </div>
+      </div>
+      <div class="man col-md-6">
+          <div class="col-md-3"><h4 class="text-right">Affiliated</h4></div>
+          <div class="col-md-3">
+            <!-- <input class="text-col-md-3" type="text" name="" id=""> -->
+            <select class="js-example-basic-single text-col-md-3" [(ngModel)]="value" name="state">
+                <option *ngFor="let ite of items"  [value]="ite.id">{{ite.name}}</option>
+            </select>
+          </div>
+      </div>
+      <div class="man col-md-6">
+          <div class="col-md-3"><h4 class="text-right">Logo</h4></div>
+          <div class="col-md-3">
+              <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)">
+              <button class="btn btn_green" (click)="file.click()"> Upload</button>                
+          </div>
+          <div class="col-md-4" *ngIf="url" >
+              <img [src]="url" class="image_display">               
+          </div>
+          <div class="col-md-2">
+          </div>
+      </div>
+</div>
+
