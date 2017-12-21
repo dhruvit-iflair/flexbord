@@ -31,10 +31,8 @@ export class SetupComponent implements OnInit {
     
   }
   change(event){
-    console.log(event.target.checked);
     if (event.target.checked) {
-      jQuery('.js-example-basic-single').val('').trigger('change')
-      ;
+      jQuery('.js-example-basic-single').val('').trigger('change');
     }
   }
   assign(e){

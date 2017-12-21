@@ -27,7 +27,7 @@ ngOnInit(){
         data => {
           this.toastr.success('Login Successfully.', 'Success');
           localStorage.setItem('uToken', JSON.stringify(data));
-          this.router.navigate(['/mainView']);
+          this.router.navigate(['/profilesetup']);
         },
         error => {
           this.toastr.error('is incorrect', 'Email/Password');

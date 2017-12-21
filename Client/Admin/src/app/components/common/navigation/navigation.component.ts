@@ -9,9 +9,14 @@ declare var jQuery:any;
 })
 
 export class NavigationComponent {
-
+public loggedinUser;
     constructor(private router: Router) {}
-
+    ngOnInit(){
+        if(localStorage.getItem('uToken')){
+            var x=JSON.parse(localStorage.getItem('uToken'));
+            this.loggedinUser=x.user.username;
+        }
+    }
     ngAfterViewInit() {
         jQuery('#side-menu').metisMenu();
     }

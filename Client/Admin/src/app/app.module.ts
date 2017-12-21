@@ -21,10 +21,16 @@ import {ResetpasswordModule} from "./views/resetpassword/resetpassword.module";
 // App modules/components
 import {LayoutsModule} from "./components/common/layouts/layouts.module";
 import { ProfileModule } from "./views/profile/profile.module";
+import { OrganizerComponent } from './views/organizer/organizer.component';
+import { ManageOrganizerComponent } from './views/organizer/manage/manage.component';
+import { SportsComponent } from './views/sports/sports.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    OrganizerComponent,
+    ManageOrganizerComponent,
+    SportsComponent,
   ],
   imports: [
     // Angular modules
@@ -49,7 +55,7 @@ import { ProfileModule } from "./views/profile/profile.module";
 
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy,},Auth24Guard],
+  providers: [Auth24Guard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
