@@ -7,26 +7,27 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var multer = require('multer');
 var path = require('path');
+var settings=require('../../config/config.js');
 var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: settings.Imailer,
+        pass: settings.mailToken
+    }
+});
 var rand, mailOpt, host, link;
-function firemail(reqdata) {
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: '',//http://192.168.1.101:4200yourmailaddress
-            pass: ''//hardiktestyourmailpassword
-        }
-    });
-    rand = Math.floor((Math.random() * 100) + 54);
+function firevmail(reqdata) {
+    rand = Math.floor((Math.random() * 100) + 8157927);
     host = reqdata.get('host');
-    link = "http://" + host + "/api/users/verify?id=" + rand+'&email='+reqdata.body.username;
+    link = "http://" + host + "/api/users/verify?id=" + rand + '&email=' + reqdata.body.username;
 
     var mailOptions = {
-        from: '',
+        from: settings.Imailer,
         to: reqdata.body.username,
-        subject: 'Sending Email using Node.js',
+        subject: 'Verification mail!!!',
         //text: 'That was easy!'
-        html: '<h1>Welcome Folks!!</h1><br><br><a href=' + link + '>Click here to Verify your account!</a>'
+        html: '<h1>Hello!  ' + reqdata.body.username + ' !!</h1><br><br><br><a href=' + link + '>Click here to Verify your account!</a>'
     };
     mailOpt = mailOptions;
     transporter.sendMail(mailOptions, function (error, info) {
@@ -55,7 +56,7 @@ usersctrl.prototype.create = function (req, res) {
         else {
             passport.authenticate('local')(req, res, function () {
                 //res.json('User Registered Successfully.');
-                firemail(req);
+                firevmail(req);
                 res.json('User Registered Successfully.Please Verify your account to Login.');
             });
         }
@@ -67,14 +68,14 @@ usersctrl.prototype.verify = function (req, res, next) {
         console.log("Domain is matched. Information is from Authentic email");
         if (req.query.id == rand) {
             console.log("email is verified");
-             var updateObject = {isVerified:'true'};
-             Users.findOneAndUpdate({username:req.query.email},{ $set: updateObject }, function (er, dt) {
+            var updateObject = { isVerified: 'true' };
+            Users.findOneAndUpdate({ username: req.query.email }, { $set: updateObject }, function (er, dt) {
                 if (er) {
                     console.log('error occured..' + er);
                 }
                 else {
-                    //return res.json(dt);
-                    res.end("<h1>Email " + mailOpt.to + " is been successfully verified.");
+                    //return res.json(dt);setTimeout("window.location.href='http://192.168.1.101:4200'",5000);
+                    res.end("<h1>Email " + mailOpt.to + " is been successfully verified.<script>setTimeout('window.location.href=`http://192.168.1.101:4200`',5000);</script>");
                 }
             });
         }
@@ -142,19 +143,32 @@ usersctrl.prototype.update = function (req, res) {
     });
 }
 
-usersctrl.prototype.resetpwd = function (req,res) {
-    Users.findByUsername(req.body.username).then(function(sanitizedUsr){
-        if(sanitizedUsr){
-            var newPwd='1234567';
-            sanitizedUsr.setPassword(newPwd,function(){
+usersctrl.prototype.resetpwd = function (req, res) {
+    Users.findByUsername(req.body.username).then(function (sanitizedUsr) {
+        var npd = Math.random().toString(36).substring(2);
+        if (sanitizedUsr) {            
+            sanitizedUsr.setPassword(npd, function () {
                 sanitizedUsr.save();
+                var mailOptions = {
+                    from: settings.Imailer,
+                    to: req.body.username,
+                    subject: 'Reset Password!',
+                    html: '<h1>Hello!  ' + req.body.username + ' !!</h1><br><br><br>Your new Password is :: ' + npd
+                };
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Email sent: ' + info.response);
+                    }
+                });
                 res.json('Password Reset Successfully.');
             });
         }
-        else{
+        else {
             res.json('This User does not exist!');
         }
-    },function(errpt){
+    }, function (errpt) {
         console.log(errpt);
     });
 }

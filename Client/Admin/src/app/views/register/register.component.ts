@@ -22,7 +22,7 @@ constructor(private router: Router, private http: HttpClient, private toastr:Toa
        if(data.username!='' && data.password!='' && data.cpassword!='' && data.isAgreemented!==false){
            this.http.post(environment.api+'/users',data)
            .subscribe(dt=>{
-               this.toastr.success('User Registered Successfully.', 'Success');
+               this.toastr.success('User Registered Successfully. Please Check your mailbox..', 'Verify your Account!');
                this.router.navigate(['/login']);
            });
 
