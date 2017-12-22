@@ -8,6 +8,7 @@ import {LocationStrategy, HashLocationStrategy,CommonModule} from '@angular/comm
 import { ToastrModule } from 'ngx-toastr';
 import {ROUTES} from "./app.routes";
 import { AppComponent } from './app.component';
+import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Auth24Guard } from "./components/common/guard/auth24.guard";
 
@@ -40,6 +41,7 @@ import { SportsComponent } from './views/sports/sports.component';
     CommonModule,
     FormsModule,
     BrowserAnimationsModule,
+    Ng4GeoautocompleteModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3500,
     }),

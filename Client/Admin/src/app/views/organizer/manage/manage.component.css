@@ -32,3 +32,7 @@ img.image_display {
     border-radius: 100px;
     height: 100px;
 }
+#search_places {
+    height: 35px;
+    width: 252px;
+  }
