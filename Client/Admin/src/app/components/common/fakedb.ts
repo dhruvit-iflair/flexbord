@@ -68,6 +68,25 @@ org : [{
             subdomain:"nba",
             website:"http://www.nba.com",
             zipcode:"07094"    
+        }],
+sport : [{
+            id:1,
+            name:"Basketball"
+        },
+        {
+            id:2,
+            name:"Table Tennis"
+        },
+        {
+            id:3,
+            name:"Boxing"
+        },
+        {
+            id:4,
+            name:"Golf"
+        },
+        {
+            id:5,
+            name:"Cricket"
         }]
-    
 }
