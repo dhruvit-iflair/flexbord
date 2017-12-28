@@ -5,8 +5,10 @@ module.exports=function(){
     return config={
         "dbName":"flexboard",
         "connection":"mongodb://127.0.0.1/",
-        "Imailer":"iflairtechnologyhardik108@gmail.com",
-        "mailToken":"hardik108",
+        "Imailer":"shivani.bisht@iflair.com",
+        "mailToken":"p?~exbz9rb/HyBsZ",
+        "host":"mail.iflair.com",
+        "mailPort": 587,
         "serverPort":"5002"
     }
 }();

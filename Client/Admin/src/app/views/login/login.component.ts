@@ -17,7 +17,11 @@ export class loginComponent {
 constructor(private router: Router, private http: HttpClient, private toastr:ToastrService) { }
 ngOnInit(){
   if(localStorage.getItem('uToken')){
-    localStorage.removeItem('uToken');
+    // localStorage.removeItem('uToken');
+    // var alford = JSON.parse(localStorage.getItem('uToken'));
+    // if (alford.user.isVerified == false) {
+    //   this.toastr.warning('Account Not Verified', 'Please verify your Account.');
+    // }
   }
 }
     login(credential) {
@@ -25,9 +29,16 @@ ngOnInit(){
       this.http.post(environment.api + '/login', credential)
         .subscribe(
         data => {
-          this.toastr.success('Login Successfully.', 'Success');
           localStorage.setItem('uToken', JSON.stringify(data));
-          this.router.navigate(['/profilesetup']);
+          // this.router.navigate(['/profilesetup']);
+          var alford = JSON.parse(localStorage.getItem('uToken'));
+          if (alford.user.isVerified == false) {
+            this.toastr.warning('Account Not Verified', 'Please verify your Account.');
+          }
+          else{
+            this.toastr.success('Login Successfully.', 'Success');
+            this.router.navigate(['/profilesetup']);
+          }
         },
         error => {
           this.toastr.error('is incorrect', 'Email/Password');

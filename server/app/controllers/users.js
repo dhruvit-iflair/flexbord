@@ -10,7 +10,9 @@ var path = require('path');
 var settings=require('../../config/config.js');
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host : settings.host,
+    port: settings.mailPort,
+    secure: false, 
     auth: {
         user: settings.Imailer,
         pass: settings.mailToken
