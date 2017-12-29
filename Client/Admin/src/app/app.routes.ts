@@ -9,6 +9,7 @@ import {blankComponent} from "./components/common/layouts/blank.component";
 import {basicComponent} from "./components/common/layouts/basic.component";
 import { Auth24Guard } from "./components/common/guard/auth24.guard";
 import { ManageOrganizerComponent } from './views/organizer/manage/manage.component';
+import { OrganizerComponent } from "./views/organizer/organizer.component";
 
 export const ROUTES:Routes = [
   // Main redirect
@@ -21,7 +22,9 @@ export const ROUTES:Routes = [
       // {path: 'mainView', component: mainViewComponent, canActivate: [Auth24Guard]},
       // {path: 'minorView', component: minorViewComponent, canActivate: [Auth24Guard]},
       {path: 'profilesetup', component: SetupComponent, canActivate: [Auth24Guard]},
-      {path: 'organizer', component: ManageOrganizerComponent, canActivate: [Auth24Guard]}
+      // {path: 'organizer', component: ManageOrganizerComponent, canActivate: [Auth24Guard]}
+      {path: 'organizer', component: OrganizerComponent,canActivate: [Auth24Guard]},
+      {path: 'organizer/manage', component: ManageOrganizerComponent , canActivate: [Auth24Guard]}
     ]
   },
   {

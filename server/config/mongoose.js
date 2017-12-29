@@ -22,6 +22,7 @@ module.exports = function () {
     });
     require('../app/models/users');
     require('../app/models/roles');
+    require('../app/models/organizer');
 
     return db;
 }

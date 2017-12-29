@@ -7,26 +7,26 @@
       <div class="man col-md-6">
           <div class="col-md-3"><h4 class="text-right">Full Name<a style="color:#f00 !important;">*</a></h4></div>
           <div class="col-md-3">
-            <input class="text-col-md-3" type="text" name="" id="">
+            <input class="text-col-md-3" type="text" name="" id="" [(ngModel)]="orgdata.name">
           </div>
       </div>
       <div class="man col-md-6">
           <div class="col-md-3"><h4 class="text-right">Sub domain<a style="color:#f00 !important;">*</a></h4></div>
           <div class="col-md-3">
-            <input class="text-col-md-3" type="text" name="" id="">
+            <input class="text-col-md-3" type="text" name="" id="" [(ngModel)]="orgdata.subDomain">
           </div>
       </div>
       <div class="man col-md-6">
           <div class="col-md-3"><h4 class="text-right">Abbreviation<a style="color:#f00 !important;">*</a></h4></div>
           <div class="col-md-3">
-            <input class="text-col-md-3" type="text" name="" id="">
+            <input class="text-col-md-3" type="text" name="" id="" [(ngModel)]="orgdata.abbreviation">
           </div>
       </div>
       <div class="man col-md-6">
           <div class="col-md-3"><h4 class="text-right">Affiliated</h4></div>
           <div class="col-md-3">
             <!-- <input class="text-col-md-3" type="text" name="" id=""> -->
-            <select class="js-example-basic-single text-col-md-3" [(ngModel)]="value" name="state">
+            <select class="js-example-basic-single text-col-md-3" [(ngModel)]="value" name="state" (setData)="dataChanged($event,'affilated')"  placeholder="Select Organization" select2>
                 <option *ngFor="let ite of items"  [value]="ite.id">{{ite.name}}</option>
             </select>
           </div>
@@ -43,9 +43,9 @@
           <div class="col-md-2">
           </div>
       </div>
-</div>
+<!-- </div>
 
-<div class="row">
+<div class="row"> -->
         <div class="col-md-12">
             <div class="col-md-6">
                 <label><h2>Location</h2></label>
@@ -94,7 +94,7 @@
      
             <div class="man col-md-4"><h4 class="text-right">Capacity</h4></div>
             <div class="man col-md-8">
-                <input class="text-col-sm-3"  type="text" name="" id="">
+                <input class="text-col-sm-3"  type="text" name="" id=""  [(ngModel)]="orgdata.capacity">
             </div>
      
             <div class="man col-md-4"><h4 class="text-right">Place Pic</h4></div>
@@ -135,7 +135,7 @@
                         </div>
                         <div class="man col-md-4"><h4 class="text-right">Choose</h4></div>
                         <div class="man col-md-8">
-                            <select class="spt text-col-md-3" [(ngModel)]="value2" name="spot" multiple="multiple">
+                            <select class="spt text-col-md-3" [(ngModel)]="value2" name="spot" multiple="multiple"  (setData)="dataChanged($event,'sport')" selectedValves={{value2}} options={{spots}} placeholder="Select Sports" select2>
                                 <option *ngFor="let ite of spots"  [value]="ite.id">{{ite.name}}</option>
                             </select>
                         </div>
@@ -145,13 +145,26 @@
                                 </div>                                
                         </div>
                         <div class="man col-md-12">
-                            <div class="col-md-1"><input type="radio" name="affiliation" id=""></div>
+                            <div class="col-md-1"><input type="radio" name="affiliation" id="" value="opened" [(ngModel)]="orgdata.affilation"></div>
                             <div class="col-md-4">Opened</div>
                         
-                            <div class="col-md-1"><input type="radio" name="affiliation" id=""></div>
+                            <div class="col-md-1"><input type="radio" name="affiliation" id="" value="closed" [(ngModel)]="orgdata.affilation"></div>
                             <div class="col-md-4">Closed</div>    
                         </div>
         </div>
 </div>
 </div>
+<div class="col-md-12">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <button class="btn" [routerLink]="['/organizer']">Back</button>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <button class="btn btn_green" (click)='addOrg()'>Save</button>        
+            <!-- [disabled]='!orgForm.valid' -->
+        </div>
+        <div class="col-md-2"></div>   
+</div>
 
+<div class="man col-md-12"></div>   

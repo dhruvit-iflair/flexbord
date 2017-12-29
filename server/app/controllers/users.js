@@ -25,7 +25,7 @@ function firevmail(reqdata) {
     link = "http://" + host + "/api/users/verify?id=" + rand + '&email=' + reqdata.body.username;
 
     var mailOptions = {
-        from: settings.Imailer,
+        from: "no-replay@flexboard.com",
         to: reqdata.body.username,
         subject: 'Verification mail!!!',
         //text: 'That was easy!'

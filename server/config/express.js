@@ -35,6 +35,6 @@ module.exports = function (db) {
 
     require('../app/routes/users')(app);
     require('../app/routes/roles')(app);
-    
+    require('../app/routes/organizer')(app);
     return server;
 };

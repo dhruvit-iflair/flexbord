@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Auth24Guard } from "./components/common/guard/auth24.guard";
+import { PaginationModule } from "ng2-bootstrap";
+import {Ng2TableModule} from 'ng2-table';
 
 // App views
 import {MainViewModule} from "./views/main-view/main-view.module";
@@ -19,12 +21,13 @@ import {LoginModule} from "./views/login/login.module";
 import {RegisterModule} from "./views/register/register.module";
 import {ResetpasswordModule} from "./views/resetpassword/resetpassword.module";
 
-// App modules/components
+// App modules/components/directives
 import {LayoutsModule} from "./components/common/layouts/layouts.module";
 import { ProfileModule } from "./views/profile/profile.module";
 import { OrganizerComponent } from './views/organizer/organizer.component';
 import { ManageOrganizerComponent } from './views/organizer/manage/manage.component';
 import { SportsComponent } from './views/sports/sports.component';
+import { Dir_select } from "./components/directive/select2";
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { SportsComponent } from './views/sports/sports.component';
     OrganizerComponent,
     ManageOrganizerComponent,
     SportsComponent,
+    Dir_select,
   ],
   imports: [
     // Angular modules
@@ -45,6 +49,8 @@ import { SportsComponent } from './views/sports/sports.component';
     ToastrModule.forRoot({
       timeOut: 3500,
     }),
+    PaginationModule.forRoot(),
+    Ng2TableModule,
     // Views
     MainViewModule,
     MinorViewModule,
