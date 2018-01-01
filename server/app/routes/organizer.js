@@ -14,5 +14,9 @@ module.exports=function(app){
                 .post(organizer.logo);
         organizerRoute.route('/upload')
                 .post(organizer.upload);
+        organizerRoute.route('/:id')
+                .get(organizer.getbyid)
+                .put(organizer.update)
+                .delete(organizer.delete);
     app.use('/api/organizer',organizerRoute);
 };

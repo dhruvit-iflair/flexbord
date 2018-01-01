@@ -36,14 +36,12 @@ export class ManageOrganizerComponent implements OnInit {
     this.spots = fakedb.sport;
   }
   readUrl(event:any) {
-    console.log(event);
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
       let up = new FormData();
       up.append('logo', file);
       this.http.post(environment.api+"/organizer/logo",up)  
             .subscribe((res) => {  
-               console.log(res);                 
                if (res) {
                  var log  = res.json();
                  this.orgdata.logo = log;
@@ -64,7 +62,6 @@ export class ManageOrganizerComponent implements OnInit {
       up.append('placePic', file);
       this.http.post(environment.api+"/organizer/upload",up)  
             .subscribe((res) => {  
-               console.log(res);                 
                if (res) {
                  var log  = res.json();
                  this.orgdata.placePic = log;
@@ -85,7 +82,6 @@ export class ManageOrganizerComponent implements OnInit {
   }
    autoCompleteCallbackHL(selectedData:any) {
      this.fieldClear();
-        console.log(selectedData.data.description);
         this.orgdata.address = selectedData.data.description;
         this.orgdata.zipcode=selectedData.data.address_components[selectedData.data.address_components.length-1].long_name;
         this.orgdata.country=selectedData.data.address_components[selectedData.data.address_components.length-2].long_name;
@@ -100,20 +96,15 @@ export class ManageOrganizerComponent implements OnInit {
     dataChanged(e,c){
       if (c == 'sport') {
         this.orgdata.sports = e;
-        console.log(this.orgdata.sports);  
-        console.log(e);  
       }
       else {
         this.orgdata.affilated = e ;
-        console.log(this.orgdata.affilated);  
-        console.log(e);  
       }
     }
     addOrg(){
       console.log(this.orgdata);
       this.http.post(environment.api +"/organizer",this.orgdata)
       .subscribe((res)=>{
-        // console.log(res.json());
         var d = res.json();
         if (d._id) {
           this.toastr.success('Organizer Registered Successfully', 'Success');

@@ -84,5 +84,33 @@ organizerCtrl.prototype.list = function (req, res) {
         });
 }
 
+organizerCtrl.prototype.getbyid = function (req, res) {
+    Organizer.find({_id:req.params.id}).exec(function (err, usrrs) {
+        if (err) console.log('error occured..' + err);
+        res.json(usrrs); 
+    });
+}
+
+organizerCtrl.prototype.update = function (req, res) {
+    Organizer.findByIdAndUpdate({_id:req.params.id},req.body,{new:true},function (er, dt) {
+            if (er) {
+                console.log('error occured..' + er);
+            }
+            else {
+                return res.json(dt);
+            }
+        });
+}
+
+organizerCtrl.prototype.delete = function (req, res) {
+    Organizer.findByIdAndRemove({_id:req.params.id},function (er, dt) {
+            if (er) {
+                console.log('error occured..' + er);
+            }
+            else {
+                return res.json(dt);
+            }
+        });
+}
 
 module.exports = new organizerCtrl();

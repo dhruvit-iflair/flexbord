@@ -25,8 +25,21 @@
     margin-bottom: 10px;
 }
 
-button.btn.btn_green {
+a.btn.btn_green button.btn.btn_green {
     background-color: #089468;
     color: #fff;
     margin-top: 15px;
+}
+.btn_green {
+    background-color: #089468;
+    color: #fff;
+    margin-top: 15px;
+}
+a.btn.btn_green.tab_btn {
+    background-color: #089468;
+    color: #fff;
+}
+ .btn_red {
+    background-color: #f55f5f;
+    color: #fff;
 }
