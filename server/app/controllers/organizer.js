@@ -27,7 +27,7 @@ organizerCtrl.prototype.upload = function (req, res, next) {
     var list = [];
     var storage = multer.diskStorage({
         destination: function (req, file, callback) {
-            callback(null, path.join(__dirname, '../../uploads'));
+            callback(null, path.join(__dirname, '../../uploads/orgplacepics'));
         },
         filename: function (req, file, callback) {
             var ext = file.originalname.split('.');
@@ -51,7 +51,7 @@ organizerCtrl.prototype.upload = function (req, res, next) {
 organizerCtrl.prototype.logo = function (req, res, next) {
     var storage = multer.diskStorage({
         destination: function (req, file, callback) {
-            callback(null, path.join(__dirname, '../../uploads'));
+            callback(null, path.join(__dirname, '../../uploads/orglogos'));
         },
         filename: function (req, file, callback) {
             var ext = file.originalname.split('.');

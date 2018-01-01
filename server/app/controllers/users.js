@@ -25,7 +25,7 @@ function firevmail(reqdata) {
     link = "http://" + host + "/api/users/verify?id=" + rand + '&email=' + reqdata.body.username;
 
     var mailOptions = {
-        from: "no-replay@flexboard.com",
+        from: settings.fromImailer,
         to: reqdata.body.username,
         subject: 'Verification mail!!!',
         //text: 'That was easy!'
@@ -152,7 +152,7 @@ usersctrl.prototype.resetpwd = function (req, res) {
             sanitizedUsr.setPassword(npd, function () {
                 sanitizedUsr.save();
                 var mailOptions = {
-                    from: settings.Imailer,
+                    from: settings.fromImailer,
                     to: req.body.username,
                     subject: 'Reset Password!',
                     html: '<h1>Hello!  ' + req.body.username + ' !!</h1><br><br><br>Your new Password is :: ' + npd

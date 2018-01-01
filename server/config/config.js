@@ -9,6 +9,7 @@ module.exports=function(){
         "mailToken":"p?~exbz9rb/HyBsZ",
         "host":"mail.iflair.com",
         "mailPort": 587,
+        "fromImailer": "no-reply@flexbord.com",
         "serverPort":"5002"
     }
 }();
