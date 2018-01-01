@@ -13,6 +13,7 @@
         <br>
             <ng-table [config]="config.sorting"
                       (tableChanged)="onChangeTable(config)"
+                      (cellClicked)="onMyCellClick(data, originalClickTarget)"
                       [rows]="rows" [columns]="columns">
             </ng-table>
       </div>

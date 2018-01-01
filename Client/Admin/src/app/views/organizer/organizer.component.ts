@@ -16,9 +16,10 @@ public data:Array<any> =[] ;
 public columns:Array<any> = [
   {title: 'Logo', name: 'logo', sort: false},
   {title: 'Name', name: 'name', sort: false},
+  {title: 'Address', name: 'city', sort: false},
   {title: 'Registered', name: 'registered', sort: false},
   {title: 'Owner', name: 'email', sort: false},
-  {title: 'Action', name: '_id', sort: false}
+  // {title: 'Action', name: 'button', sort: false}
 ];
 public page:number = 1;
 public itemsPerPage:number = 10;
@@ -37,24 +38,26 @@ public config:any = {
     this.http.get(environment.api + "/organizer")
            .subscribe((res)=>{
              this.rows= res.json();
-              // for(var i = 0; i<y.length; i++){
-              //   this.data.push(y[i]);
-              // }
+              if (this.rows) {
+                this.rows.forEach(item => {
+                  var src=environment.picpoint +item.logo;
+                  item['logo'] = '<img src="'+src+'" class="image_display" style="width:50px;height:50px;"></img>';
+                  // item['button'] = '<a class="btn btn_green tab_btn" style="background-color: #089468;color: #fff;"  [routerLink]="["/organizer/manage/'+item+']");" ><i class="fa fa-pencil" aria-hidden="true"></i></a><a [routerLink]="["/organizer/manage/'+item+']");" class="btn btn_red tab_btn"  style="background-color: #f55f5f;color: #fff;  margin-left:10px" (click)="delete('+item+');" ><i class="fa fa-trash" aria-hidden="true"></i></a>';
+                });
+                this.length = this.rows.length; 
+            }
             this.data = res.json();
-            // console.log(y);
            })
-    console.log(this.data);
-    if (this.rows) {
-        this.rows.forEach(item => {
-          console.log(item);
-          item['button'] = '<a class="action-btn history"><i class="fa fa-history" aria-hidden="true"></i></a>';
-        });
-        this.length = this.rows.length; 
-    }
   }
 
   ngOnInit():void {
   }
+  // edit(orgData:any){
+  //   console.log(orgData);
+  // }
+  // delete(orgData:any){
+  //   console.log(orgData);
+  // }
   changeItemsPerPage(it){
     this.itemsPerPage = it;
     this.onChangeTable(this.config);
@@ -148,8 +151,9 @@ public config:any = {
     }
   }
 
-  public onCellClick(data: any): any {
+  public onMyCellClick(data: any, origin:any): any {
     console.log(data);
+    console.log(origin);
   }
 }
 
