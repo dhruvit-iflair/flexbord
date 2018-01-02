@@ -26,15 +26,17 @@ import {LayoutsModule} from "./components/common/layouts/layouts.module";
 import { ProfileModule } from "./views/profile/profile.module";
 import { OrganizerComponent } from './views/organizer/organizer.component';
 import { ManageOrganizerComponent } from './views/organizer/manage/manage.component';
-import { SportsComponent } from './views/sports/sports.component';
 import { Dir_select } from "./components/directive/select2";
+import { BigTextDirective } from "./components/directive/testDir";
+import { GoogleplaceDirective } from "./components/directive/placeLookup";
 
 @NgModule({
   declarations: [
     AppComponent,
     OrganizerComponent,
     ManageOrganizerComponent,
-    SportsComponent,
+    GoogleplaceDirective,
+    BigTextDirective,
     Dir_select,
   ],
   imports: [

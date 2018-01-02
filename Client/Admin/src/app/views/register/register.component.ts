@@ -14,6 +14,7 @@ export class registerComponent {
   public Ruser = {
     username: '',
     password: '',
+    cpassword: '',
     isAgreemented:false
   }
 constructor(private router: Router, private http: HttpClient, private toastr:ToastrService) { }

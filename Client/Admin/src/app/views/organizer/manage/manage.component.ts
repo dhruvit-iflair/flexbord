@@ -49,6 +49,7 @@ export class ManageOrganizerComponent implements OnInit {
             })
       var reader = new FileReader();
         reader.onload = (event:any) => {     
+          debugger;
         this.url = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]);
@@ -69,6 +70,7 @@ export class ManageOrganizerComponent implements OnInit {
       })
       var reader = new FileReader();
         reader.onload = (event:any) => {     
+          debugger;
         this.placePic = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]);

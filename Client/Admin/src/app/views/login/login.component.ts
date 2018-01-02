@@ -17,7 +17,7 @@ export class loginComponent {
 constructor(private router: Router, private http: HttpClient, private toastr:ToastrService) { }
 ngOnInit(){
   if(localStorage.getItem('uToken')){
-    // localStorage.removeItem('uToken');
+     localStorage.removeItem('uToken');
     // var alford = JSON.parse(localStorage.getItem('uToken'));
     // if (alford.user.isVerified == false) {
     //   this.toastr.warning('Account Not Verified', 'Please verify your Account.');
