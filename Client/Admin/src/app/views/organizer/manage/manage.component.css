@@ -1,0 +1,38 @@
+/* .col-md-12 {
+    margin-top: 10px;
+    left: -11px;
+    padding: 0px 0 0 10px;
+} */
+.man {
+    /* padding-bottom: 15px; */
+    padding-top: 25px;
+}
+.text-col-md-3 {
+    height: 30px;
+    width: 250px;
+}
+.text-col-sm-3 {
+    height: 30px;
+    width: 70px;
+}
+#cont{
+    padding-left: 58px;
+}
+
+button.btn.btn_green {
+    background-color: #089468;
+    color: #fff;
+}
+input.logo_upload {
+    display: none;
+}
+img.image_display {
+    width: 100px;
+    border: 2px solid;
+    border-radius: 100px;
+    height: 100px;
+}
+#search_places {
+    height: 35px;
+    width: 252px;
+  }

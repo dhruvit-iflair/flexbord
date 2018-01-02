@@ -1,0 +1,60 @@
+.log{
+    color: #676a6c;;
+    font-size: 49px;
+    text-align: left;
+}
+.pad {
+    padding: 0 25px 0 25px;
+}
+.text-center.col-md-6 {
+    border: 2px solid #676a6c;
+    border-radius: 21px;
+    padding: 18px;
+    margin-left: 25px;
+    /* width: 610px; */
+    width: 480px;
+    margin-bottom: 24px;
+    height: 235px;
+}
+button {
+    border: 1px;
+    border-radius: 5px;
+    width: 150px;
+    height: 34px;
+}
+.col-md-12 {
+    margin-bottom: 20px;
+}
+p {
+    margin: 0 0 20px;
+}
+button.close {
+    width: 50px;
+}
+h3#clubTitle {
+    float: left;
+}
+.pad.wrapper.wrapper-content.animated.fadeInRight {
+    background-color: #fff;
+}
+body {
+    background-color: #fff;
+}
+button.box_btn.org {
+    margin-top: 10px;
+}
+.select2-container--default.select2-container--focus .select2-selection--single, .select2-container--default.select2-container--focus .select2-selection--multiple {
+    border-radius: 4px;
+}
+.select2-container--default .select2-selection--single {
+    border-radius: 4px;
+}
+.select2-container {
+    border-radius: 4px;
+}
+.select2-container--default.select2-container--disabled .select2-selection--single{
+    border-radius: 4px !important;
+}
+select span span {
+    border-radius: 4px ;   
+}

@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="container">
+      <div class="col-md-10">
+          <label><h2>Organizations</h2></label>
+      </div>
+      <div class="col-md-2">
+          <button class="btn btn_green" [routerLink]="['/organizer/manage']">New Org</button>                         
+      </div>
+      <div class="col-md-12" id="tabl">
+        <div class="col-md-12 no_padd mar_btt">
+       
+        </div>
+        <br>
+            <ng-table [config]="config.sorting"
+                      (tableChanged)="onChangeTable(config)"
+                      [rows]="rows" [columns]="columns">
+            </ng-table>
+      </div>
+  </div>  
+</div>
+
