@@ -11,10 +11,28 @@
        
         </div>
         <br>
-            <ng-table [config]="config.sorting"
+            <!-- <ng-table [config]="config.sorting"
                       (tableChanged)="onChangeTable(config)"
                       [rows]="rows" [columns]="columns">
-            </ng-table>
+            </ng-table> -->
+            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+                    <thead>
+                      <tr>
+                        <th *ngFor="let item of columns" >{{item.title}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of rows" >
+                        <td><img src='{{item.logo}}' class="image_display" style="width:50px;height:50px;"></td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.city}}</td>
+                        <td>{{item.registered  | dateFormatPipe}}</td>
+                        <td>{{item.email}}</td>
+                        <!-- <td><a routerLink="/organizer/manage/{{item.button}} ">{{item.button}} </a></td> -->
+                        <td><a class="btn btn_green tab_btn"  routerLink="/organizer/manage/{{item.button}}" ><i class="fa fa-pencil" aria-hidden="true"></i></a><a class="btn btn_red tab_btn" (click)="delOrg(item.button)"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                      </tr>
+                    </tbody>
+            </table>
       </div>
   </div>  
 </div>

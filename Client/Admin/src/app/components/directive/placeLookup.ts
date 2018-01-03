@@ -1,11 +1,11 @@
 import {Directive, ElementRef, EventEmitter, Output} from '@angular/core';
-import {NgModel} from '@angular/forms';
+import {NgModel,FormControlName} from '@angular/forms';
 // import {} from '@types/googlemaps';
 declare var google:any;
 
 @Directive({
   selector: '[Googleplace]',
-  providers: [NgModel],
+  providers: [FormControlName],
   host: {
     '(input)' : 'onInputChange()'
   }
@@ -18,7 +18,7 @@ export class GoogleplaceDirective {
   private _el:HTMLElement;
 
 
-  constructor(el: ElementRef,private model:NgModel) {
+  constructor(el: ElementRef,private model:FormControlName) {
     this._el = el.nativeElement;
     this.modelValue = this.model;
     var input = this._el;
@@ -36,6 +36,6 @@ export class GoogleplaceDirective {
   }
 
   onInputChange() {
-    console.log(this.model);
+    // console.log(this.model);
   }
 }

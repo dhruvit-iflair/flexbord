@@ -29,7 +29,16 @@
             </li>-->
             <li [ngClass]="{active: activeRoute('organizer')}">
                 <a [routerLink]="['/organizer']"><i class="fa fa-calendar "></i> <span class="nav-label">Organizer</span> </a>
+                <!-- <ul class="nav nav-second-level collapse">
+                    <li [ngClass]="{active: activeRoute('organizer/seasons')}">
+                        <a [routerLink]="['/organizer/seasons']"><i class="fa fa-superpowers "></i> <span class="nav-label">Seasons</span> </a>
+                    </li>
+                </ul> -->
             </li>
+            <li [ngClass]="{active: activeRoute('seasons')}">
+                        <a [routerLink]="['/seasons']"><i class="fa fa-superpowers "></i> <span class="nav-label">Seasons</span> </a>
+            </li>
+          
             <!--<li>
                 <a [routerLink]="['/login']"><i class="fa fa-sign-in"></i> <span class="nav-label">Login</span> </a>
             </li>

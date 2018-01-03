@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="container">
+      <div class="col-md-10">
+          <label><h2>Seasons</h2></label>
+      </div>
+      <div class="col-md-2">
+          <button class="btn btn_green" [routerLink]="['/seasons/manage']">New Season</button>                         
+      </div>
+      <div class="col-md-12" id="tabl">
+        <div class="col-md-12 no_padd mar_btt">
+       
+        </div>
+        <br>
+        <table datatable  [dtOptions]="dtOptions" class="row-border hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of seasons" >
+              <td>{{s.name}} </td>
+              <td>{{s.start_date | dateFormatPipe}} </td>
+              <td>{{s.end_date | dateFormatPipe}}</td>
+              <td>
+                <a class="btn btn_green tab_btn"  routerLink="/seasons/manage/{{s._id}}" >
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn_red tab_btn" (click)="delOrg(s._id)">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+              </td>
+              
+            </tr>
+            
+          </tbody>
+        </table>  
+      </div>
+  </div>  
+</div>

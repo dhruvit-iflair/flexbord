@@ -36,5 +36,6 @@ module.exports = function (db) {
     require('../app/routes/users')(app);
     require('../app/routes/roles')(app);
     require('../app/routes/organizer')(app);
+    require('../app/routes/seasons')(app);
     return server;
 };

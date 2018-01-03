@@ -36,13 +36,3 @@ img.image_display {
     height: 35px;
     width: 252px;
   }
-  input.text-col-md-3.ng-pristine.ng-invalid.ng-touched {
-    border: 1px solid red;
-}
-input.text-col-sm-3.ng-dirty.ng-invalid.ng-touched {
-    border: 1px solid red;
-}
-input.text-col-md-3.ng-touched.ng-dirty.ng-invalid {
-    border: 1px solid red;
-
-}

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from "@angular/router";
@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Auth24Guard } from "./components/common/guard/auth24.guard";
 import { PaginationModule } from "ng2-bootstrap";
 import {Ng2TableModule} from 'ng2-table';
+import { DataTablesModule } from 'angular-datatables';
 
 // App views
 import {MainViewModule} from "./views/main-view/main-view.module";
@@ -29,6 +30,10 @@ import { ManageOrganizerComponent } from './views/organizer/manage/manage.compon
 import { Dir_select } from "./components/directive/select2";
 import { BigTextDirective } from "./components/directive/testDir";
 import { GoogleplaceDirective } from "./components/directive/placeLookup";
+import { SeasonsComponent } from './views/organizer/seasons/seasons.component';
+import { ManageSeasonsComponent } from './views/organizer/seasons/manage-seasons/manage-seasons.component';
+import { DateValueAccessor } from "./components/directive/date-proper";
+import { dateFormatPipe } from "./components/pipes/dateFormate";
 
 @NgModule({
   declarations: [
@@ -38,6 +43,10 @@ import { GoogleplaceDirective } from "./components/directive/placeLookup";
     GoogleplaceDirective,
     BigTextDirective,
     Dir_select,
+    SeasonsComponent,
+    ManageSeasonsComponent,
+    DateValueAccessor,
+    dateFormatPipe
   ],
   imports: [
     // Angular modules
@@ -46,6 +55,7 @@ import { GoogleplaceDirective } from "./components/directive/placeLookup";
     HttpClientModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     Ng4GeoautocompleteModule.forRoot(),
     ToastrModule.forRoot({
@@ -53,6 +63,7 @@ import { GoogleplaceDirective } from "./components/directive/placeLookup";
     }),
     PaginationModule.forRoot(),
     Ng2TableModule,
+    DataTablesModule,
     // Views
     MainViewModule,
     MinorViewModule,
