@@ -36,6 +36,5 @@ export class GoogleplaceDirective {
   }
 
   onInputChange() {
-    // console.log(this.model);
   }
 }

@@ -26,6 +26,6 @@ module.exports = function () {
     require('../app/models/orgmembers');
     require('../app/models/seasons');
     require('../app/models/organizer-classifications');
-    
+
     return db;
 }

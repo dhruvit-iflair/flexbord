@@ -7,7 +7,6 @@ import { ToastrService } from 'ngx-toastr';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs/Subject';
 
-
 @Component({
   selector: 'app-organizer',
   templateUrl: './organizer.component.html',
@@ -55,6 +54,7 @@ constructor(public http:Http,private toastr : ToastrService,) {
              this.rows= res.json();
               if (this.rows) {
                 this.rows.forEach(item => {
+
                   var src=environment.picpoint +'/orglogos/'+item.logo;
                   item['logo'] = src;
                   // item['button'] = '<a class="btn btn_green tab_btn" style="background-color: #089468;color: #fff;"  [routerLink]="["/organizer/manage/'+item+']");" ><i class="fa fa-pencil" aria-hidden="true"></i></a><a [routerLink]="["/organizer/manage/'+item+']");" class="btn btn_red tab_btn"  style="background-color: #f55f5f;color: #fff;  margin-left:10px" (click)="delete('+item+');" ><i class="fa fa-trash" aria-hidden="true"></i></a>';

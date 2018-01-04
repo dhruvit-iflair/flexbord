@@ -88,6 +88,7 @@ export class ManageOrganizerComponent implements OnInit {
                 });
       }
    });
+
   }
   readUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
