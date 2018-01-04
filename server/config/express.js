@@ -38,5 +38,7 @@ module.exports = function (db) {
     require('../app/routes/organizer')(app);
     require('../app/routes/orgmembers')(app);
     require('../app/routes/seasons')(app);
+    require('../app/routes/organizer-classifications')(app);
+
     return server;
 };

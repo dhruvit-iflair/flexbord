@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="container">
+      <div class="col-md-9">
+          <label><h2>Classification</h2></label>
+      </div>
+      <div class="col-md-2">
+          <button class="btn btn_green" [routerLink]="['/classifications/manage']">New Classification</button>                         
+      </div>
+      <div class="col-md-11">
+        <table datatable [dtOptions]="dtOptions" class="row-border hover">
+            <thead>
+              <tr>
+                <th>First name</th>
+                <th>First name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bar</td>
+                <td>Bar</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+  </div>
+</div>

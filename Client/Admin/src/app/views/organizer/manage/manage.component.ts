@@ -22,7 +22,7 @@ export class ManageOrganizerComponent implements OnInit {
   public placePic:any;
   public value : any;
   public value2 : Array<string>;
-
+  public spotsIns : Array<any>;
   public sub: any;
   public logo: any;
   public logo2: any;
@@ -51,7 +51,8 @@ export class ManageOrganizerComponent implements OnInit {
       capacity:  [null,[Validators.required]],
       placePic: [null],
       affilated:  ["",[Validators.required]],
-      affilation:  ["",[Validators.required]]
+      affilation:  ["",[Validators.required]],
+      registered: [null]
     })
    }
 
@@ -70,10 +71,10 @@ export class ManageOrganizerComponent implements OnInit {
                     this.orgdata = comming[0];
                     this.logo = environment.picpoint +'orglogos/'+ comming[0].logo;
                     var yaar = [];
-                    if(comming[0].placePic){
+                    if (comming[0].placePic) {
                       comming[0].placePic.forEach((asd)=>{
-                      yaar.push(environment.picpoint +'orgplacepics/'+ asd);
-                    })
+                        yaar.push(environment.picpoint +'orgplacepics/'+ asd);
+                      })
                     }
                     this.logo2 = yaar;
                     this.orgForm.patchValue( comming[0]);
@@ -160,37 +161,54 @@ export class ManageOrganizerComponent implements OnInit {
 
    dataChanged(e,c){
       if (c == 'sport') {
-        this.orgForm.patchValue({sports: e});
+          console.log(this.orgForm.value.sports);
+          console.log(e);
+          this.orgForm.patchValue({sports: e})
       }
       if (c == 'affilated') {
         this.orgForm.patchValue({affilated: e});
       }
     }
-    addOrg(){
-      console.log(this.orgForm.valid);
-      console.log(this.orgForm.value);
-      if (this._id) {
-        this.http.put(environment.api +"/organizer/"+this._id,this.orgForm.value)
-                .subscribe((res)=>{
-                  var d = res.json();
-                  if (d._id) {
-                    this.toastr.success('Organizer Updated Successfully', 'Success');
-                    this.router.navigate(['/organizer']);
-                  }
-                },(error)=>{
-                  this.toastr.error('Something went wrong !! Please try again later', 'Error');
-                })
-      } else {
-        this.http.post(environment.api +"/organizer",this.orgForm.value)
-                .subscribe((res)=>{
-                  var d = res.json();
-                  if (d._id) {
-                    this.toastr.success('Organizer Registered Successfully', 'Success');
-                    this.router.navigate(['/organizer']);
-                  }
-                },(error)=>{
-                  this.toastr.error('Something went wrong !! Please try again later', 'Error');
-                })
+    addOrg(){      
+      if (this.orgForm.value.logo == "" || this.orgForm.value.placePic == null) {
+        if (this.orgForm.value.logo == "") {
+          this.toastr.warning('Please upload logo ', 'Warning');
+        }
+        if (this.orgForm.value.placePic == null) {
+          this.toastr.warning('Please upload placepic images', 'Warning');
+        }
+      }
+      else{
+            if (this._id) {
+              this.http.put(environment.api +"/organizer/"+this._id,this.orgForm.value)
+                      .subscribe((res)=>{
+                        var d = res.json();
+                        if (d._id) {
+                          this.toastr.success('Organizer Updated Successfully', 'Success');
+                          this.router.navigate(['/organizer']);
+                        }
+                      },(error)=>{
+                        this.toastr.error('Something went wrong !! Please try again later', 'Error');
+                      })
+            } 
+            else {
+              var h = new Date().getHours();
+              var m = new Date().getMinutes();
+              var r = new Date();
+              r.setHours(h);
+              r.setMinutes(m);
+              this.orgForm.value.registered =r;
+              this.http.post(environment.api +"/organizer",this.orgForm.value)
+                      .subscribe((res)=>{
+                        var d = res.json();
+                        if (d._id) {
+                          this.toastr.success('Organizer Registered Successfully', 'Success');
+                          this.router.navigate(['/organizer']);
+                        }
+                      },(error)=>{
+                        this.toastr.error('Something went wrong !! Please try again later', 'Error');
+                      })
+            }
       }
     }
 }
