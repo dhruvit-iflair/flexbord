@@ -38,7 +38,9 @@
             <li [ngClass]="{active: activeRoute('seasons')}">
                         <a [routerLink]="['/seasons']"><i class="fa fa-superpowers "></i> <span class="nav-label">Seasons</span> </a>
             </li>
-          
+          <li [ngClass]="{active: activeRoute('organizer/orgmembers')}">
+                        <a [routerLink]="['/organizer/orgmembers']"><i class="fa fa-user "></i> <span class="nav-label">Members</span> </a>
+            </li>
             <!--<li>
                 <a [routerLink]="['/login']"><i class="fa fa-sign-in"></i> <span class="nav-label">Login</span> </a>
             </li>

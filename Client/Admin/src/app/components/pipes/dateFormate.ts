@@ -7,7 +7,7 @@ import { DatePipe } from '@angular/common';
 export class dateFormatPipe implements PipeTransform {
     transform(value: string) {
        var datePipe = new DatePipe("en-US");
-        value = datePipe.transform(value, 'MMM-dd-yyyy');
+        value = datePipe.transform(value, 'dd-MM-yyyy h:mm');
         return value;
     }
 }

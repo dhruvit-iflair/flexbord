@@ -35,19 +35,19 @@ public config:any = {
 };
 
 constructor(public http:Http,private toastr : ToastrService,) {
-    this.http.get(environment.api + "/organizer")
-           .subscribe((res)=>{
-             this.rows= res.json();
-              if (this.rows) {
-                this.rows.forEach(item => {
-                  var src=environment.picpoint+'orglogos/' +item.logo;
-                  item['logo'] =src;
-                   item['button'] = item._id;
-                });
-                this.length = this.rows.length; 
-            }
-            this.data = res.json();
-           })
+    // this.http.get(environment.api + "/organizer")
+    //        .subscribe((res)=>{
+    //          this.rows= res.json();
+    //           if (this.rows) {
+    //             this.rows.forEach(item => {
+    //               var src=environment.picpoint+'orglogos/' +item.logo;
+    //               item['logo'] =src;
+    //                item['button'] = item._id;
+    //             });
+    //             this.length = this.rows.length; 
+    //         }
+    //         this.data = res.json();
+    //        })
   }
 
   ngOnInit():void {

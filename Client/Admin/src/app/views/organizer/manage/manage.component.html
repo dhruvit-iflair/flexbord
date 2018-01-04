@@ -44,11 +44,11 @@
           <div class="col-md-3">
               <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" >
               <button class="btn btn_green" (click)="file.click()"> Upload</button>     
-              <span style="color:red; position: absolute;" *ngIf="!orgForm.get('logo').valid && orgForm.get('logo').touched">
+              <!--<span style="color:red; position: absolute;" *ngIf="!orgForm.get('logo').valid && orgForm.get('logo').touched">
                     Logo is required.
-              </span>           
+              </span>           -->
           </div>
-          <div class="col-md-4" *ngIf="orgdata.logo" >
+          <div class="col-md-4" *ngIf="logo" >
                 <img [src]="logo" class="image_display">               
           </div>
           <div class="col-md-4" *ngIf="url" >

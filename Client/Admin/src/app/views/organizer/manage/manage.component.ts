@@ -41,8 +41,8 @@ export class ManageOrganizerComponent implements OnInit {
       street: [""],
       city: [""],
       state: [""],
-      country: ["",[Validators.required]],
-      zipcode: ["",[Validators.required]],
+      country: [""],
+      zipcode: [""],
       website: ["",[Validators.required]],
       email: ["",[Validators.email]],
       // phonenumber: [null,[Validators.required,Validators.minLength(10),Validators.maxLength(12)]],
@@ -70,9 +70,11 @@ export class ManageOrganizerComponent implements OnInit {
                     this.orgdata = comming[0];
                     this.logo = environment.picpoint +'orglogos/'+ comming[0].logo;
                     var yaar = [];
-                    comming[0].placePic.forEach((asd)=>{
+                    if(comming[0].placePic){
+                      comming[0].placePic.forEach((asd)=>{
                       yaar.push(environment.picpoint +'orgplacepics/'+ asd);
                     })
+                    }
                     this.logo2 = yaar;
                     this.orgForm.patchValue( comming[0]);
                   }

@@ -10,6 +10,8 @@ import {basicComponent} from "./components/common/layouts/basic.component";
 import { Auth24Guard } from "./components/common/guard/auth24.guard";
 import { ManageOrganizerComponent } from './views/organizer/manage/manage.component';
 import { OrganizerComponent } from "./views/organizer/organizer.component";
+import { OrgmembersComponent } from "./views/organizer/orgmembers/orgmembers.component";
+import { MemberComponent } from "./views/organizer/orgmembers/member/member.component";
 import { SeasonsComponent } from './views/organizer/seasons/seasons.component';
 import { ManageSeasonsComponent } from './views/organizer/seasons/manage-seasons/manage-seasons.component';
 
@@ -26,6 +28,9 @@ export const ROUTES:Routes = [
       {path: 'profilesetup', component: SetupComponent, canActivate: [Auth24Guard]},
       // {path: 'organizer', component: ManageOrganizerComponent, canActivate: [Auth24Guard]}
       {path: 'organizer', component: OrganizerComponent,canActivate: [Auth24Guard]},
+      {path: 'organizer/orgmembers', component: OrgmembersComponent, canActivate: [Auth24Guard]},      
+      {path: 'organizer/orgmembers/member', component: MemberComponent, canActivate: [Auth24Guard]},      
+      {path: 'organizer/orgmembers/member/:_id', component: MemberComponent, canActivate: [Auth24Guard]},      
       {path: 'organizer/manage', component: ManageOrganizerComponent , canActivate: [Auth24Guard]},
       {path: 'organizer/manage/:_id', component: ManageOrganizerComponent , canActivate: [Auth24Guard]},
       {path: 'seasons', component: SeasonsComponent , canActivate: [Auth24Guard]},

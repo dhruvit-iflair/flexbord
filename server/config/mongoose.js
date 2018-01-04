@@ -23,6 +23,7 @@ module.exports = function () {
     require('../app/models/users');
     require('../app/models/roles');
     require('../app/models/organizer');
+    require('../app/models/orgmembers');
     require('../app/models/seasons');
 
     return db;
