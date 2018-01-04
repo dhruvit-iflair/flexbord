@@ -32,7 +32,7 @@
           </div>
       </div>
       <div class="man col-md-6">
-          <div class="col-md-3"><h4 class="text-right">Affiliated</h4></div>
+          <div class="col-md-3"><h4 class="text-right">Affiliated<a style="color:#f00 !important;">*</a></h4></div>
           <div class="col-md-3">
             <select class="js-example-basic-single text-col-md-3"  name="state" (setData)="dataChanged($event,'affilated')" formControlName="affilated"  placeholder="Select Organization" select2>
                 <option *ngFor="let ite of items"  [value]="ite.id">{{ite.name}}</option>
@@ -48,7 +48,7 @@
                     Logo is required.
               </span>           
           </div>
-          <div class="col-md-4" *ngIf="orgdata.logo" >
+          <div class="col-md-4" *ngIf="logo && !url" >
                 <img [src]="logo" class="image_display">               
           </div>
           <div class="col-md-4" *ngIf="url" >
@@ -67,7 +67,7 @@
     </div>
     <div class="col-md-6">
         <div class="col-md-12">
-            <div class="man col-md-4"><h4 class="text-right">Address</h4></div>
+            <div class="man col-md-4"><h4 class="text-right">Address<a style="color:#f00 !important;">*</a></h4></div>
             <div class="man col-md-8">
                 <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace>
                 <span style="color:red; position: absolute;" *ngIf="!orgForm.get('address').valid && orgForm.get('address').touched">
@@ -105,7 +105,7 @@
                 <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="zipcode">
             </div>
      
-            <div class="man col-md-4"><h4 class="text-right">Capacity</h4></div>
+            <div class="man col-md-4"><h4 class="text-right">Capacity<a style="color:#f00 !important;">*</a></h4></div>
             <div class="man col-md-8">
                 <input class="text-col-sm-3"  type="number" formControlName="capacity">
                 <span style="color:red; position: absolute;" *ngIf="!orgForm.get('capacity').valid && orgForm.get('capacity').touched">
@@ -121,7 +121,7 @@
                 <div class="man col-md-4" *ngIf="placePic" >
                         <img [src]="placePic" class="image_display">               
                 </div>
-                <div class="man col-md-4" *ngIf="logo2" >
+                <div class="man col-md-4" *ngIf="logo2 && !placePic" >
                         <img *ngFor="let item of logo2"  [src]="item" class="image_display">               
                 </div>
                 <div class="man col-md-2">
@@ -130,7 +130,7 @@
         </div>
         <div class="col-md-6">
                 <div class="col-md-12">
-                        <div class="man col-md-4"><h4 class="text-right">Website</h4></div>
+                        <div class="man col-md-4"><h4 class="text-right">Website<a style="color:#f00 !important;">*</a></h4></div>
                         <div class="man col-md-8">
                             <input class="text-col-md-3" type="text" formControlName="website">
                             <span style="color:red; position: absolute;" *ngIf="!orgForm.get('website').valid && orgForm.get('website').touched">
@@ -138,7 +138,7 @@
                             </span>   
                         </div>
                  
-                        <div class="man col-md-4"><h4 class="text-right">Email</h4></div>
+                        <div class="man col-md-4"><h4 class="text-right">Email<a style="color:#f00 !important;">*</a></h4></div>
                         <div class="man col-md-8">
                             <input class="text-col-md-3" type="text" formControlName="email">
                             <span style="color:red; position: absolute;" *ngIf="!orgForm.get('email').valid && orgForm.get('email').touched">
@@ -162,7 +162,7 @@
                                 <label><h2>Sports</h2></label>
                             </div>                                
                         </div>
-                        <div class="man col-md-4"><h4 class="text-right">Choose</h4></div>
+                        <div class="man col-md-4"><h4 class="text-right">Choose<a style="color:#f00 !important;">*</a></h4></div>
                         <div class="man col-md-8">
                             <select class="spt text-col-md-3"  name="spot" multiple="multiple"  (setData)="dataChanged($event,'sport')" selectedValves={{value2}} options={{spots}} placeholder="Select Sports" select2 formControlName="sports">
                                 <option *ngFor="let ite of spots"  [value]="ite.id">{{ite.name}}</option>
@@ -174,7 +174,7 @@
                                 </div>                                
                         </div>
                         <div class="man col-md-12">
-                            <div class="col-md-1"><input type="radio" name="affilation"  value="opened" formControlName="affilation"></div>
+                            <div class="col-md-1"><input type="radio" name="affilation"  value="opened" formControlName="affilation"  checked="checked"></div>
                             <div class="col-md-4">Opened</div>
                         
                             <div class="col-md-1"><input type="radio" name="affilation"  value="closed" formControlName="affilation"></div>

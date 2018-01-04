@@ -34,6 +34,8 @@ import { SeasonsComponent } from './views/organizer/seasons/seasons.component';
 import { ManageSeasonsComponent } from './views/organizer/seasons/manage-seasons/manage-seasons.component';
 import { DateValueAccessor } from "./components/directive/date-proper";
 import { dateFormatPipe } from "./components/pipes/dateFormate";
+import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
+import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { dateFormatPipe } from "./components/pipes/dateFormate";
     SeasonsComponent,
     ManageSeasonsComponent,
     DateValueAccessor,
-    dateFormatPipe
+    dateFormatPipe,
+    OrganizerClassificationsComponent,
+    ManageOrganizerClassificationsComponent
   ],
   imports: [
     // Angular modules
