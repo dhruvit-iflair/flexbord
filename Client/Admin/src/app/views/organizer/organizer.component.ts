@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { fakedb } from "../../components/common/fakedb";
 import { TableData } from '../../components/common/table-data';
 import { Http } from "@angular/http";
 import { environment } from "../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs/Subject';
+
 
 @Component({
   selector: 'app-organizer',
@@ -11,8 +14,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./organizer.component.css']
 })
 export class OrganizerComponent implements OnInit {
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
 public rows:Array<any> = [];
 public data:Array<any> =[] ;
+public dtTrigger: Subject<any> = new Subject();
 
 public columns:Array<any> = [
   {title: 'Logo', name: 'logo', sort: false},
@@ -27,7 +33,9 @@ public itemsPerPage:number = 10;
 public maxSize:number = 5;
 public numPages:number = 1;
 public length:number = 0;
-public dtOptions: any = {};
+// public dtOptions: any = {};
+public dtOptions: DataTables.Settings = {};
+
 public config:any = {
   paging: true,
   sorting: {columns: this.columns},
@@ -35,19 +43,10 @@ public config:any = {
 };
 
 constructor(public http:Http,private toastr : ToastrService,) {
-    this.http.get(environment.api + "/organizer")
-           .subscribe((res)=>{
-             this.rows= res.json();
-              if (this.rows) {
-                this.rows.forEach(item => {
-                  var src=environment.picpoint+'orglogos/' +item.logo;
-                  item['logo'] =src;
-                   item['button'] = item._id;
-                });
-                this.length = this.rows.length; 
-            }
-            this.data = res.json();
-           })
+  this.dtOptions = {
+      pagingType: 'full_numbers',
+      // columns:[  { "orderable": false }, null,  null,  { "orderable": 'asc' },null,{ "orderable": false }]
+    };
   }
 
   ngOnInit():void {
@@ -62,24 +61,37 @@ constructor(public http:Http,private toastr : ToastrService,) {
                   item['button'] = item._id;
                 });
                 this.length = this.rows.length; 
+                this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+                  dtInstance.destroy();
+                  this.dtTrigger.next();
+                });
             }
     })
   }
-  // edit(orgData:any){
-  //   console.log(orgData);
-  // }
-  // delete(orgData:any){
-  //   console.log(orgData);
-  // }
-  delOrg(_id){
+  ngAfterViewInit(): void {
+    this.dtTrigger.next();
+  }
+  rerender(): void {
+    // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    //   dtInstance.destroy();
+      this.dtTrigger.next();
+    // });
+  }
+  delOrg(id,index){
+
+    // console.log();
+    var d = this.rows.findIndex(r =>r._id ==id);
+    this.rows.splice(d,1);
+                  
     var del = confirm("Confirm to delete this Organizer!");
-    if (del) {
-      this.http.delete(environment.api +"/organizer/"+_id)
+    if (del && d) {
+      this.http.delete(environment.api +"/organizer/"+id)
               .subscribe((res)=>{
                 var d = res.json();
                 if (d._id) {
                   this.toastr.success('Organizer Deleted Successfully', 'Success');
                   // this.router.navigate(['/organizer']);
+                  // this.rows.splice(d,1);
                   this.ngOnInit();
                 }
               },(error)=>{

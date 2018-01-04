@@ -24,6 +24,7 @@ module.exports = function () {
     require('../app/models/roles');
     require('../app/models/organizer');
     require('../app/models/seasons');
-
+    require('../app/models/organizer-classifications');
+    
     return db;
 }

@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./organizer-classifications.component.css']
 })
 export class OrganizerClassificationsComponent implements OnInit {
+  dtOptions: DataTables.Settings = {};
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers'
+    };
   }
 
 }

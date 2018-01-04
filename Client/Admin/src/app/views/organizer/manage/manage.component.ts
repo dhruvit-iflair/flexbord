@@ -51,7 +51,8 @@ export class ManageOrganizerComponent implements OnInit {
       capacity:  [null,[Validators.required]],
       placePic: [null],
       affilated:  ["",[Validators.required]],
-      affilation:  ["",[Validators.required]]
+      affilation:  ["",[Validators.required]],
+      registered: [null]
     })
    }
 
@@ -168,7 +169,7 @@ export class ManageOrganizerComponent implements OnInit {
         this.orgForm.patchValue({affilated: e});
       }
     }
-    addOrg(){
+    addOrg(){      
       if (this.orgForm.value.logo == "" || this.orgForm.value.placePic == null) {
         if (this.orgForm.value.logo == "") {
           this.toastr.warning('Please upload logo ', 'Warning');
@@ -189,7 +190,14 @@ export class ManageOrganizerComponent implements OnInit {
                       },(error)=>{
                         this.toastr.error('Something went wrong !! Please try again later', 'Error');
                       })
-            } else {
+            } 
+            else {
+              var h = new Date().getHours();
+              var m = new Date().getMinutes();
+              var r = new Date();
+              r.setHours(h);
+              r.setMinutes(m);
+              this.orgForm.value.registered =r;
               this.http.post(environment.api +"/organizer",this.orgForm.value)
                       .subscribe((res)=>{
                         var d = res.json();

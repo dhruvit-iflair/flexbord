@@ -39,7 +39,17 @@ export class ManageSeasonsComponent implements OnInit {
   }
  
   addSesons(){
-    console.log(this.seasonForm.value);
+    // console.log(this.seasonForm.value);
+    var h = new Date().getHours();
+    var m = new Date().getMinutes();
+    var s = new Date(this.seasonForm.value.start_date);
+    s.setHours(h);
+    s.setMinutes(m);
+    var e = new Date(this.seasonForm.value.end_date);
+    e.setHours(h);
+    e.setMinutes(m); 
+    this.seasonForm.value.start_date= s;
+    this.seasonForm.value.end_date= e
     if (this.seasonForm.valid) {
       if (this._id) {
         this.http.put(environment.api+'/seasons/'+this._id,this.seasonForm.value)
