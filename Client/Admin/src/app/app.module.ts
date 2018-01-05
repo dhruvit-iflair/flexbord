@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Auth24Guard } from "./components/common/guard/auth24.guard";
-import { PaginationModule } from "ng2-bootstrap";
+import { PaginationModule } from "ngx-bootstrap";
 import {Ng2TableModule} from 'ng2-table';
 import { DataTablesModule } from 'angular-datatables';
 
@@ -34,6 +34,9 @@ import { SeasonsComponent } from './views/organizer/seasons/seasons.component';
 import { ManageSeasonsComponent } from './views/organizer/seasons/manage-seasons/manage-seasons.component';
 import { DateValueAccessor } from "./components/directive/date-proper";
 import { dateFormatPipe } from "./components/pipes/dateFormate";
+import { OrgmembersComponent } from './views/organizer/orgmembers/orgmembers.component';
+import { MemberComponent } from './views/organizer/orgmembers/member/member.component';
+
 import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
 import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
 
@@ -49,6 +52,8 @@ import { ManageOrganizerClassificationsComponent } from './views/organizer/organ
     ManageSeasonsComponent,
     DateValueAccessor,
     dateFormatPipe,
+    OrgmembersComponent,
+    MemberComponent,
     OrganizerClassificationsComponent,
     ManageOrganizerClassificationsComponent
   ],
