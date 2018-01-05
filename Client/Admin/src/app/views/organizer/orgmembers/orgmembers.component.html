@@ -7,9 +7,10 @@
           <button class="btn btn_green" [routerLink]="['/organizer/orgmembers/member']">New Member</button>                         
       </div>
       <div class="col-md-12" id="tabl">
-        <table datatable  [dtOptions]="dtOptions" class="row-border hover">
+        <table datatable  [dtOptions]="dtOptions" class="row-border hover" onchange="gotcha()">
           <thead>
             <tr>
+              <th>_id</th>
               <th>Email</th>
               <th>User Type</th>
               <th>Status</th>
@@ -17,7 +18,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let m of members" >
+            <tr *ngFor="let m of members">
+              <td style="display:none;">{{m._id}}</td>
               <td>{{m.emailAddress}} </td>
               <td>{{m.userType}} </td>
               <td>{{m.status}}</td>

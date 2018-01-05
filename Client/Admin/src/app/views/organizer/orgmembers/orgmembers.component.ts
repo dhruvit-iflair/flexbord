@@ -19,7 +19,8 @@ export class OrgmembersComponent implements OnInit {
   gotcha(){
     this.dtOptions={
       pagingType:'simple_numbers',
-      columns: [null,null,null,{ "orderable": false }]
+      order:[[ 0, 'desc' ]],
+      columns: [{ "visible":false },null,null,null,{ "orderable": false }]
     }
     this.http.get(environment.api + '/orgmembers')
       .subscribe((res) => {

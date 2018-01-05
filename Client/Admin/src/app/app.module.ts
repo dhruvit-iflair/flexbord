@@ -37,8 +37,8 @@ import { dateFormatPipe } from "./components/pipes/dateFormate";
 import { OrgmembersComponent } from './views/organizer/orgmembers/orgmembers.component';
 import { MemberComponent } from './views/organizer/orgmembers/member/member.component';
 
-import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
-import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
+// import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
+// import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
 
 @NgModule({
   declarations: [
@@ -53,9 +53,9 @@ import { ManageOrganizerClassificationsComponent } from './views/organizer/organ
     DateValueAccessor,
     dateFormatPipe,
     OrgmembersComponent,
-    MemberComponent,
-    OrganizerClassificationsComponent,
-    ManageOrganizerClassificationsComponent
+     MemberComponent
+    // OrganizerClassificationsComponent,
+    // ManageOrganizerClassificationsComponent
   ],
   imports: [
     // Angular modules

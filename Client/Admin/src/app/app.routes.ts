@@ -14,8 +14,8 @@ import { OrgmembersComponent } from "./views/organizer/orgmembers/orgmembers.com
 import { MemberComponent } from "./views/organizer/orgmembers/member/member.component";
 import { SeasonsComponent } from './views/organizer/seasons/seasons.component';
 import { ManageSeasonsComponent } from './views/organizer/seasons/manage-seasons/manage-seasons.component';
-import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
-import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
+// import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
+// import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
 
 export const ROUTES:Routes = [
   // Main redirect
@@ -38,9 +38,9 @@ export const ROUTES:Routes = [
       {path: 'seasons', component: SeasonsComponent , canActivate: [Auth24Guard]},
       {path: 'seasons/manage', component: ManageSeasonsComponent , canActivate: [Auth24Guard]},
       {path: 'seasons/manage/:_id', component: ManageSeasonsComponent , canActivate: [Auth24Guard]},
-      {path: 'classifications', component: OrganizerClassificationsComponent , canActivate: [Auth24Guard]},
-      {path: 'classifications/manage', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
-      {path: 'classifications/manage/:_id', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]}
+      // {path: 'classifications', component: OrganizerClassificationsComponent , canActivate: [Auth24Guard]},
+      // {path: 'classifications/manage', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
+      // {path: 'classifications/manage/:_id', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]}
     ]
   },
   {

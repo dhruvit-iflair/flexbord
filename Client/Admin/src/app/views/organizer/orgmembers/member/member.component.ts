@@ -12,7 +12,7 @@ import { Router, Params, ActivatedRoute } from "@angular/router";
 export class MemberComponent implements OnInit {
 
   constructor(public http: HttpClient, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute) { }
-  public mForm = { emailAddress: '', status: '', userType: '' };
+  public mForm = { emailAddress: '', status: 'pending', userType: '' };
   public paramdetails = false;
   public userId;
   ngOnInit() {
