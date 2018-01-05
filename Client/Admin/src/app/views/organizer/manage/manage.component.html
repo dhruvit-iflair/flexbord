@@ -144,7 +144,7 @@
                             <span style="color:red; position: absolute;" *ngIf="!orgForm.get('email').valid && orgForm.get('email').touched">
                                     Email is required.
                               </span> 
-                            <span style="color:red; position: absolute;" *ngIf="orgForm.hasError('email','email') && orgForm.get('email').touched">
+                            <span style="color:red; position: absolute;" *ngIf="orgForm.controls['email'].hasError('email') && orgForm.get('email').touched">
                                 Email is invalid.
                             </span>     
                         </div>
