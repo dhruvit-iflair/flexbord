@@ -11,6 +11,9 @@
     height: 30px;
     width: 250px;
 }
+.pad{
+    padding-top: 15px;
+}
 .text-col-sm-3 {
     height: 30px;
     width: 70px;
