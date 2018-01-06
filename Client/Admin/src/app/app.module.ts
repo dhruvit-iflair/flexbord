@@ -12,7 +12,6 @@ import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Auth24Guard } from "./components/common/guard/auth24.guard";
 import { PaginationModule } from "ngx-bootstrap";
-import {Ng2TableModule} from 'ng2-table';
 import { DataTablesModule } from 'angular-datatables';
 
 // App views
@@ -21,6 +20,7 @@ import {MinorViewModule} from "./views/minor-view/minor-view.module";
 import {LoginModule} from "./views/login/login.module";
 import {RegisterModule} from "./views/register/register.module";
 import {ResetpasswordModule} from "./views/resetpassword/resetpassword.module";
+import {TabsModule} from "ngx-tabs";
 
 // App modules/components/directives
 import {LayoutsModule} from "./components/common/layouts/layouts.module";
@@ -70,9 +70,9 @@ import { MemberComponent } from './views/organizer/orgmembers/member/member.comp
     ToastrModule.forRoot({
       timeOut: 3500,
     }),
+    TabsModule,
     PaginationModule.forRoot(),
-    Ng2TableModule,
-    DataTablesModule,
+    DataTablesModule.forRoot(),
     // Views
     MainViewModule,
     MinorViewModule,

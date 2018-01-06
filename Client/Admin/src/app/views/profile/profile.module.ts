@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import {BrowserModule} from "@angular/platform-browser";
 import { FormsModule } from '@angular/forms';
 
-import { SelectModule } from 'ng2-select-compat';
 import { SetupComponent } from './setup/setup.component';
 import { ProfileComponent } from "./profile.component";
 
@@ -23,7 +22,7 @@ const routes: Routes = [
   }];
 
 @NgModule({
-    imports: [SelectModule,CommonModule, RouterModule.forChild(routes),BrowserModule,FormsModule],
+    imports: [CommonModule, RouterModule.forChild(routes),BrowserModule,FormsModule],
     exports: [RouterModule],
     declarations: [SetupComponent,ProfileComponent]
 })

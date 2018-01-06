@@ -35,11 +35,6 @@ public length:number = 0;
 // public dtOptions: any = {};
 public dtOptions: DataTables.Settings = {};
 
-public config:any = {
-  paging: true,
-  sorting: {columns: this.columns},
-  filtering: {filterString: '', columnName: 'position'}
-};
 
 constructor(public http:Http,private toastr : ToastrService,) {
   this.dtOptions = {
@@ -55,7 +50,7 @@ constructor(public http:Http,private toastr : ToastrService,) {
               if (this.rows) {
                 this.rows.forEach(item => {
 
-                  var src=environment.picpoint +'/orglogos/'+item.logo;
+                  var src=environment.picpoint +'orglogos/'+item.logo;
                   item['logo'] = src;
                   // item['button'] = '<a class="btn btn_green tab_btn" style="background-color: #089468;color: #fff;"  [routerLink]="["/organizer/manage/'+item+']");" ><i class="fa fa-pencil" aria-hidden="true"></i></a><a [routerLink]="["/organizer/manage/'+item+']");" class="btn btn_red tab_btn"  style="background-color: #f55f5f;color: #fff;  margin-left:10px" (click)="delete('+item+');" ><i class="fa fa-trash" aria-hidden="true"></i></a>';
                   item['button'] = item._id;

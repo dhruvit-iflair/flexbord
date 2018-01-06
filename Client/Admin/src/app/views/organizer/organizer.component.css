@@ -44,4 +44,17 @@ a.btn.btn_green.tab_btn {
  .btn_red {
     background-color: #f55f5f;
     color: #fff;
+    margin-right: 10px;
+}
+a.btn.btn_2.tab_btn {
+    background-color: blanchedalmond;
+    margin-top: 0px;
+    color: #fff;
+    margin-right: 10px;
+}
+a.btn.btn_1.tab_btn {
+    background-color: palegreen;
+    margin-top: 0px;
+    color: #fff;
+    margin-right: 10px;
 }
