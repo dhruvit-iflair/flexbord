@@ -40,6 +40,8 @@ import { MemberComponent } from './views/organizer/orgmembers/member/member.comp
 import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
 import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
 import { OrderByPipe } from "./components/pipes/orderBy";
+import { OrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/organizer-competitions.component';
+import { ManageOrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/manage-organizer-competitions/manage-organizer-competitions.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { OrderByPipe } from "./components/pipes/orderBy";
     MemberComponent,
     OrganizerClassificationsComponent,
     ManageOrganizerClassificationsComponent,
+    OrganizerCompetitionsComponent,
+    ManageOrganizerCompetitionsComponent,
   ],
   imports: [
     // Angular modules

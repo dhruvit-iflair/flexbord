@@ -16,6 +16,8 @@ import { SeasonsComponent } from './views/organizer/seasons/seasons.component';
 import { ManageSeasonsComponent } from './views/organizer/seasons/manage-seasons/manage-seasons.component';
 import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
 import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
+import { OrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/organizer-competitions.component';
+import { ManageOrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/manage-organizer-competitions/manage-organizer-competitions.component';
 
 export const ROUTES:Routes = [
   // Main redirect
@@ -40,7 +42,10 @@ export const ROUTES:Routes = [
       {path: 'seasons/manage/:_id', component: ManageSeasonsComponent , canActivate: [Auth24Guard]},
       {path: 'classifications', component: OrganizerClassificationsComponent , canActivate: [Auth24Guard]},
       {path: 'classifications/manage', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
-      {path: 'classifications/manage/:_id', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]}
+      {path: 'classifications/manage/:_id', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
+      {path: 'competitions', component: OrganizerCompetitionsComponent , canActivate: [Auth24Guard]},      
+      {path: 'competitions/manage', component: ManageOrganizerCompetitionsComponent , canActivate: [Auth24Guard]},
+      {path: 'competitions/manage/:_id', component: ManageOrganizerCompetitionsComponent , canActivate: [Auth24Guard]}
     ]
   },
   {

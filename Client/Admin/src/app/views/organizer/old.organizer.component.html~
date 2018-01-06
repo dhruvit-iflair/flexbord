@@ -28,10 +28,10 @@
                   <td><img src='{{item.logo}}' class="image_display" style="width:50px;height:50px;"></td>
                   <td>{{item.name}}</td>
                   <td>{{item.city}}</td>
-                  <td>{{item.registered | dateFormatPipe}}</td>
+                  <td>{{item.registered}}</td>
                   <td>{{item.email}}</td>
                   <!-- <td><a routerLink="/organizer/manage/{{item.button}} ">{{item.button}} </a></td> -->
-                  <td><a class="btn btn_green tab_btn" routerLink="/organizer/manage/{{item._id}}"><i class="fa fa-pencil" aria-hidden="true" title="Edit"></i></a><a class="btn btn_red tab_btn" (click)="delOrg(item._id,$index)"><i class="fa fa-trash" aria-hidden="true" title="Delete"></i></a><a class="btn btn_2 tab_btn"  routerLink="/seasons" ><i class="fa fa-superpowers" title="Seasons" aria-hidden="true"></i></a><a class="btn btn_1 tab_btn"  ><i class="fa fa-user" aria-hidden="true" title="Members"></i></a><a class="btn btn_green tab_btn" routerLink="/classifications" ><i class="fa fa-code-fork" aria-hidden="true" title="Classifications"></i></a></td>
+                  <td><a class="btn btn_green tab_btn" routerLink="/organizer/manage/{{item._id}}"><i class="fa fa-pencil" aria-hidden="true" title="Edit"></i></a><a class="btn btn_red tab_btn" (click)="delOrg(item._id,$index)"><i class="fa fa-trash" aria-hidden="true" title="Delete"></i></a><a class="btn btn_2 tab_btn"  routerLink="/seasons" ><i class="fa fa-superpowers" title="Seasons" aria-hidden="true"></i></a><a class="btn btn_1 tab_btn" ><i class="fa fa-user" aria-hidden="true" title="Members"></i></a><a class="btn btn_green tab_btn" routerLink="/classifications" ><i class="fa fa-code-fork" aria-hidden="true" title="Classifications"></i></a></td>
                 </tr>
               </tbody>
       </table>
