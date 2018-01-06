@@ -8,17 +8,18 @@ import { HttpObserve } from '@angular/common/http/src/client';
 @Component({
   selector: 'app-organizer-classifications',
   templateUrl: './organizer-classifications.component.html',
-  //styleUrls: ['./organizer-classifications.component.css']
    styleUrls: ['.././organizer.component.css']
 })
 export class OrganizerClassificationsComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
+  public dtOptions;
   public rows :Array<any>;
   constructor(private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.dtOptions = {
-      pagingType: 'full_numbers'
+      pagingType: 'simple_numbers',
+      order:[[ 0, 'desc' ]],
+      columns: [{"visible":false},null,null,{ "orderable": false }]
     };
     this.http.get(environment.api+'/organizerClassifications')
               .subscribe((res)=>{

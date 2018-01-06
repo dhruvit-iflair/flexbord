@@ -14,6 +14,7 @@
         <table datatable  [dtOptions]="dtOptions" class="row-border hover">
           <thead>
             <tr>
+              <th>_id</th>              
               <th>Name</th>
               <th>Start Date</th>
               <th>End Date</th>
@@ -22,6 +23,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let s of seasons" >
+              <td style="display:none">{{s._id}}</td>
               <td>{{s.name}} </td>
               <td>{{s.start_date | dateFormatPipe}} </td>
               <td>{{s.end_date | dateFormatPipe}}</td>

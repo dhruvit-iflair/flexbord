@@ -10,6 +10,7 @@
         <table datatable [dtOptions]="dtOptions" class="row-border hover">
             <thead>
               <tr>
+                <th>_ID</th>
                 <th>Name</th>
                 <th>Value</th>
                 <th>Action</th>
@@ -17,6 +18,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let r of rows" >
+                <td style="display:none">{{r._id}}</td>
                 <td>{{r.name}}</td>
                 <td>{{r.value}}</td>
                 <td>
