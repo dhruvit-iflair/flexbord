@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="container">
+        <div class="col-md-9">
+            <label><h2>Competitions</h2></label>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn_green" [routerLink]="['/competitions/manage']">New Competitions</button>                         
+        </div>
+        <div class="col-md-11">
+          <table datatable [dtOptions]="dtOptions" class="row-border hover">
+              <thead>
+                <tr>
+                  <th>_ID</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Sport</th>
+                  <th>Season</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let r of rows" >
+                  <td style="display:none">{{r._id}}</td>
+                  <td>{{r.name}}</td>
+                  <td>{{r.description}}</td>
+                  <td>{{r.sports}}</td>
+                  <td>{{r.seasons.name}}</td>
+                  <td>
+                    <a class="btn btn_green tab_btn"  routerLink="/competitions/manage/{{r._id}}" >
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn_red tab_btn" (click)="delComp(r._id)">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+  

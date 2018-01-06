@@ -1,0 +1,76 @@
+<div class="col-md-12">
+    <label><h2>Manage Competitions</h2></label>
+  </div>
+  <div class="col-md-12">
+    <form [formGroup]="comForm" >
+        <div class="form-group pad">
+            <div class="col-md-8 ">
+                <label>Name:</label>
+                <input class=" form-control" type="text" placeholder="Name" formControlName="name">
+                 <span style="color:red; position: absolute;" *ngIf="!comForm.get('name').valid && comForm.get('name').touched">
+                    Name is required.
+                  </span>
+              </div>
+            <div class="col-md-8 ">
+                <label>Description:</label>
+                <input class=" form-control" type="text" placeholder="Description" formControlName="description">
+                <span style="color:red; position: absolute;" *ngIf="!comForm.get('description').valid && comForm.get('description').touched">
+                        Description is required.
+                </span>
+            </div>
+            <div class="col-md-8 ">
+                <label>Sport:</label>
+                <!-- <input class=" form-control" type="text" placeholder="Sport" formControlName="sports"> -->
+                <select  class=" form-control" placeholder="sports"  name="sports"  formControlName="sports">
+                    <!-- <option value="" disabled selected hidden>Select your Season</option> -->
+                    <option value="null" disabled="true" [selected]="true">Select your Sports</option>
+                    <option *ngFor="let it of sports"  [value]="it.name">{{it.name}}</option>
+                </select>
+                <span style="color:red; position: absolute;" *ngIf="!comForm.get('sports').valid && comForm.get('sports').touched">
+                        Sport is required.
+                </span>
+            </div>
+            <div class="col-md-8 ">
+                <label>Seasons:</label>
+                <!-- <input class=" form-control" type="text" placeholder="Classification Name" formControlName="seasons"> -->
+                <select  class=" form-control" placeholder="Season"  name="seasons"  formControlName="seasons">
+                  <!-- <option value="" disabled selected hidden>Select your Season</option> -->
+                  <option value="null" disabled="true" [selected]="true" value="">Select your Season</option>
+                  <option *ngFor="let it of season"  [value]="it._id">{{it.name}}</option>
+                </select>
+                <span style="color:red; position: absolute;" *ngIf="!comForm.get('seasons').valid && comForm.get('seasons').touched">
+                        Seasons is required.
+                </span>
+            </div>
+            <div class="col-md-8 ">
+                <label>Classification:</label>
+                <!-- <input class=" form-control" type="text" placeholder="Classification Name" formControlName="organizerClassifications"> -->
+                <select  class=" form-control" name="organizerClassifications"  formControlName="organizerClassifications">
+                    <option value="null" disabled="true" [selected]="true" value="">Select your Classifications</option>                  
+                    <option *ngFor="let it of classifications"  [value]="it._id">{{it.name}}</option>
+                </select>
+                <span style="color:red; position: absolute;" *ngIf="!comForm.get('organizerClassifications').valid && comForm.get('organizerClassifications').touched">
+                        Classifications is required.
+                </span>
+            </div>                                 
+        <br>  
+        </div>        
+        <br>
+      </form>
+  </div>
+  <br>
+  <div class="col-md-12">
+    <br>
+          <div class="col-md-2"></div>
+          <div class="col-md-4">
+              <button class="btn" [routerLink]="['/competitions']">Back</button>
+          </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-4">
+              <button (click)='saveVal()' [disabled]='!comForm.valid'  class="btn btn_green" >Save</button>        
+              <!-- [disabled]='!orgForm.valid' -->
+          </div>
+          <div class="col-md-2"></div>   
+  </div>
+  
+  <div class="man col-md-12"></div>   
