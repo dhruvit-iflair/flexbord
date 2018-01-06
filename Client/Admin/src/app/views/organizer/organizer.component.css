@@ -45,3 +45,11 @@ a.btn.btn_green.tab_btn {
     background-color: #f55f5f;
     color: #fff;
 }
+.btn_blu{
+    color: #fff;
+    background-color: cornflowerblue;
+}
+.btn_yel{
+    color: #fff;    
+    background-color: #7cffe1;
+}
