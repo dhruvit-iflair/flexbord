@@ -37,6 +37,13 @@ orgmemsctrl.prototype.getbyid = function (req, res) {
     });
 }
 
+orgmemsctrl.prototype.getbyorg = function (req, res) {
+    OrgMems.find({ organizer: req.params.id }).exec(function (err, gd) {
+        if (err) console.log('error occured..' + err);
+        res.json(gd);
+    });
+}
+
 orgmemsctrl.prototype.update = function (req, res) {
     var updateObject = req.body;
     OrgMems.update({ _id: req.params.id }, { $set: updateObject }, function (er, dt) {

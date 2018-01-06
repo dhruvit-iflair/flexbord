@@ -6,7 +6,8 @@ Schema = mongoose.Schema;
 var orgmembersSchema = new Schema({
     emailAddress: String,
     userType: String,
-    status:{type:String,default:"pending"},
+    organizer:{ type: Schema.Types.ObjectId, ref: 'organizer' },
+    status:{type:String,default:"Pending"},
     CreatedAt:{type:Date,default:Date.now}
 });
 module.exports = mongoose.model('orgmembers', orgmembersSchema);

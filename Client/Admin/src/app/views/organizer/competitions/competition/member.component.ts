@@ -28,8 +28,6 @@ export class MemberComponent implements OnInit {
     });
   }
   addMember(gotdata) {
-    var orid=localStorage.getItem('orgid');
-    gotdata.organizer=orid;
     if (this.paramdetails) {
       this.http.patch(environment.api+'/orgmembers/'+this.userId,gotdata)
       .subscribe(result=>{

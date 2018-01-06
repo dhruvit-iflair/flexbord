@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="container">
+      <div class="col-md-10">
+          <label><h2>Members</h2></label>
+      </div>
+      <div class="col-md-2">
+          <button class="btn btn_green" [routerLink]="['/organizer/orgmembers/member']">New Member</button>                         
+      </div>
+      <div class="col-md-12" id="tabl">
+        <table datatable  [dtOptions]="dtOptions" class="row-border hover" onchange="gotcha()">
+          <thead>
+            <tr>
+              <th>_id</th>
+              <th>Email</th>
+              <th>User Type</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of members">
+              <td style="display:none;">{{m._id}}</td>
+              <td>{{m.emailAddress}} </td>
+              <td>{{m.userType}} </td>
+              <td>{{m.status}}</td>
+              <td>
+                <a class="btn btn_green tab_btn"  routerLink="/organizer/orgmembers/member/{{m._id}}" >
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn_red tab_btn" (click)="deletemember(m._id)">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>  
+      </div>
+  </div>  
+</div>

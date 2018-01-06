@@ -10,14 +10,16 @@ import { dateFormatPipe } from "../../../components/pipes/dateFormate";
   styleUrls: ['./seasons.component.css']
 })
 export class SeasonsComponent implements OnInit {
-  public dtOptions: DataTables.Settings = {};
+  public dtOptions;
   public seasons : Array<any>;
 
   constructor(public http: Http,private toastr : ToastrService, ) { }
   
   ngOnInit(): void {
     this.dtOptions = {
-      pagingType: 'full_numbers'
+      pagingType: 'simple_numbers',
+      order:[[ 0, 'desc' ]],
+      columns: [{"visible":false},null,null,null,{ "orderable": false }]
     };
     this.http.get(environment.api+'/seasons')
              .subscribe((res)=>{

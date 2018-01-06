@@ -9,6 +9,8 @@ module.exports = function (app) {
     orgmembersRoute.route('/')
         .get(orgmembers.list)
         .post(orgmembers.create);
+    orgmembersRoute.route('/byorg/:id')
+    .get(orgmembers.getbyorg);
     orgmembersRoute.route('/:id')
         .get(orgmembers.getbyid)
         .patch(orgmembers.update)

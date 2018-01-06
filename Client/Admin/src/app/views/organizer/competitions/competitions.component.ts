@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from "../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
-import { Router,ActivatedRoute,Params } from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-orgmembers',
@@ -10,11 +10,10 @@ import { Router,ActivatedRoute,Params } from "@angular/router";
   styleUrls: ['./orgmembers.component.css']
 })
 export class OrgmembersComponent implements OnInit {
-  members;dtOptions;orgid;
-  constructor(public http: HttpClient,private router: Router,private aroute:ActivatedRoute, private toastr: ToastrService) { }
+  members;dtOptions;
+  constructor(public http: HttpClient,private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.orgid=localStorage.getItem('orgid');
     this.gotcha();
   }
   gotcha(){
@@ -23,7 +22,7 @@ export class OrgmembersComponent implements OnInit {
       order:[[ 0, 'desc' ]],
       columns: [{ "visible":false },null,null,null,{ "orderable": false }]
     }
-    this.http.get(environment.api + '/orgmembers/byorg/'+this.orgid)
+    this.http.get(environment.api + '/orgmembers')
       .subscribe((res) => {
         this.members = res;
       });
