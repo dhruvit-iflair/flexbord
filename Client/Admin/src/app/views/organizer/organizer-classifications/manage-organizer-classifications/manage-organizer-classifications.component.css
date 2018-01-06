@@ -11,6 +11,9 @@
     height: 30px;
     width: 250px;
 }
+.pad{
+    padding-top: 15px;
+}
 .text-col-sm-3 {
     height: 30px;
     width: 70px;
@@ -21,6 +24,10 @@
 
 button.btn.btn_green {
     background-color: #089468;
+    color: #fff;
+}
+button.btn.btn_red {
+    background-color: #f55f5f;
     color: #fff;
 }
 input.logo_upload {
@@ -36,13 +43,6 @@ img.image_display {
     height: 35px;
     width: 252px;
   }
-  input.text-col-md-3.ng-pristine.ng-invalid.ng-touched {
-    border: 1px solid red;
-}
-input.text-col-sm-3.ng-dirty.ng-invalid.ng-touched {
-    border: 1px solid red;
-}
-input.text-col-md-3.ng-touched.ng-dirty.ng-invalid {
-    border: 1px solid red;
-
+.marTop{
+    margin-top: 24px;
 }
