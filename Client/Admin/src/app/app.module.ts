@@ -20,8 +20,6 @@ import {MinorViewModule} from "./views/minor-view/minor-view.module";
 import {LoginModule} from "./views/login/login.module";
 import {RegisterModule} from "./views/register/register.module";
 import {ResetpasswordModule} from "./views/resetpassword/resetpassword.module";
-import {TabsModule} from "ngx-tabs";
-
 // App modules/components/directives
 import {LayoutsModule} from "./components/common/layouts/layouts.module";
 import { ProfileModule } from "./views/profile/profile.module";
@@ -76,7 +74,6 @@ import { ManageOrganizerCompetitionsComponent } from './views/organizer/organize
     ToastrModule.forRoot({
       timeOut: 3500,
     }),
-    TabsModule,
     PaginationModule.forRoot(),
     DataTablesModule.forRoot(),
     // Views

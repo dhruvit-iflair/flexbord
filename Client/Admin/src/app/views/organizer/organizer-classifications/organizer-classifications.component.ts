@@ -13,6 +13,7 @@ import { HttpObserve } from '@angular/common/http/src/client';
 export class OrganizerClassificationsComponent implements OnInit {
   public dtOptions;
   public rows :Array<any>;
+  public dataRenderer=false;
   constructor(private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -24,6 +25,7 @@ export class OrganizerClassificationsComponent implements OnInit {
     this.http.get(environment.api+'/organizerClassifications')
               .subscribe((res)=>{
                 this.rows = res.json();
+                this.dataRenderer=true;
               },(error)=>{
               this.toastr.error('Error!! Something went wrong! try again later', 'Error');
             });  
@@ -35,6 +37,7 @@ export class OrganizerClassificationsComponent implements OnInit {
                 .subscribe((res)=>{
                   var d = res.json();
                   if (d._id) {
+                    this.dataRenderer=false;
                     this.toastr.success('Classifications Deleted Successfully', 'Success');
                     // this.router.navigate(['/organizer']);
                     this.ngOnInit();

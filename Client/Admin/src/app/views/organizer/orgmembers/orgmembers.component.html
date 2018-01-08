@@ -7,7 +7,7 @@
           <button class="btn btn_green" [routerLink]="['/organizer/orgmembers/member']">New Member</button>                         
       </div>
       <div class="col-md-12" id="tabl">
-        <table datatable  [dtOptions]="dtOptions" class="row-border hover" onchange="gotcha()">
+        <table datatable  [dtOptions]="dtOptions" class="row-border hover" onchange="gotcha()" *ngIf="dataRenderer">
           <thead>
             <tr>
               <th>_id</th>

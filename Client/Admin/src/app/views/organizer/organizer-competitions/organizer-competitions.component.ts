@@ -13,6 +13,7 @@ declare var jQuery:any;
 export class OrganizerCompetitionsComponent implements OnInit {
   public dtOptions;
   public rows :Array<any>;
+  public dataRenderer = false;
   constructor(private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute) { }
 
   ngOnInit() {
@@ -27,6 +28,7 @@ export class OrganizerCompetitionsComponent implements OnInit {
     this.http.get(environment.api+'/orgCompetitions')
               .subscribe((res)=>{
                 this.rows = res.json();
+                   this.dataRenderer = true;                
               },(error)=>{
               this.toastr.error('Error!! Something went wrong! try again later', 'Error');
             });  
@@ -37,9 +39,11 @@ export class OrganizerCompetitionsComponent implements OnInit {
         this.http.delete(environment.api +"/orgCompetitions/"+id)
                 .subscribe((res)=>{
                   var d = res.json();
+                  // jQuery("#cmpt").dataTable().fnDestroy();
+                   //jQuery("#cmpt").dataTable(this.dtOptions).fnClearTable();
                   if (d._id) {
+                    this.dataRenderer = false;
                     this.toastr.success('Classifications Deleted Successfully', 'Success');
-                    // this.router.navigate(['/organizer']);
                     this.initializer();
                   }
                 },(error)=>{

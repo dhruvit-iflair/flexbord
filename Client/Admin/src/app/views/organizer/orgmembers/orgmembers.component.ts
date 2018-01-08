@@ -11,6 +11,7 @@ import { Router,ActivatedRoute,Params } from "@angular/router";
 })
 export class OrgmembersComponent implements OnInit {
   members;dtOptions;orgid;
+  public dataRenderer=false;
   constructor(public http: HttpClient,private router: Router,private aroute:ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -26,6 +27,7 @@ export class OrgmembersComponent implements OnInit {
     this.http.get(environment.api + '/orgmembers/byorg/'+this.orgid)
       .subscribe((res) => {
         this.members = res;
+        this.dataRenderer=true;
       });
   }
   deletemember(id){
@@ -34,6 +36,7 @@ export class OrgmembersComponent implements OnInit {
       this.http.delete(environment.api +"/orgmembers/"+id)
               .subscribe((res)=>{
                 if (res) {
+                  this.dataRenderer=false;
                   this.toastr.success('Member Deleted Successfully', 'Success');
                 }
                 this.gotcha();

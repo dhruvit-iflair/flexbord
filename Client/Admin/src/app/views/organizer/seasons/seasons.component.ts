@@ -12,7 +12,7 @@ import { dateFormatPipe } from "../../../components/pipes/dateFormate";
 export class SeasonsComponent implements OnInit {
   public dtOptions;
   public seasons : Array<any>;
-
+  public dataRenderer=false;
   constructor(public http: Http,private toastr : ToastrService, ) { }
   
   ngOnInit(): void {
@@ -24,6 +24,7 @@ export class SeasonsComponent implements OnInit {
     this.http.get(environment.api+'/seasons')
              .subscribe((res)=>{
                this.seasons = res.json();
+               this.dataRenderer=true;
              })
   }
   delOrg(_id){
@@ -33,6 +34,7 @@ export class SeasonsComponent implements OnInit {
               .subscribe((res)=>{
                 var d = res.json();
                 if (d._id) {
+                  this.dataRenderer=false;
                   this.toastr.success('Season Deleted Successfully', 'Success');
                   // this.router.navigate(['/organizer']);
                   this.ngOnInit();

@@ -18,7 +18,7 @@ export class OrganizerComponent implements OnInit {
   public data:Array<any> =[] ;
   public length:number = 0;
   public dtOptions;
-
+  public dataRenderer=false;
 
   constructor(public http:Http,private router: Router,private toastr : ToastrService,) {
     // this.dtOptions={
@@ -46,6 +46,7 @@ export class OrganizerComponent implements OnInit {
                   item['button'] = item._id;
                 });
                 this.length = this.rows.length; 
+                this.dataRenderer=true;
             }
     })
   }
@@ -66,6 +67,7 @@ export class OrganizerComponent implements OnInit {
               .subscribe((res)=>{
                 var d = res.json();
                 if (d._id) {
+                  this.dataRenderer=false;
                   this.toastr.success('Organizer Deleted Successfully', 'Success');
                   // this.router.navigate(['/organizer']);
                   // this.rows.splice(d,1);

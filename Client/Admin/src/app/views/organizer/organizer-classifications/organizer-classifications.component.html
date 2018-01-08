@@ -7,7 +7,7 @@
           <button class="btn btn_green" [routerLink]="['/classifications/manage']">New Classification</button>                         
       </div>
       <div class="col-md-11">
-        <table datatable [dtOptions]="dtOptions" class="row-border hover">
+        <table datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
             <thead>
               <tr>
                 <th>_ID</th>
