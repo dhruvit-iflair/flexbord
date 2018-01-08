@@ -21,13 +21,19 @@ export class OrganizerComponent implements OnInit {
 
 
   constructor(public http:Http,private router: Router,private toastr : ToastrService,) {
+    // this.dtOptions={
+    //   pagingType:'simple_numbers',
+    //   order:[[ 0, 'desc' ]],
+    //   columns: [{"visible":false},null,null,null,null,null,{ "orderable": false }]
+    // }
+  }
+  ngAfterContentInit()	{
     this.dtOptions={
       pagingType:'simple_numbers',
       order:[[ 0, 'desc' ]],
       columns: [{"visible":false},null,null,null,null,null,{ "orderable": false }]
     }
   }
-
   ngOnInit():void {
     this.http.get(environment.api + "/organizer")
            .subscribe((res)=>{
