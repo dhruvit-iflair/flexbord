@@ -4,6 +4,7 @@ import {minorViewComponent} from "./views/minor-view/minor-view.component";
 import {loginComponent} from "./views/login/login.component";
 import {registerComponent} from "./views/register/register.component";
 import {ResetpasswordComponent} from "./views/resetpassword/resetpassword.component";
+import {oldResetpasswordComponent} from "./views/resetpassword/old.resetpassword.component";
 import { SetupComponent } from './views/profile/setup/setup.component';
 import {blankComponent} from "./components/common/layouts/blank.component";
 import {basicComponent} from "./components/common/layouts/basic.component";
@@ -53,7 +54,8 @@ export const ROUTES:Routes = [
     children: [
       { path: 'login', component: loginComponent },
       { path: 'register', component: registerComponent },
-      { path: 'resetpassword', component: ResetpasswordComponent }
+      { path: 'resetpassword', component: ResetpasswordComponent },
+      { path: 'setpassword', component: oldResetpasswordComponent }
     ]
   },
 

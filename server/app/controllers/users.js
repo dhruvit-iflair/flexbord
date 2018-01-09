@@ -147,15 +147,13 @@ usersctrl.prototype.update = function (req, res) {
 
 usersctrl.prototype.resetpwd = function (req, res) {
     Users.findByUsername(req.body.username).then(function (sanitizedUsr) {
-        var npd = Math.random().toString(36).substring(2);
-        if (sanitizedUsr) {            
-            sanitizedUsr.setPassword(npd, function () {
-                sanitizedUsr.save();
+        if (sanitizedUsr) {
+            var hoster=req.headers.origin+"/setpassword?u="+req.body.username;
                 var mailOptions = {
                     from: settings.fromImailer,
                     to: req.body.username,
                     subject: 'Reset Password!',
-                    html: '<h1>Hello!  ' + req.body.username + ' !!</h1><br><br><br>Your new Password is :: ' + npd
+                    html: '<h1>Hello!  ' + req.body.username + ' !!</h1><br><br><br><a href='+hoster+'>Click here to set your new password.</a>'
                 };
                 transporter.sendMail(mailOptions, function (error, info) {
                     if (error) {
@@ -164,6 +162,22 @@ usersctrl.prototype.resetpwd = function (req, res) {
                         console.log('Email sent: ' + info.response);
                     }
                 });
+                res.json('Verified your account successfully.');
+        }
+        else {
+            res.json('This User does not exist!');
+        }
+    }, function (errpt) {
+        console.log(errpt);
+    });
+}
+
+usersctrl.prototype.setnewpwd = function (req, res) {
+    Users.findByUsername(req.body.username).then(function (sanitizedUsr) {
+        var npd = req.body.npd;
+        if (sanitizedUsr) {
+            sanitizedUsr.setPassword(npd, function () {
+                sanitizedUsr.save();
                 res.json('Password Reset Successfully.');
             });
         }
@@ -174,6 +188,7 @@ usersctrl.prototype.resetpwd = function (req, res) {
         console.log(errpt);
     });
 }
+
 usersctrl.prototype.delete = function (req, res) {
     Users.findByIdAndRemove({ _id: req.params.id }, function (er, dt) {
         if (er) {

@@ -15,6 +15,8 @@ module.exports=function(app){
     .get(users.verify);
     usersRoute.route('/resetpwd')
     .post(users.resetpwd);
+    usersRoute.route('/setpwd')
+    .post(users.setnewpwd);
     usersRoute.route('/:id')
     .get(users.getbyuser)
     .patch(users.update)
