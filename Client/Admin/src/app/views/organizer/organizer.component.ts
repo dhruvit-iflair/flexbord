@@ -54,10 +54,11 @@ export class OrganizerComponent implements OnInit {
     localStorage.setItem('orgid',idx);
     this.router.navigate(['/organizer/orgmembers']);
   }
-
+movetoseason(idx){
+  localStorage.setItem('orgid',idx);
+  this.router.navigate(['/organizer/seasons']);  
+}
   delOrg(id,index){
-
-    // console.log();
     var d = this.rows.findIndex(r =>r._id ==id);
     this.rows.splice(d,1);
                   
