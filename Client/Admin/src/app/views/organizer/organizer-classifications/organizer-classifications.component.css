@@ -37,8 +37,9 @@ a.btn.btn_green button.btn.btn_green {
 }
 a.btn.btn_green.tab_btn {
     background-color: #F3825B;
+    margin-top: 0px;
     color: #fff;
-    margin-top: 0;
+    margin-right: 10px;
 }
  .btn_red {
     background-color: #f55f5f;

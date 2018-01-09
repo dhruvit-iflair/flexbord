@@ -31,7 +31,8 @@
         "../node_modules/metismenu/dist/metisMenu.js",
         "../src/vendor/pace/pace.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "assets/select2/select2.min.js"
+        "assets/select2/select2.min.js",
+        "assets/js/equal-height.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

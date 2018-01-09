@@ -3,7 +3,7 @@
             <div class="col-md-12">
                 <h2>Setup your Profile as:</h2>
             </div>
-            <div class="text-center col-md-6">
+            <div class="text-center equal_height col-md-6">
                 <h2>
                     Club
                 </h2>
@@ -13,13 +13,13 @@
                 </button>
             </div>
 
-            <div class="text-center col-md-6">
+            <div class="text-center equal_height col-md-6">
                 <h2>
                     Organizer (Federation)
                 </h2>
                 <div >
-                    <input class="col-sm-2" type="radio" name="org" id="" [value]="true" [(ngModel)]="checked" (change)="change($event)"><p class="text-left">Organize Games,Division &amp; Tournamnets </p>
-                    <input class="col-sm-2" type="radio" name="org" id="" [value]="false" [(ngModel)]="checked" (change)="assign($event)"><p class="text-left">Join Organize</p>
+                    <input class="col-sm-1" type="radio" name="org" id="" [value]="true" [(ngModel)]="checked" (change)="change($event)"><p class="text-left">Organize Games,Division &amp; Tournamnets </p>
+                    <input class="col-sm-1" type="radio" name="org" id="" [value]="false" [(ngModel)]="checked" (change)="assign($event)"><p class="text-left">Join Organize</p>
                     <select [disabled]="checked" class="js-example-basic-single col-md-8" placeholder="Select a organizer" [(ngModel)]="value" name="state">
                         <option *ngFor="let ite of items"  [value]="ite.id">{{ite.name}}</option>
                     </select>
@@ -41,7 +41,7 @@
                     Member Profile
                 </button>
             </div>
-            <div class="text-center col-md-6">
+            <div class="text-center equal_height col-md-6">
                 <h2>
                     Trainer
                 </h2>
@@ -72,3 +72,4 @@
           </div>
         </div>
       </div>
+
