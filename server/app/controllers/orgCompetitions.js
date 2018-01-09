@@ -38,6 +38,13 @@ orgCompetitionsCtrl.prototype.getbyid = function (req, res) {
     });
 }
 
+orgCompetitionsCtrl.prototype.getbyorg = function (req, res) {
+    OrgCompetitions.find({ organizer: req.params.id }).exec(function (err, gd) {
+        if (err) console.log('error occured..' + err);
+        res.json(gd);
+    });
+}
+
 orgCompetitionsCtrl.prototype.update = function (req, res) {
     OrgCompetitions.findByIdAndUpdate({_id:req.params.id},req.body,{new:true},function (er, dt) {
         if (er) {

@@ -39,6 +39,13 @@ organizerClassificationsCtrl.prototype.getbyid = function (req, res) {
     });
 }
 
+organizerClassificationsCtrl.prototype.getbyorg = function (req, res) {
+    OrganizerClassifications.find({ organizer: req.params.id }).exec(function (err, gd) {
+        if (err) console.log('error occured..' + err);
+        res.json(gd);
+    });
+}
+
 organizerClassificationsCtrl.prototype.update = function (req, res) {
     OrganizerClassifications.findByIdAndUpdate({_id:req.params.id},req.body,{new:true},function (er, dt) {
             if (er) {

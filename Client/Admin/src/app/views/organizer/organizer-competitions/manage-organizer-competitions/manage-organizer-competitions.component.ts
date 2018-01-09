@@ -103,6 +103,8 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
   saveVal(){
     // console.log(this.comForm.value);
      if (this.comForm.valid) {
+    var orid=localStorage.getItem('orgid');
+    this.comForm.value.organizer=orid;
       if (this._id) {
         this.http.put(environment.api+'/orgCompetitions/'+this._id,this.comForm.value)
                  .subscribe((res)=>{

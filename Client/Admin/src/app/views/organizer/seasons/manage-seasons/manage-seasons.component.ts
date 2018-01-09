@@ -22,7 +22,8 @@ export class ManageSeasonsComponent implements OnInit {
     this.seasonForm = this.fb.group({
       'name' : ["",[Validators.required]],
       'start_date' : [this.start_date,[Validators.required]],
-      'end_date' : [null,[Validators.required]]
+      'end_date' : [null,[Validators.required]],
+      "organizer":[""]
     },{validator:this.dateLessThan('start_date', 'end_date')})
   }
   dateLessThan(start_date: string, end_date : string) {
@@ -51,6 +52,8 @@ export class ManageSeasonsComponent implements OnInit {
     this.seasonForm.value.start_date= s;
     this.seasonForm.value.end_date= e
     if (this.seasonForm.valid) {
+    var orid=localStorage.getItem('orgid');
+    this.seasonForm.value.organizer=orid;
       if (this._id) {
         this.http.put(environment.api+'/seasons/'+this._id,this.seasonForm.value)
                  .subscribe((res)=>{

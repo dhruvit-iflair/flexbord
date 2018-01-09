@@ -14,5 +14,7 @@ module.exports=function(app){
                 .get(organizerClassifications.getbyid)
                 .put(organizerClassifications.update)
                 .delete(organizerClassifications.delete);
+        organizerClassificationsRoute.route('/byorg/:id')
+                .get(organizerClassifications.getbyorg);
     app.use('/api/organizerClassifications',organizerClassificationsRoute);
 };

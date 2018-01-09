@@ -11,7 +11,7 @@ declare var jQuery:any;
   styleUrls: ['./organizer-competitions.component.css']
 })
 export class OrganizerCompetitionsComponent implements OnInit {
-  public dtOptions;
+  public dtOptions;orgid;
   public rows :Array<any>;
   public dataRenderer = false;
   constructor(private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute) { }
@@ -25,7 +25,8 @@ export class OrganizerCompetitionsComponent implements OnInit {
       order:[[ 0, 'desc' ]],
       columns: [{"visible":false},null,null,null,null,{ "orderable": false }]
     };
-    this.http.get(environment.api+'/orgCompetitions')
+    this.orgid=localStorage.getItem('orgid');
+    this.http.get(environment.api+'/orgCompetitions/byorg/'+this.orgid)
               .subscribe((res)=>{
                 this.rows = res.json();
                    this.dataRenderer = true;                

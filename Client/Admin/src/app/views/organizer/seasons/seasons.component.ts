@@ -10,7 +10,7 @@ import { dateFormatPipe } from "../../../components/pipes/dateFormate";
   styleUrls: ['./seasons.component.css']
 })
 export class SeasonsComponent implements OnInit {
-  public dtOptions;
+  public dtOptions;orgid;
   public seasons : Array<any>;
   public dataRenderer=false;
   constructor(public http: Http,private toastr : ToastrService, ) { }
@@ -21,7 +21,8 @@ export class SeasonsComponent implements OnInit {
       order:[[ 0, 'desc' ]],
       columns: [{"visible":false},null,null,null,{ "orderable": false }]
     };
-    this.http.get(environment.api+'/seasons')
+    this.orgid=localStorage.getItem('orgid');
+    this.http.get(environment.api+'/seasons/byorg/'+this.orgid)
              .subscribe((res)=>{
                this.seasons = res.json();
                this.dataRenderer=true;

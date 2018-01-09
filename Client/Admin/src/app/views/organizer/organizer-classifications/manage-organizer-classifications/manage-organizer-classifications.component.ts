@@ -16,7 +16,7 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
   public claForm : FormGroup;
   public value : Array<any> = [''];
   public sub : any;
-  public _id : any;
+  public _id : any;orgid;
   constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute){
     this.claForm = this.fb.group({
       name: ["",[Validators.required]],
@@ -73,6 +73,8 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
     }
     this.claForm.patchValue({value:this.value});
     if (this.claForm.valid && p) {
+      var orid=localStorage.getItem('orgid');
+    this.claForm.value.organizer=orid;
       if (this._id) {
         this.http.put(environment.api+'/organizerClassifications/'+this._id,this.claForm.value)
                  .subscribe((res)=>{

@@ -14,5 +14,7 @@ module.exports=function(app){
                 .get(seasons.getbyid)
                 .put(seasons.update)
                 .delete(seasons.delete);
+        seasonsRoute.route('/byorg/:id')
+                .get(seasons.getbyorg);
     app.use('/api/seasons',seasonsRoute);
 };

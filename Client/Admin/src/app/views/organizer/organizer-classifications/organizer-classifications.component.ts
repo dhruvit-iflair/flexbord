@@ -13,7 +13,7 @@ import { HttpObserve } from '@angular/common/http/src/client';
 export class OrganizerClassificationsComponent implements OnInit {
   public dtOptions;
   public rows :Array<any>;
-  public dataRenderer=false;
+  public dataRenderer=false;orgid;
   constructor(private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -22,7 +22,8 @@ export class OrganizerClassificationsComponent implements OnInit {
       order:[[ 0, 'desc' ]],
       columns: [{"visible":false},null,null,{ "orderable": false }]
     };
-    this.http.get(environment.api+'/organizerClassifications')
+    this.orgid=localStorage.getItem('orgid');
+    this.http.get(environment.api+'/organizerClassifications/byorg/'+this.orgid)
               .subscribe((res)=>{
                 this.rows = res.json();
                 this.dataRenderer=true;

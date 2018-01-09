@@ -14,5 +14,7 @@ module.exports=function(app){
                 .get(orgCompetitions.getbyid)
                 .put(orgCompetitions.update)
                 .delete(orgCompetitions.delete);
+        orgCompetitionsRoute.route('/byorg/:id')
+                .get(orgCompetitions.getbyorg);
     app.use('/api/orgCompetitions',orgCompetitionsRoute);
 };
