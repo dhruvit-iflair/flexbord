@@ -22,7 +22,8 @@ export class ManageOrganizerComponent implements OnInit {
   public placePic:any;
   public value : any;
   public value2 : Array<string>;
-  public spotsIns : Array<any>;
+  public spotsIns : Array<any> = [];
+  public spotsdInsText : Array<any> = [];
   public sub: any;
   public logo: any;
   public logo2: any;
@@ -69,6 +70,11 @@ export class ManageOrganizerComponent implements OnInit {
                  if(fagdf.length > 0){
                     var comming = res.json();
                     this.orgdata = comming[0];
+                    this.spotsIns = comming[0].sports;
+                    for(var i=0; i<this.spotsIns.length;i++){
+                      var y = this.spots.findIndex(r=>r.id == this.spotsIns[i]);
+                      this.spotsdInsText.push(this.spots[y].name);
+                    }
                     this.logo = environment.picpoint +'orglogos/'+ comming[0].logo;
                     var yaar = [];
                     if (comming[0].placePic) {
@@ -77,7 +83,12 @@ export class ManageOrganizerComponent implements OnInit {
                       })
                     }
                     this.logo2 = yaar;
+                    this.spotsIns.sort();
+                    this.spotsdInsText.sort();
                     this.orgForm.patchValue( comming[0]);
+                    this.orgForm.controls['affilated'].setValue(fagdf[0].affilated, {onlySelf: true});
+                    this.orgForm.controls['sports'].setValue(this.spotsdInsText, {onlySelf: true});
+                     
                   }
                   else {
                     this.toastr.error('Error!! No Organizer found!', 'Error');
@@ -88,29 +99,57 @@ export class ManageOrganizerComponent implements OnInit {
                 });
       }
    });
-
+  }
+  selec(id){
+      var d = this.spotsIns.findIndex(r =>r == id);
+      var sf = this.spots.findIndex(r=> r.id == id);
+      var y =this.spotsdInsText.findIndex(r=>r == this.spots[sf].name);
+      if (d != -1) {
+         this.spotsIns.splice(d,1);
+         this.spotsdInsText.splice(y,1);  
+      } else {
+         this.spotsIns.push(id);
+         this.spotsdInsText.push(this.spots[sf].name);     
+      }
+    this.spotsIns.sort();
+    this.spotsdInsText.sort();
+    this.orgForm.patchValue({sports :this.spotsdInsText});
   }
   readUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
-      let up = new FormData();
-      up.append('logo', file);
-      this.http.post(environment.api+"/organizer/logo",up)  
-            .subscribe((res) => {  
-               if (res) {
-                 var log  = res.json();
-                 this.orgForm.patchValue({logo: log});
-               }
-            })
-      var reader = new FileReader();
-        reader.onload = (event:any) => {     
-        this.url = event.target.result;
-      }
-      reader.readAsDataURL(event.target.files[0]);
+      if (file.type == 'image/jpeg' || file.type == 'image/png' && file.size < 2000000) {
+        console.log(file);        
+        let up = new FormData();
+        up.append('logo', file);
+        this.http.post(environment.api+"/organizer/logo",up)  
+              .subscribe((res) => {  
+                if (res) {
+                  var log  = res.json();
+                  this.orgForm.patchValue({logo: log});
+                }
+                else{
+                  this.toastr.error('Error!! Something went wrong! try again later', 'Error');                 
+                }
+              })
+        var reader = new FileReader();
+          reader.onload = (event:any) => {     
+          this.url = event.target.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+      } 
+      else {
+        if ( file.size > 2000000) {
+          this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');                        
+          
+        } else {
+          this.toastr.error('Only .jpg, .png, .jpeg type of Image supported ', 'Error');                                  
+        }
+      }    
+      
     }
   }
   setAdd(e){
-    console.log(e);
     this.orgForm.patchValue({address:e.formatted_address});
     this.orgForm.patchValue({phonenumber:e.formatted_phone_number});
     this.orgForm.patchValue({website:e.website});
@@ -143,20 +182,32 @@ export class ManageOrganizerComponent implements OnInit {
   picPlaceUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
-      let up = new FormData();
-      up.append('placePic', file);
-      this.http.post(environment.api+"/organizer/upload",up)  
-            .subscribe((res) => {  
-               if (res) {
-                 var log  = res.json();
-                 this.orgForm.patchValue({placePic: log});
-               }
-      })
-      var reader = new FileReader();
-        reader.onload = (event:any) => {     
-        this.placePic = event.target.result;
-      }
-      reader.readAsDataURL(event.target.files[0]);
+      if (file.type == 'image/jpeg' || file.type == 'image/png' && file.size < 2000000) {
+        let file = event.target.files[0];
+        let up = new FormData();
+        up.append('placePic', file);
+        this.http.post(environment.api+"/organizer/upload",up)  
+              .subscribe((res) => {  
+                 if (res) {
+                   var log  = res.json();
+                   this.orgForm.patchValue({placePic: log});
+                 }
+        })
+        var reader = new FileReader();
+          reader.onload = (event:any) => {     
+          this.placePic = event.target.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+      } 
+      else {
+        if ( file.size > 2000000) {
+          this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');                        
+          
+        } else {
+          this.toastr.error('Only .jpg, .png, .jpeg type of Image supported ', 'Error');                                  
+        }
+      }    
+      
     }
   }
 
@@ -181,6 +232,7 @@ export class ManageOrganizerComponent implements OnInit {
       }
       else{
             if (this._id) {
+              this.orgForm.patchValue({sports :this.spotsIns});    
               this.http.put(environment.api +"/organizer/"+this._id,this.orgForm.value)
                       .subscribe((res)=>{
                         var d = res.json();
@@ -198,7 +250,8 @@ export class ManageOrganizerComponent implements OnInit {
               var r = new Date();
               r.setHours(h);
               r.setMinutes(m);
-              this.orgForm.value.registered =r;
+              this.orgForm.patchValue({sports :this.spotsIns});                              
+              this.orgForm.patchValue({registered :r});                              
               this.http.post(environment.api +"/organizer",this.orgForm.value)
                       .subscribe((res)=>{
                         var d = res.json();

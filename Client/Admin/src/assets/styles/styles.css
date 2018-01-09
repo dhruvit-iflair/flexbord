@@ -720,6 +720,9 @@ button.box_btn {
   font-size: 14px;
   font-weight: 700;
 }
+button.box_btn:hover {
+  background: #F3825B;
+}
 body .text-center.col-md-6[_ngcontent-c1] {
   background: #eaeaea;
   border-color: #eaeaea;
@@ -799,6 +802,106 @@ body .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
  .btn_green[_ngcontent-c2] {
   background: #F3825B;
  }
+
+ .manage-component-form .text-col-md-3,  .manage-component-form select, 
+ .select2-container .select2-selection--single {
+     width: 100%;
+    border: 1px solid #ddd;
+    padding: 9px 15px;
+    height: auto;
+ }
+ .select2-container--default .select2-selection--single {
+     width: 100% !important;
+    border: 1px solid #ddd !important;
+    padding: 9px 15px !important;
+    height: auto !important;
+ }
+ body .select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 20px;
+ }
+ body .btn.btn_green {
+  background: #F3825B;
+  font-weight: 700;
+ }
+  body .btn.btn_green:hover {
+    background: #303030;
+  }
+ body .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #ffffff !important;
+ }
+ body .btn.btn_yel.tab_btn {
+  background: #303030;
+ }
+ body .dataTable a.btn.btn_green.tab_btn {
+    margin-right: 0
+ }
+ body .dataTable a.btn.btn_green.tab_btn {
+  padding-left: 10px;
+  padding-right: 10px;
+ }
+ label {
+  margin-bottom: 0;
+ }
+.manage-box {
+  background: #eaeaea;
+  padding-bottom: 25px;
+  margin: 25px 0;
+}
+.manage-box > .col-md-12:first-child {
+  background: #535353;
+  color: #ffffff;
+  padding: 15px;
+}
+.manage-box h2 {
+  margin: 0;
+  padding-bottom: 0;
+}
+.manage-container {
+  padding-bottom: 30px;
+}
+body button.btn.btn_green {
+  background: #F3825B;
+    font-weight: 700;
+}
+.dataTables_wrapper .dataTables_filter {
+  margin-bottom: 25px;
+}
+body .select2-container--default .select2-selection--single .select2-selection__arrow {
+  top: 9px;
+  right: 13px;
+}
+table.dataTable thead .sorting, table.dataTable thead .sorting_asc:after, 
+table.dataTable thead .sorting_desc, 
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc_disabled {
+  background-color: #535353 !important;
+}
+.manage-box label {
+  font-size: 17px;
+  display: block;
+}
+.manage-box.radio-box label {
+  display: inline-block;
+}
+.margin_top {
+  margin-top: 15px;
+}
+.manage-box select {
+  width: 100%;
+  border: 1px solid #e5e6e7;
+  font-size: 14px;
+  padding: 6px 12px;
+}
+h4.text-left {
+  font-size: 17px;
+  font-weight: 700;
+}
+.man {
+    padding-top: 25px;
+}
+.manage-box a.btn, .manage-box .btn {
+    font-size: 14px;
+}
 
 @media (max-width: 768px) {
   .top-navigation .navbar-header {
@@ -8769,3 +8872,11 @@ body.md-skin {
     margin: 0;
   }
 }
+
+@media (min-width: 1200px) {
+   .container {
+      width: 100%;
+      max-width: 100%;
+  }
+}
+

@@ -4,7 +4,7 @@
 } */
 
 .col-md-12#tabl {
-    width: 94%;
+    width: 100%;
 }
 .no_padd{
     padding-right: 0px;
@@ -26,17 +26,17 @@
 }
 
 a.btn.btn_green button.btn.btn_green {
-    background-color: #089468;
+    background-color: #F3825B;
     color: #fff;
     margin-top: 15px;
 }
 .btn_green {
-    background-color: #089468;
+    background-color: #F3825B;
     color: #fff;
     margin-top: 15px;
 }
 a.btn.btn_green.tab_btn {
-    background-color: #089468;
+    background-color: #F3825B;
     margin-top: 0px;
     color: #fff;
     margin-right: 10px;

@@ -36,7 +36,11 @@ img.image_display {
     height: 35px;
     width: 252px;
   }
-  input.text-col-md-3.ng-pristine.ng-invalid.ng-touched {
+
+button{
+    background-color: #fff;
+}
+  /* input.text-col-md-3.ng-pristine.ng-invalid.ng-touched {
     border: 1px solid red;
 }
 input.text-col-sm-3.ng-dirty.ng-invalid.ng-touched {
@@ -45,4 +49,19 @@ input.text-col-sm-3.ng-dirty.ng-invalid.ng-touched {
 input.text-col-md-3.ng-touched.ng-dirty.ng-invalid {
     border: 1px solid red;
 
+} */
+.alert.alert-danger {
+    position: inherit;
+    width: 253px;
 }
+select {
+    background-color: #fff;
+}
+.no_border{
+    border: 0px;
+    background-color: #fff;
+    
+}
+/* input.no_border.ng-pristine.ng-touched.ng-invalid{
+    border: 0px;    
+} */

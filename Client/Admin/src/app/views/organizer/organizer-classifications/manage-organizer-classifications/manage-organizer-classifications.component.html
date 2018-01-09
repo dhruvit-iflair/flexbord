@@ -1,43 +1,48 @@
+<div class="manage-box clearfix">
 <div class="col-md-12">
   <label><h2>Manage Classificatiom</h2></label>
 </div>
 <div class="col-md-12">
   <form [formGroup]="claForm" >
-      <div class="form-group pad">
-        <div class="col-md-8 ">
-          <label>Name:</label>
-          <input class=" form-control" type="text" placeholder="Classification Name" formControlName="name">
-        </div>        
-        <div class="col-md-2 ">
-          <button class="btn btn_green marTop" (click)='addVal()'>Add Value</button>
-        </div>        
-      <br>  
+      <div class="col-md-12 pad">
+          <div class="row">
+              <div class="col-md-10">
+                <label>Name:</label>
+                <input class=" form-control" type="text" placeholder="Classification Name" formControlName="name">
+              
+                <div class="alert alert-danger" role="alert" *ngIf="!claForm.get('name').valid && claForm.get('name').touched">
+                  Name is required.
+                </div>
+              </div>        
+              <div class="col-md-2">
+                <button class="btn btn_green marTop" (click)='addVal()'>Add Value</button>
+              </div>        
+          </div>
+      </div>        
+        
+      <div class="col-md-12 pad man clearfix" *ngFor="let v of value; let i = index; trackBy:trackByIndex" >
+          <div class="row">
+            <div class="col-md-10">
+              <label>Value</label>
+              <input type="number" class="form-control" id="i"  placeholder="Value" [(ngModel)]='value[i]' [ngModelOptions]="{standalone: true}" required>
+              <div *ngIf="i.errors && (i.dirty || i.touched)" class="alert alert-danger">
+                Value is required
+              </div>       
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn_red marTop" *ngIf="value.length != 1"  (click)="delVal(i)"><i class="fa fa-times" aria-hidden="true"></i></button>
+            </div>   
+          </div>           
       </div>
-      <div class="form-group pad" *ngFor="let v of value; let i = index; trackBy:trackByIndex" >
-        <div class="col-md-6">
-          <label>Value</label>
-          <input type="text" class="form-control col-md-4"  placeholder="Value" [(ngModel)]='value[i]' [ngModelOptions]="{standalone: true}">
-        </div>
-        <div class="col-md-2 ">
-          <button class="btn btn_red marTop" *ngIf="value.length != 1"  (click)="delVal(i)"><i class="fa fa-times" aria-hidden="true"></i></button>
-        </div>              
-      </div>
-      <br>
     </form>
 </div>
-<br>
-<div class="col-md-12">
-  <br>
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
-            <button class="btn" [routerLink]="['/classifications']">Back</button>
-        </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
-            <button (click)='saveVal()' class="btn btn_green" >Save</button>        
-            <!-- [disabled]='!orgForm.valid' -->
-        </div>
-        <div class="col-md-2"></div>   
+<div class="col-md-12 margin_top">
+      <div class="col-md-6">
+          <button class="btn" [routerLink]="['/classifications']">Back</button>
+      </div>
+      <div class="col-md-6 text-right">
+          <button (click)='saveVal()' class="btn btn_green" >Save</button>        
+          <!-- [disabled]='!orgForm.valid' -->
+      </div>  
 </div>
-
-<div class="man col-md-12"></div>   
+</div>   
