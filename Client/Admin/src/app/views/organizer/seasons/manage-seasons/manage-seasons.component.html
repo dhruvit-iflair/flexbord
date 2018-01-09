@@ -7,6 +7,9 @@
           <div class="col-md-12">
           <label>First Name:</label>
           <input class="form-control" type="text" placeholder="Season Name" formControlName="name">
+          <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('name').valid && seasonForm.get('name').touched">
+            First Name is required.
+          </div>
         </div>        
         <br>  
         </div>
@@ -14,6 +17,9 @@
           <div class="col-md-6">
             <label>Start Date</label>
             <input type="date" class="form-control col-md-4"  placeholder="Start Date" formControlName="start_date" useValueAsDate>
+            <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('start_date').valid && seasonForm.get('start_date').touched">
+              Start Date is required.
+            </div>
           </div>           
         </div>
         <br>
@@ -21,9 +27,14 @@
           <div class="col-md-6">
             <label>End Date</label>
             <input class="form-control col-md-4" type="date" placeholder="End Date" formControlName="end_date" useValueAsDate>
+            <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('end_date').valid && seasonForm.get('end_date').touched">
+              End Date is required.
+            </div>
           </div>
         </div>
-        <label *ngIf="seasonForm.errors">{{ seasonForm.errors?.dates | json }}</label>
+        <div class="alert alert-danger" role="alert" *ngIf="seasonForm.errors && seasonForm.get('start_date').touched && seasonForm.get('end_date').touched">
+          {{ seasonForm.errors?.dates | json }}
+        </div>
       </form>
 </div>
 <br>

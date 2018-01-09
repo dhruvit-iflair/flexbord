@@ -8,35 +8,42 @@
           <div class="col-md-3"><h4 class="text-right">Full Name<a style="color:#f00 !important;">*</a></h4></div>
           <div class="col-md-3">
             <input class="text-col-md-3" type="text" formControlName="name">
-            <span style="color:red; position: absolute;" *ngIf="!orgForm.get('name').valid && orgForm.get('name').touched">
-                    Name is required.
-                  </span>
+            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('name').valid && orgForm.get('name').touched">
+                Name is required.
+            </div>
           </div>
       </div>
       <div class="man col-md-6">
           <div class="col-md-3"><h4 class="text-right">Sub domain<a style="color:#f00 !important;">*</a></h4></div>
           <div class="col-md-3">
             <input class="text-col-md-3" type="text" formControlName="subDomain">
-            <span style="color:red; position: absolute;" *ngIf="!orgForm.get('subDomain').valid && orgForm.get('subDomain').touched">
-                    Sub Domain is required
-                  </span>
+            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('subDomain').valid && orgForm.get('subDomain').touched">
+                Sub domain
+            </div>
           </div>
       </div>
       <div class="man col-md-6">
           <div class="col-md-3"><h4 class="text-right">Abbreviation<a style="color:#f00 !important;">*</a></h4></div>
           <div class="col-md-3">
             <input class="text-col-md-3" type="text" formControlName="abbreviation">
-            <span style="color:red; position: absolute;" *ngIf="!orgForm.get('abbreviation').valid && orgForm.get('abbreviation').touched">
-                    Abbreviation is required.
-                  </span>
+            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('abbreviation').valid && orgForm.get('abbreviation').touched">
+                  Abbreviation is required.
+            </div>
           </div>
       </div>
       <div class="man col-md-6">
           <div class="col-md-3"><h4 class="text-right">Affiliated<a style="color:#f00 !important;">*</a></h4></div>
           <div class="col-md-3">
-            <select class="js-example-basic-single text-col-md-3"  name="state" (setData)="dataChanged($event,'affilated')" formControlName="affilated"  placeholder="Select Organization" select2>
+            <!-- <select class="js-example-basic-single text-col-md-3"  name="state" (setData)="dataChanged($event,'affilated')" formControlName="affilated"  placeholder="Select Organization" select2>
+                <option *ngFor="let ite of items"  [value]="ite.id">{{ite.name}}</option>
+            </select> -->
+            <select class="js-example-basic-single text-col-md-3"  name="affilated" formControlName="affilated">
+                <option value="null" disabled="true" [selected]="true">Select Organization</option>    
                 <option *ngFor="let ite of items"  [value]="ite.id">{{ite.name}}</option>
             </select>
+            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('affilated').valid && orgForm.get('affilated').touched">
+                    Affilated is required.
+            </div>
           </div>
       </div>
       <div class="man col-md-6">
@@ -47,6 +54,9 @@
               <!--<span style="color:red; position: absolute;" *ngIf="!orgForm.get('logo').valid && orgForm.get('logo').touched">
                     Logo is required.
               </span>           -->
+            <!-- <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('affilated').valid && orgForm.get('affilated').touched">
+                    Affilated is required.
+            </div> -->
           </div>
           <div class="col-md-4" *ngIf="logo && !url" >
                 <img [src]="logo" class="image_display">               
@@ -69,13 +79,11 @@
         <div class="col-md-12">
             <div class="man col-md-4"><h4 class="text-right">Address<a style="color:#f00 !important;">*</a></h4></div>
             <div class="man col-md-8">
-                <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace>
-                <span style="color:red; position: absolute;" *ngIf="!orgForm.get('address').valid && orgForm.get('address').touched">
+                <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace> 
+                <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('address').valid && orgForm.get('address').touched">
                         Address is required.
-                </span>   
-
-            </div>
-     
+                </div>
+            </div>     
             <div class="man col-md-4"><h4 class="text-right">Building</h4></div>
             <div class="man col-md-8">
                 <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="building">
@@ -109,9 +117,9 @@
             <div class="man col-md-4"><h4 class="text-right">Capacity<a style="color:#f00 !important;">*</a></h4></div>
             <div class="man col-md-8">
                 <input class="text-col-sm-3"  type="number" formControlName="capacity">
-                <span style="color:red; position: absolute;" *ngIf="!orgForm.get('capacity').valid && orgForm.get('capacity').touched">
+                <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('capacity').valid && orgForm.get('capacity').touched">
                         Capicity is required.
-                </span>   
+                </div>
             </div>
      
             <div class="man col-md-4"><h4 class="text-right">Place Pic</h4></div>
@@ -134,14 +142,16 @@
                         <div class="man col-md-4"><h4 class="text-right">Website<a style="color:#f00 !important;">*</a></h4></div>
                         <div class="man col-md-8">
                             <input class="text-col-md-3" type="text" formControlName="website">
-                            <span style="color:red; position: absolute;" *ngIf="!orgForm.get('website').valid && orgForm.get('website').touched">
+                            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('website').valid && orgForm.get('website').touched">
                                     Website is required.
-                            </span>   
+                            </div> 
                         </div>
-                 
                         <div class="man col-md-4"><h4 class="text-right">Email<a style="color:#f00 !important;">*</a></h4></div>
                         <div class="man col-md-8">
                             <input class="text-col-md-3" type="text" formControlName="email">
+                            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('email').valid && orgForm.get('email').touched">
+                                    Email is required or invalid.
+                            </div>
                             <!--<span style="color:red; position: absolute;" *ngIf="!orgForm.get('email').valid && orgForm.get('email').touched">
                                     Email is required.
                               </span> 
@@ -153,11 +163,10 @@
                         <div class="man col-md-4"><h4 class="text-right">Telephone</h4></div>
                         <div class="man col-md-8">
                             <input class="text-col-md-3" type="text" formControlName="phonenumber">
-                            <span style="color:red; position: absolute;" *ngIf="!orgForm.get('phonenumber').valid && orgForm.get('phonenumber').touched">
+                            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('phonenumber').valid && orgForm.get('phonenumber').touched">
                                     Tel is required.
-                            </span>   
+                            </div> 
                         </div>                       
-                 
                         <div class="col-md-12">
                             <div class="col-md-4">
                                 <label><h2>Sports</h2></label>
@@ -165,9 +174,25 @@
                         </div>
                         <div class="man col-md-4"><h4 class="text-right">Choose<a style="color:#f00 !important;">*</a></h4></div>
                         <div class="man col-md-8">
-                            <select class="spt text-col-md-3"  name="spot" multiple="multiple"  (setData)="dataChanged($event,'sport')" selectedValves={{value2}} options={{spots}} placeholder="Select Sports" select2 formControlName="sports">
+                            <!-- <select class="spt text-col-md-3"  name="spot" multiple="multiple"  (setData)="dataChanged($event,'sport')" selectedValves={{value2}} options={{spots}} placeholder="Select Sports" select2 formControlName="sports">
                                 <option *ngFor="let ite of spots"  [value]="ite.id">{{ite.name}}</option>
-                            </select>
+                            </select> -->
+                            <!-- <select class="spt text-col-md-3"  name="spot" multiple="multiple"  placeholder="Select Sports" formControlName="sports">
+                                <option *ngFor="let ite of spots"  [value]="ite.id">{{ite.name}}</option>
+                            </select> -->
+                            <div class="button-group">
+                                    <button type="button" class="btn btn-lg dropdown-toggle" data-toggle="dropdown">
+                                        <input class="no_border text-col-md-3" type="text"  formControlName="sports" disabled><span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu col-md-8">
+                                        <li *ngFor="let ite of spots; let i = index; trackBy:trackByIndex" >
+                                            <a class="small" (click)="$event.stopPropagation(); selec(ite.id)"><input type="checkbox" [checked]="spotsIns.indexOf(ite.id) >= 0"  data-value="{{ite.id}}"/>&nbsp; {{ite.name}}</a>
+                                        </li>
+                                    </ul>
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('sports').valid && orgForm.get('sports').untouched">
+                                    Sports is required.
+                            </div> 
                         </div>
                         <div class="col-md-12">
                                 <div class="col-md-4">
@@ -180,6 +205,9 @@
                         
                             <div class="col-md-1"><input type="radio" name="affilation"  value="closed" formControlName="affilation"></div>
                             <div class="col-md-4">Closed</div>    
+                            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('affilation').valid && orgForm.get('affilation').touched">
+                                    Affiliation is required.
+                            </div> 
                         </div>
         </div>
 </div>

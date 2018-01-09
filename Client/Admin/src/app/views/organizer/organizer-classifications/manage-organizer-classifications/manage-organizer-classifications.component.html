@@ -7,6 +7,9 @@
         <div class="col-md-8 ">
           <label>Name:</label>
           <input class=" form-control" type="text" placeholder="Classification Name" formControlName="name">
+          <div class="alert alert-danger" role="alert" *ngIf="!claForm.get('name').valid && claForm.get('name').touched">
+            Name is required.
+          </div>
         </div>        
         <div class="col-md-2 ">
           <button class="btn btn_green marTop" (click)='addVal()'>Add Value</button>
@@ -14,11 +17,14 @@
       <br>  
       </div>
       <div class="form-group pad" *ngFor="let v of value; let i = index; trackBy:trackByIndex" >
-        <div class="col-md-6">
+        <div class="col-md-8">
           <label>Value</label>
-          <input type="text" class="form-control col-md-4"  placeholder="Value" [(ngModel)]='value[i]' [ngModelOptions]="{standalone: true}">
+          <input type="text" class="form-control col-md-4"  name="i" required #i="ngModel" id="i"  placeholder="Value" [(ngModel)]='value[i]' [ngModelOptions]="{standalone: true}" required>
+          <div *ngIf="i.errors && (i.dirty || i.touched)" class="alert alert-danger">
+            Value is required
+          </div>
         </div>
-        <div class="col-md-2 ">
+        <div class="col-md-4 ">
           <button class="btn btn_red marTop" *ngIf="value.length != 1"  (click)="delVal(i)"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>              
       </div>

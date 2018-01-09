@@ -46,3 +46,6 @@ img.image_display {
 .marTop{
     margin-top: 24px;
 }
+.alert.alert-danger.col-md-4 {
+    margin-top: 16px;
+}
