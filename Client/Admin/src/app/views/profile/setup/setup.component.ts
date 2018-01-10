@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { fakedb } from "../../../components/common/fakedb";
+import { Http } from "@angular/http";
+import { environment } from "../../../../environments/environment";
+import { ToastrService } from 'ngx-toastr';
 
 declare var jQuery:any;
 
@@ -11,12 +13,20 @@ declare var jQuery:any;
 export class SetupComponent implements OnInit {
   public items:Array<any> ;
   public value:any;
-  public checked = true;
+  public check = true;
+  public organizer: Array<any>;
 
-  constructor() { }
+  constructor(public http : Http,
+              public tost : ToastrService) {
+  }
 
   ngOnInit() {
-    this.items = fakedb.org;
+      this.http.get(environment.api + '/organizer')
+               .subscribe((res)=>{
+                 this.items = res.json();
+                 this.organizer = res.json();
+               })
+    
     jQuery(document).ready(function() {
         jQuery('.js-example-basic-single').select2({
           placeholder: 'Select an Organizer',          
@@ -31,12 +41,26 @@ export class SetupComponent implements OnInit {
     
   }
   change(event){
+    console.log(this.check);
     if (event.target.checked) {
-      jQuery('.js-example-basic-single').val('').trigger('change');
+      // jQuery('.js-example-basic-single').val('').trigger('change');
+      // if (this.organizer) {
+        
+      // } else {
+        
+      // }
     }
   }
   assign(e){
-      this.items = fakedb.org;
+    
+    if (this.organizer.length) {
+      this.items = this.organizer;
+      console.log(this.check);
+    }
+    else {
+      this.check = true;    
+      console.log(this.check);
+    }
   }
 }
 

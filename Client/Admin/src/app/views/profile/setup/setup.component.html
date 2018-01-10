@@ -18,16 +18,16 @@
                     Organizer (Federation)
                 </h2>
                 <div >
-                    <input class="col-sm-1" type="radio" name="org" id="" [value]="true" [(ngModel)]="checked" (change)="change($event)"><p class="text-left">Organize Games,Division &amp; Tournamnets </p>
-                    <input class="col-sm-1" type="radio" name="org" id="" [value]="false" [(ngModel)]="checked" (change)="assign($event)"><p class="text-left">Join Organize</p>
-                    <select [disabled]="checked" class="js-example-basic-single col-md-8" placeholder="Select a organizer" [(ngModel)]="value" name="state">
-                        <option *ngFor="let ite of items"  [value]="ite.id">{{ite.name}}</option>
+                    <input class="col-sm-1" type="radio" name="org" id="" [value]="true" [(ngModel)]="check" (change)="change($event)" [checked]="check"><p class="text-left">Organize Games,Division &amp; Tournamnets </p>
+                    <input class="col-sm-1" type="radio" name="org" id="" [value]="false" [(ngModel)]="check" (change)="assign($event)"><p class="text-left">Join Organize</p>
+                    <select [disabled]="check" class="js-example-basic-single col-md-8" placeholder="Select a organizer" [(ngModel)]="value" name="state">
+                        <option *ngFor="let ite of items"  [value]="ite._id">{{ite.name}}</option>
                     </select>
                 </div>
-                <button *ngIf="checked == true" class="box_btn org" routerLink="/">
+                <button *ngIf="check == true" class="box_btn org" routerLink="/">
                     Organizer  Profile
                 </button>
-                <button *ngIf="checked == false" class="box_btn org" routerLink="/">
+                <button *ngIf="check == false" class="box_btn org" routerLink="/">
                     Join Club
                 </button>
             </div>

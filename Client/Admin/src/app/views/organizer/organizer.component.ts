@@ -67,8 +67,8 @@ export class OrganizerComponent implements OnInit {
     this.router.navigate(['/competitions']);
   }
   delOrg(id, index) {
-    var d = this.rows.findIndex(r => r._id == id);
-    this.rows.splice(d, 1);
+    // var d = this.rows.findIndex(r => r._id == id);
+    // this.rows.splice(d, 1);
 
     var del = confirm("Confirm to delete this Organizer!");
     if (del) {

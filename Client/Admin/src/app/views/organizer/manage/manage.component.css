@@ -28,7 +28,6 @@ input.logo_upload {
 }
 img.image_display {
     width: 100px;
-    border: 2px solid;
     border-radius: 100px;
     height: 100px;
 }

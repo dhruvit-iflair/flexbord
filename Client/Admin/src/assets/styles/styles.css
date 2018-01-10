@@ -723,7 +723,7 @@ button.box_btn {
 button.box_btn:hover {
   background: #F3825B;
 }
-body .text-center.col-md-6[_ngcontent-c1] {
+body .text-center.col-md-6 {
   background: #eaeaea;
   border-color: #eaeaea;
   height: auto;
@@ -833,7 +833,7 @@ body .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
   background: #303030;
  }
  body .dataTable a.btn.btn_green.tab_btn {
-    margin-right: 0
+    margin-right: 7px;
  }
  body .dataTable a.btn.btn_green.tab_btn {
   padding-left: 10px;
@@ -902,6 +902,60 @@ h4.text-left {
 .manage-box a.btn, .manage-box .btn {
     font-size: 14px;
 }
+body .alert.alert-danger {
+    width: 100%;
+    padding: 10px;
+    display: none;
+}
+.manage-component-form .text-col-md-3.ng-invalid.ng-touched, 
+input.form-control.ng-touched.ng-pristine.ng-invalid,
+.form-control.ng-touched.ng-invalid {
+  border-color: #f00;
+}
+.dropdown-menu {
+  font-size: 16px;
+}
+.btn {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.form-control:focus {
+  border-color: #e5e6e7;
+}
+.alert-popup {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #00000073;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+.alert-popup-inner {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    background: #fff;
+    top: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: 23px;
+    border-radius: 7px;
+}
+.alert-popup p {
+  font-size: 19px;
+}
+img.image_display_error {
+  border: 2px solid #f00;
+}
+
+img.image_display {
+  border: 2px solid rgb(65, 65, 65);
+}
+
 
 @media (max-width: 768px) {
   .top-navigation .navbar-header {
@@ -2207,7 +2261,7 @@ div.dt-button-info {
 }
 .form-control:focus,
 .single-line:focus {
-  border-color: #F3825B;
+  border-color: #e5e6e7;
 }
 .has-success .form-control,
 .has-success .form-control:focus {
@@ -2966,6 +3020,9 @@ a.forum-item-title:hover {
 .forum-item.active a.forum-item-title {
   color: #F3825B;
 }
+
+
+
 @media (max-width: 992px) {
   .forum-info {
     margin: 15px 0 10px 0;

@@ -3,10 +3,12 @@
         <div class="col-md-9">
             <label><h2>Competitions</h2></label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3 text-right">
             <button class="btn btn_green" [routerLink]="['/competitions/manage']">New Competitions</button>                         
         </div>
-        <div class="col-md-11">
+
+        <div class="col-md-12">
+           <br>
           <table id="cmpt" datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
               <thead>
                 <tr>

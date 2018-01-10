@@ -23,8 +23,9 @@
 }
 
 .btn_green {
-    background-color: #089468;
+    background-color: #F3825B;
     color: #fff;
+    margin-top: 15px;
 }
 .btn_red {
     background-color: #f55f5f;
@@ -45,4 +46,7 @@ img.image_display {
   }
 .marTop{
     margin-top: 24px;
+}
+body .dataTable a.btn.btn_green.tab_btn, a.btn.btn_green.tab_btn {
+    margin-top: 0;
 }

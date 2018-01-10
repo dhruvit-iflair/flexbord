@@ -7,7 +7,7 @@
     padding: 0 25px 0 25px;
 }
 .text-center.col-md-6 {
-    border: 2px solid #676a6c;
+    border: 2px solid #eaeaea;
     border-radius: 21px;
     padding: 18px;
     margin-left: 25px;
@@ -15,6 +15,12 @@
     width: 480px;
     margin-bottom: 24px;
     height: 235px;
+}
+body .text-center.col-md-6 {
+  background: #eaeaea;
+  border-color: #eaeaea;
+  height: auto;
+  min-height: 263px;
 }
 button {
     border: 1px;

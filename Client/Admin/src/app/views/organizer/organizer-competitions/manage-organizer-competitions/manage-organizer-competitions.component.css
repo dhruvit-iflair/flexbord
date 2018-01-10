@@ -23,7 +23,7 @@
 }
 
 button.btn.btn_green {
-    background-color: #089468;
+    background-color: #F3825B;
     color: #fff;
 }
 button.btn.btn_red {
@@ -48,4 +48,7 @@ img.image_display {
 }
 .alert.alert-danger.col-md-4 {
     margin-top: 16px;
+}
+body .dataTable a.btn.btn_green.tab_btn, a.btn.btn_green.tab_btn {
+    margin-top: 0;
 }

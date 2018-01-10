@@ -1,25 +1,27 @@
-<div class="col-md-12">
+<div class="manage-box clearfix">  
+  <div class="col-md-12">
     <label><h2>Manage Competitions</h2></label>
   </div>
   <div class="col-md-12">
     <form [formGroup]="comForm" >
         <div class="form-group pad">
-            <div class="col-md-8 ">
-                <label>Name:</label>
+           <div class="row">
+            <div class="col-md-6">
+                <label>Name<a style="color:#f00 !important;">*</a></label>
                 <input class=" form-control" type="text" placeholder="Name" formControlName="name">
                 <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('name').valid && comForm.get('name').touched">
                         Name is required.
                 </div>
-              </div>
-            <div class="col-md-8 ">
-                <label>Description:</label>
+            </div>
+            <div class="col-md-6">
+                <label>Description<a style="color:#f00 !important;">*</a></label>
                 <input class=" form-control" type="text" placeholder="Description" formControlName="description">
                 <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('description').valid && comForm.get('description').touched">
                         Description is required.
                 </div>
             </div>
-            <div class="col-md-8 ">
-                <label>Sport:</label>
+            <div class="man col-md-6">
+                <label>Sport<a style="color:#f00 !important;">*</a></label>
                 <!-- <input class=" form-control" type="text" placeholder="Sport" formControlName="sports"> -->
                 <select  class=" form-control" placeholder="sports"  name="sports"  formControlName="sports">
                     <!-- <option value="" disabled selected hidden>Select your Season</option> -->
@@ -30,8 +32,8 @@
                         Sport is required.
                 </div>
             </div>
-            <div class="col-md-8 ">
-                <label>Seasons:</label>
+            <div class="man col-md-6">
+                <label>Seasons<a style="color:#f00 !important;">*</a></label>
                 <!-- <input class=" form-control" type="text" placeholder="Classification Name" formControlName="seasons"> -->
                 <select  class=" form-control" placeholder="Season"  name="seasons"  formControlName="seasons">
                   <!-- <option value="" disabled selected hidden>Select your Season</option> -->
@@ -42,8 +44,8 @@
                         Seasons is required.
                 </div>
             </div>
-            <div class="col-md-8 ">
-                <label>Classification:</label>
+            <div class="man col-md-6">
+                <label>Classification<a style="color:#f00 !important;">*</a></label>
                 <!-- <input class=" form-control" type="text" placeholder="Classification Name" formControlName="organizerClassifications"> -->
                 <select  class=" form-control" name="organizerClassifications"  formControlName="organizerClassifications">
                     <option value="null" disabled="true" [selected]="true" value="">Select your Classifications</option>                  
@@ -52,25 +54,21 @@
                 <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('organizerClassifications').valid && comForm.get('organizerClassifications').touched">
                         Classifications is required.
                 </div>
-            </div>                                 
-        <br>  
+            </div>     
+          </div>                              
         </div>        
-        <br>
       </form>
   </div>
-  <br>
-  <div class="col-md-12">
-    <br>
-          <div class="col-md-2"></div>
-          <div class="col-md-4">
+  <div class="col-md-12"> 
+        <div class="row">
+          <div class="col-md-6 text-left">
               <button class="btn" [routerLink]="['/competitions']">Back</button>
           </div>
-          <div class="col-md-2"></div>
-          <div class="col-md-4">
+          <div class="col-md-6 text-right">
               <button (click)='saveVal()' [disabled]='!comForm.valid'  class="btn btn_green" >Save</button>        
               <!-- [disabled]='!orgForm.valid' -->
-          </div>
-          <div class="col-md-2"></div>   
+          </div> 
+        </div> 
   </div>
   
-  <div class="man col-md-12"></div>   
+  </div>   

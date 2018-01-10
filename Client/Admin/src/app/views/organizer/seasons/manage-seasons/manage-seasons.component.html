@@ -7,21 +7,21 @@
                     <label><h2>Manage Seasons</h2></label>
                   </div>
                     <div class="man col-md-6">
-                        <label>First Name:</label>
+                        <label>Name<a style="color:#f00 !important;">*</a></label>
                         <input class="form-control" type="text" placeholder="Season Name" formControlName="name">
                         <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('name').valid && seasonForm.get('name').touched">
-                            First Name is required.
+                            Name is required.
                         </div>
                     </div>        
                   <div class="man col-md-6">
-                    <label>Start Date</label>
+                    <label>Start Date<a style="color:#f00 !important;">*</a></label>
                     <input type="date" class="form-control col-md-4"  placeholder="Start Date" formControlName="start_date" useValueAsDate>
                     <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('start_date').valid && seasonForm.get('start_date').touched">
                         Start Date is required.
                     </div>
                   </div>           
                   <div class="man col-md-6">
-                    <label>End Date</label>
+                    <label>End Date<a style="color:#f00 !important;">*</a></label>
                     <input class="form-control col-md-4" type="date" placeholder="End Date" formControlName="end_date" useValueAsDate>
                     <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('end_date').valid && seasonForm.get('end_date').touched">
                         End Date is required.

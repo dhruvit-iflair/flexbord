@@ -9,21 +9,21 @@
             <div class="col-md-12">
             <div class="row">
                 <div class="man col-md-6">
-                        <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
-                      <input class="text-col-md-3" type="text" formControlName="name">
+                      <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
+                      <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="name" required>
                       <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('name').valid && orgForm.get('name').touched">
                             Name is required.
                       </div>
                 </div>
                 <div class="man col-md-6">
-                        <h4 class="text-left">Sub domain<a style="color:#f00 !important;">*</a></h4>
+                      <h4 class="text-left">Sub domain<a style="color:#f00 !important;">*</a></h4>
                       <input class="text-col-md-3" type="text" formControlName="subDomain">
                       <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('subDomain').valid && orgForm.get('subDomain').touched">
                             Sub domain
                       </div>
                 </div>
                 <div class="man col-md-6">
-                        <h4 class="text-left">Abbreviation<a style="color:#f00 !important;">*</a></h4>
+                      <h4 class="text-left">Abbreviation<a style="color:#f00 !important;">*</a></h4>
                       <input class="text-col-md-3" type="text" formControlName="abbreviation">
                       <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('abbreviation').valid && orgForm.get('abbreviation').touched">
                             Abbreviation is required.
@@ -45,7 +45,7 @@
                 <div class="man col-md-12">
                     <div class="row">
                         <div class="col-md-2">
-                          <h4 class="text-left">Logo</h4>
+                            <h4 class="text-left">Logo<a style="color:#f00 !important;">*</a></h4>
                             <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" >
                             <button class="btn btn_green" (click)="file.click()"> Upload</button>     
                             <!--<span style="color:red; position: absolute;" *ngIf="!orgForm.get('logo').valid && orgForm.get('logo').touched">
@@ -115,7 +115,7 @@
                 </div>
          
                     <div class="man col-md-2">
-                        <h4 class="text-left">Place Pic</h4>
+                        <h4 class="text-left">Place Pic<a style="color:#f00 !important;">*</a></h4>
                         <input type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)">
                         <button class="btn btn_green" (click)="file2.click()"> Upload</button>                
                     </div>
@@ -145,7 +145,7 @@
                  </div>
                  <div class="man col-md-6">
                     <h4 class="text-left">Email<a style="color:#f00 !important;">*</a></h4>
-                    <input class="text-col-md-3" type="text" formControlName="email">
+                    <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" required>
                     <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('email').valid && orgForm.get('email').touched">
                             Email is required or invalid.
                     </div>     
@@ -190,7 +190,7 @@
 
         <div class="manage-box radio-box clearfix"> 
              <div class="col-md-12">
-                     <label><h2>Affiliation</h2></label>                               
+                     <label><h2>Affiliation<a style="color:#f00 !important;">*</a></h2></label>                               
              </div>
              <div class="man col-md-12">
                 <div class="row">
@@ -213,7 +213,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <button class="btn" [routerLink]="['/organizer']">Back</button>
+        <button class="btn btn-white" [routerLink]="['/organizer']">Back</button>
     </div>
     <div class="col-md-6 text-right">
         <button class="btn btn_green" [disabled]="!orgForm.valid" (click)='addOrg()'>Save</button>       
