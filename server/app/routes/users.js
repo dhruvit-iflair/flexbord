@@ -17,6 +17,8 @@ module.exports=function(app){
     .post(users.resetpwd);
     usersRoute.route('/setpwd')
     .post(users.setnewpwd);
+    usersRoute.route('/checkexplink')
+    .post(users.checkexplink);
     usersRoute.route('/:id')
     .get(users.getbyuser)
     .patch(users.update)

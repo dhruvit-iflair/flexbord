@@ -8,7 +8,9 @@ var usersSchema=new Schema({
     username:String,
     password:String,
     isAgreemented:Boolean,
-    isVerified:Boolean
+    isVerified:Boolean,
+    resetpwdToken:{type:String,default:""},
+    resetpwdExpiredOn:{type:String,default:""}
 //    roles:{ type: Schema.Types.ObjectId, ref: 'roles' },
 //    person_photo:Object
 });

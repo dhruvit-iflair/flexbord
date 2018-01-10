@@ -7,12 +7,12 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var multer = require('multer');
 var path = require('path');
-var settings=require('../../config/config.js');
+var settings = require('../../config/config.js');
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
-    host : settings.host,
+    host: settings.host,
     port: settings.mailPort,
-    secure: false, 
+    secure: false,
     auth: {
         user: settings.Imailer,
         pass: settings.mailToken
@@ -148,21 +148,31 @@ usersctrl.prototype.update = function (req, res) {
 usersctrl.prototype.resetpwd = function (req, res) {
     Users.findByUsername(req.body.username).then(function (sanitizedUsr) {
         if (sanitizedUsr) {
-            var hoster=req.headers.origin+"/setpassword?u="+req.body.username;
-                var mailOptions = {
-                    from: settings.fromImailer,
-                    to: req.body.username,
-                    subject: 'Reset Password!',
-                    html: '<h1>Hello!  ' + req.body.username + ' !!</h1><br><br><br><a href='+hoster+'>Click here to set your new password.</a>'
-                };
-                transporter.sendMail(mailOptions, function (error, info) {
-                    if (error) {
-                        console.log(error);
-                    } else {
-                        console.log('Email sent: ' + info.response);
-                    }
-                });
-                res.json('Verified your account successfully.');
+            var ptoken = Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2);
+            var expDate = Date.now() + 3600000;//1 hour time since generation
+            var updateObject = { resetpwdToken: ptoken, resetpwdExpiredOn: expDate };
+            Users.findOneAndUpdate({ username: req.body.username }, { $set: updateObject }, function (er, dt) {
+                if (er) {
+                    console.log('error occured..' + er);
+                }
+                else {
+                    var hoster = req.headers.origin + "/setpassword?ref=" + ptoken;
+                    var mailOptions = {
+                        from: settings.fromImailer,
+                        to: req.body.username,
+                        subject: 'Reset Password!',
+                        html: '<h1>Hello!  ' + req.body.username + ' !!</h1><br><br><br><a href=' + hoster + '>Click here to set your new password.</a>'
+                    };
+                    transporter.sendMail(mailOptions, function (error, info) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log('Email sent: ' + info.response);
+                        }
+                    });
+                    res.json('Verified your account successfully.');
+                }
+            });
         }
         else {
             res.json('This User does not exist!');
@@ -172,20 +182,42 @@ usersctrl.prototype.resetpwd = function (req, res) {
     });
 }
 
+usersctrl.prototype.checkexplink = function (req, res) {
+    Users.find({ resetpwdToken: req.body.username }).exec(function (err, usrrsdata) {
+        if (usrrsdata[0].resetpwdExpiredOn < Date.now()) {
+            res.json('Your Password Reset Link Expired');
+        }
+    });
+}
+
 usersctrl.prototype.setnewpwd = function (req, res) {
-    Users.findByUsername(req.body.username).then(function (sanitizedUsr) {
-        var npd = req.body.npd;
-        if (sanitizedUsr) {
-            sanitizedUsr.setPassword(npd, function () {
-                sanitizedUsr.save();
-                res.json('Password Reset Successfully.');
-            });
+    Users.find({ resetpwdToken: req.body.username }).exec(function (err, usrrsdata) {
+        if (err) console.log('error occured..' + err);
+        if (usrrsdata[0].resetpwdExpiredOn < Date.now()) {
+            res.json('Your Password Reset Link Expired');
         }
         else {
-            res.json('This User does not exist!');
+            Users.findByUsername(usrrsdata[0].username).then(function (sanitizedUsr) {
+                var npd = req.body.npd;
+                if (sanitizedUsr) {
+                    sanitizedUsr.setPassword(npd, function () {
+                        sanitizedUsr.save();
+                        var updateObject = { resetpwdToken: '', resetpwdExpiredOn: '' };
+                        Users.findOneAndUpdate({ username: usrrsdata[0].username }, { $set: updateObject }, function (er, dt) {
+                            if (er) {
+                                console.log('error occured..' + er);
+                            }
+                            res.json('Password Reset Successfully.');
+                        });
+                    });
+                }
+                else {
+                    res.json('This User does not exist!');
+                }
+            }, function (errpt) {
+                console.log(errpt);
+            });
         }
-    }, function (errpt) {
-        console.log(errpt);
     });
 }
 
