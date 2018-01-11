@@ -10,6 +10,7 @@ module.exports=function(){
         "host":"mail.iflair.com",
         "mailPort": 587,
         "fromImailer": "no-reply@flexbord.com",
+        "redirectionUrl":"http://flexbordiflair.westcentralus.cloudapp.azure.com",
         "serverPort":"5002"
     }
 }();
