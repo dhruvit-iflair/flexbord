@@ -39,7 +39,7 @@ orgCompetitionsCtrl.prototype.getbyid = function (req, res) {
 }
 
 orgCompetitionsCtrl.prototype.getbyorg = function (req, res) {
-    OrgCompetitions.find({ organizer: req.params.id }).exec(function (err, gd) {
+    OrgCompetitions.find({ organizer: req.params.id }).populate('seasons').populate('organizerClassifications').exec(function (err, gd) {
         if (err) console.log('error occured..' + err);
         res.json(gd);
     });
