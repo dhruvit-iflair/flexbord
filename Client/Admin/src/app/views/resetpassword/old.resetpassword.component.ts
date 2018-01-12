@@ -30,7 +30,6 @@ export class oldResetpasswordComponent implements OnInit {
           this.R.username = '';
           this.R.password = '';
           this.R.cpassword = '';
-          debugger;
           if(data!='Password Reset Successfully.'){
             this.toastr.error('Your reset password link expired.', 'Error');
             this.router.navigate(['/resetpassword']);
@@ -39,7 +38,10 @@ export class oldResetpasswordComponent implements OnInit {
             this.toastr.success('Password Reset Successfully.', 'Success');
             this.router.navigate(['/login']);
           }
-        },error => {this.toastr.error('Contact your Administrator!', 'Server Error!!');});
+        },error => {
+          console.log(error);
+          this.toastr.error('Contact your Administrator!', 'Server Error!!');
+        });
     }
     else {
       this.toastr.warning('Fields Can not be Empty', 'Email/Password');

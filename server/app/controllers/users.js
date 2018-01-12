@@ -77,7 +77,7 @@ usersctrl.prototype.verify = function (req, res, next) {
                 }
                 else {
                     //return res.json(dt);setTimeout("window.location.href='http://192.168.1.101:4200'",5000);
-                    res.end("<h1>Email " + mailOpt.to + " is been successfully verified.<script>setTimeout('window.location.href=`http://192.168.1.101:4200`',5000);</script>");
+                    res.end("<h1>Email " + mailOpt.to + " is been successfully verified.<script>setTimeout('window.location.href=`"+req.headers.origin+"`',500);</script>");
                 }
             });
         }
@@ -184,8 +184,15 @@ usersctrl.prototype.resetpwd = function (req, res) {
 
 usersctrl.prototype.checkexplink = function (req, res) {
     Users.find({ resetpwdToken: req.body.username }).exec(function (err, usrrsdata) {
-        if (usrrsdata[0].resetpwdExpiredOn < Date.now()) {
+        if(err){
+            console.log(err);
+            res.json(err);
+        }
+        if (usrrsdata[0] && usrrsdata[0].resetpwdExpiredOn < Date.now()) {
             res.json('Your Password Reset Link Expired');
+        }
+        else{
+            res.json('Your Password Reset Link Already Used/Expired');
         }
     });
 }
