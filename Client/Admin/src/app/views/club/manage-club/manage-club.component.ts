@@ -384,7 +384,7 @@ export class ManageClubComponent implements OnInit {
                       .subscribe((res)=>{
                         var d = res.json();
                         if (d._id) {
-                          this.toastr.success('Organizer Updated Successfully', 'Success');
+                          this.toastr.success('Club Updated Successfully', 'Success');
                           this.router.navigate(['/club']);
                         }
                       },(error)=>{
@@ -403,7 +403,7 @@ export class ManageClubComponent implements OnInit {
                       .subscribe((res)=>{
                         var d = res.json();
                         if (d._id) {
-                          this.toastr.success('Organizer Registered Successfully', 'Success');
+                          this.toastr.success('Club Registered Successfully', 'Success');
                           this.router.navigate(['/club']);
                         }
                       },(error)=>{
