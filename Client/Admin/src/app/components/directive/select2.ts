@@ -29,10 +29,10 @@ export class Dir_select implements OnInit{
                 self.onInputChange();
             });
             if (this.selectedValves) {
-                // console.log(this.opt);
+                // //console.log(this.opt);
                 setTimeout(()=>{
                     var vv = this.selectedValves.split(',');
-                    // console.log(vv);
+                    // //console.log(vv);
                     jQuery("."+ca[0]).val(vv).trigger('change');
                 },100);                
             }

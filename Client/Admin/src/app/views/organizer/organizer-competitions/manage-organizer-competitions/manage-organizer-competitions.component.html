@@ -35,11 +35,17 @@
             <div class="man col-md-6">
                 <label>Seasons<a style="color:#f00 !important;">*</a></label>
                 <!-- <input class=" form-control" type="text" placeholder="Classification Name" formControlName="seasons"> -->
-                <select  class=" form-control" placeholder="Season"  name="seasons"  formControlName="seasons">
+                <select  class=" form-control" placeholder="Season"  name="seasons"  formControlName="seasons" *ngIf="!season == []" >
                   <!-- <option value="" disabled selected hidden>Select your Season</option> -->
-                  <option value="null" disabled="true" [selected]="true" value="">Select your Season</option>
+                  <option disabled="true" [selected]="true" value="null">Select your Season</option>
                   <option *ngFor="let it of season"  [value]="it._id">{{it.name}}</option>
                 </select>
+                <div class="add_new row" *ngIf="!season" >
+                    <label style="float:left; padding-top: 7px;">Add New Season</label>
+                    <button class="btn btn_green" routerLink="/seasons/manage" style="float:left;margin-left: 10px;">
+                            <i class="fa fa-plus "></i>
+                    </button>
+                </div>
                 <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('seasons').valid && comForm.get('seasons').touched">
                         Seasons is required.
                 </div>
@@ -47,9 +53,27 @@
             <div class="man col-md-6">
                 <label>Classification<a style="color:#f00 !important;">*</a></label>
                 <!-- <input class=" form-control" type="text" placeholder="Classification Name" formControlName="organizerClassifications"> -->
-                <select  class=" form-control" name="organizerClassifications"  formControlName="organizerClassifications">
+                <select  class=" form-control" name="organizerClassifications"  formControlName="organizerClassifications" *ngIf="!classifications == []" (change)="getClasValue($event.target.value)">
                     <option value="null" disabled="true" [selected]="true" value="">Select your Classifications</option>                  
                     <option *ngFor="let it of classifications"  [value]="it._id">{{it.name}}</option>
+                </select>
+                <div class="add_new row" style="width: 150%;" *ngIf="!classifications" >
+                    <label style="float:left; padding-top: 7px;">Add New Classifications</label>
+                    <button class="btn btn_green" routerLink="/classifications/manage" style="float:left;margin-left: 10px;">
+                            <i class="fa fa-plus "></i>
+                    </button>
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('organizerClassifications').valid && comForm.get('organizerClassifications').touched">
+                        Classifications is required.
+                </div>
+            </div>     
+            <div class="man col-md-6" *ngIf="classValue " >
+                <label>Classification Value<a style="color:#f00 !important;">*</a></label>
+                <!-- <input class=" form-control" type="text" placeholder="Classification Name" formControlName="organizerClassifications"> -->
+                <select  class=" form-control" formControlName="organizerClassificationsValue">
+                    <option disabled="true" [selected]="!comForm.value.organizerClassificationsValue" value="">Select your Classifications Value</option>                  
+                    <!-- <option  value="4325">BBB</option>                   -->
+                    <option  *ngFor="let val of classValue[0].value" [value]='val'>{{val}}</option>
                 </select>
                 <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('organizerClassifications').valid && comForm.get('organizerClassifications').touched">
                         Classifications is required.

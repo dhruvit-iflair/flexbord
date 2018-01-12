@@ -37,11 +37,11 @@ export class SetupComponent implements OnInit {
   }
   public selected() {
     var t = jQuery('.js-example-basic-single').val();
-    console.log(t);
+    //console.log(t);
     
   }
   change(event){
-    console.log(this.check);
+    //console.log(this.check);
     if (event.target.checked) {
       // jQuery('.js-example-basic-single').val('').trigger('change');
       // if (this.organizer) {
@@ -55,11 +55,11 @@ export class SetupComponent implements OnInit {
     
     if (this.organizer.length) {
       this.items = this.organizer;
-      console.log(this.check);
+      //console.log(this.check);
     }
     else {
       this.check = true;    
-      console.log(this.check);
+      //console.log(this.check);
     }
   }
 }

@@ -7,7 +7,7 @@ import { DatePipe } from '@angular/common';
 export class OrderByPipe implements PipeTransform {
     public par:any;
     transform(array: Array<string>, args: string): Array<string> {
-        console.log(args);
+        //console.log(args);
         array.sort((a: any, b: any) => {
             if ( a._id < b._id ){
                 return -1;

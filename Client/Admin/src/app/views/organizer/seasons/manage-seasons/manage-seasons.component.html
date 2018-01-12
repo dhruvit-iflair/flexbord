@@ -40,6 +40,8 @@
        <div class="row">
           <div class="col-md-6 text-left">
               <button class="btn" [routerLink]="['/seasons']">Back</button>
+              <!-- <button class="btn" (click)="back()">Back</button> -->
+              
           </div>
           <div class="col-md-6 text-right">
               <button  [disabled]='!seasonForm.valid'  (click)='addSesons()' class="btn btn_green" >Save</button>        

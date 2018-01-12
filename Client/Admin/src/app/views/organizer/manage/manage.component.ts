@@ -17,6 +17,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 export class ManageOrganizerComponent implements OnInit {
   public orgdata:any;
   public items:Array<any> ;
+  public items2:Array<any> ;
   public spots:Array<any> ;
   public url:any;
   public placePic:any;
@@ -51,17 +52,25 @@ export class ManageOrganizerComponent implements OnInit {
       sports: [null,[Validators.required]],
       capacity:  [null,[Validators.required]],
       placePic: [null],
-      affilated:  ["",[Validators.required]],
+      affilated:  [""],
       affilation:  ["",[Validators.required]],
       registered: [null]
     })
    }
 
   ngOnInit() {
-    this.items = fakedb.org;
+    // this.items = fakedb.org;
     this.spots = fakedb.sport;
+    this.http.get(environment.api + '/organizer/')
+            .subscribe((res)=>{
+              this.items2 = res.json();
+              this.sub = this.activeRouter.params.subscribe(params => {
+                if (params._id) {
+                    this.items = this.items2.filter(af=> af._id != params._id);
+                }});
+            });
     this.sub = this.activeRouter.params.subscribe(params => {
-      // console.log(params._id);
+      // //console.log(params._id);
       if (params._id) {
         this._id = params._id;
         this.http.get(environment.api + '/organizer/'+ params._id)
@@ -119,7 +128,6 @@ export class ManageOrganizerComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
       if (file.type == 'image/jpeg' || file.type == 'image/png' && file.size < 2000000) {
-        console.log(file);        
         let up = new FormData();
         up.append('logo', file);
         this.http.post(environment.api+"/organizer/logo",up)  
@@ -213,8 +221,8 @@ export class ManageOrganizerComponent implements OnInit {
 
    dataChanged(e,c){
       if (c == 'sport') {
-          console.log(this.orgForm.value.sports);
-          console.log(e);
+          //console.log(this.orgForm.value.sports);
+          //console.log(e);
           this.orgForm.patchValue({sports: e})
       }
       if (c == 'affilated') {

@@ -19,6 +19,7 @@ import { OrganizerClassificationsComponent } from './views/organizer/organizer-c
 import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
 import { OrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/organizer-competitions.component';
 import { ManageOrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/manage-organizer-competitions/manage-organizer-competitions.component';
+// import { ClubComponent } from './views/club/club.component';
 
 export const ROUTES:Routes = [
   // Main redirect
@@ -33,20 +34,29 @@ export const ROUTES:Routes = [
       {path: 'profilesetup', component: SetupComponent, canActivate: [Auth24Guard]},
       // {path: 'organizer', component: ManageOrganizerComponent, canActivate: [Auth24Guard]}
       {path: 'organizer', component: OrganizerComponent,canActivate: [Auth24Guard]},
+      {path: 'organizer/manage', component: ManageOrganizerComponent , canActivate: [Auth24Guard]},
+      {path: 'organizer/manage/:_id', component: ManageOrganizerComponent , canActivate: [Auth24Guard]},
+      
       {path: 'organizer/orgmembers', component: OrgmembersComponent, canActivate: [Auth24Guard]},      
       {path: 'organizer/orgmembers/member', component: MemberComponent, canActivate: [Auth24Guard]},      
       {path: 'organizer/orgmembers/member/:_id', component: MemberComponent, canActivate: [Auth24Guard]},      
-      {path: 'organizer/manage', component: ManageOrganizerComponent , canActivate: [Auth24Guard]},
-      {path: 'organizer/manage/:_id', component: ManageOrganizerComponent , canActivate: [Auth24Guard]},
+      
       {path: 'seasons', component: SeasonsComponent , canActivate: [Auth24Guard]},
       {path: 'seasons/manage', component: ManageSeasonsComponent , canActivate: [Auth24Guard]},
       {path: 'seasons/manage/:_id', component: ManageSeasonsComponent , canActivate: [Auth24Guard]},
+      
       {path: 'classifications', component: OrganizerClassificationsComponent , canActivate: [Auth24Guard]},
       {path: 'classifications/manage', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
       {path: 'classifications/manage/:_id', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
+      
       {path: 'competitions', component: OrganizerCompetitionsComponent , canActivate: [Auth24Guard]},      
       {path: 'competitions/manage', component: ManageOrganizerCompetitionsComponent , canActivate: [Auth24Guard]},
-      {path: 'competitions/manage/:_id', component: ManageOrganizerCompetitionsComponent , canActivate: [Auth24Guard]}
+      {path: 'competitions/manage/:_id', component: ManageOrganizerCompetitionsComponent , canActivate: [Auth24Guard]},
+
+      // {path: 'club', component: ClubComponent , canActivate: [Auth24Guard]},
+      // {path: 'club/manage', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
+      // {path: 'club/manage/:_id', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
+      
     ]
   },
   {

@@ -22,7 +22,7 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
       name: ["",[Validators.required]],
       value: [null,[Validators.required]]
     })
-    console.log(this.value.length);
+    //console.log(this.value.length);
   }
 
   ngOnInit() {    
@@ -63,7 +63,7 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
     this.value.push('');
   }
   saveVal(){
-    // console.log(this.value);
+    // //console.log(this.value);
     var p = true ;
     for (let i = 0; i < this.value.length; i++) {
       const element = this.value[i];
@@ -122,6 +122,6 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
     if (this.value.length > 1) {
       this.value.splice(index,1);      
     }
-    console.log(index);
+    //console.log(index);
   }
 }

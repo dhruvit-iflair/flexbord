@@ -1,19 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { fakedb } from "../../components/common/fakedb";
-import { TableData } from '../../components/common/table-data';
 import { Http } from "@angular/http";
 import { Router } from "@angular/router";
 import { environment } from "../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs/Subject';
-// import { ConfirmService } from "../../components/services/confirm.services";
 @Component({
-  selector: 'app-organizer',
-  templateUrl: './organizer.component.html',
-  styleUrls: ['./organizer.component.css']
+  selector: 'app-club',
+  templateUrl: './club.component.html',
+  styleUrls: ['./club.component.css']
 })
-export class OrganizerComponent implements OnInit {
+export class ClubComponent implements OnInit {
+
   public rows: Array<any> = [];
   public data: Array<any> = [];
   public length: number = 0;
@@ -52,42 +50,5 @@ export class OrganizerComponent implements OnInit {
         }
       })
   }
-  movetomember(idx) {
-    localStorage.setItem('orgid', idx);
-    this.router.navigate(['/organizer/orgmembers']);
-  }
-  movetoseason(idq) {
-    localStorage.setItem('orgid', idq);
-    this.router.navigate(['/seasons']);
-  }
-  movetoclassification(idw) {
-    localStorage.setItem('orgid', idw);
-    this.router.navigate(['/classifications']);
-  }
-  movetocompetition(id) {
-    localStorage.setItem('orgid', id);
-    this.router.navigate(['/competitions']);
-  }
-  delOrg(id, index) {
-    // var d = this.rows.findIndex(r => r._id == id);
-    // this.rows.splice(d, 1);
-    // this.confirmBox.display();
-    var del = confirm("Confirm to delete this Organizer!");
-    if (del) {
-      this.http.delete(environment.api + "/organizer/" + id)
-        .subscribe((res) => {
-          var d = res.json();
-          if (d._id) {
-            this.dataRenderer = false;
-            this.toastr.success('Organizer Deleted Successfully', 'Success');
-            // this.router.navigate(['/organizer']);
-            // this.rows.splice(d,1);
-            this.ngOnInit();
-          }
-        }, (error) => {
-          this.toastr.error('Something went wrong !! Please try again later', 'Error');
-        })
-    }
-  }
-}
 
+}

@@ -171,11 +171,11 @@
                         <option *ngFor="let ite of spots"  [value]="ite.id">{{ite.name}}</option>
                     </select> -->
                     <div class="button-group">
-                            <button type="button" class="btn btn-lg dropdown-toggle" data-toggle="dropdown">
+                            <button type="button" class="btn btn-lg dropdown-toggle col-md-12" data-toggle="dropdown">
                                 <input class="no_border text-col-md-3" type="text"  formControlName="sports"><span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu col-md-8">
-                                <li *ngFor="let ite of spots; let i = index; trackBy:trackByIndex" >
+                                <li *ngFor="let ite of spots;" >
                                     <a class="small" (click)="$event.stopPropagation(); selec(ite.id)"><input type="checkbox" [checked]="spotsIns.indexOf(ite.id) >= 0"  data-value="{{ite.id}}"/>&nbsp; {{ite.name}}</a>
                                 </li>
                             </ul>

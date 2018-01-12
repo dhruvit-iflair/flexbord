@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Auth24Guard } from "./components/common/guard/auth24.guard";
-import { PaginationModule } from "ngx-bootstrap";
+import { PaginationModule ,ModalModule} from "ngx-bootstrap";
 import { DataTablesModule } from 'angular-datatables';
 
 // App views
@@ -40,7 +40,8 @@ import { ManageOrganizerClassificationsComponent } from './views/organizer/organ
 import { OrderByPipe } from "./components/pipes/orderBy";
 import { OrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/organizer-competitions.component';
 import { ManageOrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/manage-organizer-competitions/manage-organizer-competitions.component';
-
+import { ClubComponent } from './views/club/club.component';
+// import { ConfirmService } from "./components/services/confirm.services";
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +61,7 @@ import { ManageOrganizerCompetitionsComponent } from './views/organizer/organize
     ManageOrganizerClassificationsComponent,
     OrganizerCompetitionsComponent,
     ManageOrganizerCompetitionsComponent,
+    ClubComponent,
   ],
   imports: [
     // Angular modules

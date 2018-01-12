@@ -52,3 +52,9 @@ img.image_display {
 body .dataTable a.btn.btn_green.tab_btn, a.btn.btn_green.tab_btn {
     margin-top: 0;
 }
+.add_new.row {
+    padding-left: 15px;
+    padding-right: 68%;
+    position: inherit;
+    margin-top: 10px;
+}

@@ -56,11 +56,23 @@ input.text-col-md-3.ng-touched.ng-dirty.ng-invalid {
 select {
     background-color: #fff;
 }
-.no_border{
-    border: 0px;
+.no_border:focus,
+.no_border
+{
+    border: 1px #fff;
+    font-size: 16px;
     background-color: #fff;
-    
+}
+input.no_border.text-col-md-3.ng-pristine.ng-valid.ng-touched ,
+input.no_border.text-col-md-3.ng-pristine.ng-valid.ng-untouched {
+    border: 1px #fff;
 }
 /* input.no_border.ng-pristine.ng-touched.ng-invalid{
     border: 0px;    
 } */
+
+ul.dropdown-menu.col-md-8 {
+    margin-left: 16px;
+    font-size: 22px;
+    width: 97%;
+}
