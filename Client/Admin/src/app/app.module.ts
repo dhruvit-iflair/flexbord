@@ -42,13 +42,17 @@ import { OrganizerCompetitionsComponent } from './views/organizer/organizer-comp
 import { ManageOrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/manage-organizer-competitions/manage-organizer-competitions.component';
 import { ClubComponent } from './views/club/club.component';
 import { ClubTeamsComponent } from './views/club/club-teams/club-teams.component';
+import { ManageClubComponent } from './views/club/manage-club/manage-club.component';
 // import { ConfirmService } from "./components/services/confirm.services";
+import { placeDirectiveWithModel } from "./components/directive/placeLookupWithModel";
+import { ClubService } from "./components/services/club.services";
 @NgModule({
   declarations: [
     AppComponent,
     OrganizerComponent,
     ManageOrganizerComponent,
     GoogleplaceDirective,
+    placeDirectiveWithModel,    
     BigTextDirective,
     Dir_select,
     SeasonsComponent,
@@ -64,6 +68,7 @@ import { ClubTeamsComponent } from './views/club/club-teams/club-teams.component
     ManageOrganizerCompetitionsComponent,
     ClubComponent,
     ClubTeamsComponent,
+    ManageClubComponent,
   ],
   imports: [
     // Angular modules
@@ -92,7 +97,7 @@ import { ClubTeamsComponent } from './views/club/club-teams/club-teams.component
 
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [Auth24Guard],
+  providers: [Auth24Guard,ClubService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

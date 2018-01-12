@@ -35,12 +35,12 @@ export class ClubComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.http.get(environment.api + "/organizer")
+    this.http.get(environment.api + "/club")
       .subscribe((res) => {
         this.rows = res.json();
         if (this.rows) {
           this.rows.forEach(item => {
-            var src = environment.picpoint + 'orglogos/' + item.logo;
+            var src = environment.picpoint + 'clublogos/' + item.logo;
             item['logo'] = src;
             // item['button'] = '<a class="btn btn_green tab_btn" style="background-color: #089468;color: #fff;"  [routerLink]="["/organizer/manage/'+item+']");" ><i class="fa fa-pencil" aria-hidden="true"></i></a><a [routerLink]="["/organizer/manage/'+item+']");" class="btn btn_red tab_btn"  style="background-color: #f55f5f;color: #fff;  margin-left:10px" (click)="delete('+item+');" ><i class="fa fa-trash" aria-hidden="true"></i></a>';
             item['button'] = item._id;
@@ -50,5 +50,20 @@ export class ClubComponent implements OnInit {
         }
       })
   }
-
+  delClub(id){
+      var del = confirm("Confirm to delete this Club!");
+      if (del) {
+        this.http.delete(environment.api + "/club/" + id)
+          .subscribe((res) => {
+            var d = res.json();
+            if (d._id) {
+              this.dataRenderer = false;
+              this.toastr.success('Organizer Deleted Successfully', 'Success');
+              this.ngOnInit();
+            }
+          }, (error) => {
+            this.toastr.error('Something went wrong !! Please try again later', 'Error');
+          })
+      }
+    }
 }

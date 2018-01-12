@@ -40,6 +40,8 @@ module.exports = function (db) {
     require('../app/routes/seasons')(app);
     require('../app/routes/organizer-classifications')(app);
     require('../app/routes/orgCompetitions')(app);
+    require('../app/routes/club')(app);
+    
     
 
     return server;

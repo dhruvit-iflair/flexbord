@@ -21,6 +21,7 @@ import { OrganizerCompetitionsComponent } from './views/organizer/organizer-comp
 import { ManageOrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/manage-organizer-competitions/manage-organizer-competitions.component';
 import { ClubComponent } from './views/club/club.component';
 import { ClubTeamsComponent } from './views/club/club-teams/club-teams.component';
+import { ManageClubComponent } from './views/club/manage-club/manage-club.component';
 
 
 export const ROUTES:Routes = [
@@ -55,10 +56,12 @@ export const ROUTES:Routes = [
       {path: 'competitions/manage', component: ManageOrganizerCompetitionsComponent , canActivate: [Auth24Guard]},
       {path: 'competitions/manage/:_id', component: ManageOrganizerCompetitionsComponent , canActivate: [Auth24Guard]},
 
-       {path: 'club', component: ClubComponent , canActivate: [Auth24Guard]},
+      {path: 'club', component: ClubComponent , canActivate: [Auth24Guard]},
+      {path: 'club/manage', component: ManageClubComponent , canActivate: [Auth24Guard]},
+      {path: 'club/manage/:_id', component: ManageClubComponent , canActivate: [Auth24Guard]},
+      
       {path: 'club/clubteam', component: ClubTeamsComponent , canActivate: [Auth24Guard]},
-      // {path: 'club/manage', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
-      // {path: 'club/manage/:_id', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
+      
       
     ]
   },

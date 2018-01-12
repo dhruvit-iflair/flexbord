@@ -1,0 +1,26 @@
+/* .col-md-12 {
+    margin-top: 10px;
+    left: -11px;
+    padding: 0px 0 0 10px;
+} */
+
+img.image_display {
+    width: 100px;
+    border-radius: 100px;
+    height: 100px;
+}
+select {
+    background-color: #fff;
+}
+input.capacity.ng-pristine.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+.capacity {
+    width: 150px;
+    height: 35px;
+    margin-top: 2px;
+    padding-left: 14px;
+}
+input.capacity.ng-dirty.ng-touched.ng-invalid {
+    border: 1px solid red;
+}

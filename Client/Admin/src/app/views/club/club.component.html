@@ -4,13 +4,13 @@
             <label><h2>Clubs</h2></label>
         </div>
         <div class="col-md-2 text-right">
-            <!-- <button class="btn btn_green" [routerLink]="['/organizer/manage']">New Org</button>                          -->
+            <button class="btn btn_green" [routerLink]="['/club/manage']">New Club</button>                         
         </div>
         <div class="col-md-12" id="tabl">
         <div class="col-md-12 no_padd mar_btt">
         </div>
           <br>
-        <!-- <table datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
+        <table datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
                 <thead>
                   <tr>
                       <th>_id</th>
@@ -30,10 +30,29 @@
                     <td style="width:300px;">{{item.city}} ,{{item.country}}</td>
                     <td>{{item.registered | dateFormatPipe}}</td>
                     <td>{{item.email}}</td>
-                    <td><a class="btn btn_green tab_btn" routerLink="/organizer/manage/{{item._id}}"  title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a><a class="btn btn_red tab_btn" (click)="delOrg(item._id,$index)" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a><a class="btn btn_2 tab_btn" (click)="movetoseason(item._id)" title="Seasons"><i class="fa fa-superpowers" aria-hidden="true"></i></a><a class="btn btn_1 tab_btn" (click)="movetomember(item._id)" title="Members"><i class="fa fa-user" aria-hidden="true"></i></a><a class="btn btn_green tab_btn" (click)="movetoclassification(item._id)" title="Classifications"><i class="fa fa-code-fork" aria-hidden="true"></i></a><a class="btn btn_red tab_btn" (click)="movetocompetition(item._id)" title="Competitions"><i class="fa fa-dribbble" aria-hidden="true"></i></a></td>
+                    <td>
+                      <a class="btn btn_green tab_btn" routerLink="/club/manage/{{item._id}}"  title="Edit">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                      </a>
+                     <a class="btn btn_red tab_btn" (click)="delClub(item._id)" title="Delete">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                      <!--  <a class="btn btn_2 tab_btn" (click)="movetoseason(item._id)" title="Seasons">
+                        <i class="fa fa-superpowers" aria-hidden="true"></i>
+                      </a>
+                      <a class="btn btn_1 tab_btn" (click)="movetomember(item._id)" title="Members">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                      </a>
+                      <a class="btn btn_green tab_btn" (click)="movetoclassification(item._id)" title="Classifications">
+                        <i class="fa fa-code-fork" aria-hidden="true"></i>
+                      </a>
+                      <a class="btn btn_red tab_btn" (click)="movetocompetition(item._id)" title="Competitions">
+                        <i class="fa fa-dribbble" aria-hidden="true"></i>
+                      </a> -->
+                    </td>
                   </tr>
                 </tbody>
-        </table> -->
+        </table>
         </div>
     </div>  
   </div>
