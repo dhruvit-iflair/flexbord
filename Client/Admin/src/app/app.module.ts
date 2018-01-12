@@ -41,6 +41,7 @@ import { OrderByPipe } from "./components/pipes/orderBy";
 import { OrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/organizer-competitions.component';
 import { ManageOrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/manage-organizer-competitions/manage-organizer-competitions.component';
 import { ClubComponent } from './views/club/club.component';
+import { ClubTeamsComponent } from './views/club/club-teams/club-teams.component';
 // import { ConfirmService } from "./components/services/confirm.services";
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { ClubComponent } from './views/club/club.component';
     OrganizerCompetitionsComponent,
     ManageOrganizerCompetitionsComponent,
     ClubComponent,
+    ClubTeamsComponent,
   ],
   imports: [
     // Angular modules
