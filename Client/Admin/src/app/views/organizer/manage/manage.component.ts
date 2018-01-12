@@ -52,7 +52,7 @@ export class ManageOrganizerComponent implements OnInit {
       sports: [null,[Validators.required]],
       capacity:  [null,[Validators.required]],
       placePic: [null],
-      affilated:  [""],
+      affilated:  ["",Validators.required],
       affilation:  ["",[Validators.required]],
       registered: [null]
     })
@@ -61,13 +61,17 @@ export class ManageOrganizerComponent implements OnInit {
   ngOnInit() {
     // this.items = fakedb.org;
     this.spots = fakedb.sport;
-    this.http.get(environment.api + '/organizer/')
+    this.http.get(environment.api + '/organizer')
             .subscribe((res)=>{
               this.items2 = res.json();
               this.sub = this.activeRouter.params.subscribe(params => {
                 if (params._id) {
                     this.items = this.items2.filter(af=> af._id != params._id);
-                }});
+                }
+                else{
+                  this.items = res.json();
+                }
+              });
             });
     this.sub = this.activeRouter.params.subscribe(params => {
       // //console.log(params._id);

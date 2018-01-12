@@ -36,7 +36,7 @@
                         </select> -->
                         <select class="js-example-basic-single text-col-md-3"  name="affilated" formControlName="affilated">
                             <option value="null" disabled="true" [selected]="true">Select Organization</option>    
-                            <option *ngFor="let ite of items"  [value]="ite.id">{{ite.name}}</option>
+                            <option *ngFor="let ite of items"  [value]="ite._id">{{ite.name}}</option>
                         </select>
                         <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('affilated').valid && orgForm.get('affilated').touched">
                                 Affilated is required.

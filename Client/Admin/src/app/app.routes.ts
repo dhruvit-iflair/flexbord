@@ -19,7 +19,7 @@ import { OrganizerClassificationsComponent } from './views/organizer/organizer-c
 import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
 import { OrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/organizer-competitions.component';
 import { ManageOrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/manage-organizer-competitions/manage-organizer-competitions.component';
-// import { ClubComponent } from './views/club/club.component';
+import { ClubComponent } from './views/club/club.component';
 
 export const ROUTES:Routes = [
   // Main redirect
@@ -53,7 +53,7 @@ export const ROUTES:Routes = [
       {path: 'competitions/manage', component: ManageOrganizerCompetitionsComponent , canActivate: [Auth24Guard]},
       {path: 'competitions/manage/:_id', component: ManageOrganizerCompetitionsComponent , canActivate: [Auth24Guard]},
 
-      // {path: 'club', component: ClubComponent , canActivate: [Auth24Guard]},
+       {path: 'club', component: ClubComponent , canActivate: [Auth24Guard]},
       // {path: 'club/manage', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
       // {path: 'club/manage/:_id', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
       

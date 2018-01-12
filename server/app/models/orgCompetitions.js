@@ -10,6 +10,7 @@ var orgCompetitionsSchema=new Schema({
     sports: String,
     seasons: { type: Schema.Types.ObjectId, ref: 'seasons' },
     organizer:{ type: Schema.Types.ObjectId, ref: 'organizer' },
-    organizerClassifications: { type: Schema.Types.ObjectId, ref: 'organizerClassifications' }
+    organizerClassifications: { type: Schema.Types.ObjectId, ref: 'organizerClassifications' },
+    organizerClassificationsValue:String
 });
 module.exports = mongoose.model('orgCompetitions',orgCompetitionsSchema);
