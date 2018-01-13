@@ -21,13 +21,13 @@
             <li [ngClass]="{active: activeRoute('minorView')}">
                 <a [routerLink]="['/minorView']"><i class="fa fa-desktop"></i> <span class="nav-label">Minor view</span> </a>
             </li>-->
-            <li [ngClass]="{active: activeRoute('profilesetup')}">
+            <li [ngClass]="{active: activeRoute('profilesetup')}" *ngIf="!isProfileSet" >
                 <a [routerLink]="['/profilesetup']"><i class="fa fa-th-large"></i> <span class="nav-label">Profile setup</span></a>
             </li>
             <!--<li [ngClass]="{active: activeRoute('rolespermission')}">
                 <a [routerLink]="['/rolespermission']"><i class="fa fa-desktop"></i> <span class="nav-label">Set Permissions</span> </a>
             </li>-->
-            <li [ngClass]="{active: activeRoute('organizer')}">
+            <li [ngClass]="{active: activeRoute('organizer')}" *ngIf="isProfileSet">
                 <a [routerLink]="['/organizer']"><i class="fa fa-calendar "></i> <span class="nav-label">Organizer</span> </a>
                 <!-- <ul class="nav nav-second-level collapse">
                     <li [ngClass]="{active: activeRoute('organizer/seasons')}">
@@ -55,7 +55,7 @@
             <li>
                 <a [routerLink]="['/register']"><i class="fa fa-pencil"></i> <span class="nav-label">Register</span> </a>
             </li>--> 
-            <li [ngClass]="{active: activeRoute('club')}">
+            <li [ngClass]="{active: activeRoute('club')}" *ngIf="isProfileSet">
                     <a [routerLink]="['/club']"><i class="fa fa-eercast"></i> <span class="nav-label">Club</span> </a>
             </li>
         </ul>

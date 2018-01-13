@@ -1,0 +1,150 @@
+<div class="container manage-container">
+  <div class="row">
+  <form [formGroup]="clubMemForm" class="manage-component-form">
+    <div class="row1">
+        <div class="manage-box clearfix">
+              <div class="col-md-12">
+                <label><h2>Manage Club Member</h2></label>
+              </div>
+              <div class="col-md-12">
+              <div class="row">
+                  <div class="man col-md-6">
+                        <h4 class="text-left">First Name<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="firstname" placeholder="Enter Name" required>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Last Name<a style="color:#f00 !important;">*</a></h4>
+                    <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="lastname" placeholder="Enter Name" required>
+                  </div>
+                  <div class="man col-md-6">
+                        <h4 class="text-left">Gender<a style="color:#f00 !important;">*</a></h4>
+                        <select class="js-example-basic-single text-col-md-3"  name="gender" formControlName="gender">
+                          <option value="" disabled="true" [selected]="true">Select Gender</option>    
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                      </select>
+                  </div>
+                  <div class="man col-md-6">
+                        <h4 class="text-left">License<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" type="text" formControlName="license" placeholder="Enter License No">
+                  </div>
+                  <div class="man col-md-6">
+                          <h4 class="text-left">DOB<a style="color:#f00 !important;">*</a></h4>
+                          <input class="text-col-md-3" type="date" formControlName="dob" placeholder="Enter DOB">
+                  </div>
+                  <div class="man col-md-6">
+                          <h4 class="text-left">Member Since<a style="color:#f00 !important;">*</a></h4>
+                          <!-- <input class="text-col-md-3" type="date" formControlName="memberSince" placeholder="Enter Date"> -->
+                          <label for="">{{memberSince | dateFormatPipe :'dd/MM/yy'}}</label>
+                  </div>
+                  <div class="alert-danger col-md-12" role="alert" *ngIf="clubMemForm.errors && clubMemForm.get('dob').touched && clubMemForm.get('memberSince').touched">
+                    {{ clubMemForm.errors?.dates | json }}
+                  </div>
+                  <div class="man col-md-12">
+                      <div class="row">
+                          <div class="col-md-2">
+                              <h4 class="text-left">Photo<a style="color:#f00 !important;">*</a></h4>
+                              <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none" >
+                              <button class="btn btn_green" (click)="file.click()"> Upload</button>   
+                          </div>
+                          <div class="col-md-4" *ngIf="photo" >
+                                <img [src]="photo" class="image_display">               
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="manage-box clearfix">
+             <div class="col-md-12">
+                  <label><h2>Location</h2></label>
+             </div>
+              <div class="col-md-12">
+                  <div class="row">
+                  <div class="man col-md-6"><h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
+                      <input class="text-col-md-3" type="text" formControlName="address" placeholder="Enter Address" (setAddress)="setAdd($event)" Googleplace>
+                  </div>         
+
+                  <div class="man col-md-6">
+                      <h4 class="text-left">Street<a style="color:#f00 !important;">*</a></h4>
+                      <input class="text-col-md-3" type="text"  formControlName="street" placeholder="Enter Street">
+                  </div>
+           
+                  <div class="man col-md-6">
+                      <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
+                      <input class="text-col-md-3" type="text"  formControlName="country" placeholder="Enter Country">
+                  </div>
+           
+                  <div class="man col-md-6">
+                      <h4 class="text-left">State<a style="color:#f00 !important;">*</a></h4>
+                      <input class="text-col-md-3" type="text"  formControlName="state" placeholder="Enter State">
+                  </div>
+           
+                  <div class="man col-md-6">
+                      <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
+                      <input class="text-col-md-3" type="text"  formControlName="city" placeholder="Enter City">
+                  </div>
+           
+                  <div class="man col-md-6">
+                      <h4 class="text-left">Zipcode<a style="color:#f00 !important;">*</a></h4>
+                      <input class="text-col-md-3" type="text"  formControlName="zipcode" placeholder="Enter Zip">
+                  </div>
+                      
+              </div>
+          </div>
+        </div>
+  
+          <div class="manage-box clearfix">
+              <div class="col-md-12">
+                  <label><h2>Contact</h2></label>
+              </div>
+              <div class="col-md-12">
+                  <div class="row">
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Email<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" required placeholder="Enter Email">
+                    </div>
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Telephone<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" type="text" formControlName="phonenumber" placeholder="Enter Telephone" required>
+                        <!-- pattern="/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/" -->
+                    </div>
+              </div>
+            </div>
+          </div>
+           
+          <div class="manage-box clearfix">    
+              <div class="col-md-12">
+                   <label><h2>User Type</h2></label>
+              </div>
+               <div class="man col-md-12">
+                      <h4 class="text-left">User Type<a style="color:#f00 !important;">*</a></h4>
+                      <select class="js-example-basic-single text-col-md-3"  name="usertype" formControlName="usertype">
+                          <option value="" disabled="true" [selected]="true">Select User Type</option>    
+                          <option value="a">A</option>
+                          <option value="b">B</option>
+                          <option value="c">C</option>
+                      </select>
+              </div>     
+              <div class="man col-md-12">
+                <h4 class="text-left">User Status<a style="color:#f00 !important;">*</a></h4>
+                <select class="js-example-basic-single text-col-md-3"  name="usertype" formControlName="status">
+                    <!-- <option value="" disabled="true" [selected]="true">Select User Stats</option>     -->
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                </select>
+        </div>            
+          </div>    
+    </div>
+  </form>
+  
+  <div class="row">
+      <div class="col-md-6">
+          <button class="btn btn-white" [routerLink]="['/club/members']">Back</button>
+      </div>
+      <div class="col-md-6 text-right">
+          <button class="btn btn_green" [disabled]="!clubMemForm.valid" (click)="addClubMem()" >Save</button>       
+      </div>  
+  </div>
+  
+  </div>

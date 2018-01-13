@@ -22,11 +22,13 @@ import { ManageOrganizerCompetitionsComponent } from './views/organizer/organize
 import { ClubComponent } from './views/club/club.component';
 import { ClubTeamsComponent } from './views/club/club-teams/club-teams.component';
 import { ManageClubComponent } from './views/club/manage-club/manage-club.component';
+import { ClubMembersComponent } from './views/club/club-members/club-members.component';
+import { ManageClubMembersComponent } from './views/club/club-members/manage-club-members/manage-club-members.component';
 
 
 export const ROUTES:Routes = [
   // Main redirect
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '', redirectTo: 'organizer', pathMatch: 'full'},
 
   // App views
   {
@@ -34,7 +36,7 @@ export const ROUTES:Routes = [
     children: [
       // {path: 'mainView', component: mainViewComponent, canActivate: [Auth24Guard]},
       // {path: 'minorView', component: minorViewComponent, canActivate: [Auth24Guard]},
-      {path: 'profilesetup', component: SetupComponent, canActivate: [Auth24Guard]},
+      {path: 'profilesetup', component: SetupComponent},
       // {path: 'organizer', component: ManageOrganizerComponent, canActivate: [Auth24Guard]}
       {path: 'organizer', component: OrganizerComponent,canActivate: [Auth24Guard]},
       {path: 'organizer/manage', component: ManageOrganizerComponent , canActivate: [Auth24Guard]},
@@ -59,6 +61,10 @@ export const ROUTES:Routes = [
       {path: 'club', component: ClubComponent , canActivate: [Auth24Guard]},
       {path: 'club/manage', component: ManageClubComponent , canActivate: [Auth24Guard]},
       {path: 'club/manage/:_id', component: ManageClubComponent , canActivate: [Auth24Guard]},
+      
+      {path: 'club/members', component: ClubMembersComponent , canActivate: [Auth24Guard]},
+      {path: 'club/members/manage', component: ManageClubMembersComponent , canActivate: [Auth24Guard]},
+      {path: 'club/members/manage/:_id', component: ManageClubMembersComponent , canActivate: [Auth24Guard]},
       
       {path: 'club/clubteam', component: ClubTeamsComponent , canActivate: [Auth24Guard]},
       

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from "@angular/http";
+import { Router } from "@angular/router";
+
 import { environment } from "../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 
@@ -17,7 +19,8 @@ export class SetupComponent implements OnInit {
   public organizer: Array<any>;
 
   constructor(public http : Http,
-              public tost : ToastrService) {
+              public tost : ToastrService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -61,6 +64,19 @@ export class SetupComponent implements OnInit {
       this.check = true;    
       //console.log(this.check);
     }
+  }
+  updateProfile(){
+    var x=JSON.parse(localStorage.getItem('uToken'));
+    this.http.patch(environment.api+'/users/'+x.user._id,{isProfileSet:true})
+            .subscribe((res)=>{
+              if(res){
+                this.tost.success('Profile Set Successfully', 'Success');
+                var x=JSON.parse(localStorage.getItem('uToken'));
+                x.user.isProfileSet = true;
+                localStorage.setItem('uToken',JSON.stringify(x));
+                window.location.href = '../';
+              }
+            })
   }
 }
 

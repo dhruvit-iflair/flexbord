@@ -46,6 +46,9 @@ import { ManageClubComponent } from './views/club/manage-club/manage-club.compon
 // import { ConfirmService } from "./components/services/confirm.services";
 import { placeDirectiveWithModel } from "./components/directive/placeLookupWithModel";
 import { ClubService } from "./components/services/club.services";
+import { ClubMembersComponent } from './views/club/club-members/club-members.component';
+import { ManageClubMembersComponent } from './views/club/club-members/manage-club-members/manage-club-members.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +72,8 @@ import { ClubService } from "./components/services/club.services";
     ClubComponent,
     ClubTeamsComponent,
     ManageClubComponent,
+    ClubMembersComponent,
+    ManageClubMembersComponent,
   ],
   imports: [
     // Angular modules
