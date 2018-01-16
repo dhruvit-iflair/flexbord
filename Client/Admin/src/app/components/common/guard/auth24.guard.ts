@@ -14,7 +14,7 @@ export class Auth24Guard implements CanActivate {
         var alford = JSON.parse(localStorage.getItem('uToken'));
         if (alford.user.isVerified == true) {
           if (alford.user.isProfileSet == true) {
-            console.log(alford);
+            // console.log(alford);
             return true;   
           } else { 
             this.reoter.navigate(['/profilesetup']);

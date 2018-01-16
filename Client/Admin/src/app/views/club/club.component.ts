@@ -54,6 +54,10 @@ export class ClubComponent implements OnInit {
     localStorage.setItem('clubid', idx);
     this.router.navigate(['/club/members']);
   }
+  movetoseason(idq) {
+    localStorage.setItem('clubid', idq);
+    this.router.navigate(['/club/seasons']);
+  }
   delClub(id){
       var del = confirm("Confirm to delete this Club!");
       if (del) {

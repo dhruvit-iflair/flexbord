@@ -48,6 +48,8 @@ import { placeDirectiveWithModel } from "./components/directive/placeLookupWithM
 import { ClubService } from "./components/services/club.services";
 import { ClubMembersComponent } from './views/club/club-members/club-members.component';
 import { ManageClubMembersComponent } from './views/club/club-members/manage-club-members/manage-club-members.component';
+import { ClubSeasonsComponent } from './views/club/club-seasons/club-seasons.component';
+import { ManageClubSeasonsComponent } from './views/club/club-seasons/manage-club-seasons/manage-club-seasons.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { ManageClubMembersComponent } from './views/club/club-members/manage-clu
     ManageClubComponent,
     ClubMembersComponent,
     ManageClubMembersComponent,
+    ClubSeasonsComponent,
+    ManageClubSeasonsComponent,
   ],
   imports: [
     // Angular modules

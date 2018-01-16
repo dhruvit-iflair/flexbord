@@ -42,6 +42,7 @@ module.exports = function (db) {
     require('../app/routes/orgCompetitions')(app);
     require('../app/routes/club')(app);
     require('../app/routes/clubmembers')(app);
+    require('../app/routes/clubSeasons')(app);
     
     
 
