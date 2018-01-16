@@ -26,7 +26,7 @@ teams;dtOptions;clubid;
       order:[[ 0, 'desc' ]],
       columns: [{ "visible":false },null,null,null,{ "orderable": false }]
     }
-    this.http.get(environment.api + '/clubteams')
+    this.http.get(environment.api + '/clubteams/byclub/'+this.clubid)
       .subscribe((res) => {
         this.teams = res;
         this.dataRenderer=true;

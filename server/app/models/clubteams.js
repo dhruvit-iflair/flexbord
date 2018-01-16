@@ -15,7 +15,7 @@ var clubteamsSchema = new Schema({
     zipcode: String,
     sport:String,
     availability:Schema.Types.Mixed,
-    // club:{ type: Schema.Types.ObjectId, ref: 'club' },
+    club:{ type: Schema.Types.ObjectId, ref: 'club' },
     // sport:{ type: Schema.Types.ObjectId, ref: 'sport' },
 });
 module.exports = mongoose.model('clubteams', clubteamsSchema);

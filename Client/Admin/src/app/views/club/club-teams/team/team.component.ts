@@ -73,7 +73,6 @@ export class TeamComponent implements OnInit {
   }
 
   getmodeldata(avail) {
-    console.log(avail);
     for (var z = 0; z < this.avail.daychecker.length; z++) {
       if (this.avail.daychecker[z] == true) {
         this.finalavailability.availability.push({ "day": z, "fromtimer": this.avail.fromtimer[z], "totimer": this.avail.totimer[z] });
@@ -132,6 +131,7 @@ export class TeamComponent implements OnInit {
       this.toastr.warning('Please upload logo ', 'Warning');
     }
     else {
+    var clubid=localStorage.getItem('clubid');
       if (this.paramdetails) {
         this.teamForm.value.logo = this.imgdt;
         var janudata2 = {
@@ -145,6 +145,7 @@ export class TeamComponent implements OnInit {
           state: this.teamForm.value.state,
           street: this.teamForm.value.street,
           zipcode: this.teamForm.value.zipcode,
+          club:clubid,
           availability: this.finalavailability.availability
         };
         this.http.patch(environment.api + "/clubteams/" + this.userId, janudata2)
@@ -170,6 +171,7 @@ export class TeamComponent implements OnInit {
           state: this.teamForm.value.state,
           street: this.teamForm.value.street,
           zipcode: this.teamForm.value.zipcode,
+          club:clubid,
           availability: this.finalavailability.availability
         };
         this.http.post(environment.api + "/clubteams", janudata)
