@@ -1,0 +1,133 @@
+<div class="container manage-container">
+  <div class="row">
+    <form [formGroup]="teamForm" class="manage-component-form">
+      <div class="row1">
+        <div class="manage-box clearfix">
+          <div class="col-md-12">
+            <label><h2>Common Info</h2></label>
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="man col-md-6">
+                <h4 class="text-left">Name<a style="color:#f00 !important;">*</a></h4>
+                <input class="text-col-md-3" type="text" formControlName="name" required>
+                <div class="alert alert-danger" role="alert" *ngIf="!teamForm.get('name').valid && teamForm.get('name').touched">
+                  Name is required.
+                </div>
+              </div>
+
+              <div class="man col-md-6">
+                <h4 class="text-left">Sport<a style="color:#f00 !important;">*</a></h4>
+                <select class="js-example-basic-single text-col-md-3" name="sport" formControlName="sport">
+                            <option value="null" disabled="true" [selected]="true">Select Sport</option>    
+                            <option *ngFor="let ite of sportsdata" [value]="ite.name">{{ite.name}}</option>
+                        </select>
+                <div class="alert alert-danger" role="alert" *ngIf="!teamForm.get('sport').valid && teamForm.get('sport').touched">
+                  Sport is required.
+                </div>
+              </div>
+              <div class="man col-md-12">
+                <div class="row">
+                  <div class="col-md-2">
+                    <h4 class="text-left">Logo<a style="color:#f00 !important;">*</a></h4>
+                    <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)">
+                    <button class="btn btn_green" (click)="file.click()"> Upload</button>
+                  </div>
+                  <div class="col-md-4" *ngIf="logo && !url">
+                    <img [src]="logo" class="image_display">
+                  </div>
+                  <div class="col-md-4" *ngIf="url">
+                    <img [src]="url" class="image_display">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="manage-box clearfix">
+          <div class="col-md-12">
+            <label><h2>Availibility</h2></label>
+          </div>
+
+          <div class="col-md-12">
+            <div class="row">
+              <table style="width:99%">
+                <thead>
+                  <th style="width:10%;"><input class="text-col-md-3" type="checkbox" [(ngModel)]='avail.pchecker' (click)="allavail()" [ngModelOptions]="{standalone: true}"></th>
+                  <th style="width:30%;" class="text-col-md-3 col-md-3">Day</th>
+                  <th style="width:30%;" class="text-col-md-3 col-md-3">From</th>
+                  <th class="text-col-md-3 col-md-3" >To</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let i of dayvalues;index as x;">
+                    <td><input class="text-col-md-3" type="checkbox" [(ngModel)]='avail.daychecker[x]' [ngModelOptions]="{standalone: true}"></td>
+                    <td><label>{{i}}</label></td>
+                    <td><input class="text-col-md-3" type="time" [disabled]="avail.daychecker[x]!==true" [(ngModel)]='avail.fromtimer[x]'
+                        [ngModelOptions]="{standalone: true}"></td>
+                    <td><input class="text-col-md-3" type="time" [disabled]="avail.daychecker[x]!==true" [(ngModel)]='avail.totimer[x]'
+                        [ngModelOptions]="{standalone: true}"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="manage-box clearfix">
+          <div class="col-md-12">
+            <label><h2>Location</h2></label>
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="man col-md-6">
+                <h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
+                <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace>
+                <div class="alert alert-danger" role="alert" *ngIf="!teamForm.get('address').valid && teamForm.get('address').touched">
+                  Address is required.
+                </div>
+              </div>
+
+              <div class="man col-md-6">
+                <h4 class="text-left">Building</h4>
+                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="building">
+              </div>
+
+              <div class="man col-md-6">
+                <h4 class="text-left">Street</h4>
+                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="street">
+              </div>
+
+              <div class="man col-md-6">
+                <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
+                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="country">
+              </div>
+
+              <div class="man col-md-6">
+                <h4 class="text-left">State</h4>
+                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="state">
+              </div>
+
+              <div class="man col-md-6">
+                <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
+                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="city">
+              </div>
+
+              <div class="man col-md-6">
+                <h4 class="text-left">Zipcode</h4>
+                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="zipcode">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btn btn-white" [routerLink]="['/club/clubteam']">Back</button>
+      </div>
+      <div class="col-md-6 text-right">
+        <button class="btn btn_green" [disabled]="!teamForm.valid" (click)='getmodeldata(avail);addteam();'>Save</button>
+      </div>
+    </div>
+  </div>
+</div>

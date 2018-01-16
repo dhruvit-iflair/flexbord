@@ -27,6 +27,7 @@ module.exports = function () {
     require('../app/models/seasons');
     require('../app/models/organizer-classifications');
     require('../app/models/orgCompetitions');
-    
+    require('../app/models/clubteams');
+
     return db;
 }

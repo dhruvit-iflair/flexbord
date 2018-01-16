@@ -42,6 +42,7 @@ import { OrganizerCompetitionsComponent } from './views/organizer/organizer-comp
 import { ManageOrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/manage-organizer-competitions/manage-organizer-competitions.component';
 import { ClubComponent } from './views/club/club.component';
 import { ClubTeamsComponent } from './views/club/club-teams/club-teams.component';
+import { TeamComponent } from './views/club/club-teams/team/team.component';
 // import { ConfirmService } from "./components/services/confirm.services";
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ClubTeamsComponent } from './views/club/club-teams/club-teams.component
     ManageOrganizerCompetitionsComponent,
     ClubComponent,
     ClubTeamsComponent,
+    TeamComponent,
   ],
   imports: [
     // Angular modules
