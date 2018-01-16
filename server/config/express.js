@@ -41,7 +41,8 @@ module.exports = function (db) {
     require('../app/routes/organizer-classifications')(app);
     require('../app/routes/orgCompetitions')(app);
     require('../app/routes/clubteams')(app);
-    
+    require('../app/routes/club')(app);
+    require('../app/routes/clubmembers')(app);
 
     return server;
 };

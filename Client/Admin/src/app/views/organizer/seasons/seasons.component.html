@@ -25,8 +25,8 @@
             <tr *ngFor="let s of seasons" >
               <td style="display:none">{{s._id}}</td>
               <td>{{s.name}} </td>
-              <td>{{s.start_date | dateFormatPipe}} </td>
-              <td>{{s.end_date | dateFormatPipe}}</td>
+              <td>{{s.start_date | dateFormatPipe :'dd/MM/yy hh:mm a'}} </td>
+              <td>{{s.end_date | dateFormatPipe :'dd/MM/yy hh:mm a'}}</td>
               <td>
                 <a class="btn btn_green tab_btn"  routerLink="/seasons/manage/{{s._id}}" >
                   <i class="fa fa-pencil" aria-hidden="true"></i>

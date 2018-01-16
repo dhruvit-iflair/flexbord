@@ -10,7 +10,8 @@ var usersSchema=new Schema({
     isAgreemented:Boolean,
     isVerified:Boolean,
     resetpwdToken:{type:String,default:""},
-    resetpwdExpiredOn:{type:String,default:""}
+    resetpwdExpiredOn:{type:String,default:""},
+    isProfileSet:{ type: Boolean, default : false}
 //    roles:{ type: Schema.Types.ObjectId, ref: 'roles' },
 //    person_photo:Object
 });

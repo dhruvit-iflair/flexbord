@@ -1,4 +1,6 @@
 node_modules/
 node_modules/*
 package-lock.json
+!uploads/orglogos/1512385016670.jpeg
+!uploads/orgplacepics/1512385044868.png
 uploads/

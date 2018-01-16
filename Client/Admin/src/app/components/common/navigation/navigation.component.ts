@@ -9,12 +9,14 @@ declare var jQuery:any;
 })
 
 export class NavigationComponent {
-public loggedinUser;
+    public loggedinUser;
+    public isProfileSet;
     constructor(private router: Router) {}
     ngOnInit(){
         if(localStorage.getItem('uToken')){
             var x=JSON.parse(localStorage.getItem('uToken'));
             this.loggedinUser=x.user.username;
+            this.isProfileSet = x.user.isProfileSet;
         }
     }
     ngAfterViewInit() {

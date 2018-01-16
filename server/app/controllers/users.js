@@ -77,7 +77,7 @@ usersctrl.prototype.verify = function (req, res, next) {
                 }
                 else {
                     //return res.json(dt);setTimeout("window.location.href='http://192.168.1.101:4200'",5000);
-                    res.end("<h1>Email " + mailOpt.to + " is been successfully verified.<script>setTimeout('window.location.href=`"+settings.redirectionUrl+"`',1500);</script>");
+                    res.end("<h1>Email " + mailOpt.to + " is been successfully verified.<script>setTimeout('window.location.href=`"+settings.redirectionUrl+"`',500);</script>");
                 }
             });
         }

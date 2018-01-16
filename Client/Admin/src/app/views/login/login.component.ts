@@ -37,7 +37,7 @@ ngOnInit(){
           }
           else{
             this.toastr.success('Login Successfully.', 'Success');
-            this.router.navigate(['/profilesetup']);
+            this.router.navigate(['/']);
           }
         },
         error => {

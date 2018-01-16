@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="container">
+      <div class="col-md-10">
+          <label><h2>Club Members</h2></label>
+      </div>
+      <div class="col-md-2 text-right">
+          <button class="btn btn_green" [routerLink]="['/club/members/manage']">New Member</button>                         
+      </div>
+      <div class="col-md-12" id="tabl">
+        <table datatable  [dtOptions]="dtOptions" class="row-border hover" onchange="gotcha()" *ngIf="dataRenderer">
+          <thead>
+            <tr>
+              <th>_id</th>
+              <th>Pic</th>
+              <th>License #</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>DOB</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of members">
+              <td style="display:none;">{{m._id}}</td>
+              <td><img src='{{m.photo}}' class="image_display" style="width:50px;height:50px;"></td>
+              <td>{{m.license}} </td>
+              <td>{{m.firstname}} </td>
+              <td>{{m.lastname}}</td>
+              <td>{{m.dob | dateFormatPipe :'dd/MM/yy'}}</td>
+              <td>
+                <a class="btn btn_pending tab_btn" (click)="changeStatusA(m._id)" *ngIf="m.status == 'Pending'" >
+                  {{m.status}}
+                </a>
+                <a class="btn btn_palgreen tab_btn" (click)="changeStatusP(m._id)" *ngIf="m.status == 'Approved'">
+                  {{m.status}}
+                </a>
+              </td>
+              <td>
+                <a class="btn btn_green tab_btn"  routerLink="/club/members/manage/{{m._id}}" >
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn_red tab_btn" (click)="deletemember(m._id)">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+               
+              </td>
+            </tr>
+          </tbody>
+        </table>  
+      </div>
+  </div>  
+</div>

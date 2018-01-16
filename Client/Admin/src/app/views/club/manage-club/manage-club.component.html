@@ -1,0 +1,342 @@
+<!-- <div class="container manage-container">
+    <div class="row">
+    <form class="manage-component-form">
+      <div class="row1">
+          <div class="manage-box clearfix">
+                <div class="col-md-12">
+                  <label><h2>Manage Club</h2></label>
+                </div>
+                <div class="col-md-12">
+                <div class="row">
+                    <div class="man col-md-6">
+                            <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
+                            <input [(ngModel)]="clubForm.name" [ngModelOptions]="{standalone: true}" class="text-col-md-3" placeholder="Enter Name" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$"  required>
+                    </div>
+                    <div class="man col-md-6">
+                            <h4 class="text-left">Sub domain<a style="color:#f00 !important;">*</a></h4>
+                            <input [(ngModel)]="clubForm.subDomain" [ngModelOptions]="{standalone: true}" class="text-col-md-3" placeholder="Enter Sub domain" type="text" required>
+                    </div>
+                    <div class="man col-md-6">
+                            <h4 class="text-left">Abbreviation<a style="color:#f00 !important;">*</a></h4>
+                            <input [(ngModel)]="clubForm.abbreviation" [ngModelOptions]="{standalone: true}" class="text-col-md-3" placeholder="Enter Abbreviation" type="text" required>
+                    </div>
+                    <div class="man col-md-6">
+                            <h4 class="text-left">Affiliated<a style="color:#f00 !important;">*</a></h4>
+                            <select class="js-example-basic-single text-col-md-3" [(ngModel)]="clubForm.abbreviation" [ngModelOptions]="{standalone: true}" name="affilated" required>
+                                <option value="" disabled="true" [selected]="true">Select Club</option>    
+                                <option *ngFor="let ite of items"  [value]="ite._id">{{ite.name}}</option>
+                            </select>
+                    </div>
+                    <div class="man col-md-12">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h4 class="text-left">Logo<a style="color:#f00 !important;">*</a></h4>
+                                <input  type="file" accept="image/*" #file class="logo_upload" style="display:none;" (change)="readUrl($event)" >
+                                <button class="btn btn_green" (click)="file.click()"> Upload</button>     
+                            </div>
+                            <div class="col-md-4" *ngIf="logo" >
+                                  <img [src]="logo" class="image_display">               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+          </div>
+          <div class="manage-box clearfix">
+               <div class="col-md-12">
+                    <label><h2>Location</h2></label>
+               </div>
+                <div class="col-md-12">
+                    <div class="row">
+                    <div class="man col-md-6"><h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
+                        <input [ngModel]="clubForm.address" (click)="$event.stopPropagation();" [ngModelOptions]="{standalone: true}"class="text-col-md-3" placeholder="Enter Address" type="text" (change)='$event.stopPropagation();' (setAddress)="setAdd($event)" placeAPIWithModel required> 
+                    </div>
+             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Building</h4>
+                        <input [ngModel]="clubForm.building"[ngModelOptions]="{standalone: true}"  class="text-col-md-3" disabled="disabled" placeholder="Building" type="text">
+                    </div>
+             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Street</h4>
+                        <input [ngModel]="clubForm.street" [ngModelOptions]="{standalone: true}" class="text-col-md-3" disabled="disabled" placeholder="Street" type="text">
+                    </div>
+             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Country</h4>
+                        <input [ngModel]="clubForm.country" [ngModelOptions]="{standalone: true}" class="text-col-md-3" disabled="disabled" placeholder="Country" type="text">
+                    </div>
+             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">State</h4>
+                        <input [ngModel]="clubForm.state" [ngModelOptions]="{standalone: true}" class="text-col-md-3" disabled="disabled" placeholder="State" type="text">
+                    </div>
+             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">City</h4>
+                        <input [ngModel]="clubForm.city" [ngModelOptions]="{standalone: true}" class="text-col-md-3" disabled="disabled" placeholder="City" type="text">
+                    </div>
+             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Zipcode</h4>
+                        <input [ngModel]="clubForm.zipcode" [ngModelOptions]="{standalone: true}" class="text-col-md-3" disabled="disabled" placeholder="Zip" type="text">
+                    </div>
+             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Capacity<a style="color:#f00 !important;">*</a></h4>
+                        <input [(ngModel)]="clubForm.capacity" [ngModelOptions]="{standalone: true}" class="text-col-sm-3"  type="number" placeholder="Capacity" required>
+                    </div>
+                    <div class="man col-md-2">
+                        <h4 class="text-left">Place Pic<a style="color:#f00 !important;">*</a></h4>
+                        <input  type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)" style="display:none">
+                        <button class="btn btn_green" (click)="file2.click()"> Upload</button>                
+                    </div>
+                    <div class="man col-md-2" *ngIf="placePic" >
+                            <img [src]="placePic" class="image_display">               
+                    </div>                    
+                </div>
+             </div>
+          </div>   
+          <div class="manage-box clearfix">
+              <div class="col-md-12">
+                  <label><h2>Contact</h2></label>
+              </div>
+              <div class="col-md-12">
+                  <div class="row">
+                    <div class="man col-md-6">
+                      <h4 class="text-left">Website<a style="color:#f00 !important;">*</a></h4>
+                      <input [(ngModel)]="clubForm.website" [ngModelOptions]="{standalone: true}" class="text-col-md-3" placeholder="Enter Website" type="text" required>   
+                    </div>
+                    <div class="man col-md-6">
+                      <h4 class="text-left">Email<a style="color:#f00 !important;">*</a></h4>
+                      <input [(ngModel)]="clubForm.email" [ngModelOptions]="{standalone: true}" class="text-col-md-3" type="email" placeholder="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required>
+                    </div>
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Telephone</h4>
+                        <input [(ngModel)]="clubForm.phonenumber" [ngModelOptions]="{standalone: true}" class="text-col-md-3" placeholder="Telephone" type="text" >
+                    </div>
+                </div>
+              </div>
+          </div>
+          <div class="manage-box clearfix">    
+                <div class="col-md-12">
+                     <label><h2>Sports</h2></label>
+                </div>
+                 <div class="man col-md-12">
+                        <h4 class="text-left">Choose<a style="color:#f00 !important;">*</a></h4>
+                        <div class="button-group">
+                                <button type="button" class="btn btn-lg dropdown-toggle col-md-12" data-toggle="dropdown">
+                                    <input [(ngModel)]="clubForm.sports" [ngModelOptions]="{standalone: true}" class="no_border text-col-md-3" placeholder="Select Sports" type="text" required><span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu col-md-8">
+                                    <li *ngFor="let ite of spots;" >
+                                        <a class="small" (click)="$event.stopPropagation(); selec(ite.id)"><input  type="checkbox" [checked]="spotsIns.indexOf(ite.id) >= 0"  data-value="{{ite.id}}"/>&nbsp; {{ite.name}}</a>
+                                    </li>
+                                </ul>
+                        </div>
+                </div>            
+          </div>
+          <div class="manage-box radio-box clearfix"> 
+                 <div class="col-md-12">
+                         <label><h2>Affiliation<a style="color:#f00 !important;">*</a></h2></label>                               
+                 </div>
+                 <div class="man col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input [(ngModel)]="clubForm.affilation" [ngModelOptions]="{standalone: true}" type="radio" name="affilation"  value="opened"   checked="checked">
+                            <label>Opened</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input [(ngModel)]="clubForm.affilation" [ngModelOptions]="{standalone: true}" type="radio" name="affilation"  value="closed" >
+                            <label>Closed</label>
+                        </div>
+                    </div>
+                 </div>
+          </div>
+      </div>
+    </form>
+    <div class="row">
+        <div class="col-md-6">
+            <button class="btn btn-white" [routerLink]="['/organizer']">Back</button>
+        </div>
+        <div class="col-md-6 text-right">
+            <button class="btn btn_green" (click)=' saveClub(clubForm)'>Save</button>       
+        </div>  
+    </div>
+</div> -->
+<div class="container manage-container">
+    <div class="row">
+    <form [formGroup]="clubForm" class="manage-component-form">
+      <div class="row1">
+          <div class="manage-box clearfix">
+                <div class="col-md-12">
+                  <label><h2>Manage Club</h2></label>
+                </div>
+                <div class="col-md-12">
+                <div class="row">
+                    <div class="man col-md-6">
+                          <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
+                          <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="name" placeholder="Enter Name" required>
+                    </div>
+                    <div class="man col-md-6">
+                          <h4 class="text-left">Sub domain<a style="color:#f00 !important;">*</a></h4>
+                          <input class="text-col-md-3" type="text" formControlName="subDomain" placeholder="Enter Sub Domain">
+                    </div>
+                    <div class="man col-md-6">
+                          <h4 class="text-left">Abbreviation<a style="color:#f00 !important;">*</a></h4>
+                          <input class="text-col-md-3" type="text" formControlName="abbreviation" placeholder="Enter Abbreviation">
+                    </div>
+                    <div class="man col-md-6">
+                            <h4 class="text-left">Affiliated<a style="color:#f00 !important;">*</a></h4>
+                            <select class="js-example-basic-single text-col-md-3"  name="affilated" formControlName="affilated">
+                                <option value="" disabled="true" [selected]="true">Select Club</option>    
+                                <option *ngFor="let ite of items"  [value]="ite._id">{{ite.name}}</option>
+                            </select>
+                    </div>
+                    <div class="man col-md-12">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h4 class="text-left">Logo<a style="color:#f00 !important;">*</a></h4>
+                                <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none" >
+                                <button class="btn btn_green" (click)="file.click()"> Upload</button>   
+                            </div>
+                            <div class="col-md-4" *ngIf="logo && !url" >
+                                  <img [src]="logo" class="image_display">               
+                            </div>
+                            <div class="col-md-4" *ngIf="url" >
+                                  <img [src]="url" class="image_display">               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="manage-box clearfix">
+               <div class="col-md-12">
+                    <label><h2>Location</h2></label>
+               </div>
+                <div class="col-md-12">
+                    <div class="row">
+                    <div class="man col-md-6"><h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace placeholder="Enter Address">
+                    </div>             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Building</h4>
+                        <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="building" placeholder="Building">
+                    </div>
+             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Street</h4>
+                        <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="street" placeholder="Street">
+                    </div>
+             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="country" placeholder="Country">
+                    </div>
+             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">State</h4>
+                        <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="state" placeholder="State">
+                    </div>
+             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="city" placeholder="City">
+                    </div>
+             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Zipcode</h4>
+                        <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="zipcode" placeholder="Zip">
+                    </div>
+             
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Capacity<a style="color:#f00 !important;">*</a></h4>
+                        <input class="capacity" minlength="3" maxlength="8" type="number" formControlName="capacity" placeholder="Enter Capacity">
+                    </div>
+                    <div class="man col-md-2">
+                        <h4 class="text-left">Place Pic<a style="color:#f00 !important;">*</a></h4>
+                        <input type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)" style="display:none">
+                        <button class="btn btn_green" (click)="file2.click()"> Upload</button>                
+                    </div>
+                        <div class="man col-md-2" *ngIf="placePic" >
+                                <img [src]="placePic" class="image_display">               
+                        </div>
+                        <div class="man col-md-2" *ngIf="logo2 && !placePic" >
+                                <img *ngFor="let item of logo2"  [src]="item" class="image_display">               
+                        </div>
+                        
+                   </div>
+                   </div>
+          </div>
+    
+            <div class="manage-box clearfix">
+                <div class="col-md-12">
+                    <label><h2>Contact</h2></label>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                     <div class="man col-md-6">
+                        <h4 class="text-left">Website<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" type="text" formControlName="website" placeholder="Enter Website">
+                     </div>
+                     <div class="man col-md-6">
+                        <h4 class="text-left">Email<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" required placeholder="Enter Email">
+                    </div>
+                    <div class="man col-md-6">
+                        <h4 class="text-left">Telephone</h4>
+                        <input class="text-col-md-3" type="text" formControlName="phonenumber" placeholder="Enter Telephone">
+                    </div>
+                </div>
+              </div>
+            </div>
+             
+            <div class="manage-box clearfix">    
+                <div class="col-md-12">
+                     <label><h2>Sports</h2></label>
+                </div>
+                 <div class="man col-md-12">
+                        <h4 class="text-left">Choose<a style="color:#f00 !important;">*</a></h4>
+                        <div class="button-group">
+                                <button type="button" class="btn btn-lg dropdown-toggle col-md-12" data-toggle="dropdown">
+                                    <input class="no_border text-col-md-3" type="text"  formControlName="sports" placeholder="Select Sports"><span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu col-md-8">
+                                    <li *ngFor="let ite of spots;" >
+                                        <a class="small" (click)="$event.stopPropagation(); selec(ite.id)"><input type="checkbox" [checked]="spotsIns.indexOf(ite.id) >= 0"  data-value="{{ite.id}}"/>&nbsp; {{ite.name}}</a>
+                                    </li>
+                                </ul>
+                        </div>
+                </div>                
+            </div>    
+            <div class="manage-box radio-box clearfix"> 
+                 <div class="col-md-12">
+                         <label><h2>Affiliation<a style="color:#f00 !important;">*</a></h2></label>                               
+                 </div>
+                 <div class="man col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="radio" name="affilation"  value="opened" formControlName="affilation"  checked="checked">
+                            <label>Opened</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="radio" name="affilation"  value="closed" formControlName="affilation">
+                            <label>Closed</label>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+      </div>
+    </form>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <button class="btn btn-white" [routerLink]="['/club']">Back</button>
+        </div>
+        <div class="col-md-6 text-right">
+            <button class="btn btn_green" [disabled]="!clubForm.valid" (click)='addOrg()'>Save</button>       
+        </div>  
+    </div>
+    
+    </div>

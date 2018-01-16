@@ -13,7 +13,15 @@ export class Auth24Guard implements CanActivate {
       {
         var alford = JSON.parse(localStorage.getItem('uToken'));
         if (alford.user.isVerified == true) {
-          return true; 
+          if (alford.user.isProfileSet == true) {
+            console.log(alford);
+            return true;   
+          } else { 
+            this.reoter.navigate(['/profilesetup']);
+            this.toastr.warning('Profile not set ', 'Please set your profile.');    
+            return true;
+          }
+          
         } else {
           this.reoter.navigate(['/login']);
           this.toastr.warning('Account Not Verified', 'Please verify your Account.');
