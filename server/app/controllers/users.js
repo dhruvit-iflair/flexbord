@@ -182,7 +182,7 @@ usersctrl.prototype.resetpwd = function (req, res) {
     });
 }
 
-usersctrl.prototype.checkexplink = function (req, res) {
+usersctrl.prototype.checkexplink = function (req, res, next) {
     Users.find({ resetpwdToken: req.body.username }).exec(function (err, usrrsdata) {
         if(err){
             console.log(err);
@@ -192,7 +192,8 @@ usersctrl.prototype.checkexplink = function (req, res) {
             res.json('Your Password Reset Link Expired');
         }
         else{
-            res.json('Your Password Reset Link Already Used/Expired');
+            next();
+            //res.json('Your Password Reset Link Already Used/Expired');
         }
     });
 }

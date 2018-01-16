@@ -42,6 +42,7 @@ import { OrganizerCompetitionsComponent } from './views/organizer/organizer-comp
 import { ManageOrganizerCompetitionsComponent } from './views/organizer/organizer-competitions/manage-organizer-competitions/manage-organizer-competitions.component';
 import { ClubComponent } from './views/club/club.component';
 import { ClubTeamsComponent } from './views/club/club-teams/club-teams.component';
+import { TeamComponent } from './views/club/club-teams/team/team.component';
 import { ManageClubComponent } from './views/club/manage-club/manage-club.component';
 // import { ConfirmService } from "./components/services/confirm.services";
 import { placeDirectiveWithModel } from "./components/directive/placeLookupWithModel";
@@ -73,6 +74,7 @@ import { ManageClubSeasonsComponent } from './views/club/club-seasons/manage-clu
     ManageOrganizerCompetitionsComponent,
     ClubComponent,
     ClubTeamsComponent,
+    TeamComponent,
     ManageClubComponent,
     ClubMembersComponent,
     ManageClubMembersComponent,
