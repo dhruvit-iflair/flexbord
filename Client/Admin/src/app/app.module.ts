@@ -51,6 +51,8 @@ import { ClubMembersComponent } from './views/club/club-members/club-members.com
 import { ManageClubMembersComponent } from './views/club/club-members/manage-club-members/manage-club-members.component';
 import { ClubSeasonsComponent } from './views/club/club-seasons/club-seasons.component';
 import { ManageClubSeasonsComponent } from './views/club/club-seasons/manage-club-seasons/manage-club-seasons.component';
+import { ClubClassificationsComponent } from './views/club/club-classifications/club-classifications.component';
+import { ManageClubClassificationsComponent } from './views/club/club-classifications/manage-club-classifications/manage-club-classifications.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +82,8 @@ import { ManageClubSeasonsComponent } from './views/club/club-seasons/manage-clu
     ManageClubMembersComponent,
     ClubSeasonsComponent,
     ManageClubSeasonsComponent,
+    ClubClassificationsComponent,
+    ManageClubClassificationsComponent,
   ],
   imports: [
     // Angular modules

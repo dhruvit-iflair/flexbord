@@ -27,6 +27,8 @@ import { ClubMembersComponent } from './views/club/club-members/club-members.com
 import { ManageClubMembersComponent } from './views/club/club-members/manage-club-members/manage-club-members.component';
 import { ClubSeasonsComponent } from './views/club/club-seasons/club-seasons.component';
 import { ManageClubSeasonsComponent } from './views/club/club-seasons/manage-club-seasons/manage-club-seasons.component';
+import { ClubClassificationsComponent } from './views/club/club-classifications/club-classifications.component';
+import { ManageClubClassificationsComponent } from './views/club/club-classifications/manage-club-classifications/manage-club-classifications.component';
 
 
 export const ROUTES:Routes = [
@@ -76,6 +78,10 @@ export const ROUTES:Routes = [
       {path: 'club/clubteam', component: ClubTeamsComponent , canActivate: [Auth24Guard]},
       {path: 'club/clubteam/team', component: TeamComponent , canActivate: [Auth24Guard]},
       {path: 'club/clubteam/team/:_id', component: TeamComponent , canActivate: [Auth24Guard]},
+            
+      {path: 'club/classifications', component: ClubClassificationsComponent , canActivate: [Auth24Guard]},
+      {path: 'club/classifications/manage', component: ManageClubClassificationsComponent , canActivate: [Auth24Guard]},
+      {path: 'club/classifications/manage/:_id', component: ManageClubClassificationsComponent , canActivate: [Auth24Guard]},
       
       // {path: 'club/manage', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
       // {path: 'club/manage/:_id', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},     
