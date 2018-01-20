@@ -21,7 +21,7 @@ export class ClubComponent implements OnInit {
   public dataRenderer = false;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public modules = this.accr.getmodules();
-  public hasTeamsPerm;hasMembersPerm;
+  public hasTeamsPerm;hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;
   constructor(public http: Http, private router: Router, private toastr: ToastrService, private accr: AccessorService) { }
   ngAfterContentInit() {
     this.dtOptions = {
@@ -64,6 +64,12 @@ export class ClubComponent implements OnInit {
       }
       if (Object.keys(perms[z]).toString().toLowerCase() == "clubmembers0" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasMembersPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubseasons0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasSeasonsPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubclassifications0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasClassificationsPerm = true;
       }
     }
   }

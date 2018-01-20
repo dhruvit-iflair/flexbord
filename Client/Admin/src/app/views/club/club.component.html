@@ -40,18 +40,15 @@
                       <a class="btn btn_1 tab_btn" (click)="movetomember(item._id)" title="Members" *ngIf="hasMembersPerm">
                         <i class="fa fa-user" aria-hidden="true"></i>
                       </a>
-                      <a class="btn btn_2 tab_btn" (click)="movetoseason(item._id)" title="Seasons">
+                      <a class="btn btn_2 tab_btn" (click)="movetoseason(item._id)" title="Seasons" *ngIf="hasSeasonsPerm">
                         <i class="fa fa-superpowers" aria-hidden="true"></i>
                       </a>
-                      <a class="btn btn_green tab_btn" (click)="movetoclassification(item._id)" title="Classifications">
+                      <a class="btn btn_green tab_btn" (click)="movetoclassification(item._id)" title="Classifications"  *ngIf="hasClassificationsPerm">
                         <i class="fa fa-code-fork" aria-hidden="true"></i>
                       </a>
                       <a class="btn btn_red tab_btn" (click)="movetoteam(item._id)" title="Teams" *ngIf="hasTeamsPerm">
                         <i class="fa fa-users" aria-hidden="true"></i>
                       </a>
-                      <a class="btn btn_red tab_btn" (click)="movetoteam(item._id)" title="Teams">
-                        <i class="fa fa-dribbble" aria-hidden="true"></i>
-                      </a> 
                     </td>
                   </tr>
                 </tbody>

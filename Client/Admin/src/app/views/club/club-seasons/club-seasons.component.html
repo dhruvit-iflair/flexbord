@@ -3,7 +3,7 @@
       <div class="col-md-10">
           <label><h2>Club Seasons</h2></label>
       </div>
-      <div class="col-md-2 text-right">
+      <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
           <button class="btn btn_green" [routerLink]="['/club/seasons/manage']">New Season</button>                         
       </div>
       <div class="col-md-12" id="tabl">
@@ -28,10 +28,10 @@
               <td>{{s.start_date | dateFormatPipe :'dd/MM/yy hh:mm a'}} </td>
               <td>{{s.end_date | dateFormatPipe :'dd/MM/yy hh:mm a'}}</td>
               <td>
-                <a class="btn btn_green tab_btn"  routerLink="/club/seasons/manage/{{s._id}}" >
+                <a class="btn btn_green tab_btn"  routerLink="/club/seasons/manage/{{s._id}}" *ngIf="hasEditPerm">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
-                <a class="btn btn_red tab_btn" (click)="delOrg(s._id)">
+                <a class="btn btn_red tab_btn" (click)="delOrg(s._id)" *ngIf="hasDeletePerm">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
               </td>
