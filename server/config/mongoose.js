@@ -31,6 +31,8 @@ module.exports = function () {
     require('../app/models/clubteams');
     require('../app/models/club');
     require('../app/models/clubmembers');
+    require('../app/models/clubSeasons');
+    require('../app/models/club-classifications');
 
     return db;
 }

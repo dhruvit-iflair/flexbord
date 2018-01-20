@@ -1,0 +1,54 @@
+<div class="container manage-container">
+  <div class="row">
+      <div class="col-md-12">
+          <form [formGroup]="seasonForm" >
+              <div class="manage-box clearfix">
+                    <div class="col-md-12">
+                      <label><h2>Manage Club Seasons</h2></label>
+                    </div>
+                      <div class="man col-md-6">
+                          <label>Name<a style="color:#f00 !important;">*</a></label>
+                          <input class="form-control" type="text" placeholder="Season Name" formControlName="name">
+                          <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('name').valid && seasonForm.get('name').touched">
+                              Name is required.
+                          </div>
+                      </div>        
+                    <div class="man col-md-6">
+                      <label>Start Date<a style="color:#f00 !important;">*</a></label>
+                      <input type="date" class="form-control col-md-4"  placeholder="Start Date" formControlName="start_date" useValueAsDate>
+                      <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('start_date').valid && seasonForm.get('start_date').touched">
+                          Start Date is required.
+                      </div>
+                    </div>           
+                    <div class="man col-md-6">
+                      <label>End Date<a style="color:#f00 !important;">*</a></label>
+                      <input class="form-control col-md-4" type="date" placeholder="End Date" formControlName="end_date" useValueAsDate>
+                      <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('end_date').valid && seasonForm.get('end_date').touched">
+                          End Date is required.
+                      </div>
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="seasonForm.errors && seasonForm.get('start_date').touched && seasonForm.get('end_date').touched">
+                        {{ seasonForm.errors?.dates | json }}
+                    </div>
+            
+                  <!--<label *ngIf="seasonForm.errors">{{ seasonForm.errors?.dates | json }}</label>-->
+              </div>
+          </form>
+      </div>
+  <br>
+    <div class="col-md-12">
+         <div class="row">
+            <div class="col-md-6 text-left">
+                <button class="btn" [routerLink]="['/club/seasons']">Back</button>
+                <!-- <button class="btn" (click)="back()">Back</button> -->
+                
+            </div>
+            <div class="col-md-6 text-right">
+                <button  [disabled]='!seasonForm.valid'  (click)='addSesons()' class="btn btn_green" >Save</button>        
+                <!-- [disabled]='!orgForm.valid' -->
+            </div>   
+          </div>
+    </div>
+    
+  </div>   
+  </div> 

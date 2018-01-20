@@ -72,24 +72,33 @@ export class ClubComponent implements OnInit {
     localStorage.setItem('clubid', idx);
     this.router.navigate(['/club/members']);
   }
-  movetoteam(idx) {
+
+  movetoseason(idq) {
+    localStorage.setItem('clubid', idq);
+    this.router.navigate(['/club/seasons']);
+  }
+  movetoteam(idx){
     localStorage.setItem('clubid', idx);
     this.router.navigate(['/club/clubteam']);
   }
-  delClub(id) {
-    var del = confirm("Confirm to delete this Club!");
-    if (del) {
-      this.http.delete(environment.api + "/club/" + id)
-        .subscribe((res) => {
-          var d = res.json();
-          if (d._id) {
-            this.dataRenderer = false;
-            this.toastr.success('Organizer Deleted Successfully', 'Success');
-            this.ngOnInit();
-          }
-        }, (error) => {
-          this.toastr.error('Something went wrong !! Please try again later', 'Error');
-        })
+  movetoclassification(idw) {
+    localStorage.setItem('clubid', idw);
+    this.router.navigate(['/club/classifications']);
+  }
+  delClub(id){
+      var del = confirm("Confirm to delete this Club!");
+      if (del) {
+        this.http.delete(environment.api + "/club/" + id)
+          .subscribe((res) => {
+            var d = res.json();
+            if (d._id) {
+              this.dataRenderer = false;
+              this.toastr.success('Organizer Deleted Successfully', 'Success');
+              this.ngOnInit();
+            }
+          }, (error) => {
+            this.toastr.error('Something went wrong !! Please try again later', 'Error');
+          })
+      }
     }
   }
-}
