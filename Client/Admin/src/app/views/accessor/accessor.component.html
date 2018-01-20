@@ -1,0 +1,56 @@
+<div class="manage-box clearfix">
+  <div class="col-md-12">
+    <label><h2>Manage Permissions</h2></label>
+  </div>
+
+  <div class="col-md-12">
+    <div class="row">
+      <div class="man col-md-12">
+        <div class="col-md-4">
+          <h4 class="text-left">Role<a style="color:#f00 !important;">*</a></h4>
+        </div>
+        <div class="col-md-8">
+          <select class="js-example-basic-single text-col-md-3" name="roles" [(ngModel)]='accessor.roles'
+                        [ngModelOptions]="{standalone: true}" (ngModelChange)="getpermdata(accessor.roles)">
+                 <option value="" disabled="true" [selected]="true">Select Role</option>
+                 <option *ngFor="let ite of rolesdata" [value]="ite._id">{{ite.title}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <table style="width:99%;margin-top:1.5%;margin-left:1%;" *ngIf="accessor.roles">
+        <thead style="font-size: large;">
+          <th style="width:20%;">Modules</th>
+          <th style="width:10%;" class="text-col-md-3 col-md-3">View</th>
+          <th style="width:10%;" class="text-col-md-3 col-md-3">Create</th>
+          <th style="width:10%;" class="text-col-md-3 col-md-3">Edit</th>
+          <th style="width:10%;" class="text-col-md-3 col-md-3">Delete</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of modules;index as x;">
+            <td><label>{{i}}</label></td>
+            <td style="padding-left: 2%;"><input class="text-col-md-3" type="checkbox" [(ngModel)]="accessor.permissions[x][i][0]"
+                        [ngModelOptions]="{standalone: true}"></td>
+            <td style="padding-left: 2%;"><input class="text-col-md-3" type="checkbox" [(ngModel)]='accessor.permissions[x][i][1]'
+                        [ngModelOptions]="{standalone: true}"></td>
+            <td style="padding-left: 2%;"><input class="text-col-md-3" type="checkbox" [(ngModel)]='accessor.permissions[x][i][2]'
+                        [ngModelOptions]="{standalone: true}"></td>
+            <td style="padding-left: 2%;"><input class="text-col-md-3" type="checkbox" [(ngModel)]='accessor.permissions[x][i][3]'
+                        [ngModelOptions]="{standalone: true}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-md-12" style="margin-top:5%;">
+      <div class="col-md-6">
+        <button class="btn btn-white" [routerLink]="['/club']">Back</button>
+      </div>
+      <div class="col-md-6 text-right">
+        <button class="btn btn_green" (click)='updatepermdata(accessor)'>Save</button>
+      </div>
+      </div>
+    </div>
+</div>

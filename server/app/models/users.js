@@ -11,8 +11,8 @@ var usersSchema=new Schema({
     isVerified:Boolean,
     resetpwdToken:{type:String,default:""},
     resetpwdExpiredOn:{type:String,default:""},
-    isProfileSet:{ type: Boolean, default : false}
-//    roles:{ type: Schema.Types.ObjectId, ref: 'roles' },
+    isProfileSet:{ type: Boolean, default : false},
+    roles:{ type: Schema.Types.ObjectId, ref: 'roles' }
 //    person_photo:Object
 });
 usersSchema.plugin(passportLocalMongoose);

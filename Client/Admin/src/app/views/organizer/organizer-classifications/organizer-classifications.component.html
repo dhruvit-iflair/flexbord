@@ -3,7 +3,7 @@
       <div class="col-md-10">
           <label><h2>Classification</h2></label>
       </div>
-      <div class="col-md-2 text-right">
+      <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
           <button class="btn btn_green" [routerLink]="['/classifications/manage']">New Classification</button>                         
       </div>
       <div class="col-md-12">
@@ -22,10 +22,10 @@
                 <td>{{r.name}}</td>
                 <td>{{r.value}}</td>
                 <td>
-                  <a class="btn btn_green tab_btn"  routerLink="/classifications/manage/{{r._id}}" >
+                  <a class="btn btn_green tab_btn"  routerLink="/classifications/manage/{{r._id}}" *ngIf="hasEditPerm">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                   </a>
-                  <a class="btn btn_red tab_btn" (click)="delClas(r._id)">
+                  <a class="btn btn_red tab_btn" (click)="delClas(r._id)" *ngIf="hasDeletePerm">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   </a>
                 </td>

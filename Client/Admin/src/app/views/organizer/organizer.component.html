@@ -3,7 +3,7 @@
       <div class="col-md-10">
           <label><h2>Organizations</h2></label>
       </div>
-      <div class="col-md-2 text-right">
+      <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
           <button class="btn btn_green" [routerLink]="['/organizer/manage']">New Org</button>                         
       </div>
       <div class="col-md-12" id="tabl">
@@ -31,7 +31,13 @@
                   <td>{{item.registered | dateFormatPipe :'dd/MM/yy hh:mm a'}}</td>
                   <td>{{item.email}}</td>
                   <!-- <td><a routerLink="/organizer/manage/{{item.button}} ">{{item.button}} </a></td> -->
-                  <td><a class="btn btn_green tab_btn" routerLink="/organizer/manage/{{item._id}}"  title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a><a class="btn btn_red tab_btn" (click)="delOrg(item._id,$index)" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a><a class="btn btn_2 tab_btn" (click)="movetoseason(item._id)" title="Seasons"><i class="fa fa-superpowers" aria-hidden="true"></i></a><a class="btn btn_1 tab_btn" (click)="movetomember(item._id)" title="Members"><i class="fa fa-user" aria-hidden="true"></i></a><a class="btn btn_green tab_btn" (click)="movetoclassification(item._id)" title="Classifications"><i class="fa fa-code-fork" aria-hidden="true"></i></a><a class="btn btn_red tab_btn" (click)="movetocompetition(item._id)" title="Competitions"><i class="fa fa-dribbble" aria-hidden="true"></i></a></td>
+                  <td>
+                    <a class="btn btn_green tab_btn" routerLink="/organizer/manage/{{item._id}}"  title="Edit" *ngIf="hasEditPerm"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a class="btn btn_red tab_btn" (click)="delOrg(item._id,$index)" title="Delete" *ngIf="hasDeletePerm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a class="btn btn_2 tab_btn" (click)="movetoseason(item._id)" title="Seasons" *ngIf="hasSeasonsPerm"><i class="fa fa-superpowers" aria-hidden="true"></i></a>
+                    <a class="btn btn_1 tab_btn" (click)="movetomember(item._id)" title="Members" *ngIf="hasMembersPerm"><i class="fa fa-user" aria-hidden="true"></i></a>
+                    <a class="btn btn_green tab_btn" (click)="movetoclassification(item._id)" title="Classifications" *ngIf="hasClassificationsPerm"><i class="fa fa-code-fork" aria-hidden="true"></i></a>
+                    <a class="btn btn_red tab_btn" (click)="movetocompetition(item._id)" title="Competitions" *ngIf="hasCompetitionsPerm"><i class="fa fa-dribbble" aria-hidden="true"></i></a></td>
                 </tr>
               </tbody>
       </table>

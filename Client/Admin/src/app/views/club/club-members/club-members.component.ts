@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from "../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
-import { Router,ActivatedRoute,Params } from "@angular/router";
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { AccessorService } from "../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-club-members',
@@ -10,21 +11,22 @@ import { Router,ActivatedRoute,Params } from "@angular/router";
   styleUrls: ['./club-members.component.css']
 })
 export class ClubMembersComponent implements OnInit {
-  members;dtOptions;clubid;
-  public dataRenderer=false;
-  constructor(public http: HttpClient,private router: Router,private aroute:ActivatedRoute, private toastr: ToastrService) { }
+  members; dtOptions; clubid;
+  public dataRenderer = false;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  constructor(public http: HttpClient, private router: Router, private aroute: ActivatedRoute, private toastr: ToastrService, private accr: AccessorService) { }
 
   ngOnInit() {
-    this.clubid=localStorage.getItem('clubid');
+    this.clubid = localStorage.getItem('clubid');
     this.gotcha();
   }
-  gotcha(){
-    this.dtOptions={
-      pagingType:'simple_numbers',
-      order:[[ 0, 'desc' ]],
-      columns: [{ "visible":false },null,null,null,null,null,null,{ "orderable": false }]
+  gotcha() {
+    this.dtOptions = {
+      pagingType: 'simple_numbers',
+      order: [[0, 'desc']],
+      columns: [{ "visible": false }, null, null, null, null, null, null, { "orderable": false }]
     }
-    this.http.get(environment.api + '/clubmembers/getByClub/'+this.clubid)
+    this.http.get(environment.api + '/clubmembers/getByClub/' + this.clubid)
       .subscribe((res) => {
 
         this.members = res;
@@ -32,46 +34,61 @@ export class ClubMembersComponent implements OnInit {
           var src = environment.picpoint + 'clubMembersPhoto/' + item.photo;
           item.photo = src;
         });
-        this.dataRenderer=true;
+        this.dataRenderer = true;
       });
+      this.checkpermissions();
   }
-  deletemember(id){
+  deletemember(id) {
     var del = confirm("Delete this Member?");
     if (del) {
-      this.http.delete(environment.api +"/clubmembers/"+id)
-              .subscribe((res)=>{
-                if (res) {
-                  this.dataRenderer=false;
-                  this.toastr.success('Member Deleted Successfully', 'Success');
-                }
-                this.gotcha();
-              },(error)=>{
-                this.toastr.error('Something went wrong !! Please try again later', 'Error');
-              });
+      this.http.delete(environment.api + "/clubmembers/" + id)
+        .subscribe((res) => {
+          if (res) {
+            this.dataRenderer = false;
+            this.toastr.success('Member Deleted Successfully', 'Success');
+          }
+          this.gotcha();
+        }, (error) => {
+          this.toastr.error('Something went wrong !! Please try again later', 'Error');
+        });
     }
   }
-  changeStatusA(id){
-   this.http.get(environment.api +"/clubmembers/statusA/"+id)
-              .subscribe((res)=>{
-                if (res) {
-                  this.dataRenderer=false;
-                  this.toastr.success('Member Status Changed Successfully', 'Success');
-                }
-                this.gotcha();
-              },(error)=>{
-                this.toastr.error('Something went wrong !! Please try again later', 'Error');
-              });
+  checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubmembers1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubmembers2" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasEditPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubmembers3" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasDeletePerm = true;
+      }
+    }
   }
-  changeStatusP(id){
-    this.http.get(environment.api +"/clubmembers/statusP/"+id)
-              .subscribe((res)=>{
-                if (res) {
-                  this.dataRenderer=false;
-                  this.toastr.success('Member Status Changed Successfully', 'Success');
-                }
-                this.gotcha();
-              },(error)=>{
-                this.toastr.error('Something went wrong !! Please try again later', 'Error');
-              });
+  changeStatusA(id) {
+    this.http.get(environment.api + "/clubmembers/statusA/" + id)
+      .subscribe((res) => {
+        if (res) {
+          this.dataRenderer = false;
+          this.toastr.success('Member Status Changed Successfully', 'Success');
+        }
+        this.gotcha();
+      }, (error) => {
+        this.toastr.error('Something went wrong !! Please try again later', 'Error');
+      });
+  }
+  changeStatusP(id) {
+    this.http.get(environment.api + "/clubmembers/statusP/" + id)
+      .subscribe((res) => {
+        if (res) {
+          this.dataRenderer = false;
+          this.toastr.success('Member Status Changed Successfully', 'Success');
+        }
+        this.gotcha();
+      }, (error) => {
+        this.toastr.error('Something went wrong !! Please try again later', 'Error');
+      });
   }
 }

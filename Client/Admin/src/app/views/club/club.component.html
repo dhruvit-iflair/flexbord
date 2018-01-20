@@ -3,7 +3,7 @@
         <div class="col-md-10">
             <label><h2>Clubs</h2></label>
         </div>
-        <div class="col-md-2 text-right">
+        <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
             <button class="btn btn_green" [routerLink]="['/club/manage']">New Club</button>                         
         </div>
         <div class="col-md-12" id="tabl">
@@ -31,13 +31,13 @@
                     <td>{{item.registered | dateFormatPipe :'dd/MM/yy hh:mm a'}}</td>
                     <td>{{item.email}}</td>
                     <td>
-                      <a class="btn btn_green tab_btn" routerLink="/club/manage/{{item._id}}"  title="Edit">
+                      <a class="btn btn_green tab_btn" routerLink="/club/manage/{{item._id}}"  title="Edit" *ngIf="hasEditPerm">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                       </a>
-                     <a class="btn btn_red tab_btn" (click)="delClub(item._id)" title="Delete">
+                     <a class="btn btn_red tab_btn" (click)="delClub(item._id)" title="Delete" *ngIf="hasDeletePerm">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                       </a>
-                      <a class="btn btn_1 tab_btn" (click)="movetomember(item._id)" title="Members">
+                      <a class="btn btn_1 tab_btn" (click)="movetomember(item._id)" title="Members" *ngIf="hasMembersPerm">
                         <i class="fa fa-user" aria-hidden="true"></i>
                       </a>
                       <!--<a class="btn btn_2 tab_btn" (click)="movetoseason(item._id)" title="Seasons">
@@ -46,8 +46,8 @@
                       <a class="btn btn_green tab_btn" (click)="movetoclassification(item._id)" title="Classifications">
                         <i class="fa fa-code-fork" aria-hidden="true"></i>
                       </a>-->
-                      <a class="btn btn_red tab_btn" (click)="movetoteam(item._id)" title="Teams">
-                        <i class="fa fa-dribbble" aria-hidden="true"></i>
+                      <a class="btn btn_red tab_btn" (click)="movetoteam(item._id)" title="Teams" *ngIf="hasTeamsPerm">
+                        <i class="fa fa-users" aria-hidden="true"></i>
                       </a> 
                     </td>
                   </tr>

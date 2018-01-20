@@ -7,6 +7,8 @@ import { environment } from "../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs/Subject';
+import { AccessorService } from "../../components/common/accessor.service";
+
 // import { ConfirmService } from "../../components/services/confirm.services";
 @Component({
   selector: 'app-organizer',
@@ -19,16 +21,10 @@ export class OrganizerComponent implements OnInit {
   public length: number = 0;
   public dtOptions;
   public dataRenderer = false;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  public hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;hasCompetitionsPerm;
 
-  constructor(public http: Http, private router: Router, private toastr: ToastrService, 
-    // public confirmBox:ConfirmService 
-  ) {
-    // this.dtOptions={
-    //   pagingType:'simple_numbers',
-    //   order:[[ 0, 'desc' ]],
-    //   columns: [{"visible":false},null,null,null,null,null,{ "orderable": false }]
-    // }
-  }
+  constructor(public http: Http, private router: Router, private toastr: ToastrService,private accr: AccessorService ) {  }
   ngAfterContentInit() {
     this.dtOptions = {
       pagingType: 'simple_numbers',
@@ -50,7 +46,8 @@ export class OrganizerComponent implements OnInit {
           this.length = this.rows.length;
           this.dataRenderer = true;
         }
-      })
+      });
+    this.checkpermissions();
   }
   movetomember(idx) {
     localStorage.setItem('orgid', idx);
@@ -67,6 +64,32 @@ export class OrganizerComponent implements OnInit {
   movetocompetition(id) {
     localStorage.setItem('orgid', id);
     this.router.navigate(['/competitions']);
+  }
+  checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizer1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizer2" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasEditPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizer3" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasDeletePerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizerseasons0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasSeasonsPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizerclassifications0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasClassificationsPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizercompetitions0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCompetitionsPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizermembers0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasMembersPerm = true;
+      }
+    }
   }
   delOrg(id, index) {
     // var d = this.rows.findIndex(r => r._id == id);

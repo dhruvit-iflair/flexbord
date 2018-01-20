@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Auth24Guard } from "./components/common/guard/auth24.guard";
+// import { RouteGuard } from "./components/common/guard/route.guard";
 import { PaginationModule ,ModalModule} from "ngx-bootstrap";
 import { DataTablesModule } from 'angular-datatables';
 
@@ -34,6 +35,7 @@ import { DateValueAccessor } from "./components/directive/date-proper";
 import { dateFormatPipe } from "./components/pipes/dateFormate";
 import { OrgmembersComponent } from './views/organizer/orgmembers/orgmembers.component';
 import { MemberComponent } from './views/organizer/orgmembers/member/member.component';
+import { AccessorService } from "./components/common/accessor.service";
 
 import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
 import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
@@ -49,6 +51,7 @@ import { placeDirectiveWithModel } from "./components/directive/placeLookupWithM
 import { ClubService } from "./components/services/club.services";
 import { ClubMembersComponent } from './views/club/club-members/club-members.component';
 import { ManageClubMembersComponent } from './views/club/club-members/manage-club-members/manage-club-members.component';
+import { AccessorComponent } from './views/accessor/accessor.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +79,7 @@ import { ManageClubMembersComponent } from './views/club/club-members/manage-clu
     ManageClubComponent,
     ClubMembersComponent,
     ManageClubMembersComponent,
+    AccessorComponent,
   ],
   imports: [
     // Angular modules
@@ -104,7 +108,7 @@ import { ManageClubMembersComponent } from './views/club/club-members/manage-clu
 
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [Auth24Guard,ClubService],
+  providers: [Auth24Guard,ClubService,AccessorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
