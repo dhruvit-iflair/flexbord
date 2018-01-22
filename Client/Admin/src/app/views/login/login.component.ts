@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from "@angular/router";
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { AccessorService } from "../../components/common/accessor.service";
 import { environment } from '../../../environments/environment'
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-    selector: 'login',
-    templateUrl: 'login.template.html'
+  selector: 'login',
+  templateUrl: 'login.template.html'
 })
 
 export class loginComponent {
@@ -14,18 +15,21 @@ export class loginComponent {
     username: '',
     password: ''
   }
-constructor(private router: Router, private http: HttpClient, private toastr:ToastrService) { }
-ngOnInit(){
-  if(localStorage.getItem('uToken')){
-     localStorage.removeItem('uToken');
-    // var alford = JSON.parse(localStorage.getItem('uToken'));
-    // if (alford.user.isVerified == false) {
-    //   this.toastr.warning('Account Not Verified', 'Please verify your Account.');
-    // }
+  constructor(private router: Router, private http: HttpClient, private toastr: ToastrService, private accr: AccessorService) { }
+  ngOnInit() {
+    if (localStorage.getItem('uToken')) {
+      localStorage.removeItem('uToken');
+      // var alford = JSON.parse(localStorage.getItem('uToken'));
+      // if (alford.user.isVerified == false) {
+      //   this.toastr.warning('Account Not Verified', 'Please verify your Account.');
+      // }
+    }
+    if (localStorage.getItem('fullPerms')) {
+      localStorage.removeItem('fullPerms');
+    }
   }
-}
-    login(credential) {
-    if (credential.username!=''||credential.password!='') {
+  login(credential) {
+    if (credential.username != '' || credential.password != '') {
       this.http.post(environment.api + '/login', credential)
         .subscribe(
         data => {
@@ -35,9 +39,12 @@ ngOnInit(){
           if (alford.user.isVerified == false) {
             this.toastr.warning('Account Not Verified', 'Please verify your Account.');
           }
-          else{
+          else {
+            this.accr.setUserPermissions();
             this.toastr.success('Login Successfully.', 'Success');
-            this.router.navigate(['/']);
+            setTimeout(()=>{
+              this.router.navigate(['/']);
+            }, 1500);
           }
         },
         error => {
@@ -48,4 +55,4 @@ ngOnInit(){
       this.toastr.warning('Can not be Empty', 'Email/Password');
     }
   }
- }
+}

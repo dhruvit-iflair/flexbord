@@ -15,51 +15,21 @@
                     FB
                 </div>
             </li>
-            <!--<li [ngClass]="{active: activeRoute('mainView')}">
-                <a [routerLink]="['/mainView']"><i class="fa fa-th-large"></i> <span class="nav-label">Main view</span></a>
-            </li>
-            <li [ngClass]="{active: activeRoute('minorView')}">
-                <a [routerLink]="['/minorView']"><i class="fa fa-desktop"></i> <span class="nav-label">Minor view</span> </a>
-            </li>-->
-            <li [ngClass]="{active: activeRoute('profilesetup')}" *ngIf="!isProfileSet" >
+
+            <li [ngClass]="{active: activeRoute('profilesetup')}" *ngIf="!isProfileSet">
                 <a [routerLink]="['/profilesetup']"><i class="fa fa-th-large"></i> <span class="nav-label">Profile setup</span></a>
             </li>
-            <!--<li [ngClass]="{active: activeRoute('rolespermission')}">
-                <a [routerLink]="['/rolespermission']"><i class="fa fa-desktop"></i> <span class="nav-label">Set Permissions</span> </a>
-            </li>-->
-            <li [ngClass]="{active: activeRoute('organizer')}" *ngIf="isProfileSet">
+            <li [ngClass]="{active: activeRoute('organizer')}" *ngIf="isProfileSet && haspermission[0].Organizer0">
                 <a [routerLink]="['/organizer']"><i class="fa fa-calendar "></i> <span class="nav-label">Organizer</span> </a>
-                <!-- <ul class="nav nav-second-level collapse">
-                    <li [ngClass]="{active: activeRoute('organizer/seasons')}">
-                        <a [routerLink]="['/organizer/seasons']"><i class="fa fa-superpowers "></i> <span class="nav-label">Seasons</span> </a>
-                    </li>
-                </ul> -->
             </li>
-            <!--<li [ngClass]="{active: activeRoute('seasons')}">
-                        <a [routerLink]="['/seasons']"><i class="fa fa-superpowers "></i> <span class="nav-label">Seasons</span> </a>
-            </li>
-          <li [ngClass]="{active: activeRoute('organizer/orgmembers')}">
-                        <a [routerLink]="['/organizer/orgmembers']"><i class="fa fa-user "></i> <span class="nav-label">Members</span> </a>
-            </li>-->
-
-            <!--<li [ngClass]="{active: activeRoute('classifications')}">
-                        <a [routerLink]="['/classifications']"><i class="fa fa-code-fork"></i> <span class="nav-label">Classifications</span> </a>
-            </li>-->
-          
-            <!--<li [ngClass]="{active: activeRoute('competitions')}">
-                    <a [routerLink]="['/competitions']"><i class="fa fa-dribbble"></i> <span class="nav-label">Competitions</span> </a>
-            </li>-->
-            <!--<li>
-                <a [routerLink]="['/login']"><i class="fa fa-sign-in"></i> <span class="nav-label">Login</span> </a>
-            </li>
-            <li>
-                <a [routerLink]="['/register']"><i class="fa fa-pencil"></i> <span class="nav-label">Register</span> </a>
-            </li>--> 
-            <li [ngClass]="{active: activeRoute('club')}" *ngIf="isProfileSet">
+            <li [ngClass]="{active: activeRoute('club')}" *ngIf="isProfileSet && haspermission[20].Club0">
                     <a [routerLink]="['/club']"><i class="fa fa-eercast"></i> <span class="nav-label">Club</span> </a>
             </li>
             <li [ngClass]="{active: activeRoute('users')}" *ngIf="isProfileSet">
                     <a [routerLink]="['/users']"><i class="fa fa-user-circle" aria-hidden="true"></i><span class="nav-label">Users</span> </a>
+            </li>
+            <li [ngClass]="{active: activeRoute('permissions')}" *ngIf="isProfileSet">
+                    <a [routerLink]="['/permissions']"><i class="fa fa-gears"></i> <span class="nav-label">Permissions</span> </a>
             </li>
         </ul>
 

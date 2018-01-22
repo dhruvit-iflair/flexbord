@@ -4,6 +4,8 @@ import { Router ,ActivatedRoute} from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
+import { AccessorService } from "../../../components/common/accessor.service";
+
 declare var jQuery:any;
 @Component({
   selector: 'app-organizer-competitions',
@@ -14,7 +16,9 @@ export class OrganizerCompetitionsComponent implements OnInit {
   public dtOptions;orgid;
   public rows :Array<any>;
   public dataRenderer = false;
-  constructor(private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute) { }
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+
+  constructor(private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,private accr: AccessorService) { }
 
   ngOnInit() {
     this.initializer();
@@ -33,6 +37,21 @@ export class OrganizerCompetitionsComponent implements OnInit {
               },(error)=>{
               this.toastr.error('Error!! Something went wrong! try again later', 'Error');
             });  
+    this.checkpermissions();
+  }
+  checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizercompetitions1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizercompetitions2" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasEditPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizercompetitions3" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasDeletePerm = true;
+      }
+    }
   }
   delComp(id){
       var del = confirm("Confirm to delete this Competition!");

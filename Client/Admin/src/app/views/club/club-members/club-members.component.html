@@ -3,7 +3,7 @@
       <div class="col-md-10">
           <label><h2>Club Members</h2></label>
       </div>
-      <div class="col-md-2 text-right">
+      <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
           <button class="btn btn_green" [routerLink]="['/club/members/manage']">New Member</button>                         
       </div>
       <div class="col-md-12" id="tabl">
@@ -23,7 +23,7 @@
           <tbody>
             <tr *ngFor="let m of members">
               <td style="display:none;">{{m._id}}</td>
-              <td><img src='{{m.photo}}' class="image_display" style="width:50px;height:50px;"></td>
+              <td><img src='{{m.photo}}' class="image_display" style="border-radius: 100px;width:50px;height:50px;"></td>
               <td>{{m.license}} </td>
               <td>{{m.firstname}} </td>
               <td>{{m.lastname}}</td>
@@ -37,10 +37,10 @@
                 </a>
               </td>
               <td>
-                <a class="btn btn_green tab_btn"  routerLink="/club/members/manage/{{m._id}}" >
+                <a class="btn btn_green tab_btn"  routerLink="/club/members/manage/{{m._id}}" *ngIf="hasEditPerm">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
-                <a class="btn btn_red tab_btn" (click)="deletemember(m._id)">
+                <a class="btn btn_red tab_btn" (click)="deletemember(m._id)" *ngIf="hasDeletePerm">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
                

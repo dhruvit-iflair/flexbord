@@ -34,6 +34,7 @@ import { DateValueAccessor } from "./components/directive/date-proper";
 import { dateFormatPipe } from "./components/pipes/dateFormate";
 import { OrgmembersComponent } from './views/organizer/orgmembers/orgmembers.component';
 import { MemberComponent } from './views/organizer/orgmembers/member/member.component';
+import { AccessorService } from "./components/common/accessor.service";
 
 import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
 import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
@@ -49,6 +50,7 @@ import { placeDirectiveWithModel } from "./components/directive/placeLookupWithM
 import { ClubService } from "./components/services/club.services";
 import { ClubMembersComponent } from './views/club/club-members/club-members.component';
 import { ManageClubMembersComponent } from './views/club/club-members/manage-club-members/manage-club-members.component';
+import { AccessorComponent } from './views/accessor/accessor.component';
 import { ClubSeasonsComponent } from './views/club/club-seasons/club-seasons.component';
 import { ManageClubSeasonsComponent } from './views/club/club-seasons/manage-club-seasons/manage-club-seasons.component';
 import { ClubClassificationsComponent } from './views/club/club-classifications/club-classifications.component';
@@ -87,6 +89,7 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
     ManageClubComponent,
     ClubMembersComponent,
     ManageClubMembersComponent,
+    AccessorComponent,
     ClubSeasonsComponent,
     ManageClubSeasonsComponent,
     ClubClassificationsComponent,
@@ -126,7 +129,7 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [Auth24Guard,ClubService,UserService],
+  providers: [Auth24Guard,ClubService,UserService,AccessorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
