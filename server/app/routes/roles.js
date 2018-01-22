@@ -9,6 +9,8 @@ module.exports=function(app){
     rolesRoute.route('/')
     .get(roles.list)
     .post(roles.create);
+    rolesRoute.route('/seeds')
+    .get(roles.seeds)
     rolesRoute.route('/:id')
     .get(roles.getbyid)
     .put(roles.update)

@@ -22,7 +22,7 @@ export class ClubMembersComponent implements OnInit {
     this.dtOptions={
       pagingType:'simple_numbers',
       order:[[ 0, 'desc' ]],
-      columns: [{ "visible":false },null,null,null,null,null,null,{ "orderable": false }]
+      columns: [{ "visible":false },{ "orderable": false },null,null,null,null,null,{ "orderable": false }]
     }
     this.http.get(environment.api + '/clubmembers/getByClub/'+this.clubid)
       .subscribe((res) => {

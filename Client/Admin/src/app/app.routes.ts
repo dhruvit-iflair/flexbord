@@ -29,6 +29,10 @@ import { ClubSeasonsComponent } from './views/club/club-seasons/club-seasons.com
 import { ManageClubSeasonsComponent } from './views/club/club-seasons/manage-club-seasons/manage-club-seasons.component';
 import { ClubClassificationsComponent } from './views/club/club-classifications/club-classifications.component';
 import { ManageClubClassificationsComponent } from './views/club/club-classifications/manage-club-classifications/manage-club-classifications.component';
+import { ClubTournamentsComponent } from './views/club/club-tournaments/club-tournaments.component';
+import { ManageclubTournamentsComponent } from './views/club/club-tournaments/manageclub-tournaments/manageclub-tournaments.component';
+import { UsersComponent } from './views/users/users.component';
+import { ManageUsersComponent } from './views/users/manage-users/manage-users.component';
 
 
 export const ROUTES:Routes = [
@@ -82,6 +86,14 @@ export const ROUTES:Routes = [
       {path: 'club/classifications', component: ClubClassificationsComponent , canActivate: [Auth24Guard]},
       {path: 'club/classifications/manage', component: ManageClubClassificationsComponent , canActivate: [Auth24Guard]},
       {path: 'club/classifications/manage/:_id', component: ManageClubClassificationsComponent , canActivate: [Auth24Guard]},
+      
+      {path: 'club/tournaments', component: ClubTournamentsComponent , canActivate: [Auth24Guard]},
+      {path: 'club/tournaments/manage', component: ManageclubTournamentsComponent , canActivate: [Auth24Guard]},
+      {path: 'club/tournaments/manage/:_id', component: ManageclubTournamentsComponent , canActivate: [Auth24Guard]},
+      
+      {path: 'users', component: UsersComponent , canActivate: [Auth24Guard]},
+      {path: 'users/manage', component: ManageUsersComponent , canActivate: [Auth24Guard]},
+      {path: 'users/manage/:_id', component: ManageUsersComponent , canActivate: [Auth24Guard]},
       
       // {path: 'club/manage', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},
       // {path: 'club/manage/:_id', component: ManageOrganizerClassificationsComponent , canActivate: [Auth24Guard]},     

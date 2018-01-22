@@ -300,9 +300,13 @@ export class ManageClubComponent implements OnInit {
     this.clubForm.patchValue({address:e.formatted_address});
     this.clubForm.patchValue({phonenumber:e.formatted_phone_number});
     this.clubForm.patchValue({website:e.website});
+    console.log(e.address_components);
     e.address_components.forEach((add)=>{
       if (add.types[0] == "postal_code") {
         this.clubForm.patchValue({zipcode:add.long_name});
+      } 
+      else{
+        this.clubForm.patchValue({zipcode:''});
       } 
       if (add.types[0] == "country") {
         this.clubForm.patchValue({country:add.long_name});

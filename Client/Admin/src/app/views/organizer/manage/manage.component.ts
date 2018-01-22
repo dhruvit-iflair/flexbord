@@ -30,6 +30,12 @@ export class ManageOrganizerComponent implements OnInit {
   public logo2: any;
   public _id: any;
   public orgForm : FormGroup;
+  public fileSupport:Boolean = false;
+  public fileSizeMin:Boolean = false;
+  public fileSizeMax:Boolean = false;
+  public fileSupport2:Boolean = false;
+  public fileSizeMin2:Boolean = false;
+  public fileSizeMax2:Boolean = false;
   // public value : any = 9;
   // public value2 : Array<string> =["0: 1", "1: 2", "2: 3", "3: 4", "4: 5"];
   constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute) {
@@ -41,7 +47,7 @@ export class ManageOrganizerComponent implements OnInit {
       address: ["",[Validators.required]],
       building: [""],
       street: [""],
-      city: [""],
+      city: ["",[Validators.required]],
       state: [""],
       country: [""],
       zipcode: [""],
@@ -50,10 +56,10 @@ export class ManageOrganizerComponent implements OnInit {
       // phonenumber: [null,[Validators.required,Validators.minLength(10),Validators.maxLength(12)]],
       phonenumber: [null],
       sports: [null,[Validators.required]],
-      capacity:  [null,[Validators.required]],
+      capacity:  [0,[Validators.required]],
       placePic: [null],
       affilated:  ["",Validators.required],
-      affilation:  ["",[Validators.required]],
+      affilation:  ["closed",[Validators.required]],
       registered: [null]
     })
    }
@@ -131,7 +137,9 @@ export class ManageOrganizerComponent implements OnInit {
   readUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
-      if (file.type == 'image/jpeg' || file.type == 'image/png' && file.size < 2000000) {
+      this.fileSupport = false;this.fileSizeMin = false; this.fileSizeMax = false; 
+      if (file.type == 'image/jpeg' && file.size < 2000000 && file.size > 150000 || file.type == 'image/png' && file.size < 2000000 && file.size > 150000 ) {
+      this.fileSupport = false;this.fileSizeMin = false; this.fileSizeMax = false; 
         let up = new FormData();
         up.append('logo', file);
         this.http.post(environment.api+"/organizer/logo",up)  
@@ -151,10 +159,16 @@ export class ManageOrganizerComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
       } 
       else {
-        if ( file.size > 2000000) {
+        if (file.type == 'image/jpeg' &&  file.size > 2000000 || file.type == 'image/png'   &&  file.size > 2000000) {
+          this.fileSizeMax = true; 
           this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');                        
-          
-        } else {
+        } 
+        else if (file.type == 'image/jpeg' && file.size < 150000 || file.type == 'image/png' && file.size < 150000) {
+          this.toastr.warning('Image should be more than 150Kb!! ', 'Warning');                        
+          this.fileSizeMin = true;           
+        }
+        else {
+          this.fileSupport = true;
           this.toastr.error('Only .jpg, .png, .jpeg type of Image supported ', 'Error');                                  
         }
       }    
@@ -194,7 +208,9 @@ export class ManageOrganizerComponent implements OnInit {
   picPlaceUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
-      if (file.type == 'image/jpeg' || file.type == 'image/png' && file.size < 2000000) {
+      this.fileSupport2 = false;this.fileSizeMin2 = false; this.fileSizeMax2 = false; 
+      if (file.type == 'image/jpeg' && file.size < 2000000 && file.size > 150000 || file.type == 'image/png' && file.size < 2000000 && file.size > 150000 ) {
+      this.fileSupport2 = false;this.fileSizeMin2 = false; this.fileSizeMax2 = false; 
         let file = event.target.files[0];
         let up = new FormData();
         up.append('placePic', file);
@@ -212,10 +228,16 @@ export class ManageOrganizerComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
       } 
       else {
-        if ( file.size > 2000000) {
+        if (file.type == 'image/jpeg' &&  file.size > 2000000 || file.type == 'image/png'   &&  file.size > 2000000) {
+          this.fileSizeMax2 = true; 
           this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');                        
-          
-        } else {
+        } 
+        else if (file.type == 'image/jpeg' && file.size < 150000 || file.type == 'image/png' && file.size < 150000) {
+          this.toastr.warning('Image should be more than 150Kb!! ', 'Warning');                        
+          this.fileSizeMin2 = true;           
+        }
+        else {
+          this.fileSupport2 = true;
           this.toastr.error('Only .jpg, .png, .jpeg type of Image supported ', 'Error');                                  
         }
       }    

@@ -28,10 +28,10 @@
               <td>{{s.start_date | dateFormatPipe :'dd/MM/yy hh:mm a'}} </td>
               <td>{{s.end_date | dateFormatPipe :'dd/MM/yy hh:mm a'}}</td>
               <td>
-                <a class="btn btn_green tab_btn"  routerLink="/seasons/manage/{{s._id}}" >
+                <a class="btn btn_green tab_btn"  routerLink="/seasons/manage/{{s._id}}" title='Edit' >
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
-                <a class="btn btn_red tab_btn" (click)="delOrg(s._id)">
+                <a class="btn btn_red tab_btn" (click)="delOrg(s._id)"  title="Delete">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
               </td>

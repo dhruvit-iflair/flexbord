@@ -62,17 +62,28 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
   addVal(){
     this.value.push('');
   }
+  maxLengthCheck(object,i)
+  {
+    if (object.value[i] > 999){
+      object.value[i] = 0;
+    }
+  }
   saveVal(){
     // //console.log(this.value);
     var p = true ;
+    var valueArr = this.value.map(function(item){ return item });
+    var isDuplicate = this.value.some(function(item, idx){ 
+        return valueArr.indexOf(item) != idx 
+    });
+    console.log(isDuplicate);
     for (let i = 0; i < this.value.length; i++) {
       const element = this.value[i];
-      if(element == ''){
+      if(element == '' || element < 0){
           p = false;
       }
     }
     this.claForm.patchValue({value:this.value});
-    if (this.claForm.valid && p) {
+    if (this.claForm.valid && p && !isDuplicate) {
       var orid=localStorage.getItem('orgid');
     this.claForm.value.organizer=orid;
       if (this._id) {
@@ -90,9 +101,9 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
                   },(error)=>{
                   this.toastr.error('Error!! Something went wrong! try again later', 'Error');
                 });
-      } 
+      }     
       else if (this.claForm.value.value[0] == ''){
-            this.toastr.warning('One values is required', 'Warning');    
+        this.toastr.warning('One values is required', 'Warning');    
       }
       else {
         this.http.post(environment.api+'/organizerClassifications',this.claForm.value)
@@ -110,6 +121,9 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
                 this.toastr.error('Error!! Something went wrong! try again later', 'Error');
               });  
       }
+    }
+    else if(isDuplicate){
+      this.toastr.warning('Duplicate Value not allowed', 'Warning');    
     }
     else{
       this.toastr.warning('Please fill up all the values', 'Warning');

@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="container">
+      <div class="col-md-9">
+          <label><h2>Club Tournament</h2></label>
+      </div>
+      <div class="col-md-3 text-right">
+          <button class="btn btn_green" [routerLink]="['/club/tournaments/manage']">New Tournaments</button>                         
+      </div>
+
+      <div class="col-md-12">
+         <br>
+        <table id="cmpt" datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
+            <thead>
+              <tr>
+                <th>_ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Sport</th>
+                <th>Season</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let r of rows" >
+                <td style="display:none">{{r._id}}</td>
+                <td>{{r.name}}</td>
+                <td>{{r.description}}</td>
+                <td>{{r.sports}}</td>
+                <td>{{r.clubSeasons.name}}</td>
+                <td>
+                  <a class="btn btn_green tab_btn"  routerLink="/club/tournaments/manage/{{r._id}}" >
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </a>
+                  <a class="btn btn_red tab_btn" (click)="delTour(r._id)">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+  </div>
+</div>

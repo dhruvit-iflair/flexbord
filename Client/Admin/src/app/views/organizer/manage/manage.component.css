@@ -76,3 +76,6 @@ ul.dropdown-menu.col-md-8 {
     font-size: 22px;
     width: 97%;
 }
+input.no_border.text-col-md-3 {
+    border: 0px;
+}

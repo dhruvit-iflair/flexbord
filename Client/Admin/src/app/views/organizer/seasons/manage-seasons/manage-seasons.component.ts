@@ -7,6 +7,7 @@ import { Router ,ActivatedRoute} from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup,FormControl,Validators,FormBuilder } from "@angular/forms";
 import { start } from 'repl';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-manage-seasons',
@@ -19,8 +20,22 @@ export class ManageSeasonsComponent implements OnInit {
   public _id: any;
   public seasonForm : FormGroup;
   public start_date = new Date();
+  minDate = new Date();
+  public maxDate = new Date();
+  public startTime :Date =  new Date();
+  public endTime : Date =  new Date();
+  public endMinDate = new Date();
+
+  public bsConfig: Partial<BsDatepickerConfig>;
+
   constructor(public fb: FormBuilder,private toastr : ToastrService,public http:Http,private router: Router,public activeRouter:ActivatedRoute,public location:Location) {
     // this.start_ate = new Date();
+    this.bsConfig = {
+      containerClass: 'theme-orange',
+      dateInputFormat :'DD/MM/YY',
+      showWeekNumbers:false
+    };
+    this.maxDate.setDate(this.maxDate.getDate() + 365);
     this.seasonForm = this.fb.group({
       'name' : ["",[Validators.required]],
       'start_date' : [this.start_date,[Validators.required]],
@@ -40,19 +55,22 @@ export class ManageSeasonsComponent implements OnInit {
      return {};
     }
   }
- 
+  setTimeValue(startTime){ this.startTime = startTime; }
+  endTimeValue(endTime){ this.endTime = endTime; }
   addSesons(){
     // //console.log(this.seasonForm.value);
-    var h = new Date().getHours();
-    var m = new Date().getMinutes();
+    var hs = new Date(this.startTime).getHours();
+    var ms = new Date(this.startTime).getMinutes();    
+    var he = new Date(this.endTime).getHours();
+    var me = new Date(this.endTime).getMinutes();
     var s = new Date(this.seasonForm.value.start_date);
-    s.setHours(h);
-    s.setMinutes(m);
+    s.setHours(hs);
+    s.setMinutes(ms);
     var e = new Date(this.seasonForm.value.end_date);
-    e.setHours(h);
-    e.setMinutes(m); 
-    this.seasonForm.value.start_date= s;
-    this.seasonForm.value.end_date= e
+    e.setHours(he);
+    e.setMinutes(me); 
+    this.seasonForm.patchValue({start_date : s});
+    this.seasonForm.patchValue({end_date : e});
     if (this.seasonForm.valid) {
     var orid=localStorage.getItem('orgid');
     this.seasonForm.value.organizer=orid;
@@ -74,6 +92,14 @@ export class ManageSeasonsComponent implements OnInit {
 
       } 
       else {
+        var s = new Date(this.seasonForm.value.start_date);
+        s.setHours(this.startTime.getHours());
+        s.setMinutes(this.startTime.getMinutes());
+        var e = new Date(this.seasonForm.value.end_date);
+        e.setHours(this.endTime.getHours());
+        e.setMinutes(this.endTime.getMinutes()); 
+        this.seasonForm.value.start_date = s;
+        this.seasonForm.value.end_date = e;
         this.http.post(environment.api+'/seasons',this.seasonForm.value)
                 .subscribe((res)=>{
                   var fagdf = res.json();
@@ -95,6 +121,7 @@ export class ManageSeasonsComponent implements OnInit {
     this.location.back();
   }
   ngOnInit() {
+    this.seasonForm.controls['start_date'].valueChanges.subscribe((data) => { this.endMinDate.setDate(this.seasonForm.value.start_date + 1)});
     this.sub = this.activeRouter.params.subscribe(params => {
       // //console.log(params._id);
       if (params._id) {
@@ -104,13 +131,15 @@ export class ManageSeasonsComponent implements OnInit {
                    var fagdf = res.json();
                    //console.log(fagdf);
                  if(fagdf.length > 0){
-                   let ss = new Date(fagdf[0].start_date);
-                   let es = new Date(fagdf[0].end_date);
+                   var ss = new Date(fagdf[0].start_date);
+                   var es = new Date(fagdf[0].end_date);
                   this.seasonForm = this.fb.group({
                       'name' : [fagdf[0].name,[Validators.required]],
                       'start_date' : [ss,[Validators.required]],
                       'end_date' : [es,[Validators.required]]
-                    },{validator:this.dateLessThan('start_date', 'end_date')})
+                    },{validator:this.dateLessThan('start_date', 'end_date')});
+                    this.startTime = fagdf[0].start_date;
+                    this.endTime = fagdf[0].end_date;
                  }
                  else {
                     this.toastr.error('Error!! No Seasons found!', 'Error');

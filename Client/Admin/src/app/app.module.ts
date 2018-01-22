@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Auth24Guard } from "./components/common/guard/auth24.guard";
-import { PaginationModule ,ModalModule} from "ngx-bootstrap";
+import { PaginationModule ,ModalModule,BsDatepickerModule,TimepickerModule} from "ngx-bootstrap";
 import { DataTablesModule } from 'angular-datatables';
 
 // App views
@@ -53,6 +53,13 @@ import { ClubSeasonsComponent } from './views/club/club-seasons/club-seasons.com
 import { ManageClubSeasonsComponent } from './views/club/club-seasons/manage-club-seasons/manage-club-seasons.component';
 import { ClubClassificationsComponent } from './views/club/club-classifications/club-classifications.component';
 import { ManageClubClassificationsComponent } from './views/club/club-classifications/manage-club-classifications/manage-club-classifications.component';
+import { ClubTournamentsComponent } from './views/club/club-tournaments/club-tournaments.component';
+import { ManageclubTournamentsComponent } from './views/club/club-tournaments/manageclub-tournaments/manageclub-tournaments.component';
+import { UsersComponent } from './views/users/users.component';
+import { ManageUsersComponent } from './views/users/manage-users/manage-users.component';
+import { UserService } from "./components/services/users";
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+
 
 @NgModule({
   declarations: [
@@ -84,6 +91,10 @@ import { ManageClubClassificationsComponent } from './views/club/club-classifica
     ManageClubSeasonsComponent,
     ClubClassificationsComponent,
     ManageClubClassificationsComponent,
+    ClubTournamentsComponent,
+    ManageclubTournamentsComponent,
+    UsersComponent,
+    ManageUsersComponent,
   ],
   imports: [
     // Angular modules
@@ -99,7 +110,10 @@ import { ManageClubClassificationsComponent } from './views/club/club-classifica
       timeOut: 3500,
     }),
     PaginationModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     DataTablesModule.forRoot(),
+    TimepickerModule.forRoot(),
+    MultiselectDropdownModule,
     // Views
     MainViewModule,
     MinorViewModule,
@@ -112,7 +126,7 @@ import { ManageClubClassificationsComponent } from './views/club/club-classifica
 
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [Auth24Guard,ClubService],
+  providers: [Auth24Guard,ClubService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

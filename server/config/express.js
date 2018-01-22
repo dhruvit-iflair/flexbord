@@ -45,6 +45,7 @@ module.exports = function (db) {
     require('../app/routes/clubmembers')(app);
     require('../app/routes/clubSeasons')(app);
     require('../app/routes/club-classifications')(app);
+    require('../app/routes/clubTournaments')(app);
 
     
 

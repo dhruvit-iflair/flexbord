@@ -31,7 +31,7 @@ export class ClubComponent implements OnInit {
     this.dtOptions = {
       pagingType: 'simple_numbers',
       order: [[0, 'desc']],
-      columns: [{ "visible": false }, null, null, null, null, null, { "orderable": false }]
+      columns: [{ "visible": false }, { "orderable": false }, null, null, null, null, { "orderable": false }]
     }
   }
   ngOnInit(): void {
@@ -65,6 +65,10 @@ export class ClubComponent implements OnInit {
   movetoclassification(idw) {
     localStorage.setItem('clubid', idw);
     this.router.navigate(['/club/classifications']);
+  }
+  movetotournament(idw) {
+    localStorage.setItem('clubid', idw);
+    this.router.navigate(['/club/tournaments']);
   }
   delClub(id){
       var del = confirm("Confirm to delete this Club!");

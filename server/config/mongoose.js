@@ -32,6 +32,7 @@ module.exports = function () {
     require('../app/models/clubmembers');
     require('../app/models/clubSeasons');
     require('../app/models/club-classifications');
+    require('../app/models/clubTournaments');
 
     return db;
 }

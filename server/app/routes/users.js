@@ -9,6 +9,8 @@ module.exports=function(app){
     usersRoute.route('/')
     .get(users.list)
     .post(users.create);
+    usersRoute.route('/listonly/:id')
+    .get(users.listOnly);
     usersRoute.route('/upload')
     .post(users.upload);
     usersRoute.route('/verify')
