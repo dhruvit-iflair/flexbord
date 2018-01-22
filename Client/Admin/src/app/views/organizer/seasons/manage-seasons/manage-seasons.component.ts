@@ -22,6 +22,7 @@ export class ManageSeasonsComponent implements OnInit {
   public start_date = new Date();
   minDate = new Date();
   public maxDate = new Date();
+  public maxDate2 = new Date();
   public startTime :Date =  new Date();
   public endTime : Date =  new Date();
   public endMinDate = new Date();
@@ -36,6 +37,7 @@ export class ManageSeasonsComponent implements OnInit {
       showWeekNumbers:false
     };
     this.maxDate.setDate(this.maxDate.getDate() + 365);
+    this.maxDate2.setDate(this.maxDate2.getDate() + 365);
     this.seasonForm = this.fb.group({
       'name' : ["",[Validators.required]],
       'start_date' : [this.start_date,[Validators.required]],
