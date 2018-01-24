@@ -3,7 +3,7 @@
       <div class="col-md-10">
           <label><h2>Player Status</h2></label>
       </div>
-      <div class="col-md-2 text-right" >
+      <div class="col-md-2 text-right" *ngIf="hasCreatePerm" >
           <button class="btn btn_green" [routerLink]="['/sports/playerstatus/manage']">New Status</button>                         
       </div>
       <div class="col-md-12" id="tabl">
@@ -26,10 +26,10 @@
               <td>{{m.colorbtndown | firstcapitalize}}</td>
               <td>{{m.hidefromscoreboard | firstcapitalize}}</td>
               <td>
-                <a class="btn btn_green tab_btn"  routerLink="/sports/playerstatus/manage/{{m._id}}" >
+                <a class="btn btn_green tab_btn"  routerLink="/sports/playerstatus/manage/{{m._id}}" *ngIf="hasEditPerm" >
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
-                <a class="btn btn_red tab_btn" (click)="deletemember(m._id)">
+                <a class="btn btn_red tab_btn" (click)="deletemember(m._id)" *ngIf="hasDeletePerm">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
               </td>

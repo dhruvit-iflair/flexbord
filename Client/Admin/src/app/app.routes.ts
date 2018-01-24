@@ -43,6 +43,8 @@ import { ClubTournamentsComponent } from './views/club/club-tournaments/club-tou
 import { ManageclubTournamentsComponent } from './views/club/club-tournaments/manageclub-tournaments/manageclub-tournaments.component';
 import { UsersComponent } from './views/users/users.component';
 import { ManageUsersComponent } from './views/users/manage-users/manage-users.component';
+import { FoulsComponent } from './views/sports/fouls/fouls.component';
+import { ManagefoulsComponent } from './views/sports/fouls/managefouls/managefouls.component';
 
 export const ROUTES:Routes = [
   // Main redirect
@@ -121,6 +123,10 @@ export const ROUTES:Routes = [
       {path: 'sports/scores', component: ScoresComponent , canActivate: [Auth24Guard]},
       {path: 'sports/scores/manage', component: ManagescoreComponent, canActivate: [Auth24Guard]},
       {path: 'sports/scores/manage/:_id', component: ManagescoreComponent , canActivate: [Auth24Guard]},
+
+      {path: 'sports/fouls', component: FoulsComponent , canActivate: [Auth24Guard]},
+      {path: 'sports/fouls/manage', component: ManagefoulsComponent , canActivate: [Auth24Guard]},
+      {path: 'sports/fouls/manage/:_id', component: ManagefoulsComponent , canActivate: [Auth24Guard]},
     ]
   },
   {

@@ -10,6 +10,10 @@ export const modulerstack = {
         'ClubTeams',
         'ClubSeasons',
         'ClubClassifications',
-        'Sport'
+        'Sport',
+        'SportPoints',
+        'SportPlayerstatus',
+        'SportScores',
+        'SportFouls'
     ]
 }

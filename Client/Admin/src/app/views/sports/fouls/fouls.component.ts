@@ -6,13 +6,13 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { AccessorService } from "../../../components/common/accessor.service";
 
 @Component({
-  selector: 'app-scores',
-  templateUrl: './scores.component.html',
-  styleUrls: ['./scores.component.css']
+  selector: 'app-fouls',
+  templateUrl: './fouls.component.html',
+  styleUrls: ['./fouls.component.css']
 })
-export class ScoresComponent implements OnInit {
+export class FoulsComponent implements OnInit {
 
-  scores; dtOptions; sptid;
+  foulsdata; dtOptions; sptid;
   public dataRenderer = false;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
 
@@ -26,11 +26,11 @@ export class ScoresComponent implements OnInit {
     this.dtOptions = {
       pagingType: 'simple_numbers',
       order: [[0, 'desc']],
-      columns: [{ "visible": false }, null, null, null, { "orderable": false }]
+      columns: [{ "visible": false }, null, null, null,null,null, { "orderable": false }]
     }
-    this.http.get(environment.api + '/sportscores/bysport/' + this.sptid)
+    this.http.get(environment.api + '/sportfouls/bysport/' + this.sptid)
       .subscribe((res) => {
-        this.scores = res;
+        this.foulsdata = res;
         this.dataRenderer = true;
       });
     this.checkpermissions();
@@ -38,25 +38,25 @@ export class ScoresComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
-      if (Object.keys(perms[z]).toString().toLowerCase() == "sportscores1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "sportfouls1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }
-      if (Object.keys(perms[z]).toString().toLowerCase() == "sportscores2" && perms[z][Object.keys(perms[z]).toString()] == true) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "sportfouls2" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasEditPerm = true;
       }
-      if (Object.keys(perms[z]).toString().toLowerCase() == "sportscores3" && perms[z][Object.keys(perms[z]).toString()] == true) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "sportfouls3" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasDeletePerm = true;
       }
     }
   }
   deletemember(id) {
-    var del = confirm("Delete this ranking score?");
+    var del = confirm("Delete this Foul?");
     if (del) {
-      this.http.delete(environment.api + "/sportscores/" + id)
+      this.http.delete(environment.api + "/sportfouls/" + id)
         .subscribe((res) => {
           if (res) {
             this.dataRenderer = false;
-            this.toastr.success('Score Deleted Successfully', 'Success');
+            this.toastr.success('Foul Deleted Successfully', 'Success');
           }
           this.gotcha();
         }, (error) => {

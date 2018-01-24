@@ -71,7 +71,8 @@ import { UsersComponent } from './views/users/users.component';
 import { ManageUsersComponent } from './views/users/manage-users/manage-users.component';
 import { UserService } from "./components/services/users";
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
-
+import { FoulsComponent } from './views/sports/fouls/fouls.component';
+import { ManagefoulsComponent } from './views/sports/fouls/managefouls/managefouls.component';
 
 
 @NgModule({
@@ -118,6 +119,8 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
     ManageclubTournamentsComponent,
     UsersComponent,
     ManageUsersComponent,
+    FoulsComponent,
+    ManagefoulsComponent
   ],
   imports: [
     // Angular modules

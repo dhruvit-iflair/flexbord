@@ -22,10 +22,18 @@
       <table style="width:99%;margin-top:1.5%;margin-left:1%;" *ngIf="accessor.roles">
         <thead style="font-size: large;">
           <th style="width:20%;">Modules</th>
-          <th style="width:10%;" class="text-col-md-3 col-md-3">View</th>
-          <th style="width:10%;" class="text-col-md-3 col-md-3">Create</th>
-          <th style="width:10%;" class="text-col-md-3 col-md-3">Edit</th>
-          <th style="width:10%;" class="text-col-md-3 col-md-3">Delete</th>
+          <th style="width:10%;" class="text-col-md-3 col-md-3">
+            <input class="text-col-md-3" type="checkbox" (ngModelChange)="checkviewperm()" [(ngModel)]="checkview" [ngModelOptions]="{standalone: true}">            View
+          </th>
+          <th style="width:10%;" class="text-col-md-3 col-md-3">
+            <input class="text-col-md-3" type="checkbox" (ngModelChange)="checkcreateperm()" [(ngModel)]="checkcreate" [ngModelOptions]="{standalone: true}">            Create
+          </th>
+          <th style="width:10%;" class="text-col-md-3 col-md-3">
+            <input class="text-col-md-3" type="checkbox" (ngModelChange)="checkeditperm()" [(ngModel)]="checkedit" [ngModelOptions]="{standalone: true}">            Edit
+          </th>
+          <th style="width:10%;" class="text-col-md-3 col-md-3">
+            <input class="text-col-md-3" type="checkbox" (ngModelChange)="checkdelperm()" [(ngModel)]="checkdel" [ngModelOptions]="{standalone: true}">            Delete
+          </th>
         </thead>
         <tbody>
           <tr *ngFor="let i of modules;index as x;">

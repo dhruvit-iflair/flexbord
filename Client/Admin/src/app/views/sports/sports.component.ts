@@ -21,7 +21,7 @@ export class SportsComponent implements OnInit {
   public dataRenderer = false;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public modules = this.accr.getmodules();
-  public hasTeamsPerm;hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;
+  public hasTeamsPerm;hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;hasPointsPerm;hasStatusPerm;hasScoresPerm;hasFoulsPerm;
   constructor(public http: Http, private router: Router, private toastr: ToastrService, private accr: AccessorService) { }
   ngAfterContentInit() {
     this.dtOptions = {
@@ -50,6 +50,18 @@ export class SportsComponent implements OnInit {
       }
       if (Object.keys(perms[z]).toString().toLowerCase() == "sport3" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasDeletePerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "sportpoints0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasPointsPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "sportplayerstatus0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasStatusPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "sportscores0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasScoresPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "sportfouls0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasFoulsPerm = true;
       }
     }
   }

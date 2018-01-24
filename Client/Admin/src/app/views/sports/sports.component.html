@@ -35,18 +35,18 @@
                      <a class="btn btn_red tab_btn" (click)="delClub(item._id)" title="Delete" *ngIf="hasDeletePerm">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                       </a>
-                      <a class="btn btn_1 tab_btn" (click)="movetopoints(item._id)" title="Points">
+                      <a class="btn btn_1 tab_btn" (click)="movetopoints(item._id)" title="Points" *ngIf="hasPointsPerm">
                         <i class="fa fa-trophy" aria-hidden="true"></i>
                       </a>
-                      <a class="btn btn_green tab_btn" (click)="movetostatus(item._id)" title="Player Status">
+                      <a class="btn btn_green tab_btn" (click)="movetostatus(item._id)" title="Player Status" *ngIf="hasStatusPerm">
                         <i class="fa fa-certificate" aria-hidden="true"></i>
                       </a>
-                      <a class="btn btn_2 tab_btn" (click)="movetoscores(item._id)" title="Ranking Scores">
+                      <a class="btn btn_2 tab_btn" (click)="movetoscores(item._id)" title="Ranking Scores" *ngIf="hasScoresPerm">
                         <i class="fa fa-star" aria-hidden="true"></i>
                       </a>
-                      <!--<a class="btn btn_red tab_btn" (click)="movetofouls(item._id)" title="Fouls">
+                      <a class="btn btn_red tab_btn" (click)="movetofouls(item._id)" title="Fouls" *ngIf="hasFoulsPerm">
                         <i class="fa fa-wheelchair" aria-hidden="true"></i>
-                      </a>-->
+                      </a>
                     </td>
                   </tr>
                 </tbody>

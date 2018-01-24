@@ -1,34 +1,34 @@
 <div class="row">
   <div class="container">
       <div class="col-md-10">
-          <label><h2>Points</h2></label>
+          <label><h2>Fouls</h2></label>
       </div>
       <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
-          <button class="btn btn_green" [routerLink]="['/sports/points/manage']">New Point</button>                         
+          <button class="btn btn_green" [routerLink]="['/sports/fouls/manage']">New Foul</button>                         
       </div>
       <div class="col-md-12" id="tabl">
         <table datatable  [dtOptions]="dtOptions" class="row-border hover" onchange="gotcha()" *ngIf="dataRenderer">
           <thead>
             <tr>
               <th>_id</th>
-              <th>Name of Point</th>
-              <th>Value of Point</th>
-              <th>Color button up</th>
-              <th>Color button down</th>
-              <th>Hide from Scoreboard</th>
+              <th>Name of Foul</th>
+              <th>Value of Foul</th>
+              <th>Player</th>
+              <th>Coach</th>
+              <th>Team</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let m of points">
+            <tr *ngFor="let m of foulsdata">
               <td style="display:none;">{{m._id}}</td>
-              <td>{{m.nameofpoint | firstcapitalize}} </td>
-              <td>{{m.valueofpoint | firstcapitalize}} </td>
-              <td>{{m.colorbtnup | firstcapitalize}}</td>
-              <td>{{m.colorbtndown | firstcapitalize}}</td>
-              <td>{{m.hidefromscoreboard | firstcapitalize}}</td>
+              <td>{{m.nameoffoul | firstcapitalize}} </td>
+              <td>{{m.valueoffoul}}</td>
+              <td>{{m.isplayer | firstcapitalize}}</td>
+              <td>{{m.iscoach | firstcapitalize}}</td>
+              <td>{{m.isteam | firstcapitalize}}</td>              
               <td>
-                <a class="btn btn_green tab_btn"  routerLink="/sports/points/manage/{{m._id}}" *ngIf="hasEditPerm" >
+                <a class="btn btn_green tab_btn"  routerLink="/sports/fouls/manage/{{m._id}}" *ngIf="hasEditPerm">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
                 <a class="btn btn_red tab_btn" (click)="deletemember(m._id)" *ngIf="hasDeletePerm">
