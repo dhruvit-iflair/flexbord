@@ -45,7 +45,7 @@ permsCtrl.prototype.getbyrole = function (req, res) {
 }
 
 permsCtrl.prototype.update = function (req, res) {
-    Perms.findByIdAndUpdate({ _id: req.params.id }, req.body, function (er, dt) {
+    Perms.findByIdAndUpdate({ _id: req.params.id }, { $set: updateObject },{new:true}, function (er, dt) {
         if (er) {
             console.log('error occured..' + er);
         }
