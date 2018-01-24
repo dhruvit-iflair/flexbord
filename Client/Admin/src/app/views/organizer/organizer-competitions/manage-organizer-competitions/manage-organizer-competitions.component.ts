@@ -71,7 +71,7 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
                 // }
                 },(error)=>{
                     this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-                    this.router.navigate(['/competitions']);
+                    this.router.navigate(['/organizer/competitions']);
      });
      this.http.get(environment.api + '/organizerClassifications')
               .subscribe((res)=>{
@@ -90,7 +90,7 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
                 //   }
                 },(error)=>{
                       this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-                      this.router.navigate(['/competitions']);
+                      this.router.navigate(['/organizer/competitions']);
       });
     
     this.sub = this.activeRouter.params.subscribe(params => {
@@ -121,7 +121,7 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
                  }
                  else {
                       this.toastr.error('Error!! No Competitions found!', 'Error');
-                      this.router.navigate(['/competitions']);
+                      this.router.navigate(['/organizer/competitions']);
                   }
                  },(error)=>{
                       this.toastr.error('Error!! Something went wrong! try again later', 'Error');
@@ -150,7 +150,7 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
                     var fagdf = res.json();
                     if(res){
                       this.toastr.success('Competitions updated successfully', 'Success');
-                      this.router.navigate(['/competitions']);
+                      this.router.navigate(['/organizer/competitions']);
                     }
                     else {
                         this.toastr.error('Error!!Something went wrong! try again later!', 'Error');
@@ -165,7 +165,7 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
                   var fagdf = res.json();
                   if(res){
                     this.toastr.success('Competitions saved successfully', 'Success');
-                    this.router.navigate(['/competitions']);
+                    this.router.navigate(['/organizer/competitions']);
                   }
                   else {
                       this.toastr.error('Error!!Something went wrong! try again later!', 'Error');

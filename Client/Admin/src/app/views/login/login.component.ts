@@ -19,6 +19,7 @@ export class loginComponent {
   ngOnInit() {
     if (localStorage.getItem('uToken')) {
       localStorage.removeItem('uToken');
+      localStorage.clear();
       // var alford = JSON.parse(localStorage.getItem('uToken'));
       // if (alford.user.isVerified == false) {
       //   this.toastr.warning('Account Not Verified', 'Please verify your Account.');

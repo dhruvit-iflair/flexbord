@@ -300,35 +300,55 @@ export class ManageClubComponent implements OnInit {
     this.clubForm.patchValue({address:e.formatted_address});
     this.clubForm.patchValue({phonenumber:e.formatted_phone_number});
     this.clubForm.patchValue({website:e.website});
-    console.log(e.address_components);
-    e.address_components.forEach((add)=>{
-      if (add.types[0] == "postal_code") {
-        this.clubForm.patchValue({zipcode:add.long_name});
-      } 
-      else{
-        this.clubForm.patchValue({zipcode:''});
-      } 
-      if (add.types[0] == "country") {
-        this.clubForm.patchValue({country:add.long_name});
-      } 
-      if (add.types[0] == "administrative_area_level_1") {
-        this.clubForm.patchValue({state:add.long_name});
-      }
-      if (add.types[0] == "administrative_area_level_2") {
-        this.clubForm.patchValue({city:add.long_name});
-      } 
-      if (add.types[0] == "route") {
-        this.clubForm.patchValue({street:add.long_name});
-      } 
-      else {
-        var u = e.formatted_address.split(',');
-        var b = u[0] + ', ' + u[1]; 
-        this.clubForm.patchValue({building: b});
-      }
-      
-    });
-    // this.clubForm.value.address = e.formatted_address;
-    // this.clubForm.value.phonenumber = e.formatted_phone_number;
+    var address = { zipcode:'', country:'', state:'', city:'', street:'', building:'' }
+     for (var i = 0; i < e.address_components.length; i++) {
+          var add = e.address_components[i].types[0];
+          if (add == "postal_code") {
+            address.zipcode = e.address_components[i].long_name;
+          } 
+          else if (add == "country") {
+            address.country = e.address_components[i].long_name;
+          } 
+          else if (add == "administrative_area_level_1") {
+            address.state = e.address_components[i].long_name;
+          }
+          else if (add == "administrative_area_level_2") {
+            address.city = e.address_components[i].long_name;
+          } 
+          else if (add == "route") {
+            address.street = e.address_components[i].long_name;
+          } 
+          else {
+            var st = e.formatted_address.split(',');
+            if (st[0] && st[1] != undefined) {
+              address.building = st[0]+ ", " +st[1];
+            } else {
+              address.building = st[0];   
+              
+            }
+          //   for(var j = 0; j < 6 ;j++){
+          //     if (st[0] == " "+ e.address_components[i].long_name || st[1] == " "+ e.address_components[i].long_name) {
+          //       isSame = true;
+          //       if (st[0] == " "+ e.address_components[i].long_name) {
+          //         isSZeroSame = true;
+          //       }
+          //       if (st[1] == " "+ e.address_components[i].long_name) {
+          //         isSOneSame = true;
+          //       }
+          //     }
+          //     if (j == 5 && !isSOneSame) {
+          //       address.building = st[0] + ', ' + st[1];
+          //     }
+          //     else if (j == 5 && !isSZeroSame ) {
+          //       address.building = st[0];                  
+          //     }
+          // }
+          }
+          if (i == e.address_components.length -1) {
+            this.clubForm.patchValue(address);
+          }
+    }
+    
   }
   picPlaceUrl(event:any) {
     if (event.target.files && event.target.files[0]) {

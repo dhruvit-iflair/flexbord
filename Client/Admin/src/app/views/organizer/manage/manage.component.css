@@ -28,7 +28,7 @@ input.logo_upload {
 }
 img.image_display {
     width: 100px;
-    border-radius: 100px;
+    
     height: 100px;
 }
 #search_places {
@@ -78,4 +78,7 @@ ul.dropdown-menu.col-md-8 {
 }
 input.no_border.text-col-md-3 {
     border: 0px;
+}
+button.btn.btn-lg.dropdown-toggle.col-md-12 {
+    padding: 0;
 }

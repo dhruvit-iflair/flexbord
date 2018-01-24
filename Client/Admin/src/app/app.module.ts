@@ -35,6 +35,8 @@ import { dateFormatPipe } from "./components/pipes/dateFormate";
 import { OrgmembersComponent } from './views/organizer/orgmembers/orgmembers.component';
 import { MemberComponent } from './views/organizer/orgmembers/member/member.component';
 import { AccessorService } from "./components/common/accessor.service";
+import { BreadCrumbService } from "./components/services/bread-crumb";
+import {Ng5BreadcrumbModule,BreadcrumbService} from 'ng5-breadcrumb';
 
 import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
 import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
@@ -61,7 +63,7 @@ import { UsersComponent } from './views/users/users.component';
 import { ManageUsersComponent } from './views/users/manage-users/manage-users.component';
 import { UserService } from "./components/services/users";
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
-
+import { ProfileViewComponent } from './views/profile/profile-view/profile-view.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +100,7 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
     ManageclubTournamentsComponent,
     UsersComponent,
     ManageUsersComponent,
+    ProfileViewComponent,
   ],
   imports: [
     // Angular modules
@@ -127,9 +130,10 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
     // Modules
     LayoutsModule,
 
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    Ng5BreadcrumbModule.forRoot(),
   ],
-  providers: [Auth24Guard,ClubService,UserService,AccessorService],
+  providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

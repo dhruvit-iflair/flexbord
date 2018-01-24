@@ -22,7 +22,12 @@
                         <input type="password" name="cpwd" class="form-control" [ngClass]="(matched)?'ng-invalid':''" [(ngModel)]="Ruser.cpassword" placeholder="Confirm Password" required="" (change)="pwdchecker()">
                     </div>
                     <div class="form-group">
-                        <div class="checkbox i-checks"><label><input name="isagr" [(ngModel)]="Ruser.isAgreemented" type="checkbox"><i></i> Agree the terms and policy </label></div>
+                        <div class="bgcheckbox">
+                            <label>
+                                <input name="isagr" [(ngModel)]="Ruser.isAgreemented" type="checkbox">
+                                <span> Agree the terms and policy</span>
+                            </label>
+                        </div>
                     </div>
                     <button type="submit" (click)="Registeration(Ruser)" class="btn btn-primary block full-width m-b">Register</button>
 
