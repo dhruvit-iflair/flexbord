@@ -1,0 +1,6 @@
+input[type="checkbox"]{
+    height: 15px;
+}
+.col-md-4{
+    width: auto !important;
+}

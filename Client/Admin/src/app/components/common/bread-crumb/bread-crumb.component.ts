@@ -4,7 +4,6 @@ import { BreadCrumb } from "../../class/breadCrumb";
 // import { BreadCrumbService } from "../../services/bread-crumb";
 import { BreadCrumbList } from "../bread-crumb";
 import { BreadcrumbService } from 'ng5-breadcrumb';
-import { NavigationEnd } from "@angular/router/src/events";
 
 @Component({
   selector: 'app-bread-crumb',
@@ -15,9 +14,9 @@ export class BreadCrumbComponent implements OnInit {
   public url :string;  
   // routeChange: Subject<BreadCrumb> = new Subject<BreadCrumb>();
   constructor(public breadcrumbService: BreadcrumbService,private router : Router,private activeRoute: ActivatedRoute){
-    // Organizer Module Bread Crumbs
-    
-    
+    ///////////////////////
+    // Organizer Modules //
+    ///////////////////////
     this.breadcrumbService.addFriendlyNameForRoute('/', 'Organizer');
     this.breadcrumbService.addFriendlyNameForRoute('/organizer', 'Organizer');
     // this.breadcrumbService.addFriendlyNameForRouteRegex('/organizer/manage/[a-zA-Z0-9]', 'Update Organizer');    
@@ -42,7 +41,9 @@ export class BreadCrumbComponent implements OnInit {
     this.breadcrumbService.addFriendlyNameForRoute('/organizer/competitions/manage', 'Manage Competition');
     // this.breadcrumbService.addFriendlyNameForRouteRegex('/organizer/competitions/manage/[a-zA-Z0-9]', 'Update Competitions');
     
-    // Club Modules 
+    //////////////////
+    // Club Modules //
+    //////////////////
     this.breadcrumbService.addFriendlyNameForRoute('/club', 'Club');
     this.breadcrumbService.addFriendlyNameForRoute('/club/manage', 'Manage Club');
     // this.breadcrumbService.addFriendlyNameForRouteRegex('/club/manage/[a-zA-Z0-9]', 'Update Club');
@@ -66,10 +67,32 @@ export class BreadCrumbComponent implements OnInit {
     this.breadcrumbService.addFriendlyNameForRoute('/club/tournaments', 'Club Tournaments');
     this.breadcrumbService.addFriendlyNameForRoute('/club/tournaments/manage', 'Manage Club Tournament');
     // this.breadcrumbService.addFriendlyNameForRouteRegex('/club/tournaments/manage/[a-zA-Z0-9]', 'Update Tournaments');
-    
+        
+    //////////////////
+    // User Modules //
+    //////////////////
     this.breadcrumbService.addFriendlyNameForRoute('/users', 'Users');
     this.breadcrumbService.addFriendlyNameForRoute('/users/manage', 'Manage User');
    
+
+    ////////////////////
+    // Sports Modules //
+    ////////////////////
+    this.breadcrumbService.addFriendlyNameForRoute('/sports', 'Sports');
+    this.breadcrumbService.addFriendlyNameForRoute('/sports/manage', 'Manage Sports');
+    
+    this.breadcrumbService.addFriendlyNameForRoute('/sports/points', 'Sports Points');
+    this.breadcrumbService.addFriendlyNameForRoute('/sports/points/manage', 'Manage Sports Points');
+    
+    this.breadcrumbService.addFriendlyNameForRoute('/sports/playerstatus', 'Sports Playerstatus');
+    this.breadcrumbService.addFriendlyNameForRoute('/sports/playerstatus/manage', 'Manage Sports Playerstatus');
+    
+    this.breadcrumbService.addFriendlyNameForRoute('/sports/scores', 'Sports Scores');
+    this.breadcrumbService.addFriendlyNameForRoute('/sports/scores/manage', 'Manage Sports Scores');
+    
+    this.breadcrumbService.addFriendlyNameForRoute('/sports/fouls', 'Sports Fouls');
+    this.breadcrumbService.addFriendlyNameForRoute('/sports/fouls/manage', 'Manage Sports Fouls');
+    
     this.breadcrumbService.addFriendlyNameForRoute('/permissions', 'Permissions');
     
     // this.breadcrumbService.addFriendlyNameForRouteRegex('/home/users/[0-9]/info', 'Information');

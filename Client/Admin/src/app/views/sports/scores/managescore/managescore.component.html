@@ -1,0 +1,40 @@
+<div class="manage-box clearfix">
+  <div class="col-md-12">
+    <label><h2>Manage Score</h2></label>
+  </div>
+  <div class="col-md-12">
+    <form class="m-t" role="form" action="#">
+      <div class="row">
+        <div class="col-md-12">
+          <label>Wins<a style="color:#f00 !important;">*</a></label>
+          <input type="number" required #wins="ngModel" id="wins" name="wins" class="form-control" [(ngModel)]="former.wins" placeholder="0"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="col-md-12">
+          <label>Draws<a style="color:#f00 !important;">*</a></label>
+          <input type="number" required #draws="ngModel" id="draws" name="draws" class="form-control" [(ngModel)]="former.draws" placeholder="0"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="col-md-12">
+          <label>Losses<a style="color:#f00 !important;">*</a></label>
+          <input type="number" required #losses="ngModel" id="losses" name="losses" class="form-control" [(ngModel)]="former.losses" placeholder="0"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="man col-md-12">
+          <div class="row">
+            <div class="col-md-6 text-left">
+              <a class="btn btn-sm btn-white" [routerLink]="['/sports/scores']">Back</a>
+            </div>
+            <div class="col-md-6 text-right">
+              <button class="btn btn-sm btn-primary"  [disabled]="!former.wins || !former.draws ||!former.losses"
+                (click)="savedata(former)">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

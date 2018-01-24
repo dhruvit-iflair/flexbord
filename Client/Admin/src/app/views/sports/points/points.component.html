@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="container">
+      <div class="col-md-10">
+          <label><h2>Points</h2></label>
+      </div>
+      <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
+          <button class="btn btn_green" [routerLink]="['/sports/points/manage']">New Point</button>                         
+      </div>
+      <div class="col-md-12" id="tabl">
+        <table datatable  [dtOptions]="dtOptions" class="row-border hover" onchange="gotcha()" *ngIf="dataRenderer">
+          <thead>
+            <tr>
+              <th>_id</th>
+              <th>Name of Point</th>
+              <th>Value of Point</th>
+              <th>Color button up</th>
+              <th>Color button down</th>
+              <th>Hide from Scoreboard</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of points">
+              <td style="display:none;">{{m._id}}</td>
+              <td>{{m.nameofpoint | firstcapitalize}} </td>
+              <td>{{m.valueofpoint | firstcapitalize}} </td>
+              <td>{{m.colorbtnup | firstcapitalize}}</td>
+              <td>{{m.colorbtndown | firstcapitalize}}</td>
+              <td>{{m.hidefromscoreboard | firstcapitalize}}</td>
+              <td>
+                <a class="btn btn_green tab_btn"  routerLink="/sports/points/manage/{{m._id}}" *ngIf="hasEditPerm" >
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn_red tab_btn" (click)="deletemember(m._id)" *ngIf="hasDeletePerm">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>  
+      </div>
+  </div>  
+</div>

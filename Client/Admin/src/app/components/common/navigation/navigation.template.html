@@ -33,13 +33,16 @@
                 <a [routerLink]="['/organizer']"><i class="fa fa-calendar "></i> <span class="nav-label">Organizer</span> </a>
             </li>
             <li [ngClass]="{active: activeRoute('club')}" *ngIf="isProfileSet && haspermission[20].Club0">
-                    <a [routerLink]="['/club']"><i class="fa fa-eercast"></i> <span class="nav-label">Club</span> </a>
+                <a [routerLink]="['/club']"><i class="fa fa-eercast"></i> <span class="nav-label">Club</span> </a>
+            </li>
+            <li [ngClass]="{active: activeRoute('sports')}" *ngIf="isProfileSet  && haspermission[40].Sport0">
+                <a [routerLink]="['/sports']"><i class="fa fa-futbol-o"></i> <span class="nav-label">Sport</span> </a>
             </li>
             <li [ngClass]="{active: activeRoute('users')}" *ngIf="isProfileSet">
                     <a [routerLink]="['/users']"><i class="fa fa-user-circle" aria-hidden="true"></i><span class="nav-label">Users</span> </a>
             </li>
             <li [ngClass]="{active: activeRoute('permissions')}" *ngIf="isProfileSet">
-                    <a [routerLink]="['/permissions']"><i class="fa fa-gears"></i> <span class="nav-label">Permissions</span> </a>
+                <a [routerLink]="['/permissions']"><i class="fa fa-gears"></i> <span class="nav-label">Permissions</span> </a>
             </li>
         </ul>
 

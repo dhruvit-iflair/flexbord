@@ -57,6 +57,16 @@ import { ClubSeasonsComponent } from './views/club/club-seasons/club-seasons.com
 import { ManageClubSeasonsComponent } from './views/club/club-seasons/manage-club-seasons/manage-club-seasons.component';
 import { ClubClassificationsComponent } from './views/club/club-classifications/club-classifications.component';
 import { ManageClubClassificationsComponent } from './views/club/club-classifications/manage-club-classifications/manage-club-classifications.component';
+
+import { SportsComponent } from './views/sports/sports.component';
+import { ManageComponent } from './views/sports/manage/manage.component';
+import { PointsComponent } from './views/sports/points/points.component';
+import { ManagepointsComponent } from './views/sports/points/managepoints/managepoints.component';
+import { PlayerstatusComponent } from './views/sports/playerstatus/playerstatus.component';
+import { ManageplayerstatusComponent } from './views/sports/playerstatus/manageplayerstatus/manageplayerstatus.component';
+import { FirstcapitalizePipe } from './components/pipes/firstcapitalize.pipe';
+import { ScoresComponent } from './views/sports/scores/scores.component';
+import { ManagescoreComponent } from './views/sports/scores/managescore/managescore.component';
 import { ClubTournamentsComponent } from './views/club/club-tournaments/club-tournaments.component';
 import { ManageclubTournamentsComponent } from './views/club/club-tournaments/manageclub-tournaments/manageclub-tournaments.component';
 import { UsersComponent } from './views/users/users.component';
@@ -64,6 +74,9 @@ import { ManageUsersComponent } from './views/users/manage-users/manage-users.co
 import { UserService } from "./components/services/users";
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { ProfileViewComponent } from './views/profile/profile-view/profile-view.component';
+import { FoulsComponent } from './views/sports/fouls/fouls.component';
+import { ManagefoulsComponent } from './views/sports/fouls/managefouls/managefouls.component';
+
 
 @NgModule({
   declarations: [
@@ -96,11 +109,22 @@ import { ProfileViewComponent } from './views/profile/profile-view/profile-view.
     ManageClubSeasonsComponent,
     ClubClassificationsComponent,
     ManageClubClassificationsComponent,
+    SportsComponent,
+    ManageComponent,
+    PointsComponent,
+    ManagepointsComponent,
+    PlayerstatusComponent,
+    ManageplayerstatusComponent,
+    FirstcapitalizePipe,
+    ScoresComponent,
+    ManagescoreComponent,
     ClubTournamentsComponent,
     ManageclubTournamentsComponent,
     UsersComponent,
     ManageUsersComponent,
     ProfileViewComponent,
+    FoulsComponent,
+    ManagefoulsComponent
   ],
   imports: [
     // Angular modules
