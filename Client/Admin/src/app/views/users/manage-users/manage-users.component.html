@@ -1,0 +1,67 @@
+<div class="container manage-container">
+  <div class="row">
+  <form [formGroup]="userForm" class="manage-component-form">
+    <div class="row1">
+        <div class="manage-box clearfix">
+              <div class="col-md-12">
+                <label><h2>Manage User</h2></label>
+              </div>
+              <div class="col-md-12">
+              <div class="row">
+                  <div class="man col-md-6">
+                        <h4 class="text-left">First Name<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="firstname" placeholder="Enter Name" required>
+                  </div>
+                  <div class="man col-md-6">
+                        <h4 class="text-left">Last Name<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="lastname" placeholder="Enter Name" required>
+                  </div>
+                  <div class="man col-md-6">
+                        <h4 class="text-left">Email<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" required placeholder="Enter Email">
+                  </div>
+                  <div class="man col-md-6"><h4 class="text-left">Assign Role<a style="color:#f00 !important;">*</a></h4>
+                        <!-- <input class="text-col-md-3" type="text" formControlName="roles" placeholder="Select Roles"> -->
+                        <ss-multiselect-dropdown class="margBott" [options]="rolesOptions" [settings]='mySettings' formControlName="roles"></ss-multiselect-dropdown>
+                        <!-- <select class="form-control" name="" multiple="multiple" data-placeholder="Select Brands" style="width: 100% !important;">
+                              <option *ngFor="let role of roles"   value="{{role._id}}">{{role.title}} </option>
+                          </select> -->
+        
+                  </div> 
+                  <div class="man col-md-6" *ngIf="!_id" >
+                        <h4 class="text-left">Password<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" type="password" formControlName="password" placeholder="Enter Password">
+                  </div>
+                  <div class="man col-md-6" *ngIf="!_id">
+                        <h4 class="text-left">Confirm Password<a style="color:#f00 !important;">*</a></h4>
+                        <input class="text-col-md-3" type="password" formControlName="confirmPassword" placeholder="Confirm Password">
+                        <!-- <div class="alert alert-danger" *ngIf="userForm.controls.confirmPassword.errors?.MutchPassword">Password not match</div> -->
+                  </div>
+                  <div class="man col-md-12">
+                      <div class="row">
+                          <div class="col-md-2">
+                              <h4 class="text-left">Photo<a style="color:#f00 !important;">*</a></h4>
+                              <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none" >
+                              <button class="btn btn_green" (click)="file.click()"> Upload</button>   
+                          </div>
+                          <div class="col-md-4" *ngIf="person_photo" >
+                                <img [src]="person_photo" class="image_display">               
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>          
+    </div>
+  </form>
+  
+  <div class="row">
+      <div class="col-md-6">
+          <button class="btn btn-white" [routerLink]="['/users']">Back</button>
+      </div>
+      <div class="col-md-6 text-right">
+          <button class="btn btn_green" (click)="addUser()" >Save</button>       
+      </div>  
+  </div>
+  
+  </div>

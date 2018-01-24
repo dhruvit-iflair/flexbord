@@ -1,0 +1,90 @@
+<div class="manage-box clearfix">  
+  <div class="col-md-12">
+    <label><h2>Manage Tournament</h2></label>
+  </div>
+<div class="col-md-12">
+    <form [formGroup]="comForm" >
+        <div class="form-group pad">
+           <div class="row">
+            <div class="col-md-6">
+                <label>Name<a style="color:#f00 !important;">*</a></label>
+                <input class=" form-control" type="text" placeholder="Name" formControlName="name">
+                <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('name').valid && comForm.get('name').touched">
+                        Name is required.
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Description<a style="color:#f00 !important;">*</a></label>
+                <input class=" form-control" type="text" placeholder="Description" formControlName="description">
+                <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('description').valid && comForm.get('description').touched">
+                        Description is required.
+                </div>
+            </div>
+            <div class="man col-md-6">
+                <label>Sport<a style="color:#f00 !important;">*</a></label>
+                <select  class=" form-control" placeholder="sports"  name="sports"  formControlName="sports">
+                    <option value="null" disabled="true" [selected]="true">Select your Sports</option>
+                    <option *ngFor="let it of sports"  [value]="it.name">{{it.name}}</option>
+                </select>
+                <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('sports').valid && comForm.get('sports').touched">
+                        Sport is required.
+                </div>
+            </div>
+            <div class="man col-md-6">
+                <label>Seasons<a style="color:#f00 !important;">*</a></label>
+                <select  class=" form-control" placeholder="Season"  name="clubSeasons"  formControlName="clubSeasons" *ngIf="clubSeasons.length" >
+                  <option disabled="true" [selected]="true" value="null">Select your Season</option>
+                  <option *ngFor="let it of clubSeasons"  [value]="it._id">{{it.name}}</option>
+                </select>
+                <div class="add_new row" *ngIf="!clubSeasons.length" >
+                    <label style="float:left; padding-top: 7px;">Add New Season</label>
+                    <button class="btn btn_green" routerLink="/club/seasons/manage" style="float:left;margin-left: 10px;">
+                            <i class="fa fa-plus "></i>
+                    </button>
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('clubSeasons').valid && comForm.get('clubSeasons').touched">
+                        Seasons is required.
+                </div>
+            </div>
+            <div class="man col-md-6">
+                <label>Classification<a style="color:#f00 !important;">*</a></label>
+                <select  class=" form-control" name="clubClassifications"  formControlName="clubClassifications" *ngIf="clubClassifications.length" (change)="getClasValue($event.target.value)">
+                    <option value="null" disabled="true" [selected]="true" value="">Select your Classifications</option>                  
+                    <option *ngFor="let it of clubClassifications"  [value]="it._id">{{it.name}}</option>
+                </select>
+                <div class="add_new row" style="width: 150%;" *ngIf="!clubClassifications.length"  >
+                    <label style="float:left; padding-top: 7px;">Add New Classifications</label>
+                    <button class="btn btn_green" routerLink="/club/classifications/manage" style="float:left;margin-left: 10px;">
+                            <i class="fa fa-plus "></i>
+                    </button>
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('clubClassifications').valid && comForm.get('clubClassifications').touched">
+                        Classifications is required.
+                </div>
+            </div>     
+            <div class="man col-md-6" *ngIf="clubClassificationsValue " >
+                <label>Classification Value<a style="color:#f00 !important;">*</a></label>
+                <select  class=" form-control" formControlName="clubClassificationsValue">
+                    <option disabled="true" [selected]="!comForm.value.clubClassificationsValue" value="">Select your Classifications Value</option>                  
+                    <option  *ngFor="let val of clubClassificationsValue[0].value" [value]='val'>{{val}}</option>
+                </select>
+                <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('clubClassificationsValue').valid && comForm.get('clubClassificationsValue').touched">
+                        Classifications Value is required.
+                </div>
+            </div>     
+          </div>                              
+        </div>        
+      </form>
+  </div>
+  <div class="col-md-12"> 
+        <div class="row">
+          <div class="col-md-6 text-left">
+              <button class="btn" [routerLink]="['/club/tournaments']">Back</button>
+          </div>
+          <div class="col-md-6 text-right">
+              <button (click)='saveVal()' [disabled]='!comForm.valid'  class="btn btn_green" >Save</button>        
+          </div> 
+        </div> 
+  </div>
+  
+  </div>   

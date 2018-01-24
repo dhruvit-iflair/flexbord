@@ -28,6 +28,7 @@ export class AccessorService {
     if (localStorage.getItem('uToken')) {
       var x = JSON.parse(localStorage.getItem('uToken'));
       this.getCurrentUserPerm(x.user.roles).subscribe(res => {
+        // console.log(res);
         this.perms = res[0];
         this.checker = [];
         for (var pelu = 0; pelu < this.modules.length; pelu++) {

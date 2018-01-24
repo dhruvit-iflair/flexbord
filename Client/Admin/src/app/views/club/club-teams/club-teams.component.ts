@@ -26,7 +26,7 @@ teams;dtOptions;clubid;
     this.dtOptions={
       pagingType:'simple_numbers',
       order:[[ 0, 'desc' ]],
-      columns: [{ "visible":false },null,null,null,{ "orderable": false }]
+      columns: [{ "visible":false },{ "orderable": false },null,null,{ "orderable": false }]
     }
     this.http.get(environment.api + '/clubteams/byclub/'+this.clubid)
       .subscribe((res) => {
@@ -36,13 +36,13 @@ teams;dtOptions;clubid;
     this.checkpermissions();
   }
   deleteteam(id){
-    var del = confirm("Delete this Member?");
+    var del = confirm("Delete this Team?");
     if (del) {
       this.http.delete(environment.api +"/clubteams/"+id)
               .subscribe((res)=>{
                 if (res) {
                   this.dataRenderer=false;
-                  this.toastr.success('Member Deleted Successfully', 'Success');
+                  this.toastr.success('Team Deleted Successfully', 'Success');
                 }
                 this.gotcha();
               },(error)=>{

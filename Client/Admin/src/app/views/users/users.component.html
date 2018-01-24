@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="container">
+      <div class="col-md-10">
+          <label><h2>Users</h2></label>
+      </div>
+      <div class="col-md-2 text-right">
+          <button class="btn btn_green" [routerLink]="['/users/manage']">New User</button>                         
+      </div>
+      <div class="col-md-12" id="tabl">
+      <div class="col-md-12 no_padd mar_btt">
+      </div>
+        <br>
+      <table datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
+              <thead> 
+                <tr>
+                    <th>_id</th>
+                    <th>Photo</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                    <tr *ngFor="let items of rows">
+                      <td style="display:none">{{items._id}}</td>
+                      <td><img src='{{items.person_photo}}' class="image_display" style="border-radius: 100px;width:50px;height:50px;"></td>
+                      <td>{{items.firstname}}</td>
+                      <td>{{items.lastname}}</td>
+                      <td>{{items.username}}</td>
+                      <td>
+                          <a class="btn btn_green tab_btn" routerLink="/users/manage/{{items._id}}"  title="Edit">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                          </a>
+                         <a class="btn btn_red tab_btn" (click)=" delUser(items._id)" title="Delete">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                          </a>
+                      </td>
+                    </tr>
+              </tbody>
+      </table>
+      </div>
+  </div>  
+</div>
+
+<!-- <div class="alert-popup">
+    <div class="alert-popup-inner">
+      <p>Confirm to delete this Organizer!</p>
+      <div class="alert-popup-btn">
+           <a href="#" class="btn btn_green">Ok</a>
+           <a href="#" class="btn btn_green">cancel</a>
+      </div>
+    </div>
+</div> -->

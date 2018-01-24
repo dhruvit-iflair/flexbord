@@ -18,7 +18,23 @@ rolesctrl.prototype.create = function (req, res) {
         }
     });
 }
-
+rolesctrl.prototype.seeds = function (req, res) {
+    const roles = [
+        { title: 'admin', status: 'active' },
+        { title: 'organizer', status: 'active' },
+        { title: 'club', status: 'active' }
+      ];
+    
+      // use the Event model to insert/save
+      for (role of roles) {
+        var newRoles = new Roles(role);
+        newRoles.save();
+      }
+    
+      // seeded!
+      res.send('Roles Generated!');
+   
+}
 rolesctrl.prototype.list = function (req, res) {
 Roles.find(function (er, dt) {
         if (er) {

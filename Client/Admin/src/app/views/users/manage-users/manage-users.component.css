@@ -1,0 +1,32 @@
+img.image_display {
+    width: 100px;
+    border-radius: 100px;
+    height: 100px;
+}
+select,
+.manage-component-form .text-col-md-3, .manage-component-form select, .select2-container .select2-selection--single {
+    background-color: #fff;
+    height: 39px;
+}
+.alert-danger {
+    color: #a94442;
+    margin-left: 15px;
+    width: 97.5%;
+}
+/* input.text-col-md-3.ng-untouched.ng-pristine.ng-invalid {
+    border: 1px solid red;
+} */
+ss-multiselect-dropdown, .margBott{
+    /* border: 1px solid red; */
+    width: 100%;
+    margin-bottom: 10px;
+    display: block;
+
+}
+/* .dropdown-inline{
+    display: inline-block;
+    margin-bottom: 10px;
+} */
+/* ss-multiselect-dropdown.margBott.ng-touched.ng-dirty.ng-invalid {
+    border: 1px solid red;
+} */

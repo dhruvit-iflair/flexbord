@@ -28,10 +28,10 @@
                   <td>{{r.sports}}</td>
                   <td>{{r.seasons.name}}</td>
                   <td>
-                    <a class="btn btn_green tab_btn"  routerLink="/competitions/manage/{{r._id}}" *ngIf="hasEditPerm">
+                    <a class="btn btn_green tab_btn"  routerLink="/competitions/manage/{{r._id}}" *ngIf="hasEditPerm" title="Edit">
                       <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a>
-                    <a class="btn btn_red tab_btn" (click)="delComp(r._id)" *ngIf="hasDeletePerm">
+                    <a class="btn btn_red tab_btn" (click)="delComp(r._id)" *ngIf="hasDeletePerm" title="Delete">
                       <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                   </td>

@@ -50,7 +50,7 @@ export class OrganizerClassificationsComponent implements OnInit {
     }
   }
   delClas(id) {
-    var del = confirm("Confirm to delete this Season!");
+    var del = confirm("Confirm to delete this Classification!");
     if (del) {
       this.http.delete(environment.api + "/organizerClassifications/" + id)
         .subscribe((res) => {

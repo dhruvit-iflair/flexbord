@@ -29,7 +29,7 @@ export class OrganizerComponent implements OnInit {
     this.dtOptions = {
       pagingType: 'simple_numbers',
       order: [[0, 'desc']],
-      columns: [{ "visible": false }, null, null, null, null, null, { "orderable": false }]
+      columns: [{ "visible": false }, { "orderable": false }, null, null, null, null, { "orderable": false }]
     }
   }
   ngOnInit(): void {

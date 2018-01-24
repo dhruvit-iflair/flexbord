@@ -1,6 +1,7 @@
 /*@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");*/
-@import url('https://fonts.googleapis.com/css?family=Josefin+Slab:300,300i,400,400i,600,600i,700,700i');
+/*@import url('https://fonts.googleapis.com/css?family=Josefin+Slab:300,300i,400,400i,600,600i,700,700i');*/
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:300');
 /*
  *
  *   INSPINIA - Responsive Admin Theme
@@ -956,6 +957,36 @@ img.image_display {
   border: 2px solid rgb(65, 65, 65);
 }
 
+.nav-header a {
+  word-break: break-all;
+}
+.button-group .btn.btn-lg.dropdown-toggle {
+  padding-right: 25px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  vertical-align: middle;
+}
+.margBott .dropdown.dropdown-inline, .margBott .dropdown.dropdown-inline .dropdown-toggle  {
+  width: 100%;
+}
+.margBott .dropdown.dropdown-inline .dropdown-toggle {
+  border: 1px solid #ddd;
+  height: 39px;
+  text-align: left;
+  background-color: #fff;
+}
+.margBott .dropdown.dropdown-inline .dropdown-toggle .caret {
+  float: right;
+  margin: 8px 5px 0;
+}
+.margBott .dropdown.dropdown-inline .dropdown-menu {
+  width: 100%;
+}
+input[type="number"] {
+      border: 1px solid #ddd;
+    padding: 9px 15px;
+    height: 39px;
+}
 
 @media (max-width: 768px) {
   .top-navigation .navbar-header {
@@ -3840,7 +3871,7 @@ body.tour-open .animated {
   border-bottom: 1px solid #e7eaec;
 }
 body {
-  font-family: 'Josefin Slab', serif;
+  font-family: 'Alegreya Sans', sans-serif;
   background-color: #303030;
   font-weight: 400;
   font-size: 14px;
@@ -8937,3 +8968,17 @@ body.md-skin {
   }
 }
 
+
+.theme-orange .bs-datepicker-head {
+  background-color: #f3825b !important;
+}
+.theme-orange .bs-datepicker-body table td span.selected, .theme-green .bs-datepicker-body table td[class*="select-"] span:after {
+  background-color: #f3825b !important;
+}
+
+.theme-green .bs-datepicker-head {
+  background-color: #f3825b !important;
+}
+.theme-green .bs-datepicker-body table td span.selected, .theme-green .bs-datepicker-body table td[class*="select-"] span:after {
+  background-color: #f3825b !important;
+}

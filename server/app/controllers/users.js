@@ -46,8 +46,10 @@ var imgdata;
 usersctrl.prototype.create = function (req, res) {
     var bodydata = {
         username: req.body.username,
-        // person_photo: imgdata,
-        // roles:req.body.role,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        person_photo: req.body.person_photo,
+        roles:req.body.roles,
         isAgreemented: req.body.isAgreemented,
         isVerified: 'false'
     }
@@ -92,14 +94,15 @@ usersctrl.prototype.verify = function (req, res, next) {
 }
 
 usersctrl.prototype.upload = function (req, res, next) {
+  var person_photo;
     var storage = multer.diskStorage({
         destination: function (req, file, callback) {
             callback(null, path.join(__dirname, '../../uploads'));
         },
         filename: function (req, file, callback) {
             var ext = file.originalname.split('.');
-            imgdata = Date.now() + '.' + ext[1];
-            callback(null, imgdata);
+            person_photo = Date.now() + '.' + ext[1];
+            callback(null, person_photo);
         }
     });
 
@@ -110,7 +113,7 @@ usersctrl.prototype.upload = function (req, res, next) {
             return;
         }
         else {
-            res.json(imgdata);
+            res.json(person_photo);
             next();
         }
     });
@@ -118,6 +121,17 @@ usersctrl.prototype.upload = function (req, res, next) {
 
 usersctrl.prototype.list = function (req, res) {
     Users.find().populate('roles').exec(function (er, dt) {
+        if (er) {
+            console.log('error occured..' + er);
+        }
+        else {
+            return res.json(dt);
+        }
+    });
+}
+
+usersctrl.prototype.listOnly = function (req, res) {
+    Users.find({ _id: req.params.id }).exec(function (er, dt) {
         if (er) {
             console.log('error occured..' + er);
         }

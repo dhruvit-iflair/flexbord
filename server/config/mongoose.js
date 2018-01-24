@@ -36,11 +36,13 @@ module.exports = function () {
     require('../app/models/clubmembers');
     require('../app/models/clubSeasons');
     require('../app/models/club-classifications');
+    require('../app/models/clubTournaments');
     require('../app/models/sports');
     require('../app/models/sportpoints');
     require('../app/models/sportplayerstatus');
     require('../app/models/sportscores');
     require('../app/models/sportfouls');
+
 
     return db;
 }

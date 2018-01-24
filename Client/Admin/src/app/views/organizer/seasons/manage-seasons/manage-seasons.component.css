@@ -36,3 +36,9 @@ img.image_display {
     height: 35px;
     width: 252px;
   }
+ .datePicker{
+    float: left;
+    margin-top: 23px;
+    padding-right: 0px;
+    width: 28%;
+  }

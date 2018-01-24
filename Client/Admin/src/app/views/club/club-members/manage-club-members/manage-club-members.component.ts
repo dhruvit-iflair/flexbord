@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router ,ActivatedRoute} from "@angular/router";
 import { FormGroup,FormControl,FormBuilder,Validators,AbstractControl } from "@angular/forms";
 import { forEach } from '@angular/router/src/utils/collection';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-manage-club-members',
@@ -20,8 +21,18 @@ export class ManageClubMembersComponent implements OnInit {
   public _id: any;
   public clubMemForm : FormGroup;
   public memberSince :any = Date.now();
- 
+  public maxDate = new Date();
+  public bsConfig: Partial<BsDatepickerConfig>;
+  public fileSupport:Boolean = false;
+  public fileSizeMin:Boolean = false;
+  public fileSizeMax:Boolean = false;
+
   constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute) {
+    this.bsConfig = {
+      containerClass: 'theme-orange',
+      dateInputFormat :'DD/MM/YY',
+      showWeekNumbers:false
+    };
     this.clubMemForm = this.fb.group({
       firstname: ["",[Validators.required]],    
       lastname: ["",[Validators.required]],
@@ -78,7 +89,9 @@ export class ManageClubMembersComponent implements OnInit {
   readUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
-      if (file.type == 'image/jpeg' || file.type == 'image/png' && file.size < 2000000) {
+      this.fileSupport = false;this.fileSizeMin = false; this.fileSizeMax = false; 
+      if (file.type == 'image/jpeg' && file.size < 2000000 && file.size > 150000 || file.type == 'image/png' && file.size < 2000000 && file.size > 150000 ) {
+      this.fileSupport = false;this.fileSizeMin = false; this.fileSizeMax = false; 
         let up = new FormData();
         up.append('photo', file);
         this.http.post(environment.api+"/clubmembers/photo",up)  
@@ -98,14 +111,19 @@ export class ManageClubMembersComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
       } 
       else {
-        if ( file.size > 2000000) {
+        if (file.type == 'image/jpeg' &&  file.size > 2000000 || file.type == 'image/png'   &&  file.size > 2000000) {
+          this.fileSizeMax = true; 
           this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');                        
-          
-        } else {
+        } 
+        else if (file.type == 'image/jpeg' && file.size < 150000 || file.type == 'image/png' && file.size < 150000) {
+          this.toastr.warning('Image should be more than 150Kb!! ', 'Warning');                        
+          this.fileSizeMin = true;           
+        }
+        else {
+          this.fileSupport = true;
           this.toastr.error('Only .jpg, .png, .jpeg type of Image supported ', 'Error');                                  
         }
-      }    
-      
+      }
     }
   }
 

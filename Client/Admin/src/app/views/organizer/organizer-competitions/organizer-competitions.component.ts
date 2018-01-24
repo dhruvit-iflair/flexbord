@@ -54,7 +54,7 @@ export class OrganizerCompetitionsComponent implements OnInit {
     }
   }
   delComp(id){
-      var del = confirm("Confirm to delete this Season!");
+      var del = confirm("Confirm to delete this Competition!");
       if (del) {
         this.http.delete(environment.api +"/orgCompetitions/"+id)
                 .subscribe((res)=>{
@@ -63,7 +63,7 @@ export class OrganizerCompetitionsComponent implements OnInit {
                    //jQuery("#cmpt").dataTable(this.dtOptions).fnClearTable();
                   if (d._id) {
                     this.dataRenderer = false;
-                    this.toastr.success('Classifications Deleted Successfully', 'Success');
+                    this.toastr.success('Competition Deleted Successfully', 'Success');
                     this.initializer();
                   }
                 },(error)=>{

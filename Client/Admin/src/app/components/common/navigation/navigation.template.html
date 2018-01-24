@@ -28,6 +28,9 @@
             <li [ngClass]="{active: activeRoute('sports')}" *ngIf="isProfileSet  && haspermission[40].Sport0">
                 <a [routerLink]="['/sports']"><i class="fa fa-futbol-o"></i> <span class="nav-label">Sport</span> </a>
             </li>
+            <li [ngClass]="{active: activeRoute('users')}" *ngIf="isProfileSet">
+                    <a [routerLink]="['/users']"><i class="fa fa-user-circle" aria-hidden="true"></i><span class="nav-label">Users</span> </a>
+            </li>
             <li [ngClass]="{active: activeRoute('permissions')}" *ngIf="isProfileSet">
                 <a [routerLink]="['/permissions']"><i class="fa fa-gears"></i> <span class="nav-label">Permissions</span> </a>
             </li>

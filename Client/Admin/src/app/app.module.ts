@@ -11,8 +11,7 @@ import { AppComponent } from './app.component';
 import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Auth24Guard } from "./components/common/guard/auth24.guard";
-// import { RouteGuard } from "./components/common/guard/route.guard";
-import { PaginationModule ,ModalModule} from "ngx-bootstrap";
+import { PaginationModule ,ModalModule,BsDatepickerModule,TimepickerModule} from "ngx-bootstrap";
 import { DataTablesModule } from 'angular-datatables';
 
 // App views
@@ -56,6 +55,7 @@ import { ClubSeasonsComponent } from './views/club/club-seasons/club-seasons.com
 import { ManageClubSeasonsComponent } from './views/club/club-seasons/manage-club-seasons/manage-club-seasons.component';
 import { ClubClassificationsComponent } from './views/club/club-classifications/club-classifications.component';
 import { ManageClubClassificationsComponent } from './views/club/club-classifications/manage-club-classifications/manage-club-classifications.component';
+
 import { SportsComponent } from './views/sports/sports.component';
 import { ManageComponent } from './views/sports/manage/manage.component';
 import { PointsComponent } from './views/sports/points/points.component';
@@ -65,6 +65,13 @@ import { ManageplayerstatusComponent } from './views/sports/playerstatus/managep
 import { FirstcapitalizePipe } from './components/pipes/firstcapitalize.pipe';
 import { ScoresComponent } from './views/sports/scores/scores.component';
 import { ManagescoreComponent } from './views/sports/scores/managescore/managescore.component';
+import { ClubTournamentsComponent } from './views/club/club-tournaments/club-tournaments.component';
+import { ManageclubTournamentsComponent } from './views/club/club-tournaments/manageclub-tournaments/manageclub-tournaments.component';
+import { UsersComponent } from './views/users/users.component';
+import { ManageUsersComponent } from './views/users/manage-users/manage-users.component';
+import { UserService } from "./components/services/users";
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+
 
 
 @NgModule({
@@ -106,7 +113,11 @@ import { ManagescoreComponent } from './views/sports/scores/managescore/managesc
     ManageplayerstatusComponent,
     FirstcapitalizePipe,
     ScoresComponent,
-    ManagescoreComponent
+    ManagescoreComponent,
+    ClubTournamentsComponent,
+    ManageclubTournamentsComponent,
+    UsersComponent,
+    ManageUsersComponent,
   ],
   imports: [
     // Angular modules
@@ -122,7 +133,10 @@ import { ManagescoreComponent } from './views/sports/scores/managescore/managesc
       timeOut: 3500,
     }),
     PaginationModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     DataTablesModule.forRoot(),
+    TimepickerModule.forRoot(),
+    MultiselectDropdownModule,
     // Views
     MainViewModule,
     MinorViewModule,
@@ -135,7 +149,7 @@ import { ManagescoreComponent } from './views/sports/scores/managescore/managesc
 
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [Auth24Guard,ClubService,AccessorService],
+  providers: [Auth24Guard,ClubService,UserService,AccessorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

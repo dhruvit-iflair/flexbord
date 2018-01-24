@@ -39,6 +39,10 @@ import { PlayerstatusComponent } from './views/sports/playerstatus/playerstatus.
 import { ManageplayerstatusComponent } from './views/sports/playerstatus/manageplayerstatus/manageplayerstatus.component';
 import { ScoresComponent } from './views/sports/scores/scores.component';
 import { ManagescoreComponent } from './views/sports/scores/managescore/managescore.component';
+import { ClubTournamentsComponent } from './views/club/club-tournaments/club-tournaments.component';
+import { ManageclubTournamentsComponent } from './views/club/club-tournaments/manageclub-tournaments/manageclub-tournaments.component';
+import { UsersComponent } from './views/users/users.component';
+import { ManageUsersComponent } from './views/users/manage-users/manage-users.component';
 
 export const ROUTES:Routes = [
   // Main redirect
@@ -92,6 +96,14 @@ export const ROUTES:Routes = [
       {path: 'club/classifications/manage', component: ManageClubClassificationsComponent , canActivate: [Auth24Guard]},
       {path: 'club/classifications/manage/:_id', component: ManageClubClassificationsComponent , canActivate: [Auth24Guard]},
       
+      {path: 'club/tournaments', component: ClubTournamentsComponent , canActivate: [Auth24Guard]},
+      {path: 'club/tournaments/manage', component: ManageclubTournamentsComponent , canActivate: [Auth24Guard]},
+      {path: 'club/tournaments/manage/:_id', component: ManageclubTournamentsComponent , canActivate: [Auth24Guard]},
+      
+      {path: 'users', component: UsersComponent , canActivate: [Auth24Guard]},
+      {path: 'users/manage', component: ManageUsersComponent , canActivate: [Auth24Guard]},
+      {path: 'users/manage/:_id', component: ManageUsersComponent , canActivate: [Auth24Guard]},
+
       {path: 'permissions', component: AccessorComponent , canActivate: [Auth24Guard]},
 
       {path: 'sports', component: SportsComponent , canActivate: [Auth24Guard]},
