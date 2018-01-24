@@ -56,6 +56,16 @@ import { ClubSeasonsComponent } from './views/club/club-seasons/club-seasons.com
 import { ManageClubSeasonsComponent } from './views/club/club-seasons/manage-club-seasons/manage-club-seasons.component';
 import { ClubClassificationsComponent } from './views/club/club-classifications/club-classifications.component';
 import { ManageClubClassificationsComponent } from './views/club/club-classifications/manage-club-classifications/manage-club-classifications.component';
+import { SportsComponent } from './views/sports/sports.component';
+import { ManageComponent } from './views/sports/manage/manage.component';
+import { PointsComponent } from './views/sports/points/points.component';
+import { ManagepointsComponent } from './views/sports/points/managepoints/managepoints.component';
+import { PlayerstatusComponent } from './views/sports/playerstatus/playerstatus.component';
+import { ManageplayerstatusComponent } from './views/sports/playerstatus/manageplayerstatus/manageplayerstatus.component';
+import { FirstcapitalizePipe } from './components/pipes/firstcapitalize.pipe';
+import { ScoresComponent } from './views/sports/scores/scores.component';
+import { ManagescoreComponent } from './views/sports/scores/managescore/managescore.component';
+
 
 @NgModule({
   declarations: [
@@ -88,6 +98,15 @@ import { ManageClubClassificationsComponent } from './views/club/club-classifica
     ManageClubSeasonsComponent,
     ClubClassificationsComponent,
     ManageClubClassificationsComponent,
+    SportsComponent,
+    ManageComponent,
+    PointsComponent,
+    ManagepointsComponent,
+    PlayerstatusComponent,
+    ManageplayerstatusComponent,
+    FirstcapitalizePipe,
+    ScoresComponent,
+    ManagescoreComponent
   ],
   imports: [
     // Angular modules

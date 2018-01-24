@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="container">
+      <div class="col-md-10">
+          <label><h2>Ranking Scores</h2></label>
+      </div>
+      <div class="col-md-2 text-right" >
+          <button class="btn btn_green" [routerLink]="['/sports/scores/manage']">New Score</button>                         
+      </div>
+      <div class="col-md-12" id="tabl">
+        <table datatable  [dtOptions]="dtOptions" class="row-border hover" onchange="gotcha()" *ngIf="dataRenderer">
+          <thead>
+            <tr>
+              <th>_id</th>
+              <th>Wins</th>
+              <th>Draws</th>
+              <th>Losses</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of scores">
+              <td style="display:none;">{{m._id}}</td>
+              <td>{{m.wins}} </td>
+              <td>{{m.draws}}</td>
+              <td>{{m.losses}}</td>
+              <td>
+                <a class="btn btn_green tab_btn"  routerLink="/sports/scores/manage/{{m._id}}" >
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn_red tab_btn" (click)="deletemember(m._id)">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>  
+      </div>
+  </div>  
+</div>

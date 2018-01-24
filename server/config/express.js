@@ -46,8 +46,11 @@ module.exports = function (db) {
     require('../app/routes/clubmembers')(app);
     require('../app/routes/clubSeasons')(app);
     require('../app/routes/club-classifications')(app);
-
-    
+    require('../app/routes/sports')(app);
+    require('../app/routes/sportpoints')(app);
+    require('../app/routes/sportplayerstatus')(app);
+    require('../app/routes/sportscores')(app);
+    require('../app/routes/sportfouls')(app);
 
     return server;
 };

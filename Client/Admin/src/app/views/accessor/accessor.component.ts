@@ -12,22 +12,22 @@ import { AccessorService } from "../../components/common/accessor.service";
 })
 export class AccessorComponent implements OnInit {
 
-  constructor(public http: HttpClient, private router: Router, private aroute: ActivatedRoute, private toastr: ToastrService, private accr:AccessorService ) { }
+  constructor(public http: HttpClient, private router: Router, private aroute: ActivatedRoute, private toastr: ToastrService, private accr: AccessorService) { }
   public rolesdata; modules;
-  public accessor={permissions:[],roles:''};
-  
+  public accessor = { permissions: [], roles: '' };
+
   ngOnInit() {
     this.http.get(environment.api + '/roles')
       .subscribe((res) => {
         this.rolesdata = res;
       });
-      this.modules=this.accr.getmodules();
-      for(var x=0;x<this.modules.length;x++){
-        this.accessor.permissions.push({[this.modules[x]]:[false,false,false,false]});
-      }
+    this.modules = this.accr.getmodules();
+    for (var x = 0; x < this.modules.length; x++) {
+      this.accessor.permissions.push({ [this.modules[x]]: [false, false, false, false] });
+    }
   }
   updatepermdata(data) {
-    this.http.put(environment.api + "/permissions/byrole/"+this.accessor.roles, data)
+    this.http.put(environment.api + "/permissions/byrole/" + this.accessor.roles, data)
       .subscribe((res) => {
         this.accr.setUserPermissions();
         this.toastr.success('Permissions Updated Successfully', 'Success');
@@ -36,10 +36,10 @@ export class AccessorComponent implements OnInit {
         this.toastr.error('Something went wrong !! Please try again later', 'Error');
       });
   }
-  getpermdata(getdata){
-    this.http.get(environment.api+'/permissions/byrole/'+getdata)
-    .subscribe(resp=>{
-      this.accessor.permissions=resp[0].permissions;
-    });
+  getpermdata(getdata) {
+    this.http.get(environment.api + '/permissions/byrole/' + getdata)
+      .subscribe(resp => {
+        this.accessor.permissions = resp[0].permissions;
+      });
   }
 }

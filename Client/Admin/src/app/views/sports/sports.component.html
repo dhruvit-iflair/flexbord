@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="container">
+        <div class="col-md-10">
+            <label><h2>Sports</h2></label>
+        </div>
+        <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
+            <button class="btn btn_green" [routerLink]="['/sports/manage']">New Sport</button>                         
+        </div>
+        <div class="col-md-12" id="tabl">
+        <div class="col-md-12 no_padd mar_btt">
+        </div>
+          <br>
+        <table datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
+                <thead>
+                  <tr>
+                      <th>_id</th>                      
+                      <th>Sport Name</th>
+                      <th>Types of Sport</th>
+                      <th>Types of Game</th>
+                      <th>Types of Team</th>
+                      <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of rows" >
+                    <td style="display:none">{{item._id}}</td>
+                    <td>{{item.name | firstcapitalize}}</td>
+                    <td style="width:300px;">{{item.typeofsport | firstcapitalize}}</td>
+                    <td>{{item.typeofgame | firstcapitalize}}</td>
+                    <td>{{item.typeofteam | firstcapitalize}}</td>
+                    <td>
+                      <a class="btn btn_green tab_btn" routerLink="/sports/manage/{{item._id}}"  title="Edit" *ngIf="hasEditPerm">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                      </a>
+                     <a class="btn btn_red tab_btn" (click)="delClub(item._id)" title="Delete" *ngIf="hasDeletePerm">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                      <a class="btn btn_1 tab_btn" (click)="movetopoints(item._id)" title="Points">
+                        <i class="fa fa-trophy" aria-hidden="true"></i>
+                      </a>
+                      <a class="btn btn_green tab_btn" (click)="movetostatus(item._id)" title="Player Status">
+                        <i class="fa fa-certificate" aria-hidden="true"></i>
+                      </a>
+                      <a class="btn btn_2 tab_btn" (click)="movetoscores(item._id)" title="Ranking Scores">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      </a>
+                      <!--<a class="btn btn_red tab_btn" (click)="movetofouls(item._id)" title="Fouls">
+                        <i class="fa fa-wheelchair" aria-hidden="true"></i>
+                      </a>-->
+                    </td>
+                  </tr>
+                </tbody>
+        </table>
+        </div>
+    </div>  
+  </div>
+ 

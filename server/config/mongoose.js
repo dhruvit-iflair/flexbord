@@ -3,8 +3,11 @@ Created By : Hardik Lakhani(hardik.lakhani@iflair.com)
 */
 var mongoose = require('mongoose');
 var config = require('./config.js');
+const options = {
+  useMongoClient: true
+};
 module.exports = function () {
-    var db = mongoose.connect(config.connection + config.dbName);    
+    var db = mongoose.connect(config.connection + config.dbName,options);    
     mongoose.connection.on('connected', function () {
         console.log('Mongoose default connection open for: ' + config.dbName);
     });
@@ -33,6 +36,11 @@ module.exports = function () {
     require('../app/models/clubmembers');
     require('../app/models/clubSeasons');
     require('../app/models/club-classifications');
+    require('../app/models/sports');
+    require('../app/models/sportpoints');
+    require('../app/models/sportplayerstatus');
+    require('../app/models/sportscores');
+    require('../app/models/sportfouls');
 
     return db;
 }
