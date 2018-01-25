@@ -16,7 +16,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 export class ManageplayerstatusComponent implements OnInit {
   public paramdetails = false;
   public userId;
-  public former = { nameofpoint: '', valueofpoint: 0, valueofpointopt: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };
+  public former = { playerstatus: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };
   public items = ['Subtracted', 'Apply to contender', 'Fault'];
   constructor(private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute) { }
 
