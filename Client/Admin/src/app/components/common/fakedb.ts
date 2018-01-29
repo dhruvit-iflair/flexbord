@@ -71,22 +71,22 @@ org : [{
         }],
 sport : [{
             id:1,
-            name:"Basketball"
+            name:" Basketball"
         },
         {
             id:2,
-            name:"Table Tennis"
+            name:" Table Tennis"
         },
         {
             id:3,
-            name:"Boxing"
+            name:" Boxing"
         },
         {
             id:4,
-            name:"Golf"
+            name:" Golf"
         },
         {
             id:5,
-            name:"Cricket"
+            name:" Cricket"
         }]
 }

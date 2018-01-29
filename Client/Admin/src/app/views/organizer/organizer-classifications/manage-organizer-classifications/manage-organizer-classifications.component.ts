@@ -44,7 +44,7 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
                  }
                  else {
                       this.toastr.error('Error!! No Classifications found!', 'Error');
-                      this.router.navigate(['/classifications']);
+                      this.router.navigate(['/organizer/classifications']);
                   }
                  },(error)=>{
                       this.toastr.error('Error!! Something went wrong! try again later', 'Error');
@@ -92,7 +92,7 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
                     var fagdf = res.json();
                     if(res){
                       this.toastr.success('Classifications updated successfully', 'Success');
-                      this.router.navigate(['/classifications']);
+                      this.router.navigate(['/organizer/classifications']);
                     }
                     else {
                         this.toastr.error('Error!!Something went wrong! try again later!', 'Error');
@@ -111,7 +111,7 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
                   var fagdf = res.json();
                   if(res){
                     this.toastr.success('Classifications saved successfully', 'Success');
-                    this.router.navigate(['/classifications']);
+                    this.router.navigate(['/organizer/classifications']);
                   }
                   else {
                       this.toastr.error('Error!!Something went wrong! try again later!', 'Error');

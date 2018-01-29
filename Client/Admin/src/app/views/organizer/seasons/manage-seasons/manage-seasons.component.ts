@@ -82,7 +82,7 @@ export class ManageSeasonsComponent implements OnInit {
                     var fagdf = res.json();
                     if(res){
                       this.toastr.success('Season updated successfully', 'Success');
-                      this.router.navigate(['/seasons']);
+                      this.router.navigate(['/organizer/seasons']);
                     }
                     else {
                         this.toastr.error('Error!!Something went wrong! try again later!', 'Error');
@@ -107,7 +107,7 @@ export class ManageSeasonsComponent implements OnInit {
                   var fagdf = res.json();
                   if(res){
                     this.toastr.success('Season saved successfully', 'Success');
-                    this.router.navigate(['/seasons']);
+                    this.router.navigate(['/organizer/seasons']);
                   }
                   else {
                       this.toastr.error('Error!!Something went wrong! try again later!', 'Error');
@@ -145,7 +145,7 @@ export class ManageSeasonsComponent implements OnInit {
                  }
                  else {
                     this.toastr.error('Error!! No Seasons found!', 'Error');
-                    this.router.navigate(['/seasons']);
+                    this.router.navigate(['/organizer/seasons']);
                   }
                  },(error)=>{
                   this.toastr.error('Error!! Something went wrong! try again later', 'Error');

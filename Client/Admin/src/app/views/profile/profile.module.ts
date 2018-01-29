@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 
 import { SetupComponent } from './setup/setup.component';
 import { ProfileComponent } from "./profile.component";
-
 const routes: Routes = [
   // {
   //   path: 'profile',

@@ -2,9 +2,19 @@
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
+                <!-- <div class="profile">
+                    <img class="profileImage"src="{{profilePhoto}}">
+                </div> -->
                 <div class="dropdown profile-element">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="block m-t-xs"> <strong class="font-bold">{{loggedinUser}}</strong> </span>
+                        <div class="profile">
+                            <img class="profileImage"src="{{profilePhoto}}">
+                        </div>
+                        <div class="profile-data-right">
+                                <span class="block m-t-xs name"> <strong class="font-bold" *ngIf="u.user.firstname && u.user.lastname" >{{u.user.firstname}}</strong> </span>
+                                <span class="block m-t-xs name"> <strong class="font-bold" *ngIf="u.user.firstname && u.user.lastname" >{{u.user.lastname}}</strong> </span>                        
+                        </div>
+                        <span class="block m-t-xs email"> <strong class="font-bold">{{loggedinUser}}</strong> </span>
                         <!--<span class="text-muted text-xs block">Example <b class="caret"></b> </span>-->
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">

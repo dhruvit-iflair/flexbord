@@ -28,12 +28,21 @@ export class AccessorService {
     if (localStorage.getItem('uToken')) {
       var x = JSON.parse(localStorage.getItem('uToken'));
       this.getCurrentUserPerm(x.user.roles).subscribe(res => {
-        // console.log(res);
         this.perms = res[0];
         this.checker = [];
         for (var pelu = 0; pelu < this.modules.length; pelu++) {
-          for (var biju = 0; biju < this.perms.permissions[pelu][this.modules[pelu]].length; biju++) {
-            this.checker.push({ [[this.modules[pelu]] + biju.toString()]: this.perms.permissions[pelu][this.modules[pelu]][biju] });
+          if (this.perms.permissions[pelu]) {
+            for (var biju = 0; biju < this.perms.permissions[pelu][this.modules[pelu]].length; biju++) {
+              this.checker.push({ [[this.modules[pelu]] + biju.toString()]: this.perms.permissions[pelu][this.modules[pelu]][biju] });
+            }
+          }
+          else{
+            if(localStorage.getItem('uToken')){
+              alert('Something Wrong with Assigned Permissions, Please Contact Your Administrator..');
+              setTimeout(()=>{
+                window.location.reload();
+              },1500);
+            }
           }
         }
         localStorage.setItem('fullPerms', JSON.stringify(this.checker));

@@ -4,7 +4,7 @@
             <label><h2>Competitions</h2></label>
         </div>
         <div class="col-md-3 text-right" *ngIf="hasCreatePerm">
-            <button class="btn btn_green" [routerLink]="['/competitions/manage']">New Competitions</button>                         
+            <button class="btn btn_green" [routerLink]="['/organizer/competitions/manage']">New Competitions</button>                         
         </div>
 
         <div class="col-md-12">
@@ -28,7 +28,7 @@
                   <td>{{r.sports}}</td>
                   <td>{{r.seasons.name}}</td>
                   <td>
-                    <a class="btn btn_green tab_btn"  routerLink="/competitions/manage/{{r._id}}" *ngIf="hasEditPerm" title="Edit">
+                    <a class="btn btn_green tab_btn"  routerLink="/organizer/competitions/manage/{{r._id}}" *ngIf="hasEditPerm" title="Edit">
                       <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a>
                     <a class="btn btn_red tab_btn" (click)="delComp(r._id)" *ngIf="hasDeletePerm" title="Delete">

@@ -4,7 +4,7 @@
           <label><h2>Seasons</h2></label>
       </div>
       <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
-          <button class="btn btn_green" [routerLink]="['/seasons/manage']">New Season</button>                         
+          <button class="btn btn_green" [routerLink]="['/organizer/seasons/manage']">New Season</button>                         
       </div>
       <div class="col-md-12" id="tabl">
         <div class="col-md-12 no_padd mar_btt">
@@ -29,7 +29,7 @@
               <td>{{s.end_date | dateFormatPipe :'dd/MM/yy hh:mm a'}}</td>
               <td>
 
-                <a class="btn btn_green tab_btn"  routerLink="/seasons/manage/{{s._id}}" *ngIf="hasEditPerm" title='Edit'>
+                <a class="btn btn_green tab_btn"  routerLink="/organizer/seasons/manage/{{s._id}}" *ngIf="hasEditPerm" title='Edit'>
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
                 <a class="btn btn_red tab_btn" (click)="delOrg(s._id)" *ngIf="hasDeletePerm" title="Delete">

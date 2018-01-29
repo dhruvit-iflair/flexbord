@@ -13,7 +13,7 @@ import { AccessorService } from "../../components/common/accessor.service";
 export class AccessorComponent implements OnInit {
 
   constructor(public http: HttpClient, private router: Router, private aroute: ActivatedRoute, private toastr: ToastrService, private accr: AccessorService) { }
-  public rolesdata; modules;
+  public rolesdata; modules; scorecreatebypass; scoredeletebypass;
   public accessor = { permissions: [], roles: '' };
   public checkview = false; checkdel = false; checkedit = false; checkcreate = false;
   ngOnInit() {
@@ -49,6 +49,10 @@ export class AccessorComponent implements OnInit {
     }
     this.checkcreate = tp;
     for (var p = 0; p < this.modules.length; p++) {
+      if (Object.keys(this.accessor.permissions[p]).toString() == "SportScores") {
+        this.scorecreatebypass = true;
+        continue;
+      }
       this.accessor.permissions[p][Object.keys(this.accessor.permissions[p]).toString()][1] = tp;
     }
   }
@@ -75,6 +79,10 @@ export class AccessorComponent implements OnInit {
     }
     this.checkdel = tp;
     for (var p = 0; p < this.modules.length; p++) {
+      if (Object.keys(this.accessor.permissions[p]).toString() == "SportScores") {
+        this.scoredeletebypass = true;
+        continue;
+      }
       this.accessor.permissions[p][Object.keys(this.accessor.permissions[p]).toString()][3] = tp;
     }
   }
@@ -90,7 +98,7 @@ export class AccessorComponent implements OnInit {
   }
   getpermdata(getdata) {
     var viewer = 0, creater = 0, editer = 0, deleter = 0;
-    this.checkcreate=false;this.checkdel=false;this.checkview=false;this.checkedit=false;
+    this.checkcreate = false; this.checkdel = false; this.checkview = false; this.checkedit = false;
     this.http.get(environment.api + '/permissions/byrole/' + getdata)
       .subscribe(resp => {
         this.accessor.permissions = resp[0].permissions;
@@ -107,15 +115,25 @@ export class AccessorComponent implements OnInit {
           if (this.accessor.permissions[p][Object.keys(this.accessor.permissions[p]).toString()][3] == true) {
             deleter++;
           }
+          if (Object.keys(this.accessor.permissions[p]).toString() == "SportScores") {
+            this.scoredeletebypass = true;
+            this.scorecreatebypass = true;
+          }
         }
         if (this.accessor.permissions.length == viewer) {
           this.checkview = true;
+        }
+        if ((this.accessor.permissions.length - creater) == 1 && this.scorecreatebypass == true) {
+          this.checkcreate = true;
         }
         if (this.accessor.permissions.length == creater) {
           this.checkcreate = true;
         }
         if (this.accessor.permissions.length == editer) {
           this.checkedit = true;
+        }
+        if ((this.accessor.permissions.length - deleter) == 1 && this.scoredeletebypass == true) {
+          this.checkdel = true;
         }
         if (this.accessor.permissions.length == deleter) {
           this.checkdel = true;

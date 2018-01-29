@@ -55,15 +55,15 @@ export class OrganizerComponent implements OnInit {
   }
   movetoseason(idq) {
     localStorage.setItem('orgid', idq);
-    this.router.navigate(['/seasons']);
+    this.router.navigate(['/organizer/seasons']);
   }
   movetoclassification(idw) {
     localStorage.setItem('orgid', idw);
-    this.router.navigate(['/classifications']);
+    this.router.navigate(['/organizer/classifications']);
   }
   movetocompetition(id) {
     localStorage.setItem('orgid', id);
-    this.router.navigate(['/competitions']);
+    this.router.navigate(['/organizer/competitions']);
   }
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
