@@ -62,10 +62,12 @@
                   <tr *ngFor="let i of dayvalues;index as x;">
                     <td><input class="text-col-md-3" type="checkbox" [(ngModel)]='avail.daychecker[x]' [ngModelOptions]="{standalone: true}"></td>
                     <td><label>{{i}}</label></td>
-                    <td><input class="text-col-md-3" type="time" [disabled]="avail.daychecker[x]!==true" [(ngModel)]='avail.fromtimer[x]'
-                        [ngModelOptions]="{standalone: true}"></td>
-                    <td><input class="text-col-md-3" type="time" [disabled]="avail.daychecker[x]!==true" [(ngModel)]='avail.totimer[x]'
-                        [ngModelOptions]="{standalone: true}"></td>
+                    <td *ngIf="avail.daychecker[x]==true"><timepicker class="text-col-md-3" style="padding: 0;" [(ngModel)]='avail.fromtimer[x]' [ngModelOptions]="{standalone: true}" ></timepicker></td>
+                    <td *ngIf="avail.daychecker[x]==true"><timepicker class="text-col-md-3" style="padding: 0;" [(ngModel)]='avail.totimer[x]' [ngModelOptions]="{standalone: true}" ></timepicker></td>
+                    <!--<td><input class="text-col-md-3" type="time" [disabled]="avail.daychecker[x]!==true" [(ngModel)]='avail.fromtimer[x]'
+                        [ngModelOptions]="{standalone: true}"></td>-->
+                    <!--<td><input class="text-col-md-3" type="time" [disabled]="avail.daychecker[x]!==true" [(ngModel)]='avail.totimer[x]'
+                        [ngModelOptions]="{standalone: true}"></td>-->
                   </tr>
                 </tbody>
               </table>

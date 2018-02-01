@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { fakedb } from "../../../../components/common/fakedb";
 import { Http } from "@angular/http";
+import { CommonModule } from "@angular/common";
 import { HttpObserve } from '@angular/common/http/src/client';
 import { environment } from "../../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
@@ -64,8 +65,30 @@ export class TeamComponent implements OnInit {
 
             for (var j = 0; j < datapatcher[0].availability.length; j++) {
               this.avail.daychecker[datapatcher[0].availability[j].day] = true;
-              this.avail.fromtimer[datapatcher[0].availability[j].day] = datapatcher[0].availability[j].fromtimer;
-              this.avail.totimer[datapatcher[0].availability[j].day] = datapatcher[0].availability[j].totimer;
+
+              //janu coding chalu
+
+              var patcher = datapatcher[0].availability[j].fromtimer;
+              var patcher1 = datapatcher[0].availability[j].totimer;
+              var hs = new Date(patcher).getHours();
+              var ms = new Date(patcher).getMinutes();
+
+              var he = new Date(patcher1).getHours();
+              var me = new Date(patcher1).getMinutes();
+              var s = new Date(patcher);
+              s.setHours(hs);
+              s.setMinutes(ms);
+              var e = new Date(patcher1);
+              e.setHours(he);
+              e.setMinutes(me);
+
+              this.avail.fromtimer[datapatcher[0].availability[j].day] = s;
+              this.avail.totimer[datapatcher[0].availability[j].day] = e;
+
+              //janu coding puru
+
+              // this.avail.fromtimer[datapatcher[0].availability[j].day] = datapatcher[0].availability[j].fromtimer;
+              // this.avail.totimer[datapatcher[0].availability[j].day] = datapatcher[0].availability[j].totimer;
             }
           });
       }
@@ -75,7 +98,20 @@ export class TeamComponent implements OnInit {
   getmodeldata(avail) {
     for (var z = 0; z < this.avail.daychecker.length; z++) {
       if (this.avail.daychecker[z] == true) {
-        this.finalavailability.availability.push({ "day": z, "fromtimer": this.avail.fromtimer[z], "totimer": this.avail.totimer[z] });
+        var patcher = this.avail.fromtimer[z];
+        var patcher1 = this.avail.totimer[z];
+        var hs = new Date(patcher).getHours();
+        var ms = new Date(patcher).getMinutes();
+
+        var he = new Date(patcher1).getHours();
+        var me = new Date(patcher1).getMinutes();
+        var s = new Date(patcher);
+        s.setHours(hs);
+        s.setMinutes(ms);
+        var e = new Date(patcher1);
+        e.setHours(he);
+        e.setMinutes(me);
+        this.finalavailability.availability.push({ "day": z, "fromtimer": s, "totimer": e });
       }
     }
   }
@@ -131,7 +167,7 @@ export class TeamComponent implements OnInit {
       this.toastr.warning('Please upload logo ', 'Warning');
     }
     else {
-    var clubid=localStorage.getItem('clubid');
+      var clubid = localStorage.getItem('clubid');
       if (this.paramdetails) {
         this.teamForm.value.logo = this.imgdt;
         var janudata2 = {
@@ -145,7 +181,7 @@ export class TeamComponent implements OnInit {
           state: this.teamForm.value.state,
           street: this.teamForm.value.street,
           zipcode: this.teamForm.value.zipcode,
-          club:clubid,
+          club: clubid,
           availability: this.finalavailability.availability
         };
         this.http.patch(environment.api + "/clubteams/" + this.userId, janudata2)
@@ -171,7 +207,7 @@ export class TeamComponent implements OnInit {
           state: this.teamForm.value.state,
           street: this.teamForm.value.street,
           zipcode: this.teamForm.value.zipcode,
-          club:clubid,
+          club: clubid,
           availability: this.finalavailability.availability
         };
         this.http.post(environment.api + "/clubteams", janudata)

@@ -3,9 +3,9 @@ Created By : Hardik Lakhani(hardik.lakhani@iflair.com)
 */
 var mongoose = require('mongoose');
 var Sports = mongoose.model('sports');
+var SportsScore = mongoose.model('sportscores');
 
 var sportsCtrl = function () { };
-
 
 sportsCtrl.prototype.create = function (req, res) {
     var urole = new Sports(req.body);
@@ -14,7 +14,12 @@ sportsCtrl.prototype.create = function (req, res) {
             console.log('error occured..' + err);
         }
         else {
-            res.json(dta);
+            // res.json(dta);
+            var defaultScores = {wins: 0,draws: 0,losses: 0,sports: dta._id,};
+            SportsScore.create(defaultScores,function(ers,babu){
+                if(ers){console.log('error occured while set scores..'+ers);}
+                else{res.json(dta);}
+            });
         }
     });
 }

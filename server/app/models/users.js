@@ -17,8 +17,6 @@ var usersSchema=new Schema({
     isProfileSet:{ type: Boolean, default : false},
     roles:[{ type: Schema.Types.ObjectId, ref: 'roles' }],
     person_photo:String
-    // roles:{ type: Schema.Types.ObjectId, ref: 'roles' }
-//    person_photo:Object
 });
 usersSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model('users',usersSchema);

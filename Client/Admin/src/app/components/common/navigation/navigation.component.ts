@@ -17,6 +17,7 @@ export class NavigationComponent {
     public profilePhoto;
     public u : any;
     public modules=this.accr.getmodules();
+    public modulesize=this.modules.length * 4;
     constructor(private router: Router, private accr:AccessorService) { }
 
     ngOnInit() {
