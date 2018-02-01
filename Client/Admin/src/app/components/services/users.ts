@@ -37,6 +37,11 @@ export class UserService {
             .map((res: Response) => <Users[]>res.json())
             .catch(this.handleError);
     }
+    updateUsersDetails(data: Users,id:String): Observable<Users> {
+        return this.http.put(environment.api + '/users/'+id, data)
+            .map((res: Response) => <Users[]>res.json())
+            .catch(this.handleError);
+    }
     usersPhoto(data: any): Observable<Users> {
         return this.http.post(environment.api + '/users/upload', data)
             .map((res: Response) => <any[]>res.json())

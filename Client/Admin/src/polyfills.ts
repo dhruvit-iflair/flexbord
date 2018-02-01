@@ -17,3 +17,9 @@ import 'core-js/es6/reflect';
 
 import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
+
+/** IE10 and IE11 requires the following for NgClass support on SVG elements 
+ *      - By  : Nasiruddin Saiyed (nasiruddin.saiyed@iflair.com).
+ *        ref : https://github.com/angular/angular/issues/16264 https://github.com/angular/angular-cli/issues/4825  https://github.com/angular/angular-cli/issues/4822
+*/
+import 'classlist.js';  // Run `npm install --save classlist.js`.

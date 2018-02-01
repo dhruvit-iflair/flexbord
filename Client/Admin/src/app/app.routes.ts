@@ -48,6 +48,9 @@ import { ProfileViewComponent } from './views/profile/profile-view/profile-view.
 import { FoulsComponent } from './views/sports/fouls/fouls.component';
 import { ManagefoulsComponent } from './views/sports/fouls/managefouls/managefouls.component';
 
+import { EmailComponent } from './views/email/email.component';
+import { ManageEmailComponent } from './views/email/manage-email/manage-email.component';
+
 export const ROUTES:Routes = [
   // Main redirect
   {path: '', redirectTo: 'organizer', pathMatch: 'full'},
@@ -130,6 +133,10 @@ export const ROUTES:Routes = [
       {path: 'sports/fouls', component: FoulsComponent , canActivate: [Auth24Guard]},
       {path: 'sports/fouls/manage', component: ManagefoulsComponent , canActivate: [Auth24Guard]},
       {path: 'sports/fouls/manage/:_id', component: ManagefoulsComponent , canActivate: [Auth24Guard]},
+
+      {path: 'email', component: EmailComponent , canActivate: [Auth24Guard]},
+      {path: 'email/manage', component: ManageEmailComponent , canActivate: [Auth24Guard]},
+      {path: 'email/manage/:_id', component: ManageEmailComponent , canActivate: [Auth24Guard]},
     ]
   },
   {

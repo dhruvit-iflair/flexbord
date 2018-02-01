@@ -42,6 +42,8 @@ module.exports = function () {
     require('../app/models/sportplayerstatus');
     require('../app/models/sportscores');
     require('../app/models/sportfouls');
+    require('../app/models/email');
+    require('../app/models/emailType');
 
 
     return db;

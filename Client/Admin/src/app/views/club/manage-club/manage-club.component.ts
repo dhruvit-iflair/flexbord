@@ -158,8 +158,6 @@ export class ManageClubComponent implements OnInit {
   public placePic:any;
   public value : any;
   public value2 : Array<string>;
-  public spotsIns : Array<any> = [];
-  public spotsdInsText : Array<any> = [];
   public sub: any;
   public logo: any;
   public logo2: any;
@@ -194,8 +192,6 @@ export class ManageClubComponent implements OnInit {
    }
 
   ngOnInit() {
-    // this.items = fakedb.org;
-    this.spots = fakedb.sport;
     this.http.get(environment.api + '/club')
             .subscribe((res)=>{
               this.items2 = res.json();
@@ -208,6 +204,10 @@ export class ManageClubComponent implements OnInit {
                 }
               });
             });
+    this.http.get(environment.api + '/sports')
+            .subscribe((res)=>{
+              this.spots = res.json();
+            });
     this.sub = this.activeRouter.params.subscribe(params => {
       // //console.log(params._id);
       if (params._id) {
@@ -218,11 +218,6 @@ export class ManageClubComponent implements OnInit {
                  if(fagdf.length > 0){
                     var comming = res.json();
                     this.orgdata = comming[0];
-                    this.spotsIns = comming[0].sports;
-                    for(var i=0; i<this.spotsIns.length;i++){
-                      var y = this.spots.findIndex(r=>r.id == this.spotsIns[i]);
-                      this.spotsdInsText.push(this.spots[y].name);
-                    }
                     this.logo = environment.picpoint +'clublogos/'+ comming[0].logo;
                     var yaar = [];
                     if (comming[0].placePic) {
@@ -230,13 +225,9 @@ export class ManageClubComponent implements OnInit {
                         yaar.push(environment.picpoint +'clubplacepics/'+ asd);
                       })
                     }
-                    this.logo2 = yaar;
-                    this.spotsIns.sort();
-                    this.spotsdInsText.sort();
+                    this.logo2 = yaar
                     this.clubForm.patchValue( comming[0]);
-                    this.clubForm.controls['affilated'].setValue(fagdf[0].affilated, {onlySelf: true});
-                    this.clubForm.controls['sports'].setValue(this.spotsdInsText, {onlySelf: true});
-                     
+                    this.clubForm.controls['affilated'].setValue(fagdf[0].affilated, {onlySelf: true})
                   }
                   else {
                     this.toastr.error('Error!! No Club found!', 'Error');
@@ -247,21 +238,6 @@ export class ManageClubComponent implements OnInit {
                 });
       }
    });
-  }
-  selec(id){
-      var d = this.spotsIns.findIndex(r =>r == id);
-      var sf = this.spots.findIndex(r=> r.id == id);
-      var y =this.spotsdInsText.findIndex(r=>r == this.spots[sf].name);
-      if (d != -1) {
-         this.spotsIns.splice(d,1);
-         this.spotsdInsText.splice(y,1);  
-      } else {
-         this.spotsIns.push(id);
-         this.spotsdInsText.push(this.spots[sf].name);     
-      }
-    this.spotsIns.sort();
-    this.spotsdInsText.sort();
-    this.clubForm.patchValue({sports :this.spotsdInsText});
   }
   readUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
@@ -326,23 +302,6 @@ export class ManageClubComponent implements OnInit {
               address.building = st[0];   
               
             }
-          //   for(var j = 0; j < 6 ;j++){
-          //     if (st[0] == " "+ e.address_components[i].long_name || st[1] == " "+ e.address_components[i].long_name) {
-          //       isSame = true;
-          //       if (st[0] == " "+ e.address_components[i].long_name) {
-          //         isSZeroSame = true;
-          //       }
-          //       if (st[1] == " "+ e.address_components[i].long_name) {
-          //         isSOneSame = true;
-          //       }
-          //     }
-          //     if (j == 5 && !isSOneSame) {
-          //       address.building = st[0] + ', ' + st[1];
-          //     }
-          //     else if (j == 5 && !isSZeroSame ) {
-          //       address.building = st[0];                  
-          //     }
-          // }
           }
           if (i == e.address_components.length -1) {
             this.clubForm.patchValue(address);
@@ -381,17 +340,6 @@ export class ManageClubComponent implements OnInit {
       
     }
   }
-
-   dataChanged(e,c){
-      if (c == 'sport') {
-          //console.log(this.clubForm.value.sports);
-          //console.log(e);
-          this.clubForm.patchValue({sports: e})
-      }
-      if (c == 'affilated') {
-        this.clubForm.patchValue({affilated: e});
-      }
-    }
     addOrg(){      
       if (this.clubForm.value.logo == "" || this.clubForm.value.placePic == null) {
         if (this.clubForm.value.logo == "") {
@@ -402,8 +350,7 @@ export class ManageClubComponent implements OnInit {
         }
       }
       else{
-            if (this._id) {
-              this.clubForm.patchValue({sports :this.spotsIns});    
+            if (this._id) {   
               this.http.put(environment.api +"/club/"+this._id,this.clubForm.value)
                       .subscribe((res)=>{
                         var d = res.json();
@@ -420,8 +367,7 @@ export class ManageClubComponent implements OnInit {
               var m = new Date().getMinutes();
               var r = new Date();
               r.setHours(h);
-              r.setMinutes(m);
-              this.clubForm.patchValue({sports :this.spotsIns});                              
+              r.setMinutes(m);                         
               this.clubForm.patchValue({registered :r});                              
               this.http.post(environment.api +"/club",this.clubForm.value)
                       .subscribe((res)=>{
@@ -437,5 +383,3 @@ export class ManageClubComponent implements OnInit {
       }
     }
 }
-
-// }

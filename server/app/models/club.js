@@ -22,7 +22,8 @@ var clubSchema=new Schema({
     website: String,
     email: String,
     phonenumber: String,          
-    sports : Array, 
+    // sports : Array, 
+    sports:[{ type: Schema.Types.ObjectId, ref: 'sports' }],
     affilation : String,
     registered: { type: Date, default : Date.now()}
 });

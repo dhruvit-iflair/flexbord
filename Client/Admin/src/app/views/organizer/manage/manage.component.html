@@ -178,18 +178,12 @@
             </div>
              <div class="man col-md-12">
                     <h4 class="text-left">Choose<a style="color:#f00 !important;">*</a></h4>
-                    <!-- <select class="spt text-col-md-3"  name="spot" multiple="multiple"  (setData)="dataChanged($event,'sport')" selectedValves={{value2}} options={{spots}} placeholder="Select Sports" select2 formControlName="sports">
-                        <option *ngFor="let ite of spots"  [value]="ite.id">{{ite.name}}</option>
-                    </select> -->
-                    <div class="button-group">
-                            <button type="button" class="btn btn-lg dropdown-toggle col-md-12" data-toggle="dropdown">
-                                <input class="no_border text-col-md-3" type="text"  formControlName="sports" placeholder="Select Sports"><span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu col-md-8">
-                                <li *ngFor="let ite of spots;" >
-                                    <a class="small" (click)="$event.stopPropagation(); selec(ite.id)"><input type="checkbox" [checked]="spotsIns.indexOf(ite.id) >= 0"  data-value="{{ite.id}}"/>&nbsp; {{ite.name}}</a>
-                                </li>
-                            </ul>
+                    <app-multiselect [mArray]='spots' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="spots? spots.length > 0 : spots" ></app-multiselect>
+                    <div class="col-md-12" *ngIf="!spots? spots == [] : spots.length == 0">
+                        <h4 class="text-left col-md-4">Add Sport</h4>                        
+                        <button class="btn btn_green" [routerLink]="['/sports/manage']"> 
+                            <i class="fa fa-plus"></i>
+                        </button>
                     </div>
                     <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('sports').valid && orgForm.get('sports').touched">
                             Sports is required.

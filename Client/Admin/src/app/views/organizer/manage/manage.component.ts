@@ -18,13 +18,11 @@ export class ManageOrganizerComponent implements OnInit {
   public orgdata:any;
   public items:Array<any> ;
   public items2:Array<any> ;
-  public spots:Array<any> ;
+  public spots:Array<any> = [];
   public url:any;
   public placePic:any;
   public value : any;
   public value2 : Array<string>;
-  public spotsIns : Array<any> = [];
-  public spotsdInsText : Array<any> = [];
   public sub: any;
   public logo: any;
   public logo2: any;
@@ -55,7 +53,7 @@ export class ManageOrganizerComponent implements OnInit {
       email: ["",[Validators.email]],
       // phonenumber: [null,[Validators.required,Validators.minLength(10),Validators.maxLength(12)]],
       phonenumber: [null],
-      sports: [null,[Validators.required]],
+      sports: ["",[Validators.required]],
       capacity:  [0,[Validators.required]],
       placePic: [null],
       affilated:  ["",Validators.required],
@@ -65,8 +63,6 @@ export class ManageOrganizerComponent implements OnInit {
    }
 
   ngOnInit() {
-    // this.items = fakedb.org;
-    this.spots = fakedb.sport;
     this.http.get(environment.api + '/organizer')
             .subscribe((res)=>{
               this.items2 = res.json();
@@ -79,6 +75,10 @@ export class ManageOrganizerComponent implements OnInit {
                 }
               });
             });
+    this.http.get(environment.api + '/sports')
+            .subscribe((res)=>{
+              this.spots = res.json();
+            });
     this.sub = this.activeRouter.params.subscribe(params => {
       // //console.log(params._id);
       if (params._id) {
@@ -89,11 +89,6 @@ export class ManageOrganizerComponent implements OnInit {
                  if(fagdf.length > 0){
                     var comming = res.json();
                     this.orgdata = comming[0];
-                    this.spotsIns = comming[0].sports;
-                    for(var i=0; i<this.spotsIns.length;i++){
-                      var y = this.spots.findIndex(r=>r.id == this.spotsIns[i]);
-                      this.spotsdInsText.push(this.spots[y].name);
-                    }
                     this.logo = environment.picpoint +'orglogos/'+ comming[0].logo;
                     var yaar = [];
                     if (comming[0].placePic) {
@@ -102,12 +97,8 @@ export class ManageOrganizerComponent implements OnInit {
                       })
                     }
                     this.logo2 = yaar;
-                    this.spotsIns.sort();
-                    this.spotsdInsText.sort();
                     this.orgForm.patchValue( comming[0]);
-                    this.orgForm.controls['affilated'].setValue(fagdf[0].affilated, {onlySelf: true});
-                    this.orgForm.controls['sports'].setValue(this.spotsdInsText, {onlySelf: true});
-                     
+                    this.orgForm.controls['affilated'].setValue(fagdf[0].affilated, {onlySelf: true}); 
                   }
                   else {
                     this.toastr.error('Error!! No Organizer found!', 'Error');
@@ -119,21 +110,7 @@ export class ManageOrganizerComponent implements OnInit {
       }
    });
   }
-  selec(id){
-      var d = this.spotsIns.findIndex(r =>r == id);
-      var sf = this.spots.findIndex(r=> r.id == id);
-      var y =this.spotsdInsText.findIndex(r=>r == this.spots[sf].name);
-      if (d != -1) {
-         this.spotsIns.splice(d,1);
-         this.spotsdInsText.splice(y,1);  
-      } else {
-         this.spotsIns.push(id);
-         this.spotsdInsText.push(this.spots[sf].name);     
-      }
-    this.spotsIns.sort();
-    this.spotsdInsText.sort();
-    this.orgForm.patchValue({sports :this.spotsdInsText});
-  }
+
   readUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
@@ -179,9 +156,7 @@ export class ManageOrganizerComponent implements OnInit {
     this.orgForm.patchValue({address:e.formatted_address});
     this.orgForm.patchValue({phonenumber:e.formatted_phone_number});
     this.orgForm.patchValue({website:e.website});
-     // and fill the corresponding field on the form.
-     var address = { zipcode:'', country:'', state:'', city:'', street:'', building:'' }
-     var address = { zipcode:'', country:'', state:'', city:'', street:'', building:'' }
+    var address = { zipcode:'', country:'', state:'', city:'', street:'', building:'' };
      for (var i = 0; i < e.address_components.length; i++) {
           var add = e.address_components[i].types[0];
           if (add == "postal_code") {
@@ -207,9 +182,9 @@ export class ManageOrganizerComponent implements OnInit {
               address.building = st[0];   
               
             }
-          if (i == e.address_components.length -1) {
-            this.orgForm.patchValue(address);
-          }
+        }
+        if (i == e.address_components.length -1) {
+          this.orgForm.patchValue(address);
         }
     }
   }
@@ -252,18 +227,8 @@ export class ManageOrganizerComponent implements OnInit {
       
     }
   }
-
-   dataChanged(e,c){
-      if (c == 'sport') {
-          //console.log(this.orgForm.value.sports);
-          //console.log(e);
-          this.orgForm.patchValue({sports: e})
-      }
-      if (c == 'affilated') {
-        this.orgForm.patchValue({affilated: e});
-      }
-    }
-    addOrg(){      
+    addOrg(){     
+      console.log(this.orgForm.value); 
       if (this.orgForm.value.logo == "" || this.orgForm.value.placePic == null) {
         if (this.orgForm.value.logo == "") {
           this.toastr.warning('Please upload logo ', 'Warning');
@@ -274,7 +239,7 @@ export class ManageOrganizerComponent implements OnInit {
       }
       else{
             if (this._id) {
-              this.orgForm.patchValue({sports :this.spotsIns});    
+              // this.orgForm.patchValue({sports :this.spotsIns});    
               this.http.put(environment.api +"/organizer/"+this._id,this.orgForm.value)
                       .subscribe((res)=>{
                         var d = res.json();
@@ -292,7 +257,7 @@ export class ManageOrganizerComponent implements OnInit {
               var r = new Date();
               r.setHours(h);
               r.setMinutes(m);
-              this.orgForm.patchValue({sports :this.spotsIns});                              
+              // this.orgForm.patchValue({sports :this.spotsIns});                              
               this.orgForm.patchValue({registered :r});                              
               this.http.post(environment.api +"/organizer",this.orgForm.value)
                       .subscribe((res)=>{

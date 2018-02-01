@@ -1,0 +1,65 @@
+.bgcheckbox {
+    position: relative;
+}
+span.boxwitoutTouch{
+    font-size: 17px;
+    line-height: 22px;
+    width: 86px;
+    color: #303030;
+    border: 1px solid;
+}
+a.btn.btn-lg.dropdown-toggle.col-md-12 {
+    background-color: #fff;
+    height: 40px;
+}
+span.boxwitoutTouch{
+    font-size: 17px;
+    line-height: 22px;
+    width: 86px;
+    color: #303030;
+    padding-left: 3px;
+    border: 1px solid;
+    padding-right: 5px;
+    margin-left: 3px;
+    margin-right: 5px;
+}
+.button-group .btn.btn-lg.dropdown-toggle span.boxwitoutTouch {
+    float: left;
+    border: 1px solid #333;
+    width: auto;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    box-shadow: 1px 2px 3px #868686;
+    position: relative;
+    top: -5px;
+}
+ul.dropdown-menu.col-md-8 {
+    /* padding-left: 14px; */
+    /* padding-right: 15px; */
+    /* padding-bottom: 11px; */
+    padding: 15px;
+}
+li {
+    padding-top: 3px;
+    border-bottom: 1px solid #c3c3c3;
+    padding-bottom: 7px;
+}
+.bgcheckbox label {
+    padding-top: 3px;
+}
+input.no_border.text.col-md-12.ng-untouched.ng-pristine.ng-valid{
+    /* width: 95%; */
+    border: 1px solid #c3c3c3;
+    height: 39px;
+    margin-right: -22px;
+}
+span.box {
+    float: left;
+    color: #535353;
+}
+span.caret {
+    position: relative;
+    right: 0;
+    left: 98.5%;
+    top: -29px;
+}

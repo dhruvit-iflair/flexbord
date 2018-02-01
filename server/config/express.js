@@ -52,6 +52,8 @@ module.exports = function (db) {
     require('../app/routes/sportplayerstatus')(app);
     require('../app/routes/sportscores')(app);
     require('../app/routes/sportfouls')(app);
+    require('../app/routes/email')(app);
+    require('../app/routes/emailType')(app);
 
 
     return server;

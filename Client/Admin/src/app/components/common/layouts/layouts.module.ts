@@ -9,10 +9,11 @@ import {NavigationModule} from "../navigation/navigation.module";
 import {TopnavbarModule} from "../topnavbar/topnavbar.module";
 import {FooterModule} from "../footer/footer.module";
 import { BreadCrumbModule } from "../bread-crumb/bread-crumb.module";
+import {LoadingComponent} from '../loading/loading.component'
 @NgModule({
-    declarations: [blankComponent,basicComponent],
+    declarations: [blankComponent,basicComponent,LoadingComponent],
     imports     : [BrowserModule, RouterModule, NavigationModule, TopnavbarModule, FooterModule,BreadCrumbModule],
-    exports     : [blankComponent,basicComponent]
+    exports     : [blankComponent,basicComponent,LoadingComponent]
 })
 
 export class LayoutsModule {}

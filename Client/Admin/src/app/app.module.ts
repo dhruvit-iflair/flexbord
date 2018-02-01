@@ -36,8 +36,11 @@ import { OrgmembersComponent } from './views/organizer/orgmembers/orgmembers.com
 import { MemberComponent } from './views/organizer/orgmembers/member/member.component';
 import { AccessorService } from "./components/common/accessor.service";
 import { BreadCrumbService } from "./components/services/bread-crumb";
-import {Ng5BreadcrumbModule,BreadcrumbService} from 'ng5-breadcrumb';
+import { EmailService } from "./components/services/email.service";
+import { EmailTypeService } from './components/services/email-type.service';
 
+import {Ng5BreadcrumbModule,BreadcrumbService} from 'ng5-breadcrumb';
+import { BackLocationDirective } from "./components/directive/backButton";
 import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
 import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
 import { OrderByPipe } from "./components/pipes/orderBy";
@@ -76,7 +79,10 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { ProfileViewComponent } from './views/profile/profile-view/profile-view.component';
 import { FoulsComponent } from './views/sports/fouls/fouls.component';
 import { ManagefoulsComponent } from './views/sports/fouls/managefouls/managefouls.component';
-
+import { MultiselectComponent } from './components/custom/multiselect/multiselect.component';
+import { EmailComponent } from './views/email/email.component';
+import { ManageEmailComponent } from './views/email/manage-email/manage-email.component';
+import { CkEditorDirective } from './components/directive/ck-editor.directive';
 
 @NgModule({
   declarations: [
@@ -86,6 +92,7 @@ import { ManagefoulsComponent } from './views/sports/fouls/managefouls/managefou
     GoogleplaceDirective,
     placeDirectiveWithModel,    
     BigTextDirective,
+    BackLocationDirective,
     Dir_select,
     SeasonsComponent,
     ManageSeasonsComponent,
@@ -124,7 +131,11 @@ import { ManagefoulsComponent } from './views/sports/fouls/managefouls/managefou
     ManageUsersComponent,
     ProfileViewComponent,
     FoulsComponent,
-    ManagefoulsComponent
+    ManagefoulsComponent,
+    MultiselectComponent,
+    EmailComponent,
+    ManageEmailComponent,
+    CkEditorDirective
   ],
   imports: [
     // Angular modules
@@ -157,7 +168,7 @@ import { ManagefoulsComponent } from './views/sports/fouls/managefouls/managefou
     RouterModule.forRoot(ROUTES),
     Ng5BreadcrumbModule.forRoot(),
   ],
-  providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService],
+  providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService,EmailService,EmailTypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

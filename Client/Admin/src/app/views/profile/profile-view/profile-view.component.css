@@ -1,0 +1,19 @@
+img.profileView {
+    width: 100%;
+    margin: 0;
+    position: absolute;
+    text-align: center;
+    padding-top: 30px;
+}
+.under-box {
+    margin: 13px auto;
+}
+.under-box div {
+    padding-top: 2%;
+}
+.profileBtn {
+    position: relative;
+    width: auto;
+    margin-top: 69%;
+    margin-left: 0%;
+}

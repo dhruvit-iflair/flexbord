@@ -1,0 +1,28 @@
+<div class="button-group">
+  <!-- <button type="button" > -->      
+    <a class="btn btn-lg dropdown-toggle col-md-12" data-toggle="dropdown" *ngIf="placeholder && valueNeedToDisplay.length == 0"><span class="box">{{placeholder}} </span> </a>
+    <a class="btn btn-lg dropdown-toggle col-md-12" data-toggle="dropdown" *ngIf="valueNeedToDisplay.length > 0"><span class="boxwitoutTouch" *ngFor="let its of valueNeedToDisplay" (click)="$event.stopPropagation();">{{its}} <i class="fa fa-times" aria-hidden="true" (click)="$event.stopPropagation();removeFromSpan(its)"></i></span> </a>
+    <!-- <input class="no_border text-col-md-3" type="text" placeholder="" value='{{valueNeedToDisplay}}'><span class="caret"></span> -->
+    <span class="caret"></span>
+  <!-- </button> -->
+  <ul class="dropdown-menu col-md-8">
+      <li *ngIf="isSearch" class="searchBox">
+        <div class="row" (click)="$event.stopPropagation();">
+          <div class="col-md-11">
+                <input class="no_border text col-md-12" type="text" placeholder="Search" [(ngModel)]='searchFilter' [ngModelOptions]="{standalone: true}" (ngModelChange)="filter()">
+          </div>
+          <div class="col-md-1">
+                <i class="fa fa-search" aria-hidden="true"></i>
+          </div>          
+        </div>
+      </li>
+      <li *ngFor="let item of mArray" (click)="$event.stopPropagation()">
+        <div class="bgcheckbox">
+          <label class="bgcheckbox-label">
+              <input class="bgcheckbox-input"  type="checkbox" value="{{item[mValue]}}" (click)="$event.stopPropagation();selectVal(item[mValue])" [checked]="valueNeedToSend.indexOf(item[mValue]) >= 0">
+              <span class="bgcheckbox-span"> {{item[mDisplay]}}</span>
+          </label>
+      </div>
+    </li>
+  </ul>
+</div>

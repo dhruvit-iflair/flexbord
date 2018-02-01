@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="container">
+      <div class="col-md-10">
+          <label><h2>Email</h2></label>
+      </div>
+      <!-- <div class="col-md-2 text-right">
+          <button class="btn btn_green" [routerLink]="['/email/manage']">New Email Template</button>                         
+      </div> -->
+      <div class="col-md-12" id="tabl">
+      <div class="col-md-12 no_padd mar_btt">
+      </div>
+        <br>
+      <table datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
+              <thead>
+                <tr>
+                    <th>_id</th>
+                    <th>Title</th>
+                    <th>From</th>
+                    <th>CC</th>
+                    <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of email" >
+                  <td style="display:none">{{item._id}}</td>
+                  <td>{{item.title}}</td>
+                  <td>{{item.from}}</td>
+                  <td>{{item.cc}}</td>
+                  <td>
+                    <a class="btn btn_green tab_btn" routerLink="/email/manage/{{item._id}}"  title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <!-- <a class="btn btn_red tab_btn" (click)="delMailva(item._id)" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
+                    <!-- <a class="btn btn_2 tab_btn" (click)="movetoseason(item._id)" title="Seasons" *ngIf="hasSeasonsPerm"><i class="fa fa-superpowers" aria-hidden="true"></i></a>
+                    <a class="btn btn_1 tab_btn" (click)="movetomember(item._id)" title="Members" *ngIf="hasMembersPerm"><i class="fa fa-user" aria-hidden="true"></i></a>
+                    <a class="btn btn_green tab_btn" (click)="movetoclassification(item._id)" title="Classifications" *ngIf="hasClassificationsPerm"><i class="fa fa-code-fork" aria-hidden="true"></i></a>
+                    <a class="btn btn_red tab_btn" (click)="movetocompetition(item._id)" title="Competitions" *ngIf="hasCompetitionsPerm"><i class="fa fa-dribbble" aria-hidden="true"></i></a></td> -->
+                </tr>
+              </tbody>
+      </table>
+      </div>
+  </div>  
+</div>
+
+<!-- <div class="alert-popup">
+    <div class="alert-popup-inner">
+      <p>Confirm to delete this Organizer!</p>
+      <div class="alert-popup-btn">
+           <a href="#" class="btn btn_green">Ok</a>
+           <a href="#" class="btn btn_green">cancel</a>
+      </div>
+    </div>
+</div> -->

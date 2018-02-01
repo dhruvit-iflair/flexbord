@@ -1,3 +1,53 @@
-<p>
-  profile-view works!
-</p>
+<div class="row">
+  <!-- <div class="col-md-10">
+      <label><h2>Profile Setup</h2></label>
+  </div> -->
+  <div class="container">
+    <div class="manage-box clearfix">
+        <div class="col-md-12">
+          <label><h2>Edit Profile</h2></label>
+        </div>
+        <div class="col-md-5">
+            <div class="col-md-12"><img src="{{person_photo}}" alt="" class="profileView"></div>
+            <div class="col-md-12">
+                <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none" >
+                <button class="btn btn_green profileBtn" (click)="file.click()">Upload</button>   
+            </div>
+        </div>
+        <div class="col-md-7">
+          <div class="under-box">
+            <form [formGroup]='userForm'>
+              <div class="col-md-12">
+                  <h4 class="text-left">First Name<a style="color:#f00 !important;">*</a></h4>
+                  <input class="form-control text-col-md-3" type="text" formControlName="firstname" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" required placeholder="Enter First Name">
+              </div>
+              <div class="col-md-12">
+                  <h4 class="text-left">Last Name<a style="color:#f00 !important;">*</a></h4>
+                  <input class="form-control text-col-md-3" type="text" formControlName="lastname" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" required placeholder="Enter Last Name">
+              </div>
+              <div class="col-md-12">
+                  <h4 class="text-left">Email<a style="color:#f00 !important;">*</a></h4>
+                  <input class="form-control text-col-md-3" type="email" formControlName="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required placeholder="Email">
+              </div>
+              <div class="col-md-12">
+                  <h4 class="text-left">New Password<a style="color:#f00 !important;">*</a></h4>
+                  <input class="form-control text-col-md-3" type="password" formControlName="password" placeholder="Enter New Password">
+              </div>
+              <div class="col-md-12">
+                  <h4 class="text-left">Confirm New Password<a style="color:#f00 !important;">*</a></h4>
+                  <input class="form-control text-col-md-3" type="password" formControlName="confirmPassword" placeholder="Confirm New Password">
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="col-md-6 text-left">
+      <button class="btn btn-white" Back> Back </button>
+    </div>
+    <div class="col-md-6 text-right">
+        <button class="btn btn_green" [disabled]='!userForm.valid' (click)='updateUser()'>Save  </button>      
+    </div>
+  </div>
+</div>

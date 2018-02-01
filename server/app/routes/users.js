@@ -24,6 +24,7 @@ module.exports=function(app){
     usersRoute.route('/:id')
     .get(users.getbyuser)
     .patch(users.update)
-    .delete(users.delete);
+    .delete(users.delete)
+    .put(users.changepassword);
     app.use('/api/users',usersRoute);
 };

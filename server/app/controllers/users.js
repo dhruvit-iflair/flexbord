@@ -254,6 +254,28 @@ usersctrl.prototype.delete = function (req, res) {
     });
 }
 
+usersctrl.prototype.changepassword = function (req, res) {
+    Users.findByUsername(req.body.username).then(function (doc) {
+        var newPass = req.body.password;
+        if (doc) {
+            var updateObject = req.body;
+            if (req.body.password) {             
+                doc.setPassword(newPass, function () {
+                    doc.save();
+                });   
+            }
+            Users.findOneAndUpdate({ username: req.body.username }, { $set: updateObject },{new:true} ,function (er, dt) {
+                if (er) {
+                    console.log('error occured..' + er);
+                }
+                res.json(dt);
+            });
+        }
+        else {
+            res.json('This User does not exist!');
+        }
+    });
+}
 // use static authenticate method of model in LocalStrategy
 passport.use(new LocalStrategy(Users.authenticate()));
 

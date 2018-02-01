@@ -21,7 +21,7 @@ clubTournamentsCtrl.prototype.create = function (req, res) {
 }
 
 clubTournamentsCtrl.prototype.list = function (req, res) {
-    clubTournaments.find().populate('clubSeasons').populate('clubClassifications').exec(function (er, dt) {
+    clubTournaments.find().populate('clubSeasons').populate('clubClassifications').populate('sports').exec(function (er, dt) {
         if (er) {
             console.log('error occured..' + er);
         }
@@ -39,7 +39,7 @@ clubTournamentsCtrl.prototype.getbyid = function (req, res) {
 }
 
 clubTournamentsCtrl.prototype.getbyclub = function (req, res) {
-    clubTournaments.find({ club: req.params.id }).populate('clubSeasons').populate('clubClassifications').exec(function (err, gd) {
+    clubTournaments.find({ club: req.params.id }).populate('clubSeasons').populate('clubClassifications').populate('sports').exec(function (err, gd) {
         if (err) console.log('error occured..' + err);
         res.json(gd);
     });

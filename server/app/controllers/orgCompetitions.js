@@ -21,7 +21,7 @@ orgCompetitionsCtrl.prototype.create = function (req, res) {
 }
 
 orgCompetitionsCtrl.prototype.list = function (req, res) {
-    OrgCompetitions.find().populate('seasons').populate('organizerClassifications').exec(function (er, dt) {
+    OrgCompetitions.find().populate('seasons').populate('organizerClassifications').populate('sports').exec(function (er, dt) {
         if (er) {
             console.log('error occured..' + er);
         }
@@ -39,7 +39,7 @@ orgCompetitionsCtrl.prototype.getbyid = function (req, res) {
 }
 
 orgCompetitionsCtrl.prototype.getbyorg = function (req, res) {
-    OrgCompetitions.find({ organizer: req.params.id }).populate('seasons').populate('organizerClassifications').exec(function (err, gd) {
+    OrgCompetitions.find({ organizer: req.params.id }).populate('seasons').populate('organizerClassifications').populate('sports').exec(function (err, gd) {
         if (err) console.log('error occured..' + err);
         res.json(gd);
     });
