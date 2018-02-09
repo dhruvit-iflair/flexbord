@@ -42,7 +42,12 @@ module.exports = function () {
     require('../app/models/sportplayerstatus');
     require('../app/models/sportscores');
     require('../app/models/sportfouls');
-
+    require('../app/models/games');
+    require('../app/models/gamesettings');
+    require('../app/models/timesettings');
+    require('../app/models/consequences');
+    require('../app/models/structures');
+    require('../app/models/playlists');
 
     return db;
 }

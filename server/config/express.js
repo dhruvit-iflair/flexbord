@@ -52,7 +52,12 @@ module.exports = function (db) {
     require('../app/routes/sportplayerstatus')(app);
     require('../app/routes/sportscores')(app);
     require('../app/routes/sportfouls')(app);
-
+    require('../app/routes/games')(app);
+    require('../app/routes/gamesettings')(app);
+    require('../app/routes/timesettings')(app);
+    require('../app/routes/consequences')(app);
+    require('../app/routes/structures')(app);
+    require('../app/routes/playlists')(app);
 
     return server;
 };
