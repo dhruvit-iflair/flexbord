@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { smoothlyMenu } from '../../../app.helpers';
 import { environment } from "../../../../environments/environment";
+import * as jQuery from 'jquery'
 
-declare var jQuery:any;
+// declare var jQuery:any;
 
 @Component({
     selector: 'topnavbar',

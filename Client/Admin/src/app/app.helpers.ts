@@ -7,7 +7,10 @@
  *
  */
 
-declare var jQuery:any;
+// declare var jQuery:any;
+import * as jQuery from 'jquery'
+
+
 
 export function correctHeight() {
 

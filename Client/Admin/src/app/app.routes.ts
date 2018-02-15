@@ -13,6 +13,8 @@ import { ManageOrganizerComponent } from './views/organizer/manage/manage.compon
 import { OrganizerComponent } from "./views/organizer/organizer.component";
 import { OrgmembersComponent } from "./views/organizer/orgmembers/orgmembers.component";
 import { MemberComponent } from "./views/organizer/orgmembers/member/member.component";
+import { ImportOrgMembersComponent } from './views/organizer/orgmembers/import-org-members/import-org-members.component';
+
 import { SeasonsComponent } from './views/organizer/seasons/seasons.component';
 import { ManageSeasonsComponent } from './views/organizer/seasons/manage-seasons/manage-seasons.component';
 import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
@@ -69,6 +71,7 @@ export const ROUTES:Routes = [
       {path: 'organizer/manage/:_id', component: ManageOrganizerComponent , canActivate: [Auth24Guard]},
       
       {path: 'organizer/orgmembers', component: OrgmembersComponent, canActivate: [Auth24Guard]},      
+      {path: 'organizer/orgmembers/import', component: ImportOrgMembersComponent, canActivate: [Auth24Guard]},      
       {path: 'organizer/orgmembers/member', component: MemberComponent, canActivate: [Auth24Guard]},      
       {path: 'organizer/orgmembers/member/:_id', component: MemberComponent, canActivate: [Auth24Guard]},      
       

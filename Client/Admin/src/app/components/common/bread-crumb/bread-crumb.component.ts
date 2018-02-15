@@ -36,6 +36,7 @@ export class BreadCrumbComponent implements OnInit {
     
     // this.breadcrumbService.addFriendlyNameForRoute('/classifications', 'Classifications');
     // this.breadcrumbService.addFriendlyNameForRoute('/classifications/manage', 'Manage Classifications');
+    this.breadcrumbService.addFriendlyNameForRoute('/organizer/orgmembers/import', 'Import');
     
     this.breadcrumbService.addFriendlyNameForRoute('/organizer/competitions', 'Competitions');
     this.breadcrumbService.addFriendlyNameForRoute('/organizer/competitions/manage', 'Manage Competition');

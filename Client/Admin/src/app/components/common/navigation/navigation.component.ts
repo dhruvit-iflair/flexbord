@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccessorService } from "../accessor.service";
 import { environment } from "../../../../environments/environment";
-declare var jQuery: any;
+declare const jQuery: any;
+// import * as jQuery from 'jquery'
+
 
 @Component({
     selector: 'navigation',

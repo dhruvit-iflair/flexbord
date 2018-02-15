@@ -1,5 +1,6 @@
 import {OnInit,Input, Directive, ElementRef, EventEmitter, Output } from "@angular/core";
 import {NgModel} from '@angular/forms';
+// import * as jQuery from 'jquery'
 
 declare var jQuery:any;
 

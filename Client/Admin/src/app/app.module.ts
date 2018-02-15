@@ -83,6 +83,7 @@ import { MultiselectComponent } from './components/custom/multiselect/multiselec
 import { EmailComponent } from './views/email/email.component';
 import { ManageEmailComponent } from './views/email/manage-email/manage-email.component';
 import { CkEditorDirective } from './components/directive/ck-editor.directive';
+import { ImportOrgMembersComponent } from './views/organizer/orgmembers/import-org-members/import-org-members.component';
 
 @NgModule({
   declarations: [
@@ -135,7 +136,8 @@ import { CkEditorDirective } from './components/directive/ck-editor.directive';
     MultiselectComponent,
     EmailComponent,
     ManageEmailComponent,
-    CkEditorDirective
+    CkEditorDirective,
+    ImportOrgMembersComponent
   ],
   imports: [
     // Angular modules

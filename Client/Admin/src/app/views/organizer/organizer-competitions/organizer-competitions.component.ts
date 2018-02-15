@@ -6,7 +6,7 @@ import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
 import { AccessorService } from "../../../components/common/accessor.service";
 
-declare var jQuery:any;
+// declare var jQuery:any;
 @Component({
   selector: 'app-organizer-competitions',
   templateUrl: './organizer-competitions.component.html',
