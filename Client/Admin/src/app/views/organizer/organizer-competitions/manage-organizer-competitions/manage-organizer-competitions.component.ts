@@ -5,7 +5,6 @@ import { Router ,ActivatedRoute} from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
-import { fakedb } from "../../../../components/common/fakedb";
 
 @Component({
   selector: 'app-manage-organizer-competitions',
@@ -32,62 +31,37 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
       organizerClassifications: ["",[Validators.required]],
       organizerClassificationsValue: ["",[Validators.required]]
     })
-
-    this.http.get(environment.api + "/organizer/"+localStorage.getItem('orgid'))
-            .subscribe((res) => {
-              var r = res.json(); 
-              this.sportsValue = r[0].sports;
-              var w = [];
-              for (let i = 0; i < fakedb.sport.length; i++) {
-                const e = fakedb.sport[i];
-                for (let j = 0; j < this.sportsValue.length; j++) {
-                  if (e.id == this.sportsValue[j]) {
-                      w.push(fakedb.sport[i]);
-                  } 
-                }
-                if (i == fakedb.sport.length -1 ) {
-                    this.sports = w;
-                    console.log(w);
-                }              
-              }
-            })
-            
+    this.http.get(environment.api + "/organizer/"+localStorage.getItem('orgid')).subscribe((res) => {
+      var r = res.json(); 
+      this.sportsValue = r[0].sports;
+    })      
   }
 
   ngOnInit() {    
-    this.http.get(environment.api + '/seasons')
-              .subscribe((res)=>{
-                var fagdf = res.json();
-                this.amki = fagdf;
-                var t = this.amki.filter((rf)=>rf.organizer==  localStorage.getItem('orgid'));
-                if(t.length > 0){
-                  // this.season = fagdf;
-                  this.season = t;                  
-                  // console.log(t);
-                }
-                // else {
-                //     this.toastr.error('Error!! No Season found! Please Create one', 'Error');
-                //     this.router.navigate(['/seasons']);
-                // }
-                },(error)=>{
-                    this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-                    this.router.navigate(['/organizer/competitions']);
+    this.http.get(environment.api + '/seasons').subscribe((res)=>{
+        var fagdf = res.json();
+        this.amki = fagdf;
+        var t = this.amki.filter((rf)=>rf.organizer==  localStorage.getItem('orgid'));
+        if(t.length > 0){
+          this.season = t;                  
+        }
+      },(error)=>{
+          this.toastr.error('Error!! Something went wrong! try again later', 'Error');
+          this.router.navigate(['/organizer/competitions']);
      });
-     this.http.get(environment.api + '/organizerClassifications')
-              .subscribe((res)=>{
+     this.http.get(environment.api + '/sports')
+            .subscribe((res)=>{
+              this.sports = res.json();
+            });
+     this.http.get(environment.api + '/organizerClassifications').subscribe((res)=>{
                 var fagdf = res.json();
                 var u = [];
                 u= fagdf;
                 var t = u.filter((rf)=>rf.organizer==  localStorage.getItem('orgid'));
                    
                 if(t.length > 0){
-                  //  this.classifications = fagdf;
                    this.classifications = t;   
                 }
-                // else {
-                //       this.toastr.error('Error!! No Classification found! Please Create one', 'Error');
-                //       this.router.navigate(['/classifications']);
-                //   }
                 },(error)=>{
                       this.toastr.error('Error!! Something went wrong! try again later', 'Error');
                       this.router.navigate(['/organizer/competitions']);
@@ -98,26 +72,13 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
         this._id = params._id;
         this.http.get(environment.api + '/orgCompetitions/'+ params._id)
                .subscribe((res)=>{
-                 //console.log(res.json());
                  var fagdf = res.json();
                  if(fagdf.length > 0){
-                  // this.classValue = this.classifications.filter(ad => ad._id == fagdf[0].organizerClassifications);
-                  this.classValue = this.classifications.filter(ad => ad._id == fagdf[0].organizerClassifications._id); 
-                      this.comForm = this.fb.group({
-                        name: [fagdf[0].name,[Validators.required]],
-                        description: [fagdf[0].description,[Validators.required]],
-                        sports: [fagdf[0].sports,[Validators.required]],
-                        seasons: [fagdf[0].seasons,[Validators.required]],
-                        organizerClassifications: [fagdf[0].organizerClassifications,[Validators.required]],
-                        organizerClassificationsValue: [fagdf[0].organizerClassificationsValue,[Validators.required]]
-                      })
+                   this.classValue = this.classifications.filter(ad => ad._id == fagdf[0].organizerClassifications._id); 
+                   this.comForm.patchValue(fagdf[0]);
                    this.comForm.controls['seasons'].setValue(fagdf[0].seasons._id, {onlySelf: true});
                    this.comForm.controls['organizerClassifications'].setValue(fagdf[0].organizerClassifications._id, {onlySelf: true});
                    this.comForm.controls['organizerClassificationsValue'].setValue(fagdf[0].organizerClassificationsValue, {onlySelf: true});
-                      // this.comForm.patchValue({seasons:});              
-                   console.log(this.classValue);
-                   console.log(fagdf[0].organizerClassificationsValue);
-
                  }
                  else {
                       this.toastr.error('Error!! No Competitions found!', 'Error');
@@ -140,11 +101,10 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
    });
   }
   saveVal(){
-    // //console.log(this.comForm.value);
-     if (this.comForm.valid) {
-    var orid=localStorage.getItem('orgid');
-    this.comForm.value.organizer=orid;
-      if (this._id) {
+   if (this.comForm.valid) {
+     var orid=localStorage.getItem('orgid');
+     this.comForm.value.organizer=orid;
+     if (this._id) {
         this.http.put(environment.api+'/orgCompetitions/'+this._id,this.comForm.value)
                  .subscribe((res)=>{
                     var fagdf = res.json();
@@ -179,8 +139,6 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
      }
   }
   getClasValue(e:any){
-    console.log(e);
     this.classValue = this.classifications.filter(ad => ad._id == this.comForm.value.organizerClassifications);
-    console.log(this.classValue);
   }
 }

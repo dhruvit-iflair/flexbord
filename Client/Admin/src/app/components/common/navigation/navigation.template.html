@@ -50,6 +50,9 @@
             <li [ngClass]="{active: activeRoute('permissions')}" *ngIf="isProfileSet">
                 <a [routerLink]="['/permissions']"><i class="fa fa-gears"></i> <span class="nav-label">Permissions</span> </a>
             </li>
+            <li [ngClass]="{active: activeRoute('email')}" *ngIf="isProfileSet">
+                <a [routerLink]="['/email']"><i class="fa fa-envelope"></i> <span class="nav-label">Email</span> </a>
+            </li>
         </ul>
 
     </div>

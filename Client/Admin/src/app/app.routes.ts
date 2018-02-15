@@ -60,9 +60,10 @@ import { PlaylistsComponent } from './views/gamesettings/playlists/playlists.com
 import { ManageplaylistComponent } from './views/gamesettings/playlists/manageplaylist/manageplaylist.component';
 import { ScoreboardsComponent } from './views/gamesettings/scoreboards/scoreboards.component';
 import { ManagescoreboardComponent } from './views/gamesettings/scoreboards/managescoreboard/managescoreboard.component';
+import { EmailComponent } from './views/email/email.component';
+import { ManageEmailComponent } from './views/email/manage-email/manage-email.component';
 
-
-export const ROUTES: Routes = [
+export const ROUTES:Routes = [
   // Main redirect
   { path: '', redirectTo: 'organizer', pathMatch: 'full' },
 
@@ -172,6 +173,11 @@ export const ROUTES: Routes = [
       { path: 'game_settings/scoreboards', component: ScoreboardsComponent, canActivate: [Auth24Guard] },
       { path: 'game_settings/scoreboards/manage', component: ManagescoreboardComponent, canActivate: [Auth24Guard] },
       { path: 'game_settings/scoreboards/manage/:_id', component: ManagescoreboardComponent, canActivate: [Auth24Guard] },
+
+      {path: 'email', component: EmailComponent , canActivate: [Auth24Guard]},
+      {path: 'email/manage', component: ManageEmailComponent , canActivate: [Auth24Guard]},
+      {path: 'email/manage/:_id', component: ManageEmailComponent , canActivate: [Auth24Guard]},
+
     ]
   },
   {

@@ -95,6 +95,20 @@ export class BreadCrumbComponent implements OnInit {
     
     this.breadcrumbService.addFriendlyNameForRoute('/permissions', 'Permissions');
     
+
+    /////////////////////
+    // Profile Modules //
+    /////////////////////
+
+    this.breadcrumbService.hideRoute('/profile');
+    this.breadcrumbService.addFriendlyNameForRoute('/profile/view', 'Edit Profile');
+    
+    /////////////////////
+    // Email Modules //
+    /////////////////////
+    this.breadcrumbService.addFriendlyNameForRoute('/email', 'Email');
+    this.breadcrumbService.hideRoute('/email/manage');
+    this.breadcrumbService.addFriendlyNameForRouteRegex('/email/manage/[a-zA-Z0-9]', 'Manage Email');        // 
     // this.breadcrumbService.addFriendlyNameForRouteRegex('/home/users/[0-9]/info', 'Information');
   }   
   ngOnInit(){

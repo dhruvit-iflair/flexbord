@@ -7,7 +7,8 @@ Schema=mongoose.Schema;
 var orgCompetitionsSchema=new Schema({
     name:String,    
     description: String,
-    sports: String,
+    // sports: String,
+    sports:[{ type: Schema.Types.ObjectId, ref: 'sports' }],
     seasons: { type: Schema.Types.ObjectId, ref: 'seasons' },
     organizer:{ type: Schema.Types.ObjectId, ref: 'organizer' },
     organizerClassifications: { type: Schema.Types.ObjectId, ref: 'organizerClassifications' },

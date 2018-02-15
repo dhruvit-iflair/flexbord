@@ -59,6 +59,8 @@ module.exports = function (db) {
     require('../app/routes/structures')(app);
     require('../app/routes/playlists')(app);
     require('../app/routes/scoreboards')(app);
+    require('../app/routes/email')(app);
+    require('../app/routes/emailType')(app);
 
     return server;
 };

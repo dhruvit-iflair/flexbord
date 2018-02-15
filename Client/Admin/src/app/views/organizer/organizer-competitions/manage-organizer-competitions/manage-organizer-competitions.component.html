@@ -22,12 +22,17 @@
             </div>
             <div class="man col-md-6">
                 <label>Sport<a style="color:#f00 !important;">*</a></label>
-                <!-- <input class=" form-control" type="text" placeholder="Sport" formControlName="sports"> -->
-                <select  class=" form-control" placeholder="sports"  name="sports"  formControlName="sports">
-                    <!-- <option value="" disabled selected hidden>Select your Season</option> -->
+                <!-- <select  class=" form-control" placeholder="sports"  name="sports"  formControlName="sports">
                     <option value="null" disabled="true" [selected]="true">Select your Sports</option>
                     <option *ngFor="let it of sports"  [value]="it.name">{{it.name}}</option>
-                </select>
+                </select> -->
+                <app-multiselect class="form-control"  [mArray]='sports' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="sports? sports.length > 0 : sports"></app-multiselect>
+                <div class="col-md-12" *ngIf="!sports? sports == [] : sports.length == 0">
+                    <label style="float:left; padding-top: 7px;">Add New Sport</label>
+                    <button class="btn btn_green" routerLink="/sports/manage" style="float:left;margin-left: 10px;">
+                            <i class="fa fa-plus "></i>
+                    </button>
+                </div>
                 <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('sports').valid && comForm.get('sports').touched">
                         Sport is required.
                 </div>

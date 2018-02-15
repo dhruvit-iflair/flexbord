@@ -49,6 +49,8 @@ module.exports = function () {
     require('../app/models/structures');
     require('../app/models/playlists');
     require('../app/models/scoreboards');
+    require('../app/models/email');
+    require('../app/models/emailType');
 
     return db;
 }

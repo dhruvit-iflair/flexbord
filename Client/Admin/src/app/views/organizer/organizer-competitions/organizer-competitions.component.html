@@ -25,7 +25,7 @@
                   <td style="display:none">{{r._id}}</td>
                   <td>{{r.name}}</td>
                   <td>{{r.description}}</td>
-                  <td>{{r.sports}}</td>
+                  <td> <span *ngFor="let s of r.sports"> {{s.name}}</span></td>
                   <td>{{r.seasons.name}}</td>
                   <td>
                     <a class="btn btn_green tab_btn"  routerLink="/organizer/competitions/manage/{{r._id}}" *ngIf="hasEditPerm" title="Edit">

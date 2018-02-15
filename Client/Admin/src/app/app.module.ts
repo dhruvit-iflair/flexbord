@@ -36,8 +36,11 @@ import { OrgmembersComponent } from './views/organizer/orgmembers/orgmembers.com
 import { MemberComponent } from './views/organizer/orgmembers/member/member.component';
 import { AccessorService } from "./components/common/accessor.service";
 import { BreadCrumbService } from "./components/services/bread-crumb";
-import {Ng5BreadcrumbModule,BreadcrumbService} from 'ng5-breadcrumb';
+import { EmailService } from "./components/services/email.service";
+import { EmailTypeService } from './components/services/email-type.service';
 
+import {Ng5BreadcrumbModule,BreadcrumbService} from 'ng5-breadcrumb';
+import { BackLocationDirective } from "./components/directive/backButton";
 import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
 import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
 import { OrderByPipe } from "./components/pipes/orderBy";
@@ -90,7 +93,10 @@ import { PlaylistsComponent } from './views/gamesettings/playlists/playlists.com
 import { ManageplaylistComponent } from './views/gamesettings/playlists/manageplaylist/manageplaylist.component';
 import { ScoreboardsComponent } from './views/gamesettings/scoreboards/scoreboards.component';
 import { ManagescoreboardComponent } from './views/gamesettings/scoreboards/managescoreboard/managescoreboard.component';
-
+import { MultiselectComponent } from './components/custom/multiselect/multiselect.component';
+import { EmailComponent } from './views/email/email.component';
+import { ManageEmailComponent } from './views/email/manage-email/manage-email.component';
+import { CkEditorDirective } from './components/directive/ck-editor.directive';
 
 @NgModule({
   declarations: [
@@ -100,6 +106,7 @@ import { ManagescoreboardComponent } from './views/gamesettings/scoreboards/mana
     GoogleplaceDirective,
     placeDirectiveWithModel,    
     BigTextDirective,
+    BackLocationDirective,
     Dir_select,
     SeasonsComponent,
     ManageSeasonsComponent,
@@ -152,7 +159,11 @@ import { ManagescoreboardComponent } from './views/gamesettings/scoreboards/mana
     PlaylistsComponent,
     ManageplaylistComponent,
     ScoreboardsComponent,
-    ManagescoreboardComponent
+    ManagescoreboardComponent,
+    MultiselectComponent,
+    EmailComponent,
+    ManageEmailComponent,
+    CkEditorDirective
   ],
   imports: [
     // Angular modules
@@ -185,7 +196,7 @@ import { ManagescoreboardComponent } from './views/gamesettings/scoreboards/mana
     RouterModule.forRoot(ROUTES),
     Ng5BreadcrumbModule.forRoot(),
   ],
-  providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService],
+  providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService,EmailService,EmailTypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
