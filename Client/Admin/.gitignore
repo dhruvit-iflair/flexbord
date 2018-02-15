@@ -1,4 +1,4 @@
 node_modules/
 package-lock.json
 dist/
-src/environments/environment.ts
+/src/environments/environment.ts

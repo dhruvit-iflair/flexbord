@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="container">
+        <div class="col-md-10">
+            <label><h2>Games</h2></label>
+        </div>
+        <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
+            <button class="btn btn_green" [routerLink]="['/games/manage']">New Game</button>                         
+        </div>
+        <div class="col-md-12" id="tabl">
+        <div class="col-md-12 no_padd mar_btt">
+        </div>
+          <br>
+        <table datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
+                <thead>
+                  <tr>
+                      <th>_id</th>                      
+                      <th>Game</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Location</th>
+                      <th>Home Team</th>
+                      <th>Visitor Team</th>
+                      <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of rows" >
+                    <td style="display:none">{{item._id}}</td>
+                    <td>{{item.gamenumber | firstcapitalize}}</td>
+                    <td>{{item.gamedate | date:'dd-MM-yyyy'}}</td>
+                    <td>{{item.gametime | date:'shortTime'}}</td>
+                    <td>{{item.gamelocation | firstcapitalize}}</td>
+                    <td>{{item.hometeam.name | firstcapitalize}}</td>
+                    <td>{{item.visitorteam.name | firstcapitalize}}</td>
+                    <td>
+                      <a class="btn btn_green tab_btn" routerLink="/games/manage/{{item._id}}"  title="Edit" *ngIf="hasEditPerm">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                      </a>
+                     <a class="btn btn_red tab_btn" (click)="delClub(item._id)" title="Delete" *ngIf="hasDeletePerm">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </a>
+                      <a class="btn btn_2 tab_btn" title="Start Game">
+                        <i class="fa fa-tachometer" aria-hidden="true"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+        </table>
+        </div>
+    </div>  
+  </div>
+ 

@@ -8,11 +8,11 @@
                 <div class="dropdown profile-element">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <div class="profile">
-                            <img class="profileImage"src="{{profilePhoto}}">
+                            <img class="profileImage" src="{{profilePhoto}}">
                         </div>
                         <div class="profile-data-right">
-                                <span class="block m-t-xs name"> <strong class="font-bold" *ngIf="u.user.firstname && u.user.lastname" >{{u.user.firstname}}</strong> </span>
-                                <span class="block m-t-xs name"> <strong class="font-bold" *ngIf="u.user.firstname && u.user.lastname" >{{u.user.lastname}}</strong> </span>                        
+                            <span class="block m-t-xs name"> <strong class="font-bold" *ngIf="u.user.firstname && u.user.lastname" >{{u.user.firstname}}</strong> </span>
+                            <span class="block m-t-xs name"> <strong class="font-bold" *ngIf="u.user.firstname && u.user.lastname" >{{u.user.lastname}}</strong> </span>
                         </div>
                         <span class="block m-t-xs email"> <strong class="font-bold">{{loggedinUser}}</strong> </span>
                         <!--<span class="text-muted text-xs block">Example <b class="caret"></b> </span>-->
@@ -38,8 +38,14 @@
             <li [ngClass]="{active: activeRoute('sports')}" *ngIf="isProfileSet  && haspermission[40].Sport0">
                 <a [routerLink]="['/sports']"><i class="fa fa-futbol-o"></i> <span class="nav-label">Sport</span> </a>
             </li>
+            <li [ngClass]="{active: activeRoute('game_settings')}" *ngIf="isProfileSet">
+                <a [routerLink]="['/game_settings']"><i class="fa fa-gear"></i> <span class="nav-label">Game Settings</span> </a>
+            </li>
+            <li [ngClass]="{active: activeRoute('games')}" *ngIf="isProfileSet">
+                <a [routerLink]="['/games']"><i class="fa fa-trophy"></i> <span class="nav-label">Game</span> </a>
+            </li>
             <li [ngClass]="{active: activeRoute('users')}" *ngIf="isProfileSet">
-                    <a [routerLink]="['/users']"><i class="fa fa-user-circle" aria-hidden="true"></i><span class="nav-label">Users</span> </a>
+                <a [routerLink]="['/users']"><i class="fa fa-user-circle" aria-hidden="true"></i><span class="nav-label">Users</span> </a>
             </li>
             <li [ngClass]="{active: activeRoute('permissions')}" *ngIf="isProfileSet">
                 <a [routerLink]="['/permissions']"><i class="fa fa-gears"></i> <span class="nav-label">Permissions</span> </a>

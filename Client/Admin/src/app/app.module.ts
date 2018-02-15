@@ -79,6 +79,20 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { ProfileViewComponent } from './views/profile/profile-view/profile-view.component';
 import { FoulsComponent } from './views/sports/fouls/fouls.component';
 import { ManagefoulsComponent } from './views/sports/fouls/managefouls/managefouls.component';
+import { GamesComponent } from './views/games/games.component';
+import { ManagegameComponent } from './views/games/managegame/managegame.component';
+import { GamesettingsComponent } from './views/gamesettings/gamesettings.component';
+import { BasesettingComponent } from './views/gamesettings/basesetting/basesetting.component';
+import { TimesettingsComponent } from './views/gamesettings/timesettings/timesettings.component';
+import { ManagetimesettingComponent } from './views/gamesettings/timesettings/managetimesetting/managetimesetting.component';
+import { ConsequencesComponent } from './views/gamesettings/consequences/consequences.component';
+import { ManageconsequenceComponent } from './views/gamesettings/consequences/manageconsequence/manageconsequence.component';
+import { StructureComponent } from './views/gamesettings/structure/structure.component';
+import { ManagestructureComponent } from './views/gamesettings/structure/managestructure/managestructure.component';
+import { PlaylistsComponent } from './views/gamesettings/playlists/playlists.component';
+import { ManageplaylistComponent } from './views/gamesettings/playlists/manageplaylist/manageplaylist.component';
+import { ScoreboardsComponent } from './views/gamesettings/scoreboards/scoreboards.component';
+import { ManagescoreboardComponent } from './views/gamesettings/scoreboards/managescoreboard/managescoreboard.component';
 import { MultiselectComponent } from './components/custom/multiselect/multiselect.component';
 import { EmailComponent } from './views/email/email.component';
 import { ManageEmailComponent } from './views/email/manage-email/manage-email.component';
@@ -133,6 +147,20 @@ import { ImportOrgMembersComponent } from './views/organizer/orgmembers/import-o
     ProfileViewComponent,
     FoulsComponent,
     ManagefoulsComponent,
+    GamesComponent,
+    ManagegameComponent,
+    GamesettingsComponent,
+    BasesettingComponent,
+    TimesettingsComponent,
+    ManagetimesettingComponent,
+    ConsequencesComponent,
+    ManageconsequenceComponent,
+    StructureComponent,
+    ManagestructureComponent,
+    PlaylistsComponent,
+    ManageplaylistComponent,
+    ScoreboardsComponent,
+    ManagescoreboardComponent,
     MultiselectComponent,
     EmailComponent,
     ManageEmailComponent,

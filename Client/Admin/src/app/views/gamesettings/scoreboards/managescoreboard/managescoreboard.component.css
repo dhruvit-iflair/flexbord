@@ -1,0 +1,56 @@
+.manage-screener{
+    background: #000;
+    padding-bottom: 25px;
+    margin: 25px 300px;
+    min-height: 250px;
+    border: #f00 3px solid;
+    position: relative;
+}
+
+.manage-game-clock,.manage-game-clock span{
+    text-align: center;
+    color: #fe0;
+    font-family: 'digital';
+    font-size:1.8em;
+}
+.manage-shot-clock{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    color: #d2322d;
+    font-family: 'digital';
+    font-size:1.8em;
+    line-height: 1;
+}
+.manage-period{
+    position: absolute;
+    width: 100%;
+    top: 45%;
+    text-align: center;
+    color: #fe0;
+    font-family: 'digital';
+    font-size:1.8em;
+    line-height: 1;
+}
+.labeledcolor{
+    color: white;
+}
+input[type=checkbox] {
+    width: auto;
+    margin-left: 2%;
+    margin-right: 1%;
+}
+.resizer{
+    resize: none;
+    height: 100px;
+    border:1px solid #ddd;
+    min-width: 100%;
+}
+@font-face {
+  font-family: 'digital';
+  src: url("../../../../../assets/fonts/digital-7__mono_.eot");
+  src: url("../../../../../assets/fonts/digital-7__mono_.eot?#iefix") format('embedded-opentype'), url("../../../../../assets/fonts/digital-7__mono_.woff") format('woff'), url("../../../../../assets/fonts/digital-7__mono_.ttf") format('truetype'), url("../../../../../assets/fonts/digital-7__mono_.svg#bpdotsregular") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

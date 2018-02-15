@@ -1,0 +1,11 @@
+input.logo_upload {
+    display: none;
+}
+input.vdo_upload {
+    display: none;
+}
+img.image_display {
+    width: 100px;
+    border-radius: 50%;
+    height: 100px;
+}

@@ -22,4 +22,4 @@ import 'zone.js/dist/zone';
  *      - By  : Nasiruddin Saiyed (nasiruddin.saiyed@iflair.com).
  *        ref : https://github.com/angular/angular/issues/16264 https://github.com/angular/angular-cli/issues/4825  https://github.com/angular/angular-cli/issues/4822
 */
-import 'classlist.js';  // Run `npm install --save classlist.js`.
+// import 'classlist.js';  // Run `npm install --save classlist.js`.
