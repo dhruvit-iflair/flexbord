@@ -58,6 +58,9 @@ import { StructureComponent } from './views/gamesettings/structure/structure.com
 import { ManagestructureComponent } from './views/gamesettings/structure/managestructure/managestructure.component';
 import { PlaylistsComponent } from './views/gamesettings/playlists/playlists.component';
 import { ManageplaylistComponent } from './views/gamesettings/playlists/manageplaylist/manageplaylist.component';
+import { ScoreboardsComponent } from './views/gamesettings/scoreboards/scoreboards.component';
+import { ManagescoreboardComponent } from './views/gamesettings/scoreboards/managescoreboard/managescoreboard.component';
+
 
 export const ROUTES: Routes = [
   // Main redirect
@@ -165,6 +168,10 @@ export const ROUTES: Routes = [
       { path: 'game_settings/playlists', component: PlaylistsComponent, canActivate: [Auth24Guard] },
       { path: 'game_settings/playlists/manage', component: ManageplaylistComponent, canActivate: [Auth24Guard] },
       { path: 'game_settings/playlists/manage/:_id', component: ManageplaylistComponent, canActivate: [Auth24Guard] },
+
+      { path: 'game_settings/scoreboards', component: ScoreboardsComponent, canActivate: [Auth24Guard] },
+      { path: 'game_settings/scoreboards/manage', component: ManagescoreboardComponent, canActivate: [Auth24Guard] },
+      { path: 'game_settings/scoreboards/manage/:_id', component: ManagescoreboardComponent, canActivate: [Auth24Guard] },
     ]
   },
   {

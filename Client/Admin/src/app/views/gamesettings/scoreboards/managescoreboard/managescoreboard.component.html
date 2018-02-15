@@ -1,0 +1,233 @@
+<div class="container manage-container">
+  <div class="row">
+    <div class="manage-screener clearfix">
+      <div id="screener">
+        <div class="manage-game-clock" *ngIf="mForm.gameclock.isEnable==true" style="line-height:0.8;">
+          <div id="gameclocktitle" class="labeledcolor">{{mForm.gameclock.titlevalue}}</div>
+          <span id="gameclockvalue">{{mForm.gameclock.value}}</span>
+        </div>
+        <div class="manage-period" *ngIf="mForm.gameperiod.isEnable==true" style="line-height:0.8;">
+          <div id="periodtitle" class="labeledcolor">{{mForm.gameperiod.titlevalue}}</div>
+          <span id="periodvalue">{{mForm.gameperiod.value}}</span>
+        </div>
+        <div class="manage-shot-clock" *ngIf="mForm.gameshotclock.isEnable==true">
+          <div id="shotclocktitle" class="labeledcolor">{{mForm.gameshotclock.titlevalue}}</div>
+          <span id="shotclockvalue">{{mForm.gameshotclock.value}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <form class="manage-component-form">
+      <div class="col-md-12">
+        <div class="row1">
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label><h2>Scoreboards</h2></label>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="man col-md-12">
+                  <h4 class="text-left">Display Name</h4>
+                  <input class="text-col-md-3" type="text" [(ngModel)]="mForm.dispName" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="man col-md-12">
+                  <h4 class="text-left">Style</h4>
+                  <input class="text-col-md-3" type="text" [(ngModel)]="mForm.dispStyle" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="man col-md-12">
+                  <h4 class="text-left">Show On</h4>
+                  <div>
+                    <input class="text-col-md-3" type="checkbox" [(ngModel)]="mForm.dispShownOn.timeouts" [ngModelOptions]="{standalone: true}">Timeouts
+                    <input class="text-col-md-3" type="checkbox" [(ngModel)]="mForm.dispShownOn.break" [ngModelOptions]="{standalone: true}">Break
+                    <input class="text-col-md-3" type="checkbox" [(ngModel)]="mForm.dispShownOn.period" [ngModelOptions]="{standalone: true}">Period
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Game Clock</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="checkenable()" [(ngModel)]="mForm.gameclock.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.gameclock.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.gameclock.valuestyle" (ngModelChange)="setgamevaluestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.gameclock.titlestyle" (ngModelChange)="setgametitlestyler()" [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="time" [(ngModel)]="mForm.gameclock.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.gameclock.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Shot Clock</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="shotcheckenable()" [(ngModel)]="mForm.gameshotclock.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.gameshotclock.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.gameshotclock.valuestyle" (ngModelChange)="setshotvaluestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.gameshotclock.titlestyle" (ngModelChange)="setshottitlestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="number" [(ngModel)]="mForm.gameshotclock.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.gameshotclock.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Period</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="periodcheckenable()" [(ngModel)]="mForm.gameperiod.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.gameperiod.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.gameperiod.valuestyle" (ngModelChange)="setperiodvaluestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.gameperiod.titlestyle" (ngModelChange)="setperiodtitlestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="number" [(ngModel)]="mForm.gameperiod.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.gameperiod.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Period Title</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" [(ngModel)]="mForm.gameperiodtitle.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.gameperiodtitle.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.gameperiodtitle.valuestyle"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.gameperiodtitle.titlestyle"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="number" [(ngModel)]="mForm.gameperiodtitle.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.gameperiodtitle.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Clock Banner</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" [(ngModel)]="mForm.gameclockbanner.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.gameclockbanner.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.gameclockbanner.valuestyle"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.gameclockbanner.titlestyle"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="number" [(ngModel)]="mForm.gameclockbanner.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.gameclockbanner.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </form>
+
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btn btn-white" [routerLink]="['/game_settings/scoreboards']">Back</button>
+      </div>
+      <div class="col-md-6 text-right">
+        <button class="btn btn_green" [disabled]="!mForm.dispName || !mForm.dispStyle"
+          (click)='managesetting(mForm)'>Save</button>
+      </div>
+    </div>
+
+  </div>

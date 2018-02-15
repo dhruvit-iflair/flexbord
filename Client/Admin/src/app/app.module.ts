@@ -88,6 +88,8 @@ import { StructureComponent } from './views/gamesettings/structure/structure.com
 import { ManagestructureComponent } from './views/gamesettings/structure/managestructure/managestructure.component';
 import { PlaylistsComponent } from './views/gamesettings/playlists/playlists.component';
 import { ManageplaylistComponent } from './views/gamesettings/playlists/manageplaylist/manageplaylist.component';
+import { ScoreboardsComponent } from './views/gamesettings/scoreboards/scoreboards.component';
+import { ManagescoreboardComponent } from './views/gamesettings/scoreboards/managescoreboard/managescoreboard.component';
 
 
 @NgModule({
@@ -148,7 +150,9 @@ import { ManageplaylistComponent } from './views/gamesettings/playlists/managepl
     StructureComponent,
     ManagestructureComponent,
     PlaylistsComponent,
-    ManageplaylistComponent
+    ManageplaylistComponent,
+    ScoreboardsComponent,
+    ManagescoreboardComponent
   ],
   imports: [
     // Angular modules

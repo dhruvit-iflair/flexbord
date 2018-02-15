@@ -43,13 +43,21 @@ export class GamesettingsComponent implements OnInit {
     localStorage.setItem('setting', idx);
     this.router.navigate(['/game_settings/timesetting']);
   }
-  movetoconsequences(ix){
+  movetoconsequences(ix) {
     localStorage.setItem('setting', ix);
     this.router.navigate(['/game_settings/consequences']);
   }
-  movetostructures(idr){
+  movetostructures(idr) {
     localStorage.setItem('setting', idr);
     this.router.navigate(['/game_settings/structures']);
+  }
+  movetoplaylists(idd) {
+    localStorage.setItem('setting', idd);
+    this.router.navigate(['/game_settings/playlists']);
+  }
+  movetoscoreboards(iid){
+    localStorage.setItem('setting', iid);
+    this.router.navigate(['/game_settings/scoreboards']);
   }
   checkpermissions() {
     var perms = this.accr.getUserPermissions();

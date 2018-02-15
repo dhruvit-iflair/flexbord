@@ -58,6 +58,7 @@ module.exports = function (db) {
     require('../app/routes/consequences')(app);
     require('../app/routes/structures')(app);
     require('../app/routes/playlists')(app);
+    require('../app/routes/scoreboards')(app);
 
     return server;
 };

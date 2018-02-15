@@ -48,6 +48,7 @@ module.exports = function () {
     require('../app/models/consequences');
     require('../app/models/structures');
     require('../app/models/playlists');
+    require('../app/models/scoreboards');
 
     return db;
 }

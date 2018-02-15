@@ -8,12 +8,13 @@ import { Subject } from 'rxjs/Subject';
 import { AccessorService } from "../../../components/common/accessor.service";
 
 @Component({
-  selector: 'app-playlists',
-  templateUrl: './playlists.component.html',
-  styleUrls: ['./playlists.component.css']
+  selector: 'app-scoreboards',
+  templateUrl: './scoreboards.component.html',
+  styleUrls: ['./scoreboards.component.css']
 })
-export class PlaylistsComponent implements OnInit {
-public rows: Array<any> = [];
+export class ScoreboardsComponent implements OnInit {
+
+  public rows: Array<any> = [];
   public data: Array<any> = [];
   public length: number = 0;
   public dtOptions;settingid;
@@ -21,17 +22,19 @@ public rows: Array<any> = [];
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public modules = this.accr.getmodules();
   public hasTeamsPerm;hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;hasPointsPerm;hasStatusPerm;hasScoresPerm;hasFoulsPerm;
+
   constructor(public http: Http, private router: Router, private toastr: ToastrService, private accr: AccessorService) { }
+
   ngAfterContentInit() {
     this.dtOptions = {
       pagingType: 'simple_numbers',
       order: [[0, 'desc']],
-      columns: [{ "visible": false }, null, null,null,null,null, { "orderable": false }]
+      columns: [{ "visible": false }, null, null,null, { "orderable": false }]
     }
   }
   ngOnInit(): void {
     this.settingid = localStorage.getItem('setting');
-    this.http.get(environment.api + "/playlists/bysetting/" + this.settingid)
+    this.http.get(environment.api + "/scoreboards/bysetting/" + this.settingid)
       .subscribe((res) => {
         this.rows = res.json();
           this.length = this.rows.length;
@@ -69,7 +72,7 @@ public rows: Array<any> = [];
   delClub(id){
       var del = confirm("Confirm to delete this Setting?");
       if (del) {
-        this.http.delete(environment.api + "/playlists/" + id)
+        this.http.delete(environment.api + "/scoreboards/" + id)
           .subscribe((res) => {
             var d = res.json();
             if (d._id) {
@@ -82,6 +85,5 @@ public rows: Array<any> = [];
           });
       }
     }
-
 
 }
