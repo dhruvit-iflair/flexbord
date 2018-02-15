@@ -14,7 +14,6 @@ export const modulerstack = {
         'SportPoints',
         'SportPlayerstatus',
         'SportScores',
-        'SportFouls',
-        'Permissions'
+        'SportFouls'
     ]
 }
