@@ -14,7 +14,7 @@ export class ManagestructureComponent implements OnInit {
   constructor(public http: HttpClient, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute) { }
   public settingid;paramdetails;userId;
 
-public mForm={altname:{},level:''};
+public mForm={altname:{point:0,name:''},level:''};
 
   ngOnInit() {
     this.settingid = localStorage.getItem('setting');

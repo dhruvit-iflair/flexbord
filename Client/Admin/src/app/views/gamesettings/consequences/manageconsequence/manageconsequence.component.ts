@@ -14,7 +14,7 @@ export class ManageconsequenceComponent implements OnInit {
   constructor(public http: HttpClient, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute) { }
   public settingid;paramdetails;userId;
 
-public mForm={playerconseq:{},teamfaults:{}}
+public mForm={playerconseq:{name:'',color:'',type:'',value:0},teamfaults:{faulttype:'',type:'',value:0}}
 
   ngOnInit() {
     this.settingid = localStorage.getItem('setting');

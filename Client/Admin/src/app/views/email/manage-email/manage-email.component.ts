@@ -12,7 +12,7 @@ import { EmailTypeService } from '../../../components/services/email-type.servic
   styleUrls: ['./manage-email.component.css']
 })
 export class ManageEmailComponent implements OnInit {
-  private emailForm : any;
+  public emailForm : any;
   private emailType : Array<any>;
   private sub : any;
   private id : any;
