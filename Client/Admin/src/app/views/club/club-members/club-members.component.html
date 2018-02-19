@@ -5,6 +5,7 @@
       </div>
       <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
           <button class="btn btn_green" [routerLink]="['/club/members/manage']">New Member</button>                         
+          <button class="btn btn_green" [routerLink]="['/club/members/import']">Import Members</button>                         
       </div>
       <div class="col-md-12" id="tabl">
         <table datatable  [dtOptions]="dtOptions" class="row-border hover" onchange="gotcha()" *ngIf="dataRenderer">

@@ -4,6 +4,7 @@ img.profileView {
     position: absolute;
     text-align: center;
     padding-top: 30px;
+    height: 250px;
 }
 .under-box {
     margin: 13px auto;
@@ -12,8 +13,5 @@ img.profileView {
     padding-top: 2%;
 }
 .profileBtn {
-    position: relative;
-    width: auto;
-    margin-top: 69%;
-    margin-left: 0%;
+    margin: 100% auto 0 auto;
 }

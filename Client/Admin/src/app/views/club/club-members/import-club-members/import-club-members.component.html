@@ -1,0 +1,40 @@
+<div class="container manage-container">
+  <div class="row">
+    <form class="manage-component-form">
+      <div class="row1">
+          <div class="manage-box clearfix">
+              <div class="col-md-12">
+                  <label><h2>Import Members </h2></label>
+              </div>
+              <div class="col-md-12">
+                <div class="row">
+                    <div class="man col-md-12">
+                          <h4 class="text-left">File Name<a style="color:#f00 !important;">*</a></h4>
+                          <input id="uploadFile" [(ngModel)]="fileName" class="text-col-md-3"  placeholder="Choose File" disabled="disabled"  [ngModelOptions]="{standalone: true}" (ngModelChange)="mauka()"/>
+                          <div class="fileUpload btn btn-primary">
+                              <span>Select File</span>
+                              <input id="uploadBtn" type="file" class="upload " (change)="upload($event)"/>
+                          </div>
+                          <div class="col-md-12" *ngIf="!approved">
+                            <span class="RedHotError">Note : Only CSV are supported.</span>
+                          </div>
+                          <div class="col-md-12">
+                            <a (click)="getFile()">Download Sample CSV file</a>
+                          </div>
+                    </div>
+                  
+                </div>
+              </div>
+          </div>
+      </div>
+    </form>
+    <div class="row">
+        <div class="col-md-6">
+            <button class="btn btn-white" Back>Back</button>
+        </div>
+        <div class="col-md-6 text-right">
+            <button class="btn btn_green" [disabled]="!approved" (click)="send()" >Save</button>       
+        </div>  
+    </div>
+  </div>
+</div>

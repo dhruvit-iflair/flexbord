@@ -105,11 +105,39 @@ export class BreadCrumbComponent implements OnInit {
     this.breadcrumbService.addFriendlyNameForRoute('/profile/view', 'Edit Profile');
     
     /////////////////////
-    // Email Modules //
+    // Email Modules   //
     /////////////////////
     this.breadcrumbService.addFriendlyNameForRoute('/email', 'Email');
     this.breadcrumbService.hideRoute('/email/manage');
     this.breadcrumbService.addFriendlyNameForRouteRegex('/email/manage/[a-zA-Z0-9]', 'Manage Email');        // 
+
+    ////////////////////////////
+    // Game Setting Modules   //
+    ////////////////////////////
+    this.breadcrumbService.addFriendlyNameForRoute('/game_settings', 'Game Setting');
+    
+    this.breadcrumbService.addFriendlyNameForRoute('/game_settings/base', 'Base');
+    
+
+    this.breadcrumbService.addFriendlyNameForRoute('/game_settings/timesetting', 'Time Setting');
+    this.breadcrumbService.addFriendlyNameForRoute('/game_settings/timesetting/manage', 'Manage');
+   
+    this.breadcrumbService.addFriendlyNameForRoute('/game_settings/consequences', 'Consequences');
+    this.breadcrumbService.addFriendlyNameForRoute('/game_settings/consequences/manage', 'Manage');
+   
+
+    this.breadcrumbService.addFriendlyNameForRoute('/game_settings/structures', 'Structures');
+    this.breadcrumbService.addFriendlyNameForRoute('/game_settings/structures/manage', 'Manage');
+   
+    this.breadcrumbService.addFriendlyNameForRoute('/game_settings/playlists', 'Playlist');
+    this.breadcrumbService.addFriendlyNameForRoute('/game_settings/playlists/manage', 'Manage');
+   
+    this.breadcrumbService.addFriendlyNameForRoute('/game_settings/scoreboards', 'Scoreboards');
+    this.breadcrumbService.addFriendlyNameForRoute('/game_settings/scoreboards/manage', 'Manage');
+    
+    this.breadcrumbService.addFriendlyNameForRoute('/games', 'Games');
+    this.breadcrumbService.addFriendlyNameForRoute('/games/manage', 'Manage');
+    
     // this.breadcrumbService.addFriendlyNameForRouteRegex('/home/users/[0-9]/info', 'Information');
   }   
   ngOnInit(){
