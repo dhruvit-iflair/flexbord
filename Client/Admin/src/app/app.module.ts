@@ -98,6 +98,7 @@ import { EmailComponent } from './views/email/email.component';
 import { ManageEmailComponent } from './views/email/manage-email/manage-email.component';
 import { CkEditorDirective } from './components/directive/ck-editor.directive';
 import { ImportOrgMembersComponent } from './views/organizer/orgmembers/import-org-members/import-org-members.component';
+import { ImportClubMembersComponent } from './views/club/club-members/import-club-members/import-club-members.component';
 
 @NgModule({
   declarations: [
@@ -165,7 +166,8 @@ import { ImportOrgMembersComponent } from './views/organizer/orgmembers/import-o
     EmailComponent,
     ManageEmailComponent,
     CkEditorDirective,
-    ImportOrgMembersComponent
+    ImportOrgMembersComponent,
+    ImportClubMembersComponent
   ],
   imports: [
     // Angular modules
