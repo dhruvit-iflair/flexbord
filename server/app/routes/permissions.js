@@ -9,6 +9,8 @@ module.exports=function(app){
     permRoute.route('/')
     .get(perm.list)
     .post(perm.create);
+    permRoute.route('/updatePermission')
+    .patch(perm.permissionUpdate);
     permRoute.route('/:id')
     .get(perm.getbyid)
     .put(perm.update)
