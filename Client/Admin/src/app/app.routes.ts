@@ -64,6 +64,7 @@ import { ScoreboardsComponent } from './views/gamesettings/scoreboards/scoreboar
 import { ManagescoreboardComponent } from './views/gamesettings/scoreboards/managescoreboard/managescoreboard.component';
 import { EmailComponent } from './views/email/email.component';
 import { ManageEmailComponent } from './views/email/manage-email/manage-email.component';
+import { ImportClubMembersComponent } from './views/club/club-members/import-club-members/import-club-members.component';
 
 export const ROUTES:Routes = [
   // Main redirect
@@ -108,6 +109,8 @@ export const ROUTES:Routes = [
       { path: 'club/seasons/manage/:_id', component: ManageClubSeasonsComponent, canActivate: [Auth24Guard] },
 
       { path: 'club/members', component: ClubMembersComponent, canActivate: [Auth24Guard] },
+      { path: 'club/members/import', component: ImportClubMembersComponent, canActivate: [Auth24Guard] },
+
       { path: 'club/members/manage', component: ManageClubMembersComponent, canActivate: [Auth24Guard] },
       { path: 'club/members/manage/:_id', component: ManageClubMembersComponent, canActivate: [Auth24Guard] },
 

@@ -7,14 +7,14 @@
         <div class="col-md-12">
           <label><h2>Edit Profile</h2></label>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="col-md-12"><img src="{{person_photo}}" alt="" class="profileView"></div>
             <div class="col-md-12">
                 <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none" >
                 <button class="btn btn_green profileBtn" (click)="file.click()">Upload</button>   
             </div>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
           <div class="under-box">
             <form [formGroup]='userForm'>
               <div class="col-md-12">
