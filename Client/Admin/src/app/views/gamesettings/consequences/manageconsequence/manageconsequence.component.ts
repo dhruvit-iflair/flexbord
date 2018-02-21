@@ -12,13 +12,12 @@ import { Router, Params, ActivatedRoute } from "@angular/router";
 export class ManageconsequenceComponent implements OnInit {
 
   constructor(public http: HttpClient, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute) { }
-  public settingid;paramdetails;userId;
-
-public mForm={playerconseq:{name:'',color:'',type:'',value:0},teamfaults:{faulttype:'',type:'',value:0}}
+  public settingid; paramdetails; userId; settingsfouldata;
+  public mForm = { playerconseq: { name: '', color: '', type: '', value: 0 }, teamfaults: { faulttype: '', type: '', value: 0 } }
 
   ngOnInit() {
     this.settingid = localStorage.getItem('setting');
-      this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.params.subscribe(params => {
       this.userId = params._id;
       if (this.userId) {
         this.paramdetails = true;
@@ -28,10 +27,19 @@ public mForm={playerconseq:{name:'',color:'',type:'',value:0},teamfaults:{faultt
           });
       }
     });
+    this.http.get(environment.api + '/gamesettings/' + this.settingid)
+      .subscribe(sportsrespo => {
+        if (sportsrespo) {
+          this.http.get(environment.api + '/sportfouls/bysport/' + sportsrespo[0].sports._id)
+            .subscribe(foulrespo => {
+              this.settingsfouldata = foulrespo;
+            });
+        }
+      });
   }
-  managesetting(gotdata){
-    gotdata.gamesettings=this.settingid;
-        if (this.paramdetails) {
+  managesetting(gotdata) {
+    gotdata.gamesettings = this.settingid;
+    if (this.paramdetails) {
       this.http.patch(environment.api + '/consequences/' + this.userId, gotdata)
         .subscribe(result => {
           this.toastr.success('Consequences', 'Updated Successfully.');

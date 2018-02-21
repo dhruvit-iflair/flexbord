@@ -6,10 +6,10 @@
           <div id="gameclocktitle" class="labeledcolor">{{mForm.gameclock.titlevalue}}</div>
           <span id="gameclockvalue">{{mForm.gameclock.value}}</span>
         </div>
-        <div class="manage-period" *ngIf="mForm.gameperiod.isEnable==true" style="line-height:0.8;">
+        <!--<div class="manage-period" *ngIf="mForm.gameperiod.isEnable==true" style="line-height:0.8;">
           <div id="periodtitle" class="labeledcolor">{{mForm.gameperiod.titlevalue}}</div>
           <span id="periodvalue">{{mForm.gameperiod.value}}</span>
-        </div>
+        </div>-->
         <div class="manage-shot-clock" *ngIf="mForm.gameshotclock.isEnable==true">
           <div id="shotclocktitle" class="labeledcolor">{{mForm.gameshotclock.titlevalue}}</div>
           <span id="shotclockvalue">{{mForm.gameshotclock.value}}</span>
@@ -114,7 +114,7 @@
             </div>
           </div>
 
-          <div class="manage-box clearfix">
+          <!--<div class="manage-box clearfix">
             <div class="col-md-12">
               <label style="display: inline-block;"><h2>Period</h2></label>
               <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="periodcheckenable()" [(ngModel)]="mForm.gameperiod.isEnable"
@@ -146,7 +146,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
 
           <div class="manage-box clearfix">
             <div class="col-md-12">
@@ -182,7 +182,7 @@
             </div>
           </div>
           
-          <div class="manage-box clearfix">
+          <!--<div class="manage-box clearfix">
             <div class="col-md-12">
               <label style="display: inline-block;"><h2>Clock Banner</h2></label>
               <input style="float: right;" class="text-col-md-3" type="checkbox" [(ngModel)]="mForm.gameclockbanner.isEnable"
@@ -214,7 +214,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
 
         </div>
       </div>

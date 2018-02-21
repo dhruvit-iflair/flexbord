@@ -31,6 +31,12 @@ public mForm={shotclock:0,foulshotclock:0,periodsclockdesc:false,timeouttype:"ov
       }
     });
   }
+  addpenalty(){
+    this.toastr.warning("Add Penalties!!!","Added!");
+  }
+  addperiod(){
+    this.toastr.error("Add Periods!!!","Added!");
+  }
   managesetting(gotdata){
     gotdata.gamesettings=this.settingid;
         if (this.paramdetails) {

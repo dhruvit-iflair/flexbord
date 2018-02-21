@@ -21,7 +21,6 @@ export class ScoreboardsComponent implements OnInit {
   public dataRenderer = false;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public modules = this.accr.getmodules();
-  public hasTeamsPerm;hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;hasPointsPerm;hasStatusPerm;hasScoresPerm;hasFoulsPerm;
 
   constructor(public http: Http, private router: Router, private toastr: ToastrService, private accr: AccessorService) { }
 
@@ -45,26 +44,14 @@ export class ScoreboardsComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
-      if (Object.keys(perms[z]).toString().toLowerCase() == "sport1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "gamesettingscoreboard1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }
-      if (Object.keys(perms[z]).toString().toLowerCase() == "sport2" && perms[z][Object.keys(perms[z]).toString()] == true) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "gamesettingscoreboard2" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasEditPerm = true;
       }
-      if (Object.keys(perms[z]).toString().toLowerCase() == "sport3" && perms[z][Object.keys(perms[z]).toString()] == true) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "gamesettingscoreboard3" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasDeletePerm = true;
-      }
-      if (Object.keys(perms[z]).toString().toLowerCase() == "sportpoints0" && perms[z][Object.keys(perms[z]).toString()] == true) {
-        this.hasPointsPerm = true;
-      }
-      if (Object.keys(perms[z]).toString().toLowerCase() == "sportplayerstatus0" && perms[z][Object.keys(perms[z]).toString()] == true) {
-        this.hasStatusPerm = true;
-      }
-      if (Object.keys(perms[z]).toString().toLowerCase() == "sportscores0" && perms[z][Object.keys(perms[z]).toString()] == true) {
-        this.hasScoresPerm = true;
-      }
-      if (Object.keys(perms[z]).toString().toLowerCase() == "sportfouls0" && perms[z][Object.keys(perms[z]).toString()] == true) {
-        this.hasFoulsPerm = true;
       }
     }
   }
