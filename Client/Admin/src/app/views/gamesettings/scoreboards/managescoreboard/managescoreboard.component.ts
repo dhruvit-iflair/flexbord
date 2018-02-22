@@ -16,11 +16,10 @@ export class ManagescoreboardComponent implements OnInit {
   public mForm = { dispName: '', dispStyle: '', dispShownOn: {timeouts:false,break:false,period:false},
   gameclock:{isEnable:false,titlestyle:'',valuestyle:'',value:'00:00',titlevalue:''},
   gameshotclock:{isEnable:false,titlestyle:'',valuestyle:'',value:'0',titlevalue:''},
-  gameperiod:{isEnable:false,titlestyle:'',valuestyle:'',value:'2',titlevalue:'Period'},
-  gameperiodtitle:{isEnable:false,titlestyle:'',valuestyle:'',value:'',titlevalue:''},
-  gameclockbanner:{isEnable:false,titlestyle:'',valuestyle:'',value:'',titlevalue:''}
-  };
-
+  gameperiodtitle:{isEnable:false,titlestyle:'',valuestyle:'',value:'',titlevalue:''}
+};
+// gameperiod:{isEnable:false,titlestyle:'',valuestyle:'',value:'2',titlevalue:'Period'},
+// gameclockbanner:{isEnable:false,titlestyle:'',valuestyle:'',value:'',titlevalue:''}
   ngOnInit() {
     this.settingid = localStorage.getItem('setting');
     this.activatedRoute.params.subscribe(params => {
@@ -40,7 +39,7 @@ export class ManagescoreboardComponent implements OnInit {
   editimplies(){
     this.checkenable();
     this.shotcheckenable();
-    this.periodcheckenable();
+    // this.periodcheckenable();
   }
   checkenable(){
     if(this.mForm.gameclock.isEnable){
@@ -54,12 +53,12 @@ export class ManagescoreboardComponent implements OnInit {
       this.setshottitlestyler();
     }
   }
-  periodcheckenable(){
-    if(this.mForm.gameperiod.isEnable){
-      this.setperiodvaluestyler();
-      this.setperiodtitlestyler();
-    }
-  }
+  // periodcheckenable(){
+  //   if(this.mForm.gameperiod.isEnable){
+  //     this.setperiodvaluestyler();
+  //     this.setperiodtitlestyler();
+  //   }
+  // }
   // ngDoCheck(){
   //   this.setgametitlestyler();
   //   this.setgamevaluestyler();
@@ -80,13 +79,13 @@ export class ManagescoreboardComponent implements OnInit {
     if(document.getElementById('shotclocktitle'))
     document.getElementById('shotclocktitle').setAttribute('style',this.mForm.gameshotclock.titlestyle);
   }
-  setperiodvaluestyler(){
-    if(document.getElementById('periodvalue'))
-    document.getElementById('periodvalue').setAttribute('style',this.mForm.gameperiod.valuestyle);
-  }
+  // setperiodvaluestyler(){
+  //   if(document.getElementById('periodvalue'))
+  //   document.getElementById('periodvalue').setAttribute('style',this.mForm.gameperiod.valuestyle);
+  // }
   setperiodtitlestyler(){
     if(document.getElementById('periodtitle'))
-    document.getElementById('periodtitle').setAttribute('style',this.mForm.gameperiod.titlestyle);
+    document.getElementById('periodtitle').setAttribute('style',this.mForm.gameperiodtitle.titlestyle);
   }
   managesetting(gotdata) {
     gotdata.gamesettings = this.settingid;

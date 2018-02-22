@@ -43,13 +43,13 @@ export class GamesComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
-      if (Object.keys(perms[z]).toString().toLowerCase() == "sport1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "game1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }
-      if (Object.keys(perms[z]).toString().toLowerCase() == "sport2" && perms[z][Object.keys(perms[z]).toString()] == true) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "game2" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasEditPerm = true;
       }
-      if (Object.keys(perms[z]).toString().toLowerCase() == "sport3" && perms[z][Object.keys(perms[z]).toString()] == true) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "game3" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasDeletePerm = true;
       }
       if (Object.keys(perms[z]).toString().toLowerCase() == "sportpoints0" && perms[z][Object.keys(perms[z]).toString()] == true) {

@@ -31,19 +31,19 @@
               <a class="btn btn_red tab_btn" (click)="delClub(item._id)" title="Delete" *ngIf="hasDeletePerm">
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </a>
-              <a class="btn btn_1 tab_btn" (click)="movetotimesetting(item._id)" title="Time Settings">
+              <a class="btn btn_1 tab_btn" (click)="movetotimesetting(item._id)" title="Time Settings" *ngIf="hastimesettingPerm">
                 <i class="fa fa-clock-o" aria-hidden="true"></i>
               </a>
-              <a class="btn btn_2 tab_btn" (click)="movetoconsequences(item._id)" title="Consequences">
+              <a class="btn btn_2 tab_btn" (click)="movetoconsequences(item._id)" title="Consequences" *ngIf="hasconsequencesPerm">
                 <i class="fa fa-wheelchair" aria-hidden="true"></i>
               </a>
-              <a class="btn btn_green tab_btn" (click)="movetostructures(item._id)" title="Structures">
+              <a class="btn btn_green tab_btn" (click)="movetostructures(item._id)" title="Structures" *ngIf="hasstructurePerm">
                 <i class="fa fa-dribbble" aria-hidden="true"></i>
               </a>
-              <a class="btn btn_red tab_btn" (click)="movetoplaylists(item._id)" title="Playlists">
+              <a class="btn btn_red tab_btn" (click)="movetoplaylists(item._id)" title="Playlists" *ngIf="hasplaylistPerm">
                 <i class="fa fa-superpowers" aria-hidden="true"></i>
               </a>
-              <a class="btn btn_2 tab_btn" (click)="movetoscoreboards(item._id)" title="Scoreboards">
+              <a class="btn btn_2 tab_btn" (click)="movetoscoreboards(item._id)" title="Scoreboards" *ngIf="hasscoreboardPerm">
                 <i class="fa fa-television" aria-hidden="true"></i>
               </a>
             </td>

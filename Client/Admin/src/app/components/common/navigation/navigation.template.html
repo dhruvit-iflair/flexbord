@@ -38,10 +38,10 @@
             <li [ngClass]="{active: activeRoute('sports')}" *ngIf="isProfileSet  && haspermission[40].Sport0">
                 <a [routerLink]="['/sports']"><i class="fa fa-futbol-o"></i> <span class="nav-label">Sport</span> </a>
             </li>
-            <li [ngClass]="{active: activeRoute('game_settings')}" *ngIf="isProfileSet">
+            <li [ngClass]="{active: activeRoute('game_settings')}" *ngIf="isProfileSet && haspermission[64].GameSetting0">
                 <a [routerLink]="['/game_settings']"><i class="fa fa-gear"></i> <span class="nav-label">Game Settings</span> </a>
             </li>
-            <li [ngClass]="{active: activeRoute('games')}" *ngIf="isProfileSet">
+            <li [ngClass]="{active: activeRoute('games')}" *ngIf="isProfileSet  && haspermission[60].Game0">
                 <a [routerLink]="['/games']"><i class="fa fa-trophy"></i> <span class="nav-label">Game</span> </a>
             </li>
             <li [ngClass]="{active: activeRoute('users')}" *ngIf="isProfileSet">

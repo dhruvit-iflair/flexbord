@@ -14,6 +14,13 @@ export const modulerstack = {
         'SportPoints',
         'SportPlayerstatus',
         'SportScores',
-        'SportFouls'
+        'SportFouls',
+        'Game',
+        'GameSetting',
+        'GameSettingTimeSetting',
+        'GameSettingStructure',
+        'GameSettingScoreboard',
+        'GameSettingConsequences',
+        'GameSettingPlaylist'
     ]
 }
