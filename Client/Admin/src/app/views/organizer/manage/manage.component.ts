@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router ,ActivatedRoute} from "@angular/router";
 import { FormGroup,FormControl,FormBuilder,Validators,AbstractControl } from "@angular/forms";
 import { forEach } from '@angular/router/src/utils/collection';
+import { UserService } from '../../../components/services/users';
 
 @Component({
   selector: 'app-manage',
@@ -26,7 +27,7 @@ export class ManageOrganizerComponent implements OnInit {
   public sub: any;
   public logo: any;
   public logo2: any;
-  public _id: any;
+  public _id: any = '';
   public orgForm : FormGroup;
   public fileSupport:Boolean = false;
   public fileSizeMin:Boolean = false;
@@ -34,9 +35,12 @@ export class ManageOrganizerComponent implements OnInit {
   public fileSupport2:Boolean = false;
   public fileSizeMin2:Boolean = false;
   public fileSizeMax2:Boolean = false;
+  public role:any; 
+  public user:any; 
+
   // public value : any = 9;
   // public value2 : Array<string> =["0: 1", "1: 2", "2: 3", "3: 4", "4: 5"];
-  constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute) {
+  constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public userSer:UserService) {
     this.orgForm = this.fb.group({
       name: ["",[Validators.required]],
       subDomain: ["",[Validators.required]],
@@ -51,6 +55,8 @@ export class ManageOrganizerComponent implements OnInit {
       zipcode: [""],
       website: ["",[Validators.required]],
       email: ["",[Validators.email]],
+      password: [""],
+      roles: ['',[Validators.required]],
       // phonenumber: [null,[Validators.required,Validators.minLength(10),Validators.maxLength(12)]],
       phonenumber: [null],
       sports: ["",[Validators.required]],
@@ -62,7 +68,14 @@ export class ManageOrganizerComponent implements OnInit {
     })
    }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.http.get(environment.api + '/roles').subscribe((res)=>{
+      var r = [];
+      r = res.json();
+      this.role =r.filter((t)=> t.title == "organizer");
+      this.orgForm.patchValue({roles :this.role[0]._id});
+    });
+    this.userSer.getUsers().subscribe((user)=>{ this.user = user; });
     this.http.get(environment.api + '/organizer')
             .subscribe((res)=>{
               this.items2 = res.json();
@@ -152,6 +165,11 @@ export class ManageOrganizerComponent implements OnInit {
       
     }
   }
+  asdl(e){
+    if (e.clientX > 0 && e.clientY > 0) {
+      document.getElementById('logo').click();
+    }
+  }
   setAdd(e){
     this.orgForm.patchValue({address:e.formatted_address});
     this.orgForm.patchValue({phonenumber:e.formatted_phone_number});
@@ -228,13 +246,19 @@ export class ManageOrganizerComponent implements OnInit {
     }
   }
     addOrg(){     
-      console.log(this.orgForm.value); 
-      if (this.orgForm.value.logo == "" || this.orgForm.value.placePic == null) {
+      var usn = this.user.filter((u)=>{ 
+        return u.username == this.orgForm.value.email;
+      });
+      if (this.orgForm.value.logo == "" || this.orgForm.value.placePic == null || usn[0]) {
         if (this.orgForm.value.logo == "") {
           this.toastr.warning('Please upload logo ', 'Warning');
         }
         if (this.orgForm.value.placePic == null) {
           this.toastr.warning('Please upload placepic images', 'Warning');
+        }
+        if (usn[0]) {
+          console.log(usn)
+          this.toastr.error('This Email is already taken', 'Error');
         }
       }
       else{

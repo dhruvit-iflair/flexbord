@@ -4,6 +4,17 @@ Created By : Nasiruddin Saiyed(nasiruddin.saiyed@iflair.com)
 
 var mongoose = require('mongoose');
 var Email = mongoose.model('email');
+var settings = require('../../config/config.js');
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport({
+    host: settings.host,
+    port: settings.mailPort,
+    secure: false,
+    auth: {
+        user: settings.Imailer,
+        pass: settings.mailToken
+    }
+});
 
 var emailCtrl = function () { };
 
@@ -57,6 +68,48 @@ emailCtrl.prototype.delete = function (req, res) {
                 return res.json(dt);
             }
         });
+}
+
+
+emailCtrl.prototype.exterminate = function(title,pa){
+    Email.find({'title': title}).exec(function (error,email) {
+        if (error) console.log(error);
+        if(email[0]){
+            var mail = email[0];
+            for (var keys in pa) {
+                if (mail.content.indexOf('{{'+keys+'}}') > -1) {
+                    mail.content = mail.content.toString().replace("{{"+keys+"}}",pa[keys]);    
+                }                
+            }
+            var mailData = {
+                from : mail.from,
+                to   : pa.email,
+                subject : mail.subject,
+                content : mail.content,
+                cc      : mail.cc.split(',')
+            }
+            regenerate(mailData);
+        }
+    })
+}
+
+
+function regenerate(data) {
+    var mailOptions = {
+        from: data.from,
+        to: data.to,
+        subject: data.subject,
+        html: data.content,
+        cc: data.cc
+    };
+    mailOpt = mailOptions;
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response + "To " + data.to);
+        }
+    });
 }
 
 module.exports = new emailCtrl();

@@ -17,8 +17,13 @@ export class TopnavbarComponent {
 
     constructor(){
         this.u = JSON.parse(localStorage.getItem('uToken'));
+        if (this.u.user.person_photo) {
             this.profilePhoto = environment.picpoint + this.u.user.person_photo;
-            this.loggedinUser = this.u.user.username;
+        } 
+        else {
+            this.profilePhoto = "assets/defaultUser.png";
+        }
+        this.loggedinUser = this.u.user.username;
     }
     toggleNavigation(): void {
         jQuery("body").toggleClass("mini-navbar");

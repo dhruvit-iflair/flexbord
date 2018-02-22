@@ -8,7 +8,10 @@
           <label><h2>Edit Profile</h2></label>
         </div>
         <div class="col-md-4">
-            <div class="col-md-12"><img src="{{person_photo}}" alt="" class="profileView"></div>
+            <div class="col-md-12">
+                <img src="{{person_photo}}"  class="profileView">
+                <!-- this.profilePhoto = "assets/defaultUser.png"; -->
+            </div>
             <div class="col-md-12">
                 <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none" >
                 <button class="btn btn_green profileBtn" (click)="file.click()">Upload</button>   
@@ -30,11 +33,13 @@
                   <input class="form-control text-col-md-3" type="email" formControlName="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required placeholder="Email">
               </div>
               <div class="col-md-12">
-                  <h4 class="text-left">New Password<a style="color:#f00 !important;">*</a></h4>
+                  <h4 class="text-left" *ngIf="userForm.get('password').value !=''">New Password<a style="color:#f00 !important;">*</a></h4>
+                  <h4 class="text-left" *ngIf="userForm.get('password').value ==''">New Password</h4>
                   <input class="form-control text-col-md-3" type="password" formControlName="password" placeholder="Enter New Password">
               </div>
               <div class="col-md-12">
-                  <h4 class="text-left">Confirm New Password<a style="color:#f00 !important;">*</a></h4>
+                    <h4 class="text-left" *ngIf="userForm.get('password').value !=''">Confirm New Password<a style="color:#f00 !important;">*</a></h4>
+                    <h4 class="text-left" *ngIf="userForm.get('password').value ==''">Confirm New Password</h4>
                   <input class="form-control text-col-md-3" type="password" formControlName="confirmPassword" placeholder="Confirm New Password">
               </div>
             </form>

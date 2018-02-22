@@ -9,6 +9,8 @@ module.exports=function(app){
     usersRoute.route('/')
     .get(users.list)
     .post(users.create);
+    usersRoute.route('/createByOrg')
+    .post(users.createByOrg);
     usersRoute.route('/listonly/:id')
     .get(users.listOnly);
     usersRoute.route('/upload')

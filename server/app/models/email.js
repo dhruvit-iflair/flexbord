@@ -6,7 +6,7 @@ var mongoose=require('mongoose');
 Schema=mongoose.Schema;
 var emailSchema=new Schema({
     title:String,    
-    emailType:{ type: Schema.Types.ObjectId, ref: 'emailType'},  
+    // emailType:{ type: Schema.Types.ObjectId, ref: 'emailType'},  
     subject:String,
     from:String,
     cc:String,

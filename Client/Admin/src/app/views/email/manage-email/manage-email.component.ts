@@ -23,7 +23,7 @@ export class ManageEmailComponent implements OnInit {
         subject:['',[Validators.required]],
         from:['',[Validators.required]],
         cc:['',[Validators.required]],
-        emailType:['',[Validators.required]],
+        // emailType:['',[Validators.required]],
         content:['',[Validators.required]]
       })
   }
@@ -39,7 +39,7 @@ export class ManageEmailComponent implements OnInit {
   }
   getType(){
     this.title = "";
-    this.emailTypeService.getEmailType().subscribe(res=>this.emailType = res);
+    // this.emailTypeService.getEmailType().subscribe(res=>this.emailType = res);
   }
   saveEmail(){
     if (this.emailForm.valid) {

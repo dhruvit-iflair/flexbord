@@ -276,6 +276,31 @@ usersctrl.prototype.changepassword = function (req, res) {
         }
     });
 }
+usersctrl.prototype.createByOrg = function (req, res) {
+    var bodydata = {
+        username: req.body.username,
+        email: req.body.username,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        person_photo: req.body.person_photo,
+        roles:req.body.roles,
+        isAgreemented: req.body.isAgreemented,
+        isVerified: false,
+        isProfileSet:true
+    }
+    Users.register(new Users(bodydata), req.body.password, function (err, account) {
+        if (err) {
+            res.json(err.message);
+        }
+        else {
+            passport.authenticate('local')(req, res, function () {
+                //res.json('User Registered Successfully.');
+                firevmail(req);
+                res.json('User Registered Successfully.Please Verify your account to Login.');
+            });
+        }
+    });
+}
 // use static authenticate method of model in LocalStrategy
 passport.use(new LocalStrategy(Users.authenticate()));
 

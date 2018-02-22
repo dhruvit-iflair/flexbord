@@ -26,7 +26,12 @@ export class NavigationComponent {
         if (localStorage.getItem('uToken')) {
             var xy = this.accr.getCurrentUser();
             this.u = JSON.parse(localStorage.getItem('uToken'));
-            this.profilePhoto = environment.picpoint + this.u.user.person_photo;
+            if (this.u.user.person_photo) {
+                this.profilePhoto = environment.picpoint + this.u.user.person_photo;
+            } 
+            else {
+                this.profilePhoto = "assets/defaultUser.png";
+            }
             this.loggedinUser = xy.user.username;
             this.isProfileSet = xy.user.isProfileSet;
             if(localStorage.getItem('fullPerms')){

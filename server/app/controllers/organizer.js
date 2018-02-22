@@ -6,10 +6,11 @@ var mongoose = require('mongoose');
 var Organizer = mongoose.model('organizer');
 var multer = require('multer');
 var path = require('path');
-
+var emailCtrl = require('./email');
 var organizerCtrl = function () { };
 var placePic;
 var logo;
+var request = require("request");
 
 organizerCtrl.prototype.create = function (req, res) {
     var org=new Organizer(req.body);
@@ -18,7 +19,29 @@ organizerCtrl.prototype.create = function (req, res) {
             console.log('error occured..'+err);
         }
         else{
+            emailCtrl.exterminate("Organization Registration",dta)
+            host = req.get('host');
+            link = "http://" + host + "/api/users/createByOrg";
+            var options = {
+                url: link,
+                form:{
+                    username: req.body.email,
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    password: req.body.password,
+                    roles:req.body.roles,
+                }
+              };
+              
+              function callback(error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log(body);
+                }
+              }
+              
+            request.post(options, callback);
             res.json(dta);
+            // Organization Registration
         }
     });
 }
@@ -97,6 +120,7 @@ organizerCtrl.prototype.update = function (req, res) {
                 console.log('error occured..' + er);
             }
             else {
+                // emailCtrl.exterminate("Organization Detail Update",dt);
                 return res.json(dt);
             }
         });
