@@ -19,7 +19,10 @@ conseqCtrl.prototype.create = function (req, res) {
 }
 
 conseqCtrl.prototype.list = function (req, res) {
-    Conseq.find().populate('gamesettings').exec(function (er, dt) {
+    Conseq.find().populate('gamesettings').populate({
+        path: 'teamfaults.type',
+        model: 'sportfouls'
+    }).exec(function (er, dt) {
         if (er) {
             console.log('error occured..' + er);
         }
@@ -30,14 +33,20 @@ conseqCtrl.prototype.list = function (req, res) {
 }
 
 conseqCtrl.prototype.getbyid = function (req, res) {
-    Conseq.find({ _id: req.params.id }).populate('gamesettings').exec(function (err, gdt) {
+    Conseq.find({ _id: req.params.id }).populate('gamesettings').populate({
+        path: 'teamfaults.type',
+        model: 'sportfouls'
+    }).exec(function (err, gdt) {
         if (err) console.log('error occured..' + err);
         res.json(gdt);
     });
 }
 
 conseqCtrl.prototype.getbysetting = function (req, res) {
-    Conseq.find({ gamesettings: req.params.id }).populate('gamesettings').exec(function (err, gd) {
+    Conseq.find({ gamesettings: req.params.id }).populate('gamesettings').populate({
+        path: 'teamfaults.type',
+        model: 'sportfouls'
+    }).exec(function (err, gd) {
         if (err) console.log('error occured..' + err);
         res.json(gd);
     });
