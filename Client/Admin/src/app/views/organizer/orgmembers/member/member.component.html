@@ -5,7 +5,7 @@
 <div class="col-md-12">
   <form class="m-t" role="form" action="#">
     <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <label>Email Address<a style="color:#f00 !important;">*</a></label>
         <input type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required #email="ngModel" id="email" name="email" class="form-control" [(ngModel)]="mForm.emailAddress" placeholder="Email Address" [ngModelOptions]="{standalone: true}">
         <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
@@ -14,14 +14,14 @@
         </div>
     </div>
     <!-- </div> -->
-    <div class="col-md-6">
+    <div class="col-md-4">
         <label>Status<a style="color:#f00 !important;">*</a></label>
         <select class="spt text-col-md-3" [(ngModel)]="mForm.status" [ngModelOptions]="{standalone: true}">
             <option value="pending">Pending</option>
             <option value="approved">Approved</option>
         </select>
     </div>
-    <div class="man col-md-6">
+    <div class="col-md-4">
         <label>User Type<a style="color:#f00 !important;">*</a></label>
         <input type="radio" value="organizeradmin" name="utype" required #utype="ngModel" id="utype" [(ngModel)]="mForm.userType" [ngModelOptions]="{standalone: true}"> Organizer Admin
         <div *ngIf="utype.errors && (utype.dirty || utype.touched)" class="alert alert-danger">

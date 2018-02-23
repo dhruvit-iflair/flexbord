@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { smoothlyMenu } from '../../../app.helpers';
 import { environment } from "../../../../environments/environment";
 import * as jQuery from 'jquery'
+import { UserService } from '../../services/users';
+import { Router } from '@angular/router';
 
 // declare var jQuery:any;
 
@@ -14,9 +16,15 @@ export class TopnavbarComponent {
     public profilePhoto;
     public u : any;
     public loggedinUser;
-
-    constructor(){
+    public roles : any;
+    constructor(public userSer: UserService,public router : Router){
         this.u = JSON.parse(localStorage.getItem('uToken'));
+        try {
+            this.roles = JSON.parse(localStorage.getItem('roles'));
+        }
+        catch(err) {
+            this.router.navigate(['/login']);
+        }        
         if (this.u.user.person_photo) {
             this.profilePhoto = environment.picpoint + this.u.user.person_photo;
         } 

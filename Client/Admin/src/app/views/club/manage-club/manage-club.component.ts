@@ -192,22 +192,25 @@ export class ManageClubComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.http.get(environment.api + '/club')
-            .subscribe((res)=>{
-              this.items2 = res.json();
-              this.sub = this.activeRouter.params.subscribe(params => {
-                if (params._id) {
-                    this.items = this.items2.filter(af=> af._id != params._id);
-                }
-                else{
-                  this.items = res.json();
-                }
-              });
-            });
-    this.http.get(environment.api + '/sports')
-            .subscribe((res)=>{
-              this.spots = res.json();
-            });
+    // this.http.get(environment.api + '/club')
+    //         .subscribe((res)=>{
+    //           this.items2 = res.json();
+    //           this.sub = this.activeRouter.params.subscribe(params => {
+    //             if (params._id) {
+    //                 this.items = this.items2.filter(af=> af._id != params._id);
+    //             }
+    //             else{
+    //               this.items = res.json();
+    //             }
+    //           });
+    //         });
+
+    this.http.get(environment.api + '/sports').subscribe((res)=>{
+      this.spots = res.json();
+    });
+    this.http.get(environment.api + '/organizer').subscribe((res)=>{
+      this.items = res.json();
+    });
     this.sub = this.activeRouter.params.subscribe(params => {
       // //console.log(params._id);
       if (params._id) {
@@ -345,7 +348,7 @@ export class ManageClubComponent implements OnInit {
         if (this.clubForm.value.logo == "") {
           this.toastr.warning('Please upload logo ', 'Warning');
         }
-        if (this.clubForm.value.placePic == null) {
+        if (this.clubForm.value.placePic == null || this.clubForm.value.placePic == '' ) {
           this.toastr.warning('Please upload placepic images', 'Warning');
         }
       }

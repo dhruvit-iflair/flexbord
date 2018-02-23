@@ -35,7 +35,7 @@ export class ManageUsersComponent implements OnInit {
         this._id = params._id;
         this.userForm = this.fb.group({
               firstname: ["",[Validators.required]],    
-              email:["",[Validators.required,Validators.email]],
+              email:[{ value: null,disabled: true},[Validators.required,Validators.email]],
               lastname: ["",[Validators.required]],
               roles:[[],[Validators.required]],
               person_photo:["",[Validators.required]],

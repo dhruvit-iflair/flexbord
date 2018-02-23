@@ -29,7 +29,7 @@
                 <a class="btn btn_green tab_btn"  routerLink="/sports/playerstatus/manage/{{m._id}}" *ngIf="hasEditPerm" >
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
-                <a class="btn btn_red tab_btn" (click)="deletemember(m._id)" *ngIf="hasDeletePerm">
+                <a class="btn btn_red tab_btn delete-btn" (click)="deletemember(m._id)" *ngIf="hasDeletePerm">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
               </td>

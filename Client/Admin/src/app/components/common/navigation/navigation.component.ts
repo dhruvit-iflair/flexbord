@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccessorService } from "../accessor.service";
 import { environment } from "../../../../environments/environment";
+import { UserService } from '../../services/users';
 declare const jQuery: any;
 // import * as jQuery from 'jquery'
 
@@ -20,12 +21,20 @@ export class NavigationComponent {
     public u : any;
     public modules=this.accr.getmodules();
     public modulesize=this.modules.length * 4;
-    constructor(private router: Router, private accr:AccessorService) { }
+    public roles : any;
+    public check : Boolean = true;
+    constructor(private router: Router, private accr:AccessorService, public userSer:UserService) { }
 
     ngOnInit() {
         if (localStorage.getItem('uToken')) {
             var xy = this.accr.getCurrentUser();
             this.u = JSON.parse(localStorage.getItem('uToken'));
+            try {
+                this.roles = JSON.parse(localStorage.getItem('roles'));
+            }
+            catch(err) {
+                this.router.navigate(['/login']);
+            }     
             if (this.u.user.person_photo) {
                 this.profilePhoto = environment.picpoint + this.u.user.person_photo;
             } 

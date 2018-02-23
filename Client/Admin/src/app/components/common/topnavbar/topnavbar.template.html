@@ -38,6 +38,7 @@
                                     <div class="col-lg-8">
                                         <p class="text-left"><strong>{{u.user.firstname}} {{u.user.lastname}}</strong></p>
                                         <p class="text-left small">{{u.user.username}}</p>
+                                        <span class="text-left roles"> <strong class="font-bold" *ngIf="roles['title']" >{{roles.title |  uppercase}}</strong> </span>
                                         <!-- <p class="text-left"> -->
                                             <!-- <a class="btn btn-primary btn-block btn-sm" [routerLink]="['/profile/view']">Profile</a> -->
                                             <!-- <a class="btn btn-primary btn-block btn-sm" onclick="open(location, '_self').close();">Profile</a> -->                                            

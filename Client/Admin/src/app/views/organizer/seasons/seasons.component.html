@@ -32,7 +32,7 @@
                 <a class="btn btn_green tab_btn"  routerLink="/organizer/seasons/manage/{{s._id}}" *ngIf="hasEditPerm" title='Edit'>
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
-                <a class="btn btn_red tab_btn" (click)="delOrg(s._id)" *ngIf="hasDeletePerm" title="Delete">
+                <a class="btn btn_red tab_btn delete-btn" (click)="delOrg(s._id)" *ngIf="hasDeletePerm" title="Delete">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
               </td>

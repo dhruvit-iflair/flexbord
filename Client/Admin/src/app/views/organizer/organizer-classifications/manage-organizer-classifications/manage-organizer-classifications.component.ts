@@ -20,7 +20,7 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
   constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute){
     this.claForm = this.fb.group({
       name: ["",[Validators.required]],
-      value: [null,[Validators.required]]
+      value: ["",[Validators.required]]
     })
     //console.log(this.value.length);
   }

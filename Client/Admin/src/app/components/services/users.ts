@@ -27,6 +27,11 @@ export class UserService {
             .map((res: Response) => <any[]>res.json())
             .catch(this.handleError);
     }
+    getRolesById(id): Observable<any[]> {
+        return this.http.get(environment.api + '/roles/' +id)
+            .map((res: Response) => <any[]>res.json())
+            .catch(this.handleError);
+    }
     addUsers(data: Users): Observable<any> {
         return this.http.post(environment.api + '/users', data)
             .map((res: Response) => <any[]>res.json())

@@ -8,28 +8,28 @@
             </div>
             <div class="col-md-12">
             <div class="row">
-                <div class="man col-md-6">
+                <div class="man col-md-3">
                       <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
                       <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="name" required placeholder="Enter Full Name">
                       <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('name').valid && orgForm.get('name').touched">
                             Name is required.
                       </div>
                 </div>
-                <div class="man col-md-6">
+                <div class="man col-md-3">
                       <h4 class="text-left">Sub domain<a style="color:#f00 !important;">*</a></h4>
                       <input class="text-col-md-3" type="text" formControlName="subDomain" placeholder="Enter Sub Domain">
                       <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('subDomain').valid && orgForm.get('subDomain').touched">
                             Sub domain
                       </div>
                 </div>
-                <div class="man col-md-6">
+                <div class="man col-md-3">
                       <h4 class="text-left">Abbreviation<a style="color:#f00 !important;">*</a></h4>
                       <input class="text-col-md-3" type="text" formControlName="abbreviation" placeholder="Enter Abbreviation">
                       <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('abbreviation').valid && orgForm.get('abbreviation').touched">
                             Abbreviation is required.
                       </div>
                 </div>
-                <div class="man col-md-6">
+                <div class="man col-md-3">
                         <h4 class="text-left">Affiliated<a style="color:#f00 !important;">*</a></h4>
                         <!-- <select class="js-example-basic-single text-col-md-3"  name="state" (setData)="dataChanged($event,'affilated')" formControlName="affilated"  placeholder="Select Organization" select2>
                             <option *ngFor="let ite of items"  [value]="ite.id">{{ite.name}}</option>
@@ -52,10 +52,10 @@
                                   Logo is required.
                             </span>           -->
                         </div>
-                        <div class="col-md-4" *ngIf="logo && !url" >
+                        <div class="man col-md-4" *ngIf="logo && !url" >
                               <img [src]="logo" class="image_display">               
                         </div>
-                        <div class="col-md-4" *ngIf="url" >
+                        <div class="man col-md-4" *ngIf="url" >
                               <img [src]="url" class="image_display">               
                         </div>
 
@@ -75,51 +75,52 @@
            </div>
             <div class="col-md-12">
                 <div class="row">
-                <div class="man col-md-6"><h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
+                <div class="man col-md-3"><h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
                     <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event);" Googleplace #box >
                     <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('address').valid && orgForm.get('address').touched">
                             Address is required.
                     </div>   
                 </div>
          
-                <div class="man col-md-6">
+                <div class="man col-md-3">
                     <h4 class="text-left">Building</h4>
                     <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="building" placeholder="Building">
                 </div>
          
-                <div class="man col-md-6">
+                <div class="man col-md-3">
                     <h4 class="text-left">Street</h4>
                     <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="street" placeholder="Street">
                 </div>
          
-                <div class="man col-md-6">
+                <div class="man col-md-3">
                     <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
                     <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="country" placeholder="Country">
                 </div>
          
-                <div class="man col-md-6">
+                <div class="man col-md-3">
                     <h4 class="text-left">State</h4>
                     <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="state" placeholder="State">
                 </div>
          
-                <div class="man col-md-6">
+                <div class="man col-md-3">
                     <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
                     <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="city" placeholder="City">
                 </div>
          
-                <div class="man col-md-6">
+                <div class="man col-md-3">
                     <h4 class="text-left">Zip code</h4>
                     <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="zipcode" placeholder="Zip code">
                 </div>
          
-                <div class="man col-md-6">
+                <div class="man col-md-3">
                     <h4 class="text-left">Capacity<a style="color:#f00 !important;">*</a></h4>
-                    <input class="text-col-sm-3"  type="number" formControlName="capacity" min="0" max="9999999" style="width: 90px;" value="0">
+                    <input class="text-col-sm-3"  type="number" formControlName="capacity" min="0" max="9999999" style="width: 100%;" value="0">
                     <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('capacity').valid && orgForm.get('capacity').touched">
                             Capicity is required.
                     </div>
                 </div>
-         
+                 <div class="man col-md-12">
+                        <div class="row">
                     <div class="man col-md-2">
                         <h4 class="text-left">Place Pic<a style="color:#f00 !important;">*</a></h4>
                         <input type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)">
@@ -130,13 +131,15 @@
                             <p *ngIf="fileSupport2">Image format .jpg, .jpeg and .png only supported.</p>
                         </div>
                     </div>
-                    <div class="man col-md-2" *ngIf="placePic" >
-                            <img [src]="placePic" class="image_display">               
-                    </div>
-                    <div class="man col-md-2" *ngIf="logo2 && !placePic" >
-                            <img *ngFor="let item of logo2"  [src]="item" class="image_display">               
-                    </div>
                     
+                            <div class="man col-md-2" *ngIf="placePic" >
+                                    <img [src]="placePic" class="image_display">               
+                            </div>
+                            <div class="man col-md-2" *ngIf="logo2 && !placePic" >
+                                    <img *ngFor="let item of logo2"  [src]="item" class="image_display">               
+                            </div>
+                        </div>
+                    </div>
                </div>
                </div>
       </div>
@@ -147,21 +150,21 @@
             </div>
             <div class="col-md-12">
                 <div class="row">
-                 <div class="man col-md-6">
+                 <div class="man col-md-4">
                     <h4 class="text-left">Website<a style="color:#f00 !important;">*</a></h4>
                     <input class="text-col-md-3" type="text" formControlName="website" placeholder="Enter Website" pattern="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})">
                     <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('website').valid && orgForm.get('website').touched">
                             Website is required.
                     </div>    
                  </div>
-                 <div class="man col-md-6">
+                 <div class="man col-md-4">
                     <h4 class="text-left">Email<a style="color:#f00 !important;">*</a></h4>
                     <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" required placeholder="Enter Email">
                     <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('email').valid && orgForm.get('email').touched">
                             Email is required or invalid.
                     </div>     
                 </div>
-                <div class="man col-md-6">
+                <div class="man col-md-4">
                     <h4 class="text-left">Telephone</h4>
                     <input class="text-col-md-3" type="text" formControlName="phonenumber" pattern="^\+{0,2}([\-\. ])?(\(?\d{0,3}\))?([\-\. ])?\(?\d{0,3}\)?([\-\. ])?\d{3}([\-\. ])?\d{4}" placeholder="Enter Telephone">
                     <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('phonenumber').valid && orgForm.get('phonenumber').touched">
@@ -182,7 +185,8 @@
             </div>
              <div class="man col-md-12">
                     <h4 class="text-left">Choose<a style="color:#f00 !important;">*</a></h4>
-                    <app-multiselect [mArray]='spots' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="spots? spots.length > 0 : spots" ></app-multiselect>
+                    <div class="multi-wrap">
+                    <app-multiselect [mArray]='spots' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="spots? spots.length > 0 : spots" ></app-multiselect></div>
                     <div class="col-md-12" *ngIf="!spots? spots == [] : spots.length == 0">
                         <h4 class="text-left col-md-4">Add Sport</h4>                        
                         <button class="btn btn_green" [routerLink]="['/sports/manage']"> 
@@ -204,12 +208,12 @@
              <div class="man col-md-12">
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="radio" name="affilation"  value="opened" formControlName="affilation">
-                        <label>Opened</label>
+                        <input type="radio" class="bgradio-input" id="test1" name="affilation"  value="opened" formControlName="affilation">
+                        <label for="test1">Opened</label>
                     </div>
                     <div class="col-md-6">
-                        <input type="radio" name="affilation"  value="closed" formControlName="affilation">
-                        <label>Closed</label>
+                        <input type="radio" name="affilation" id="test2"  value="closed" formControlName="affilation">
+                        <label for="test2">Closed</label>
                     </div>
                     <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('affilation').valid && orgForm.get('affilation').touched">
                             Affiliation is required.
