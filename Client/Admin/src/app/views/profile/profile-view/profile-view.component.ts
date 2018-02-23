@@ -20,7 +20,12 @@ export class ProfileViewComponent implements OnInit {
   public userForm : any;
   public passwords : any;
   constructor(public fb: FormBuilder,private toastr : ToastrService, private router: Router,public userService:UserService) {
-    this.person_photo = environment.picpoint + this.user.user.person_photo;
+    if (this.user.user.person_photo) {
+        this.person_photo = environment.picpoint + this.user.user.person_photo;
+    } 
+    else {
+        this.person_photo = "assets/img/noImage.jpeg";
+    }
     this.userForm = this.fb.group({
         firstname: [this.user.user.firstname,[Validators.required]],
         lastname: [this.user.user.lastname,[Validators.required]],
@@ -50,7 +55,7 @@ export class ProfileViewComponent implements OnInit {
           localStorage.removeItem('uToken');
           localStorage.setItem('uToken',JSON.stringify(this.user));
           setTimeout(()=>{
-            location.reload();
+            location.href = '/';
           },1000)
         }
       } else {
