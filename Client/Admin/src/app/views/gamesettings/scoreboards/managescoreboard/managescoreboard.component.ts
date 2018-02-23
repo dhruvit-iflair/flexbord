@@ -18,14 +18,14 @@ export class ManagescoreboardComponent implements OnInit {
     gameclock: { isEnable: false, titlestyle: '', valuestyle: '', value: '00:00', titlevalue: '' },
     gameshotclock: { isEnable: false, titlestyle: '', valuestyle: '', value: '0', titlevalue: '' },
     gameperiodtitle: { isEnable: false, titlestyle: '', valuestyle: '', value: '', titlevalue: '' },
-    teamslogo: { isEnable: false, titlestyle: '', valuestyle: '', value: '', titlevalue: '' },
-    points: { isEnable: false, titlestyle: '', valuestyle: '', value: '00', titlevalue: '' },
-    bonus: { isEnable: false, titlestyle: '', valuestyle: '', value: 'bonus', titlevalue: '' },
-    fouls: { isEnable: false, titlestyle: '', valuestyle: '', value: '00', titlevalue: '' },
-    timeouts: { isEnable: false, titlestyle: '', valuestyle: '', value: '00', titlevalue: '' },
-    statistics: { isEnable: false, titlestyle: '', valuestyle: '', value: 'statistics', titlevalue: '' },
+    teamslogo: { isEnable: true, titlestyle: '', valuestyle: '', value: '', titlevalue: '' },
+    points: { isEnable: true, titlestyle: '', valuestyle: '', value: '00', titlevalue: '' },
+    bonus: { isEnable: true, titlestyle: '', valuestyle: '', value: 'bonus', titlevalue: '' },
+    fouls: { isEnable: true, titlestyle: '', valuestyle: '', value: '00', titlevalue: '' },
+    timeouts: { isEnable: true, titlestyle: '', valuestyle: '', value: '00', titlevalue: '' },
+    statistics: { isEnable: true, titlestyle: '', valuestyle: '', value: 'statistics', titlevalue: '' },
     playerpenlty: { isEnable: false, titlestyle: '', valuestyle: '', value: '', titlevalue: '' },
-    directions: { isEnable: false, titlestyle: '', valuestyle: '', value: '', titlevalue: '' },
+    directions: { isEnable: true, titlestyle: '', valuestyle: '', value: '', titlevalue: '' },
     pointstructure: { isEnable: false, titlestyle: '', valuestyle: '', value: '', titlevalue: '', blocksize: 3, blockheight: 0 }
   };
   temp=[];
