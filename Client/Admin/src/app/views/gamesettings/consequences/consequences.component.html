@@ -27,7 +27,7 @@
                     <td>{{item.gamesettings.settingname | firstcapitalize}}</td>
                     <td>{{item.playerconseq.name | firstcapitalize}}</td>
                     <td>{{item.playerconseq.color}}</td>
-                    <td>{{item.teamfaults.type}}</td>
+                    <td>{{item.teamfaults.type.nameoffoul}}</td>
                     <td>
                       <a class="btn btn_green tab_btn" routerLink="/game_settings/consequences/manage/{{item._id}}"  title="Edit" *ngIf="hasEditPerm">
                         <i class="fa fa-pencil" aria-hidden="true"></i>

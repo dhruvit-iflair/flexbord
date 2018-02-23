@@ -13,8 +13,52 @@
     font-family: 'digital';
     font-size:1.8em;
 }
-.manage-shot-clock{
+.manage-points{
+    line-height: 0.8;
+    margin-top: 15%;
+    text-align: center;
+    color: #5cb85c;
+    font-family: 'digital';
+    font-size:1.8em;
+}
+.pointslabel{
+    font-size: 0.56em;
+    color: white;
+}
+.foulspan{
+     color: #d2322d;
+}
+.statisticsspan{
+    color: white;
+}
+.pointsspan{
+    font-size: 1.9em;
+}
+.manage-team-penalty{
+    margin-top: 3%;
+}
+.manage-pointstructure div{
+  background-color: #00b662;
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+}
+.manage-pointstructure{
+    display: flex;flex-wrap: nowrap;background: #00b662;font-family: 'digital';
+}
+.changedcss{
+    background:#00b662;
+    width:100%;
     position: absolute;
+    bottom: 0;
+}
+.defaultcss{
+    display: inline-block;
+    background: #00b662;
+    font-size: 15px;
+    color: white;
+}
+.manage-shot-clock{
     width: 100%;
     bottom: 0;
     text-align: center;
