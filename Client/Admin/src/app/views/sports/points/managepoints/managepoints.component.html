@@ -14,7 +14,7 @@
           <label>Value of Point<a style="color:#f00 !important;">*</a></label>
           <div class="man col-md-2">
             <input type="number" required #valueofpoint="ngModel" id="valueofpoint" name="valueofpoint" [(ngModel)]="former.valueofpoint"
-              [ngModelOptions]="{standalone: true}">
+              [ngModelOptions]="{standalone: true}" min="0" step="1" pattern="/^[0-9]{1,6}$/">
           </div>
           <div class="man col-md-10">
             <select class="js-example-basic-single text-col-md-3" [(ngModel)]="former.valueofpointopt"

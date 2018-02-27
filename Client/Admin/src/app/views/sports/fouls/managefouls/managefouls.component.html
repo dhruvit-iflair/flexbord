@@ -29,7 +29,7 @@
         <div class="man col-md-12">
           <label>Value of Foul<a style="color:#f00 !important;">*</a></label>
           <input type="number" required #valueoffoul="ngModel" id="valueoffoul" name="valueoffoul" class="form-control" [(ngModel)]="former.valueoffoul"
-            placeholder="0" [ngModelOptions]="{standalone: true}">
+            placeholder="0" [ngModelOptions]="{standalone: true}" min="0" step="1">
         </div>
 
         <div class="man col-md-12">
