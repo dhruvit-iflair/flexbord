@@ -36,7 +36,7 @@
                       <a class="btn btn_green tab_btn" routerLink="/games/manage/{{item._id}}"  title="Edit" *ngIf="hasEditPerm">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                       </a>
-                     <a class="btn btn_red tab_btn" (click)="delClub(item._id)" title="Delete" *ngIf="hasDeletePerm">
+                     <a class="btn btn_red tab_btn delete-btn" (click)="delClub(item._id)" title="Delete" *ngIf="hasDeletePerm">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                       </a>
                       <a class="btn btn_2 tab_btn" title="Start Game">

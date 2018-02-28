@@ -82,3 +82,6 @@ input.no_border.text-col-md-3 {
 button.btn.btn-lg.dropdown-toggle.col-md-12 {
     padding: 0;
 }
+.manage-box .man select{
+    height: 40px;
+}

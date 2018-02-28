@@ -1,11 +1,11 @@
 <div class="row">
   <div class="container">
-      <div class="col-md-10">
-          <label><h2>Club Members</h2></label>
+      <div class="col-md-8">
+          <label><h2 style="margin-top: 0;">Club Members</h2></label>
       </div>
-      <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
-          <button class="btn btn_green" [routerLink]="['/club/members/manage']">New Member</button>                         
-          <button class="btn btn_green" [routerLink]="['/club/members/import']" style="margin-bottom: 15px;">Import Members</button>                         
+      <div class="col-md-4 text-right" *ngIf="hasCreatePerm">
+          <button class="btn btn_green" [routerLink]="['/club/members/manage']" style="margin-top: 0;margin-bottom: 15px;">New Member</button>                         
+          <button class="btn btn_black" [routerLink]="['/club/members/import']" style="margin-bottom: 15px;">Import Members</button>                         
       </div>
       <div class="col-md-12" id="tabl">
         <table datatable  [dtOptions]="dtOptions" class="row-border hover" onchange="gotcha()" *ngIf="dataRenderer">
@@ -33,7 +33,7 @@
                 <a class="btn btn_pending tab_btn" (click)="changeStatusA(m._id)" *ngIf="m.status == 'Pending'" >
                   {{m.status}}
                 </a>
-                <a class="btn btn_palgreen tab_btn" (click)="changeStatusP(m._id)" *ngIf="m.status == 'Approved'">
+                <a class="btn btn_green tab_btn" (click)="changeStatusP(m._id)" *ngIf="m.status == 'Approved'">
                   {{m.status}}
                 </a>
               </td>
@@ -41,7 +41,7 @@
                 <a class="btn btn_green tab_btn"  routerLink="/club/members/manage/{{m._id}}" *ngIf="hasEditPerm">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
-                <a class="btn btn_red tab_btn" (click)="deletemember(m._id)" *ngIf="hasDeletePerm">
+                <a class="btn btn_red tab_btn delete-btn" (click)="deletemember(m._id)" *ngIf="hasDeletePerm">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
                

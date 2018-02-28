@@ -163,10 +163,10 @@ export class TeamComponent implements OnInit {
     }
   }
   addteam() {
-    if (this.logo == "") {
-      this.toastr.warning('Please upload logo ', 'Warning');
-    }
-    else {
+    // if (this.logo == "") {
+    //   this.toastr.warning('Please upload logo ', 'Warning');
+    // }
+    // else {
       var clubid = localStorage.getItem('clubid');
       if (this.paramdetails) {
         this.teamForm.value.logo = this.imgdt;
@@ -221,7 +221,7 @@ export class TeamComponent implements OnInit {
             this.toastr.error('Something went wrong !! Please try again later', 'Error');
           })
       }
-    }
+   // }
   }
   setAdd(e) {
     this.teamForm.patchValue({ address: e.formatted_address });

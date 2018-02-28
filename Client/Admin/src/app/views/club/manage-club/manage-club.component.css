@@ -27,3 +27,6 @@ input.capacity.ng-dirty.ng-touched.ng-invalid {
 button.btn.btn-lg.dropdown-toggle.col-md-12 {
     padding: 0;
 }
+.manage-box .man select{
+    height: 40px;
+}

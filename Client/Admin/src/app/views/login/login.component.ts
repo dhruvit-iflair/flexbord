@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AccessorService } from "../../components/common/accessor.service";
 import { environment } from '../../../environments/environment'
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../components/services/users';
 
 @Component({
   selector: 'login',
@@ -15,7 +16,7 @@ export class loginComponent {
     username: '',
     password: ''
   }
-  constructor(private router: Router, private http: HttpClient, private toastr: ToastrService, private accr: AccessorService) { }
+  constructor(private router: Router, private http: HttpClient, private toastr: ToastrService, private accr: AccessorService, public userSer: UserService) { }
   ngOnInit() {
     if (localStorage.getItem('uToken')) {
       localStorage.removeItem('uToken');
@@ -37,6 +38,10 @@ export class loginComponent {
           localStorage.setItem('uToken', JSON.stringify(data));
           // this.router.navigate(['/profilesetup']);
           var alford = JSON.parse(localStorage.getItem('uToken'));
+          this.userSer.getRolesById(data['user']['roles'][0]).subscribe(res=>{
+              localStorage.setItem('roles',JSON.stringify(res[0]));
+          })  
+          
           if (alford.user.isVerified == false) {
             this.toastr.warning('Account Not Verified', 'Please verify your Account.');
           }

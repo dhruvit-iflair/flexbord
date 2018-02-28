@@ -174,29 +174,29 @@
                 </div>
                 <div class="col-md-12">
                 <div class="row">
-                    <div class="man col-md-6">
+                    <div class="man col-md-3">
                           <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
                           <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="name" placeholder="Enter Name" required>
                     </div>
-                    <div class="man col-md-6">
+                    <div class="man col-md-3">
                           <h4 class="text-left">Sub domain<a style="color:#f00 !important;">*</a></h4>
                           <input class="text-col-md-3" type="text" formControlName="subDomain" placeholder="Enter Sub Domain">
                     </div>
-                    <div class="man col-md-6">
+                    <div class="man col-md-3">
                           <h4 class="text-left">Abbreviation<a style="color:#f00 !important;">*</a></h4>
                           <input class="text-col-md-3" type="text" formControlName="abbreviation" placeholder="Enter Abbreviation">
                     </div>
-                    <div class="man col-md-6">
-                            <h4 class="text-left">Affiliated<a style="color:#f00 !important;">*</a></h4>
+                    <div class="man col-md-3">
+                            <h4 class="text-left">Affiliated</h4>
                             <select class="js-example-basic-single text-col-md-3"  name="affilated" formControlName="affilated">
-                                <option value="" disabled="true" [selected]="true">Select Club</option>    
+                                <option value="" disabled="true" [selected]="true">Select Organizer</option>    
                                 <option *ngFor="let ite of items"  [value]="ite._id">{{ite.name}}</option>
                             </select>
                     </div>
                     <div class="man col-md-12">
                         <div class="row">
                             <div class="col-md-2">
-                                <h4 class="text-left">Logo<a style="color:#f00 !important;">*</a></h4>
+                                <h4 class="text-left">Logo</h4>
                                 <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none" >
                                 <button class="btn btn_green" (click)="file.click()"> Upload</button>   
                             </div>
@@ -217,54 +217,56 @@
                </div>
                 <div class="col-md-12">
                     <div class="row">
-                    <div class="man col-md-6"><h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
+                    <div class="man col-md-3"><h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
                         <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace placeholder="Enter Address">
                     </div>             
-                    <div class="man col-md-6">
+                    <div class="man col-md-3">
                         <h4 class="text-left">Building</h4>
                         <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="building" placeholder="Building">
                     </div>
              
-                    <div class="man col-md-6">
+                    <div class="man col-md-3">
                         <h4 class="text-left">Street</h4>
                         <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="street" placeholder="Street">
                     </div>
              
-                    <div class="man col-md-6">
+                    <div class="man col-md-3">
                         <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
                         <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="country" placeholder="Country">
                     </div>
              
-                    <div class="man col-md-6">
+                    <div class="man col-md-3">
                         <h4 class="text-left">State</h4>
                         <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="state" placeholder="State">
                     </div>
              
-                    <div class="man col-md-6">
+                    <div class="man col-md-3">
                         <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
                         <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="city" placeholder="City">
                     </div>
              
-                    <div class="man col-md-6">
+                    <div class="man col-md-3">
                         <h4 class="text-left">Zipcode</h4>
                         <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="zipcode" placeholder="Zip">
                     </div>
              
-                    <div class="man col-md-6">
-                        <h4 class="text-left">Capacity<a style="color:#f00 !important;">*</a></h4>
+                    <div class="man col-md-3">
+                        <h4 class="text-left">Capacity</h4>
                         <input class="capacity" minlength="3" maxlength="8" type="number" formControlName="capacity" placeholder="Enter Capacity">
                     </div>
-                    <div class="man col-md-2">
-                        <h4 class="text-left">Place Pic<a style="color:#f00 !important;">*</a></h4>
-                        <input type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)" style="display:none">
-                        <button class="btn btn_green" (click)="file2.click()"> Upload</button>                
-                    </div>
+                    <div class="man col-md-12">
+                        <div class="man col-md-2">
+                            <h4 class="text-left">Place Pic</h4>
+                            <input type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)" style="display:none">
+                            <button class="btn btn_green" (click)="file2.click()"> Upload</button>                
+                        </div>
                         <div class="man col-md-2" *ngIf="placePic" >
                                 <img [src]="placePic" class="image_display">               
                         </div>
                         <div class="man col-md-2" *ngIf="logo2 && !placePic" >
                                 <img *ngFor="let item of logo2"  [src]="item" class="image_display">               
                         </div>
+                    </div>
                         
                    </div>
                    </div>
@@ -276,15 +278,15 @@
                 </div>
                 <div class="col-md-12">
                     <div class="row">
-                     <div class="man col-md-6">
-                        <h4 class="text-left">Website<a style="color:#f00 !important;">*</a></h4>
+                     <div class="man col-md-4">
+                        <h4 class="text-left">Website</h4>
                         <input class="text-col-md-3" type="text" formControlName="website" placeholder="Enter Website" pattern="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})">
                      </div>
-                     <div class="man col-md-6">
-                        <h4 class="text-left">Email<a style="color:#f00 !important;">*</a></h4>
-                        <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" required placeholder="Enter Email">
+                     <div class="man col-md-4">
+                        <h4 class="text-left">Email</h4>
+                        <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" placeholder="Enter Email">
                     </div>
-                    <div class="man col-md-6">
+                    <div class="man col-md-4">
                         <h4 class="text-left">Telephone</h4>
                         <input class="text-col-md-3" type="text" formControlName="phonenumber" placeholder="Enter Telephone">
                     </div>
@@ -297,7 +299,7 @@
                      <label><h2>Sports</h2></label>
                 </div>
                  <div class="man col-md-12">
-                        <h4 class="text-left">Choose<a style="color:#f00 !important;">*</a></h4>
+                        <h4 class="text-left">Choose</h4>
                         <app-multiselect [mArray]='spots' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="spots? spots.length > 0 : spots"></app-multiselect>
                         <div class="col-md-12" *ngIf="!spots? spots == [] : spots.length == 0">
                             <h4 class="text-left col-md-4">Add Sport</h4>                        
@@ -309,7 +311,7 @@
             </div>    
             <div class="manage-box radio-box clearfix"> 
                  <div class="col-md-12">
-                         <label><h2>Affiliation<a style="color:#f00 !important;">*</a></h2></label>                               
+                         <label><h2>Affiliation</h2></label>                               
                  </div>
                  <div class="man col-md-12">
                     <div class="row">

@@ -178,36 +178,39 @@ export class ManageClubComponent implements OnInit {
       state: [""],
       country: [""],
       zipcode: [""],
-      website: ["",[Validators.required]],
-      email: ["",[Validators.email]],
+      website: [""],
+      email: [""],
       // phonenumber: [null,[Validators.required,Validators.minLength(10),Validators.maxLength(12)]],
       phonenumber: [null],
-      sports: [null,[Validators.required]],
-      capacity:  [null,[Validators.required]],
+      sports: [null],
+      capacity:  [null],
       placePic: [null],
-      affilated:  ["",Validators.required],
-      affilation:  ["",[Validators.required]],
+      affilated:  [""],
+      affilation:  [""],
       registered: [null]
     })
    }
 
   ngOnInit() {
-    this.http.get(environment.api + '/club')
-            .subscribe((res)=>{
-              this.items2 = res.json();
-              this.sub = this.activeRouter.params.subscribe(params => {
-                if (params._id) {
-                    this.items = this.items2.filter(af=> af._id != params._id);
-                }
-                else{
-                  this.items = res.json();
-                }
-              });
-            });
-    this.http.get(environment.api + '/sports')
-            .subscribe((res)=>{
-              this.spots = res.json();
-            });
+    // this.http.get(environment.api + '/club')
+    //         .subscribe((res)=>{
+    //           this.items2 = res.json();
+    //           this.sub = this.activeRouter.params.subscribe(params => {
+    //             if (params._id) {
+    //                 this.items = this.items2.filter(af=> af._id != params._id);
+    //             }
+    //             else{
+    //               this.items = res.json();
+    //             }
+    //           });
+    //         });
+
+    this.http.get(environment.api + '/sports').subscribe((res)=>{
+      this.spots = res.json();
+    });
+    this.http.get(environment.api + '/organizer').subscribe((res)=>{
+      this.items = res.json();
+    });
     this.sub = this.activeRouter.params.subscribe(params => {
       // //console.log(params._id);
       if (params._id) {
@@ -341,15 +344,15 @@ export class ManageClubComponent implements OnInit {
     }
   }
     addOrg(){      
-      if (this.clubForm.value.logo == "" || this.clubForm.value.placePic == null) {
-        if (this.clubForm.value.logo == "") {
-          this.toastr.warning('Please upload logo ', 'Warning');
-        }
-        if (this.clubForm.value.placePic == null) {
-          this.toastr.warning('Please upload placepic images', 'Warning');
-        }
-      }
-      else{
+      // if (this.clubForm.value.logo == "" || this.clubForm.value.placePic == null) {
+      //   if (this.clubForm.value.logo == "") {
+      //     this.toastr.warning('Please upload logo ', 'Warning');
+      //   }
+      //   if (this.clubForm.value.placePic == null || this.clubForm.value.placePic == '' ) {
+      //     this.toastr.warning('Please upload placepic images', 'Warning');
+      //   }
+      // }
+      // else{
             if (this._id) {   
               this.http.put(environment.api +"/club/"+this._id,this.clubForm.value)
                       .subscribe((res)=>{
@@ -380,6 +383,6 @@ export class ManageClubComponent implements OnInit {
                         this.toastr.error('Something went wrong !! Please try again later', 'Error');
                       })
             }
-      }
+     // }
     }
 }

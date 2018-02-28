@@ -8,27 +8,27 @@
               </div>
               <div class="col-md-12">
               <div class="row">
-                  <div class="man col-md-6">
+                  <div class="man col-md-4">
                         <h4 class="text-left">First Name<a style="color:#f00 !important;">*</a></h4>
                         <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="firstname" placeholder="Enter Name" required>
                   </div>
-                  <div class="man col-md-6">
+                  <div class="man col-md-4">
                     <h4 class="text-left">Last Name<a style="color:#f00 !important;">*</a></h4>
                     <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="lastname" placeholder="Enter Name" required>
                   </div>
-                  <div class="man col-md-6">
-                        <h4 class="text-left">Gender<a style="color:#f00 !important;">*</a></h4>
+                  <div class="man col-md-4">
+                        <h4 class="text-left">Gender</h4>
                         <select class="js-example-basic-single text-col-md-3"  name="gender" formControlName="gender">
                           <option value="" disabled="true" [selected]="true">Select Gender</option>    
                           <option value="male">Male</option>
                           <option value="female">Female</option>
                       </select>
                   </div>
-                  <div class="man col-md-6">
-                        <h4 class="text-left">License<a style="color:#f00 !important;">*</a></h4>
+                  <div class="man col-md-4">
+                        <h4 class="text-left">License</h4>
                         <input class="text-col-md-3" type="text" formControlName="license" placeholder="Enter License No">
                   </div>
-                  <div class="man col-md-6">
+                  <div class="man col-md-4">
                           <h4 class="text-left">DOB<a style="color:#f00 !important;">*</a></h4>
                           <!-- <input class="text-col-md-3" type="date" formControlName="dob" placeholder="Enter DOB"> -->
                           <input type="text" class="text-col-md-3"  [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker  [bsConfig]="bsConfig"  formControlName="dob" placeholder="Enter DOB">  
@@ -39,8 +39,8 @@
                         
 
                   </div>
-                  <div class="man col-md-6">
-                          <h4 class="text-left">Member Since<a style="color:#f00 !important;">*</a></h4>
+                  <div class="man col-md-4">
+                          <h4 class="text-left">Member Since</h4>
                           <!-- <input class="text-col-md-3" type="date" formControlName="memberSince" placeholder="Enter Date"> -->
                           <label for="">{{memberSince | dateFormatPipe :'dd/MM/yy'}}</label>
                   </div>
@@ -50,7 +50,7 @@
                   <div class="man col-md-12">
                       <div class="row">
                           <div class="col-md-2">
-                              <h4 class="text-left">Photo<a style="color:#f00 !important;">*</a></h4>
+                              <h4 class="text-left">Photo</h4>
                               <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none" >
                               <button class="btn btn_green" (click)="file.click()"> Upload</button>   
                               <div class="col-md-12" style="padding-top: 10px;">
@@ -73,32 +73,32 @@
              </div>
               <div class="col-md-12">
                   <div class="row">
-                  <div class="man col-md-6"><h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
+                  <div class="man col-md-4"><h4 class="text-left">Address</h4>
                       <input class="text-col-md-3" type="text" formControlName="address" placeholder="Enter Address" (setAddress)="setAdd($event)" Googleplace>
                   </div>         
 
-                  <div class="man col-md-6">
-                      <h4 class="text-left">Street<a style="color:#f00 !important;">*</a></h4>
+                  <div class="man col-md-4">
+                      <h4 class="text-left">Street</h4>
                       <input class="text-col-md-3" type="text"  formControlName="street" placeholder="Enter Street">
                   </div>
            
-                  <div class="man col-md-6">
+                  <div class="man col-md-4">
                       <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
                       <input class="text-col-md-3" type="text"  formControlName="country" placeholder="Enter Country">
                   </div>
            
-                  <div class="man col-md-6">
-                      <h4 class="text-left">State<a style="color:#f00 !important;">*</a></h4>
+                  <div class="man col-md-4">
+                      <h4 class="text-left">State</h4>
                       <input class="text-col-md-3" type="text"  formControlName="state" placeholder="Enter State">
                   </div>
            
-                  <div class="man col-md-6">
+                  <div class="man col-md-4">
                       <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
                       <input class="text-col-md-3" type="text"  formControlName="city" placeholder="Enter City">
                   </div>
            
-                  <div class="man col-md-6">
-                      <h4 class="text-left">Zipcode<a style="color:#f00 !important;">*</a></h4>
+                  <div class="man col-md-4">
+                      <h4 class="text-left">Zipcode</h4>
                       <input class="text-col-md-3" type="text"  formControlName="zipcode" placeholder="Enter Zip">
                   </div>
                       
@@ -113,12 +113,12 @@
               <div class="col-md-12">
                   <div class="row">
                     <div class="man col-md-6">
-                        <h4 class="text-left">Email<a style="color:#f00 !important;">*</a></h4>
-                        <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" required placeholder="Enter Email">
+                        <h4 class="text-left">Email</h4>
+                        <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" placeholder="Enter Email">
                     </div>
                     <div class="man col-md-6">
-                        <h4 class="text-left">Telephone<a style="color:#f00 !important;">*</a></h4>
-                        <input class="text-col-md-3" type="text" formControlName="phonenumber" placeholder="Enter Telephone" required>
+                        <h4 class="text-left">Telephone</h4>
+                        <input class="text-col-md-3" type="text" formControlName="phonenumber" placeholder="Enter Telephone">
                         <!-- pattern="/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/" -->
                     </div>
               </div>
@@ -129,8 +129,8 @@
               <div class="col-md-12">
                    <label><h2>User Type</h2></label>
               </div>
-               <div class="man col-md-12">
-                      <h4 class="text-left">User Type<a style="color:#f00 !important;">*</a></h4>
+               <div class="man col-md-6">
+                      <h4 class="text-left">User Type</h4>
                       <select class="js-example-basic-single text-col-md-3"  name="usertype" formControlName="usertype">
                           <option value="" disabled="true" [selected]="true">Select User Type</option>    
                           <option value="a">A</option>
@@ -138,8 +138,8 @@
                           <option value="c">C</option>
                       </select>
               </div>     
-              <div class="man col-md-12">
-                <h4 class="text-left">User Status<a style="color:#f00 !important;">*</a></h4>
+              <div class="man col-md-6">
+                <h4 class="text-left">User Status</h4>
                 <select class="js-example-basic-single text-col-md-3"  name="usertype" formControlName="status">
                     <!-- <option value="" disabled="true" [selected]="true">Select User Stats</option>     -->
                     <option value="Pending">Pending</option>

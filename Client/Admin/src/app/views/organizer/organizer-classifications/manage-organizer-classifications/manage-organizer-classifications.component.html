@@ -24,7 +24,7 @@
           <div class="row">
             <div class="col-md-10">
               <label>Value<a style="color:#f00 !important;">*</a></label>
-              <input type="number" class="form-control" id="i"  placeholder="Value" [(ngModel)]='value[i]' [ngModelOptions]="{standalone: true}" min="0" max="999" maxlength="999" (ngModelChange)="maxLengthCheck(this,i)" value="0">
+              <input type="text" class="form-control" id="i"  placeholder="Value" [(ngModel)]='value[i]' [ngModelOptions]="{standalone: true}" min="0" max="999" maxlength="999" pattern="^[a-zA-Z0-9_]*$" (ngModelChange)="maxLengthCheck(this,i)" value="0">
               <div *ngIf="i.errors && (i.dirty || i.touched)" class="alert alert-danger">
                 Value is required
               </div>       
