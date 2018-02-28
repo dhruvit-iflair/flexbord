@@ -4,7 +4,9 @@
             <label><h2>Competitions</h2></label>
         </div>
         <div class="col-md-3 text-right" *ngIf="hasCreatePerm">
-            <button class="btn btn_green" [routerLink]="['/organizer/competitions/manage']">New Competitions</button>                         
+            <button class="btn btn_green" [routerLink]="['/organizer/competitions/manage']">
+              <i class="fa fa-plus"></i> Add New Competition
+            </button>                         
         </div>
 
         <div class="col-md-12">

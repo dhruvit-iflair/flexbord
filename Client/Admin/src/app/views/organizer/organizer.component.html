@@ -1,10 +1,12 @@
 <div class="row">
   <div class="container">
       <div class="col-md-10">
-          <label><h2>Organizations</h2></label>
+          <label><h2>Organizers</h2></label>
       </div>
       <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
-          <button class="btn btn_green" [routerLink]="['/organizer/manage']">New Org</button>                         
+          <button class="btn btn_green" [routerLink]="['/organizer/manage']">
+          <i class="fa fa-plus"></i> Add New Organizer
+          </button>                         
       </div>
       <div class="col-md-12" id="tabl">
       <div class="col-md-12 no_padd mar_btt">

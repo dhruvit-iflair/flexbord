@@ -56,14 +56,14 @@ public rows: Array<any> = [];
   }
 
   delClub(id){
-      var del = confirm("Confirm to delete this Setting?");
+      var del = confirm("Confirm to delete this Structure?");
       if (del) {
         this.http.delete(environment.api + "/structures/" + id)
           .subscribe((res) => {
             var d = res.json();
             if (d._id) {
               this.dataRenderer = false;
-              this.toastr.success('Setting Deleted Successfully', 'Success');
+              this.toastr.success('Structure Deleted Successfully', 'Success');
               this.ngOnInit();
             }
           }, (error) => {

@@ -23,6 +23,10 @@ export class ManageUsersComponent implements OnInit {
   public rolesOptions: IMultiSelectOption[];
   public  mySettings: IMultiSelectSettings = { displayAllSelectedText: true};
 
+  public fileSupport:Boolean = false;
+  public fileSizeMin:Boolean = false;
+  public fileSizeMax:Boolean = false;
+
   constructor(public fb: FormBuilder,private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute, public userService:UserService) {
     this.userService.getRoles().subscribe((res)=>{
         this.roles = res;
@@ -74,7 +78,9 @@ export class ManageUsersComponent implements OnInit {
   readUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
-      if (file.type == 'image/jpeg' || file.type == 'image/png' && file.size < 2000000) {
+      this.fileSupport = false;this.fileSizeMin = false; this.fileSizeMax = false; 
+      if (file.type == 'image/jpeg' && file.size < 2000000 && file.size > 150000 || file.type == 'image/png' && file.size < 2000000 && file.size > 150000 ) {
+      this.fileSupport = false;this.fileSizeMin = false; this.fileSizeMax = false; 
         let up = new FormData();
         up.append('person_photo', file);
         this.userService.usersPhoto(up).subscribe((res)=>{ this.userForm.patchValue({person_photo :res}); });
@@ -83,10 +89,16 @@ export class ManageUsersComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
       } 
       else {
-        if ( file.size > 2000000) {
+        if (file.type == 'image/jpeg' &&  file.size > 2000000 || file.type == 'image/png'   &&  file.size > 2000000) {
+          this.fileSizeMax = true; 
           this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');                        
-          
-        } else {
+        } 
+        else if (file.type == 'image/jpeg' && file.size < 150000 || file.type == 'image/png' && file.size < 150000) {
+          this.toastr.warning('Image should be more than 150Kb!! ', 'Warning');                        
+          this.fileSizeMin = true;           
+        }
+        else {
+          this.fileSupport = true;
           this.toastr.error('Only .jpg, .png, .jpeg type of Image supported ', 'Error');                                  
         }
       }    

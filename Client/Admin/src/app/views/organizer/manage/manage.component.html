@@ -58,11 +58,11 @@
                         <div class="man col-md-4" *ngIf="url" >
                               <img [src]="url" class="image_display">               
                         </div>
-
-                        <div class="col-md-12" style="padding-top: 10px;">
-                            <p *ngIf="fileSizeMin" >Min Size of image should be 150 Kb.</p>
-                            <p *ngIf="fileSizeMax" >Max Size of image should be 2 Mb.</p>
-                            <p *ngIf="fileSupport">Image format .jpg, .jpeg and .png only supported.</p>
+                        <div class="col-md-12" style="padding-top: 10px; color:red">
+                            <p style="font-size: small; color:red;" *ngIf="fileSizeMin" >Min Size of image should be 150 Kb.</p>
+                            <p style="font-size: small; color:red;" *ngIf="fileSizeMax" >Max Size of image should be 2 Mb.</p>
+                            <p style="font-size: small; color:red;" *ngIf="fileSupport">Image format .jpg, .jpeg and .png only supported.</p>
+                            <p style="font-size: small;" *ngIf="(!fileSupport || !fileSizeMin || !fileSizeMax )&& !orgForm.value.logo ">Image format .jpg, .jpeg and .png only supported with min 150 Kb to max 2Mb.</p>
                         </div>
                     </div>
                 </div>
@@ -121,17 +121,18 @@
                 </div>
                  <div class="man col-md-12">
                         <div class="row">
-                    <div class="man col-md-2">
-                        <h4 class="text-left">Place Pic<a style="color:#f00 !important;">*</a></h4>
-                        <input type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)">
-                        <button class="btn btn_green" (click)="file2.click()"> Upload</button>                
-                        <div class="col-md-12" style="padding-top: 10px;">
-                            <p *ngIf="fileSizeMin2" >Min Size of image should be 150 Kb.</p>
-                            <p *ngIf="fileSizeMax2" >Max Size of image should be 2 Mb.</p>
-                            <p *ngIf="fileSupport2">Image format .jpg, .jpeg and .png only supported.</p>
-                        </div>
-                    </div>
-                    
+                            <div class="man col-md-2">
+                                <h4 class="text-left">Place Pic<a style="color:#f00 !important;">*</a></h4>
+                                <input type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)">
+                                <button class="btn btn_green" (click)="file2.click()"> Upload</button>                
+                            </div>
+                            <div class="col-md-12" style="padding-top: 10px;">
+                                <p style="font-size: small; color:red;" *ngIf="fileSizeMin2" >Min Size of image should be 150 Kb.</p>
+                                <p style="font-size: small; color:red;" *ngIf="fileSizeMax2" >Max Size of image should be 2 Mb.</p>
+                                <p style="font-size: small; color:red;" *ngIf="fileSupport2">Image format .jpg, .jpeg and .png only supported.</p>
+                                <p style="font-size: small;" *ngIf="(!fileSupport2 || !fileSizeMin2 || !fileSizeMax2 )&& !orgForm.value.placePic">Image format .jpg, .jpeg and .png only supported with min 150 Kb to max 2Mb.</p>                            
+                            </div>
+                
                             <div class="man col-md-2" *ngIf="placePic" >
                                     <img [src]="placePic" class="image_display">               
                             </div>
