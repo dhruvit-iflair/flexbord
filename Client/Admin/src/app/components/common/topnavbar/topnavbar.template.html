@@ -19,9 +19,9 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- <span class="glyphicon glyphicon-user"></span>  -->
-                        <div class="row">
+                        <div class="row" *ngIf="profilePhoto && u">
                             <img src="{{profilePhoto}}" class="top_nav_sm">
-                            <span><p class="top_nav_sm_text">{{u.user.firstname}} {{u.user.lastname}}</p></span>
+                            <span><p class="top_nav_sm_text">{{u.firstname}} {{u.lastname}}</p></span>
                             <!-- <span class="glyphicon glyphicon-chevron-down carlet"></span> -->
                         </div>
                     </a>
@@ -30,14 +30,14 @@
                             <div class="navbar-login">
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <p class="text-center">
+                                        <p class="text-center" *ngIf="profilePhoto">
                                             <!-- <span class="glyphicon glyphicon-user icon-size"></span> -->
                                             <img src="{{profilePhoto}}" class="dropdown_sm">                                            
                                         </p>
                                     </div>
-                                    <div class="col-lg-8">
-                                        <p class="text-left"><strong>{{u.user.firstname}} {{u.user.lastname}}</strong></p>
-                                        <p class="text-left small">{{u.user.username}}</p>
+                                    <div class="col-lg-8"  *ngIf="u">
+                                        <p class="text-left"><strong>{{u.firstname}} {{u.lastname}}</strong></p>
+                                        <p class="text-left small">{{u.username}}</p>
                                         <span class="text-left roles"> <strong class="font-bold" *ngIf="roles['title']" >{{roles.title |  uppercase}}</strong> </span>
                                         <!-- <p class="text-left"> -->
                                             <!-- <a class="btn btn-primary btn-block btn-sm" [routerLink]="['/profile/view']">Profile</a> -->

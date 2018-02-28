@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable()
 export class Auth24Guard implements CanActivate {
   public perm;
-  constructor(public reoter:Router, private toastr:ToastrService, private accr:AccessorService){}
+  constructor(public reoter:Router, private toastr:ToastrService, private accr:AccessorService){  }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {

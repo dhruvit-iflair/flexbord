@@ -7,12 +7,12 @@
                 </div> -->
                 <div class="dropdown profile-element">
                     <a class="dropdown-toggle">
-                        <div class="profile">
+                        <div class="profile" *ngIf="profilePhoto">
                             <img class="profileImage" src="{{profilePhoto}}">
                         </div>
                         <div class="profile-data-right">
-                            <span class="block m-t-xs name"> <strong class="font-bold" *ngIf="u.user.firstname && u.user.lastname" >{{u.user.firstname}} {{u.user.lastname}}</strong> </span>
-                            <span class="block m-t-xs name"> <strong class="font-bold" *ngIf="u.user.firstname && u.user.lastname" ></strong> </span>
+                            <span class="block m-t-xs name"> <strong class="font-bold">{{u.firstname}} {{u.lastname}}</strong> </span>
+                            <!--<span class="block m-t-xs name"> <strong class="font-bold" *ngIf="u.user.firstname && u.user.lastname" ></strong> </span>-->
                             <span class="block m-t-xs roles"> <strong class="font-bold" >{{roles.title |  uppercase}}</strong> </span>
                         </div>
                         <!--<span class="block m-t-xs email"> <strong class="font-bold">{{loggedinUser}}</strong> </span>-->

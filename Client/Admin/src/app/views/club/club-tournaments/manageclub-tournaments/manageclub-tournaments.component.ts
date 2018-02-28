@@ -24,7 +24,7 @@ export class ManageclubTournamentsComponent implements OnInit {
   constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute){
       
       this.clubId = localStorage.getItem('clubid');
-      this.comForm = this.fb.group({ name: ["",[Validators.required]],description: ["",[Validators.required]],sports: [null,[Validators.required]],clubSeasons: ["",[Validators.required]],clubClassifications: ["",[Validators.required]],clubClassificationsValue: ["",[Validators.required]],club:[this.clubId ,[Validators.required]]});
+      this.comForm = this.fb.group({ name: ["",[Validators.required]],description: [""],sports: [null,[Validators.required]],clubSeasons: ["",[Validators.required]],clubClassifications: ["",[Validators.required]],clubClassificationsValue: ["",[Validators.required]],club:[this.clubId ,[Validators.required]]});
       this.http.get(environment.api + "/club/"+this.clubId).subscribe((res) => {
             this.club = res.json()[0];
       })      

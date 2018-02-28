@@ -10,45 +10,49 @@ declare const jQuery: any;
 @Component({
     selector: 'navigation',
     templateUrl: 'navigation.template.html',
-    styleUrls:['navigation.css']
+    styleUrls: ['navigation.css']
 })
 
 export class NavigationComponent {
     public loggedinUser;
     public isProfileSet;
-    public perms;haspermission=[];checker=[];
+    public perms; haspermission = []; checker = [];
     public profilePhoto;
-    public u : any;
-    public modules=this.accr.getmodules();
-    public modulesize=this.modules.length * 4;
-    public roles : any;
-    public check : Boolean = true;
-    constructor(private router: Router, private accr:AccessorService, public userSer:UserService) { }
+    public u: any;
+    public modules = this.accr.getmodules();
+    public modulesize = this.modules.length * 4;
+    public roles: any;
+    public check: Boolean = true;
+    constructor(private router: Router, private accr: AccessorService, public userSer: UserService) { }
 
     ngOnInit() {
-        if (localStorage.getItem('uToken')) {
-            var xy = this.accr.getCurrentUser();
-            this.u = JSON.parse(localStorage.getItem('uToken'));
-            try {
-                this.roles = JSON.parse(localStorage.getItem('roles'));
-            }
-            catch(err) {
-                this.router.navigate(['/login']);
-            }     
-            if (this.u.user.person_photo) {
-                this.profilePhoto = environment.picpoint + this.u.user.person_photo;
-            } 
-            else {
-                this.profilePhoto = "assets/defaultUser.png";
-            }
-            this.loggedinUser = xy.user.username;
-            this.isProfileSet = xy.user.isProfileSet;
-            if(localStorage.getItem('fullPerms')){
-                this.haspermission=this.accr.getUserPermissions();
-            }
-            else{
-                this.accr.setUserPermissions();
-            }
+        var tokendetails=JSON.parse(localStorage.getItem('uToken'));
+        if (tokendetails) {
+            this.userSer.getUsersById(tokendetails.user._id).subscribe(respo => {
+                this.u = respo[0];
+               // var xy = this.accr.getCurrentUser();
+                //this.u = JSON.parse(localStorage.getItem('uToken'));
+                try {
+                    this.roles = JSON.parse(localStorage.getItem('roles'));
+                }
+                catch (err) {
+                    this.router.navigate(['/login']);
+                }
+                if (this.u.person_photo) {
+                    this.profilePhoto = environment.picpoint + this.u.person_photo;
+                }
+                else {
+                    this.profilePhoto = "assets/defaultUser.png";
+                }
+                this.loggedinUser = this.u.username;
+                this.isProfileSet = this.u.isProfileSet;
+                if (localStorage.getItem('fullPerms')) {
+                    this.haspermission = this.accr.getUserPermissions();
+                }
+                else {
+                    this.accr.setUserPermissions();
+                }
+            });
         }
     }
     ngAfterViewInit() {

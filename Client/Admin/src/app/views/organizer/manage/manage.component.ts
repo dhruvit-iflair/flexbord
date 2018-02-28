@@ -53,17 +53,17 @@ export class ManageOrganizerComponent implements OnInit {
       state: [""],
       country: [""],
       zipcode: [""],
-      website: ["",[Validators.required]],
+      website: [""],
       email: ["",[Validators.email]],
       password: [""],
-      roles: ['',[Validators.required]],
+      roles: [''],
       // phonenumber: [null,[Validators.required,Validators.minLength(10),Validators.maxLength(12)]],
       phonenumber: [null],
-      sports: ["",[Validators.required]],
-      capacity:  [0,[Validators.required]],
+      sports: [""],
+      capacity:  [0],
       placePic: [null],
-      affilated:  ["",Validators.required],
-      affilation:  ["closed",[Validators.required]],
+      affilated:  [""],
+      affilation:  ["closed"],
       registered: [null]
     })
    }
@@ -249,19 +249,19 @@ export class ManageOrganizerComponent implements OnInit {
       var usn = this.user.filter((u)=>{ 
         return u.username == this.orgForm.value.email;
       });
-      if (this.orgForm.value.logo == "" || this.orgForm.value.placePic == null || usn[0]) {
-        if (this.orgForm.value.logo == "") {
-          this.toastr.warning('Please upload logo ', 'Warning');
-        }
-        if (this.orgForm.value.placePic == null) {
-          this.toastr.warning('Please upload placepic images', 'Warning');
-        }
-        if (usn[0]) {
-          console.log(usn)
-          this.toastr.error('This Email is already taken', 'Error');
-        }
-      }
-      else{
+      // if (this.orgForm.value.logo == "" || this.orgForm.value.placePic == null || usn[0]) {
+      //   if (this.orgForm.value.logo == "") {
+      //     this.toastr.warning('Please upload logo ', 'Warning');
+      //   }
+      //   if (this.orgForm.value.placePic == null) {
+      //     this.toastr.warning('Please upload placepic images', 'Warning');
+      //   }
+      //   if (usn[0]) {
+      //     console.log(usn)
+      //     this.toastr.error('This Email is already taken', 'Error');
+      //   }
+      // }
+      // else{
             if (this._id) {
               // this.orgForm.patchValue({sports :this.spotsIns});    
               this.http.put(environment.api +"/organizer/"+this._id,this.orgForm.value)
@@ -294,6 +294,6 @@ export class ManageOrganizerComponent implements OnInit {
                         this.toastr.error('Something went wrong !! Please try again later', 'Error');
                       })
             }
-      }
+     // }
     }
 }

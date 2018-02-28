@@ -19,7 +19,7 @@
         </div>
         <div class="col-md-8">
           <div class="under-box">
-            <form [formGroup]='userForm'>
+            <form [formGroup]='userForm' *ngIf="user">
               <div class="col-md-12">
                   <h4 class="text-left">First Name<a style="color:#f00 !important;">*</a></h4>
                   <input class="form-control text-col-md-3" type="text" formControlName="firstname" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" required placeholder="Enter First Name">
@@ -35,19 +35,19 @@
               <div class="col-md-12">
                   <h4 class="text-left" *ngIf="userForm.get('password').value !=''">New Password<a style="color:#f00 !important;">*</a></h4>
                   <h4 class="text-left" *ngIf="userForm.get('password').value ==''">New Password</h4>
-                  <input class="form-control text-col-md-3" type="password" formControlName="password" placeholder="Enter New Password">
+                  <input class="form-control text-col-md-3 fontsizer" type="password" formControlName="password" placeholder="Enter New Password">
               </div>
               <div class="col-md-12">
                     <h4 class="text-left" *ngIf="userForm.get('password').value !=''">Confirm New Password<a style="color:#f00 !important;">*</a></h4>
                     <h4 class="text-left" *ngIf="userForm.get('password').value ==''">Confirm New Password</h4>
-                  <input class="form-control text-col-md-3" type="password" formControlName="confirmPassword" placeholder="Confirm New Password">
+                  <input class="form-control text-col-md-3 fontsizer" type="password" formControlName="confirmPassword" placeholder="Confirm New Password">
               </div>
             </form>
           </div>
         </div>
     </div>
   </div>
-  <div class="col-md-12">
+  <div class="col-md-12" *ngIf="user">
     <div class="col-md-6 text-left">
       <button class="btn btn-white" Back> Back </button>
     </div>
