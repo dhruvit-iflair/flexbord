@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <label>Description<a style="color:#f00 !important;">*</a></label>
+                <label>Description</label>
                 <input class=" form-control" type="text" placeholder="Description" formControlName="description">
                 <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('description').valid && comForm.get('description').touched">
                         Description is required.

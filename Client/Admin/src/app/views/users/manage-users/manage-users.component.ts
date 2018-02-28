@@ -34,11 +34,11 @@ export class ManageUsersComponent implements OnInit {
       if (params._id) {
         this._id = params._id;
         this.userForm = this.fb.group({
-              firstname: ["",[Validators.required]],    
+              firstname: [""],    
               email:[{ value: null,disabled: true},[Validators.required,Validators.email]],
-              lastname: ["",[Validators.required]],
-              roles:[[],[Validators.required]],
-              person_photo:["",[Validators.required]],
+              lastname: [""],
+              roles:[[]],
+              person_photo:[""],
         })
         setTimeout(() => {
           this.userService.getUsersById(params._id).subscribe((res)=>{
@@ -51,13 +51,13 @@ export class ManageUsersComponent implements OnInit {
       }
       else{
         this.userForm = this.fb.group({
-          firstname: ["",[Validators.required]],    
-          lastname: ["",[Validators.required]],
+          firstname: [""],    
+          lastname: [""],
           username:["",[Validators.required,Validators.email]],
           password:[""],
           email:["",[Validators.required,Validators.email]],
-          roles:[[],[Validators.required]],
-          person_photo:["",[Validators.required]],
+          roles:[[]],
+          person_photo:[""],
           confirmPassword:["",]
          }, {
           validator: PasswordValidation.MatchPassword 

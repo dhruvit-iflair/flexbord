@@ -25,7 +25,7 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
   constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute){
     this.comForm = this.fb.group({
       name: ["",[Validators.required]],
-      description: ["",[Validators.required]],
+      description: [""],
       sports: [null,[Validators.required]],
       seasons: ["",[Validators.required]],
       organizerClassifications: ["",[Validators.required]],
@@ -91,7 +91,7 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
       else{
         this.comForm = this.fb.group({
           name: ["",[Validators.required]],
-          description: ["",[Validators.required]],
+          description: [""],
           sports: [null,[Validators.required]],
           seasons: ["",[Validators.required]],
           organizerClassifications: ["",[Validators.required]],

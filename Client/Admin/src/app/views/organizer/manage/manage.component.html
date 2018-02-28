@@ -30,7 +30,7 @@
                       </div>
                 </div>
                 <div class="man col-md-3">
-                        <h4 class="text-left">Affiliated<a style="color:#f00 !important;">*</a></h4>
+                        <h4 class="text-left">Affiliated</h4>
                         <!-- <select class="js-example-basic-single text-col-md-3"  name="state" (setData)="dataChanged($event,'affilated')" formControlName="affilated"  placeholder="Select Organization" select2>
                             <option *ngFor="let ite of items"  [value]="ite.id">{{ite.name}}</option>
                         </select> -->
@@ -45,7 +45,7 @@
                 <div class="man col-md-12">
                     <div class="row">
                         <div class="col-md-2">
-                            <h4 class="text-left">Logo<a style="color:#f00 !important;">*</a></h4>
+                            <h4 class="text-left">Logo</h4>
                             <input type="file" accept="image/*" class="logo_upload" id='logo' (change)="readUrl($event);" #fie style="width:0px;height:0px; display:none;">
                             <button class="btn btn_green" (click)="asdl($event)"> Upload</button>     
                             <!--<span style="color:red; position: absolute;" *ngIf="!orgForm.get('logo').valid && orgForm.get('logo').touched">
@@ -113,7 +113,7 @@
                 </div>
          
                 <div class="man col-md-3">
-                    <h4 class="text-left">Capacity<a style="color:#f00 !important;">*</a></h4>
+                    <h4 class="text-left">Capacity</h4>
                     <input class="text-col-sm-3"  type="number" formControlName="capacity" min="0" max="9999999" style="width: 100%;" value="0">
                     <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('capacity').valid && orgForm.get('capacity').touched">
                             Capicity is required.
@@ -122,7 +122,7 @@
                  <div class="man col-md-12">
                         <div class="row">
                     <div class="man col-md-2">
-                        <h4 class="text-left">Place Pic<a style="color:#f00 !important;">*</a></h4>
+                        <h4 class="text-left">Place Pic</h4>
                         <input type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)">
                         <button class="btn btn_green" (click)="file2.click()"> Upload</button>                
                         <div class="col-md-12" style="padding-top: 10px;">
@@ -151,7 +151,7 @@
             <div class="col-md-12">
                 <div class="row">
                  <div class="man col-md-4">
-                    <h4 class="text-left">Website<a style="color:#f00 !important;">*</a></h4>
+                    <h4 class="text-left">Website</h4>
                     <input class="text-col-md-3" type="text" formControlName="website" placeholder="Enter Website" pattern="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})">
                     <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('website').valid && orgForm.get('website').touched">
                             Website is required.
@@ -203,7 +203,7 @@
 
         <div class="manage-box radio-box clearfix"> 
              <div class="col-md-12">
-                     <label><h2>Affiliation<a style="color:#f00 !important;">*</a></h2></label>                               
+                     <label><h2>Affiliation</h2></label>                               
              </div>
              <div class="man col-md-12">
                 <div class="row">
