@@ -5,18 +5,18 @@
   <div class="col-md-12">
     <form class="m-t" role="form" action="#">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4">
           <label>Name of Point<a style="color:#f00 !important;">*</a></label>
           <input type="text" required #nameofpoint="ngModel" id="nameofpoint" name="nameofpoint" class="form-control" [(ngModel)]="former.nameofpoint" placeholder="Sport Name"
             [ngModelOptions]="{standalone: true}">
         </div>
-        <div class="man col-md-12">
+        <div class="col-md-4">
           <label>Value of Point<a style="color:#f00 !important;">*</a></label>
-          <div class="man col-md-2">
+          <div class="man1 col-md-2">
             <input type="number" required #valueofpoint="ngModel" id="valueofpoint" name="valueofpoint" [(ngModel)]="former.valueofpoint"
               [ngModelOptions]="{standalone: true}" min="0" step="1" pattern="/^[0-9]{1,6}$/">
           </div>
-          <div class="man col-md-10">
+          <div class="man1 col-md-10">
             <select class="js-example-basic-single text-col-md-3" [(ngModel)]="former.valueofpointopt"
               [ngModelOptions]="{standalone: true}">
                 <option value="" disabled="true" [selected]="true">Options</option>    
@@ -25,13 +25,13 @@
           </div>
         </div>
 
-        <div class="man col-md-12">
+        <div class="col-md-4">
           <label>Color Button Up</label>
           <input type="text" #colorbtnup="ngModel" id="colorbtnup" name="colorbtnup" class="form-control" [(ngModel)]="former.colorbtnup"
             placeholder=" #333FFF " [ngModelOptions]="{standalone: true}">
         </div>
 
-        <div class="man col-md-12">
+        <div class="man col-md-4">
           <label>Color Button Down</label>
           <input type="text" #colorbtndown="ngModel" id="colorbtndown" name="colorbtndown" class="form-control" [(ngModel)]="former.colorbtndown"
             placeholder=" #333FFF " [ngModelOptions]="{standalone: true}">

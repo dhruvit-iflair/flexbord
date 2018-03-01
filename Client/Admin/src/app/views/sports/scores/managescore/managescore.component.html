@@ -5,19 +5,19 @@
   <div class="col-md-12">
     <form class="m-t" role="form" action="#">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4">
           <label>Wins<a style="color:#f00 !important;">*</a></label>
           <input type="number" required #wins="ngModel" id="wins" name="wins" class="form-control" [(ngModel)]="former.wins" placeholder="0"
             [ngModelOptions]="{standalone: true}">
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-4">
           <label>Draws<a style="color:#f00 !important;">*</a></label>
           <input type="number" required #draws="ngModel" id="draws" name="draws" class="form-control" [(ngModel)]="former.draws" placeholder="0"
             [ngModelOptions]="{standalone: true}">
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-4">
           <label>Losses<a style="color:#f00 !important;">*</a></label>
           <input type="number" required #losses="ngModel" id="losses" name="losses" class="form-control" [(ngModel)]="former.losses" placeholder="0"
             [ngModelOptions]="{standalone: true}">

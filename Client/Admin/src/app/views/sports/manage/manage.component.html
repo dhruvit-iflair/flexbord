@@ -15,8 +15,8 @@
     <!-- </div> -->
     <div class="man col-md-4">
         <label>Type of Sport<a style="color:#f00 !important;">*</a></label>
-        <div><input type="radio" value="opponent" name="typeofsport" required #typeofsport="ngModel" id="typeofsport" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}"> Opponents</div>
-        <div><input type="radio" value="races" name="typeofsport" required #typeofsport="ngModel" id="typeofsport" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}"> Races</div>
+        <div><input type="radio" value="opponent" name="typeofsport" required #typeofsport="ngModel" id="typeofsport" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}"> <label for="typeofsport">Opponents</label></div>
+        <div><input type="radio" value="races" name="typeofsport" required #typeofsport="ngModel" id="typeofsport1" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}"> <label for="typeofsport1">Races</label></div>
         <div *ngIf="typeofsport.errors && (typeofsport.dirty || typeofsport.touched)" class="alert alert-danger">
             <span *ngIf="typeofsport.errors.required">Sport Type is required</span>
         </div>
@@ -24,8 +24,8 @@
 
     <div class="man col-md-4">
         <label>Type of Game<a style="color:#f00 !important;">*</a></label>
-        <div><input type="radio" value="points" name="typeofgame" required #typeofgame="ngModel" id="typeofgame" [(ngModel)]="mForm.typeofgame" [ngModelOptions]="{standalone: true}"> Points</div>
-        <div><input type="radio" value="time" name="typeofgame" required #typeofgame="ngModel" id="typeofgame" [(ngModel)]="mForm.typeofgame" [ngModelOptions]="{standalone: true}"> Time</div>
+        <div><input type="radio" value="points" name="typeofgame" required #typeofgame="ngModel" id="typeofgame" [(ngModel)]="mForm.typeofgame" [ngModelOptions]="{standalone: true}"> <label for="typeofgame">Points</label></div>
+        <div><input type="radio" value="time" name="typeofgame" required #typeofgame="ngModel" id="typeofgame1" [(ngModel)]="mForm.typeofgame" [ngModelOptions]="{standalone: true}"> <label for="typeofgame1">Time</label></div>
         <div *ngIf="typeofgame.errors && (typeofgame.dirty || typeofgame.touched)" class="alert alert-danger">
             <span *ngIf="typeofgame.errors.required">Game Type is required</span>
         </div>
@@ -33,9 +33,9 @@
 
     <div class="man col-md-4">
         <label>Type of Team<a style="color:#f00 !important;">*</a></label>
-        <div><input type="radio" value="individual" name="typeofteam" required #typeofteam="ngModel" id="typeofteam" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> Individual</div>
-        <div><input type="radio" value="double" name="typeofteam" required #typeofteam="ngModel" id="typeofteam" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> Double</div>
-        <div><input type="radio" value="team" name="typeofteam" required #typeofteam="ngModel" id="typeofteam" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> Team</div>
+        <div><input type="radio" value="individual" name="typeofteam" required #typeofteam="ngModel" id="typeofteam" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> <label for="typeofteam">Individual</label></div>
+        <div><input type="radio" value="double" name="typeofteam" required #typeofteam="ngModel" id="typeofteam1" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> <label for="typeofteam1">Double</label></div>
+        <div><input type="radio" value="team" name="typeofteam" required #typeofteam="ngModel" id="typeofteam2" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> <label for="typeofteam2">Team</label></div>
         <div *ngIf="typeofteam.errors && (typeofteam.dirty || typeofteam.touched)" class="alert alert-danger">
             <span *ngIf="typeofteam.errors.required">Team Type is required</span>
         </div>

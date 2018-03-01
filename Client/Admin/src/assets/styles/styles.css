@@ -1144,7 +1144,7 @@ body nav.navbar-default.navbar-static-side li.active a {
     color: #F3825B;
 }
 .breadcrumb li:first-child a {
-    padding-left: 25px;
+    padding-left: 22px;
 }
 body .marTop[_ngcontent-c4] {
     margin-top: 29px;
@@ -1158,6 +1158,35 @@ body .marTop[_ngcontent-c4] {
 .dataTable .btn.btn_red.tab_btn.delete-btn {
     background: #191919 !important;
 }
+body .dataTable a.btn.btn {
+  margin-bottom: 8px;
+}
+.text-left {
+    word-wrap: break-word;
+}
+body bs-datepicker-container, body bs-daterangepicker-container {
+    z-index: 99999;
+}
+
+.manage-component-form timepicker.text-col-md-3 {
+  border: none;
+}
+.manage-component-form .text-col-md-3, 
+.manage-component-form select, .select2-container .select2-selection--single {
+  padding-top: 5px;
+  padding-bottom: 5px;
+} 
+.margBott .dropdown.dropdown-inline .dropdown-toggle .caret {
+  margin: 0;
+}
+body input[type="number"] {
+  width: 100%;
+  height: 34px;
+}
+
+
+
+
 
 @media (max-width: 1300px) {
     .dataTable a.btn {
