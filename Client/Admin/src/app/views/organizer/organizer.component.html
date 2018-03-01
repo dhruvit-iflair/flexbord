@@ -15,7 +15,7 @@
                 <tr>
                     <th>_id</th>
                     <th>Logo</th>
-	                <th style="width: 10%;">Name</th>
+                    <th style="width: 10%;">Name</th>
                     <th style="width: 20%;">Address</th>
                     <th style="width: 15%;">Registered</th>
                     <th style="width: 10%;">Owner</th>
@@ -26,10 +26,10 @@
                 <tr *ngFor="let item of rows" >
                   <td style="display:none">{{item._id}}</td>
                   <td><img src='{{item.logo}}' class="image_display" style="width:50px;height:50px;"></td>
-                  <td>{{item.name}}</td>
-                  <td style="width:200px;">{{item.city}}, {{item.country}}</td>
-                  <td>{{item.registered | dateFormatPipe :'dd/MM/yy hh:mm a'}}</td>
-                  <td>{{item.email}}</td>
+                  <td >{{item.name}}</td>
+                  <td >{{item.city}}, {{item.country}}</td>
+                  <td >{{item.registered | dateFormatPipe :'dd/MM/yy hh:mm a'}}</td>
+                  <td >{{item.email}}</td>
                   <!-- <td><a routerLink="/organizer/manage/{{item.button}} ">{{item.button}} </a></td> -->
                   <td>
                     <a class="btn btn_green tab_btn" routerLink="/organizer/manage/{{item._id}}"  title="Edit" *ngIf="hasEditPerm"><i class="fa fa-pencil" aria-hidden="true"></i></a>
