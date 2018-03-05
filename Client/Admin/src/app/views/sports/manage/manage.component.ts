@@ -31,14 +31,14 @@ export class ManageComponent implements OnInit {
     if (this.paramdetails) {
       this.http.patch(environment.api + '/sports/' + this.userId, gotdata)
         .subscribe(result => {
-          this.toastr.success('Sport', 'Updated Successfully.');
+          this.toastr.success('Updated Successfully.','Success');
           this.router.navigate(['/sports']);
         });
     }
     else {
       this.http.post(environment.api + '/sports', gotdata)
         .subscribe(dt => {
-          this.toastr.success('Sport', 'Added Successfully.');
+          this.toastr.success('Added Successfully.','Success');
           this.router.navigate(['/sports']);
         });
     }

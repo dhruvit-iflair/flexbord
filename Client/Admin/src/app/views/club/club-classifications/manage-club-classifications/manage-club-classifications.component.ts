@@ -25,12 +25,12 @@ export class ManageClubClassificationsComponent implements OnInit {
     })
     //console.log(this.value.length);
   }
-  maxLengthCheck(object,i)
-  {
-    if (object.value[i] > 999 || object.value[i] < 0 ){
-      object.value[i] = 0;
-    }
-  }
+  // maxLengthCheck(object,i)
+  // {
+  //   if (object.value[i] > 999 || object.value[i] < 0 ){
+  //     object.value[i] = 0;
+  //   }
+  // }
 
   ngOnInit() {    
     this.sub = this.activeRouter.params.subscribe(params => {

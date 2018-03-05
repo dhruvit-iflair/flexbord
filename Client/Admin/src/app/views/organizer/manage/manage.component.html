@@ -1,236 +1,250 @@
+<div>
+    <tabset #staticTabs>
+        <tab heading="Base">
+                  
 <div class="container manage-container">
-<div class="row">
-<form [formGroup]="orgForm" class="manage-component-form">
-  <div class="row1">
-      <div class="manage-box clearfix">
-            <div class="col-md-12">
-              <label><h2>Manage Organizer</h2></label>
-            </div>
-            <div class="col-md-12">
-            <div class="row">
-                <div class="man col-md-3">
-                      <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
-                      <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="name" required placeholder="Enter Full Name">
-                      <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('name').valid && orgForm.get('name').touched">
-                            Name is required.
-                      </div>
-                </div>
-                <div class="man col-md-3">
-                      <h4 class="text-left">Sub domain<a style="color:#f00 !important;">*</a></h4>
-                      <input class="text-col-md-3" type="text" formControlName="subDomain" placeholder="Enter Sub Domain">
-                      <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('subDomain').valid && orgForm.get('subDomain').touched">
-                            Sub domain
-                      </div>
-                </div>
-                <div class="man col-md-3">
-                      <h4 class="text-left">Abbreviation<a style="color:#f00 !important;">*</a></h4>
-                      <input class="text-col-md-3" type="text" formControlName="abbreviation" placeholder="Enter Abbreviation">
-                      <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('abbreviation').valid && orgForm.get('abbreviation').touched">
-                            Abbreviation is required.
-                      </div>
-                </div>
-                <div class="man col-md-3">
-                        <h4 class="text-left">Affiliated</h4>
-                        <!-- <select class="js-example-basic-single text-col-md-3"  name="state" (setData)="dataChanged($event,'affilated')" formControlName="affilated"  placeholder="Select Organization" select2>
-                            <option *ngFor="let ite of items"  [value]="ite.id">{{ite.name}}</option>
-                        </select> -->
-                        <select class="js-example-basic-single text-col-md-3"  name="affilated" formControlName="affilated">
-                            <option value="null" disabled="true" value="">Select Organization</option>    
-                            <option *ngFor="let ite of items"  [value]="ite._id">{{ite.name}}</option>
-                        </select>
-                        <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('affilated').valid && orgForm.get('affilated').touched">
-                                Affilated is required.
-                        </div>
-                </div>
-                <div class="man col-md-12">
+        <div class="row">
+        <form [formGroup]="orgForm" class="manage-component-form">
+          <div class="row1">
+              <div class="manage-box clearfix">
+                    <div class="col-md-12">
+                      <label><h2>Manage Organizer</h2></label>
+                    </div>
+                    <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-2">
-                            <h4 class="text-left">Logo</h4>
-                            <input type="file" accept="image/*" class="logo_upload" id='logo' (change)="readUrl($event);" #fie style="width:0px;height:0px; display:none;">
-                            <button class="btn btn_green" (click)="asdl($event)"> Upload</button>     
-                            <!--<span style="color:red; position: absolute;" *ngIf="!orgForm.get('logo').valid && orgForm.get('logo').touched">
-                                  Logo is required.
-                            </span>           -->
+                        <div class="man col-md-3">
+                              <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
+                              <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="name" required placeholder="Enter Full Name">
+                              <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('name').valid && orgForm.get('name').touched">
+                                    Name is required.
+                              </div>
                         </div>
-                        <div class="man col-md-4" *ngIf="logo && !url" >
-                              <img [src]="logo" class="image_display">               
+                        <div class="man col-md-3">
+                              <h4 class="text-left">Sub domain<a style="color:#f00 !important;">*</a></h4>
+                              <input class="text-col-md-3" type="text" formControlName="subDomain" placeholder="Enter Sub Domain">
+                              <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('subDomain').valid && orgForm.get('subDomain').touched">
+                                    Sub domain
+                              </div>
                         </div>
-                        <div class="man col-md-4" *ngIf="url" >
-                              <img [src]="url" class="image_display">               
+                        <div class="man col-md-3">
+                              <h4 class="text-left">Abbreviation<a style="color:#f00 !important;">*</a></h4>
+                              <input class="text-col-md-3" type="text" formControlName="abbreviation" placeholder="Enter Abbreviation">
+                              <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('abbreviation').valid && orgForm.get('abbreviation').touched">
+                                    Abbreviation is required.
+                              </div>
                         </div>
-
-                        <div class="col-md-12" style="padding-top: 10px;">
-                            <p *ngIf="fileSizeMin" >Min Size of image should be 150 Kb.</p>
-                            <p *ngIf="fileSizeMax" >Max Size of image should be 2 Mb.</p>
-                            <p *ngIf="fileSupport">Image format .jpg, .jpeg and .png only supported.</p>
+                        <div class="man col-md-3">
+                                <h4 class="text-left">Affiliated</h4>
+                                <!-- <select class="js-example-basic-single text-col-md-3"  name="state" (setData)="dataChanged($event,'affilated')" formControlName="affilated"  placeholder="Select Organization" select2>
+                                    <option *ngFor="let ite of items"  [value]="ite.id">{{ite.name}}</option>
+                                </select> -->
+                                <select class="js-example-basic-single text-col-md-3"  name="affilated" formControlName="affilated">
+                                    <option value="null" disabled="true" value="">Select Organization</option>    
+                                    <option *ngFor="let ite of items"  [value]="ite._id">{{ite.name}}</option>
+                                </select>
+                                <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('affilated').valid && orgForm.get('affilated').touched">
+                                        Affilated is required.
+                                </div>
+                        </div>
+                        <div class="man col-md-12">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <h4 class="text-left">Logo</h4>
+                                    <input type="file" accept="image/*" class="logo_upload" id='logo' (change)="readUrl($event);" #fie style="width:0px;height:0px; display:none;">
+                                    <button class="btn btn_green" (click)="asdl($event)"> Upload</button>     
+                                    <!--<span style="color:red; position: absolute;" *ngIf="!orgForm.get('logo').valid && orgForm.get('logo').touched">
+                                          Logo is required.
+                                    </span>           -->
+                                </div>
+                                <div class="man col-md-4" *ngIf="logo && !url" >
+                                      <img [src]="logo" class="image_display">               
+                                </div>
+                                <div class="man col-md-4" *ngIf="url" >
+                                      <img [src]="url" class="image_display">               
+                                </div>
+                                <div class="col-md-12" style="padding-top: 10px; color:red">
+                                    <p style="font-size: small; color:red;" *ngIf="fileSizeMin" >Min Size of image should be 150 Kb.</p>
+                                    <p style="font-size: small; color:red;" *ngIf="fileSizeMax" >Max Size of image should be 2 Mb.</p>
+                                    <p style="font-size: small; color:red;" *ngIf="fileSupport">Image format .jpg, .jpeg and .png only supported.</p>
+                                    <p style="font-size: small;" *ngIf="(!fileSupport || !fileSizeMin || !fileSizeMax )&& !orgForm.value.logo ">Image format .jpg, .jpeg and .png only supported with min 150 Kb to max 2Mb.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-      </div>
-      <div class="manage-box clearfix">
-           <div class="col-md-12">
-                <label><h2>Location</h2></label>
-           </div>
-            <div class="col-md-12">
-                <div class="row">
-                <div class="man col-md-3"><h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
-                    <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event);" Googleplace #box >
-                    <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('address').valid && orgForm.get('address').touched">
-                            Address is required.
-                    </div>   
-                </div>
-         
-                <div class="man col-md-3">
-                    <h4 class="text-left">Building</h4>
-                    <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="building" placeholder="Building">
-                </div>
-         
-                <div class="man col-md-3">
-                    <h4 class="text-left">Street</h4>
-                    <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="street" placeholder="Street">
-                </div>
-         
-                <div class="man col-md-3">
-                    <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
-                    <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="country" placeholder="Country">
-                </div>
-         
-                <div class="man col-md-3">
-                    <h4 class="text-left">State</h4>
-                    <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="state" placeholder="State">
-                </div>
-         
-                <div class="man col-md-3">
-                    <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
-                    <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="city" placeholder="City">
-                </div>
-         
-                <div class="man col-md-3">
-                    <h4 class="text-left">Zip code</h4>
-                    <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="zipcode" placeholder="Zip code">
-                </div>
-         
-                <div class="man col-md-3">
-                    <h4 class="text-left">Capacity</h4>
-                    <input class="text-col-sm-3"  type="number" formControlName="capacity" min="0" max="9999999" style="width: 100%;" value="0">
-                    <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('capacity').valid && orgForm.get('capacity').touched">
-                            Capicity is required.
-                    </div>
-                </div>
-                 <div class="man col-md-12">
+              </div>
+              <div class="manage-box clearfix">
+                   <div class="col-md-12">
+                        <label><h2>Location</h2></label>
+                   </div>
+                    <div class="col-md-12">
                         <div class="row">
-                    <div class="man col-md-2">
-                        <h4 class="text-left">Place Pic</h4>
-                        <input type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)">
-                        <button class="btn btn_green" (click)="file2.click()"> Upload</button>                
-                        <div class="col-md-12" style="padding-top: 10px;">
-                            <p *ngIf="fileSizeMin2" >Min Size of image should be 150 Kb.</p>
-                            <p *ngIf="fileSizeMax2" >Max Size of image should be 2 Mb.</p>
-                            <p *ngIf="fileSupport2">Image format .jpg, .jpeg and .png only supported.</p>
+                        <div class="man col-md-3"><h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
+                            <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event);" Googleplace #box >
+                            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('address').valid && orgForm.get('address').touched">
+                                    Address is required.
+                            </div>   
                         </div>
+                 
+                        <div class="man col-md-3">
+                            <h4 class="text-left">Building</h4>
+                            <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="building" placeholder="Building">
+                        </div>
+                 
+                        <div class="man col-md-3">
+                            <h4 class="text-left">Street</h4>
+                            <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="street" placeholder="Street">
+                        </div>
+                 
+                        <div class="man col-md-3">
+                            <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
+                            <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="country" placeholder="Country">
+                        </div>
+                 
+                        <div class="man col-md-3">
+                            <h4 class="text-left">State</h4>
+                            <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="state" placeholder="State">
+                        </div>
+                 
+                        <div class="man col-md-3">
+                            <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
+                            <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="city" placeholder="City">
+                        </div>
+                 
+                        <div class="man col-md-3">
+                            <h4 class="text-left">Zip code</h4>
+                            <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="zipcode" placeholder="Zip code">
+                        </div>
+                 
+                        <div class="man col-md-3">
+                            <h4 class="text-left">Capacity</h4>
+                            <input class="text-col-sm-3"  type="number" formControlName="capacity" max="9999999" style="width: 100%;" value="0" min="0" oninput="validity.valid||(value='');">
+                            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('capacity').valid && orgForm.get('capacity').touched">
+                                    Capicity is required.
+                            </div>
+                        </div>
+                         <div class="man col-md-12">
+                                <div class="row">
+                                    <div class="man col-md-2">
+                                        <h4 class="text-left">Place Pic</h4>
+                                        <input type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)">
+                                        <button class="btn btn_green" (click)="file2.click()"> Upload</button>                
+                                    </div>
+                                    <div class="col-md-12" style="padding-top: 10px;">
+                                        <p style="font-size: small; color:red;" *ngIf="fileSizeMin2" >Min Size of image should be 150 Kb.</p>
+                                        <p style="font-size: small; color:red;" *ngIf="fileSizeMax2" >Max Size of image should be 2 Mb.</p>
+                                        <p style="font-size: small; color:red;" *ngIf="fileSupport2">Image format .jpg, .jpeg and .png only supported.</p>
+                                        <p style="font-size: small;" *ngIf="(!fileSupport2 || !fileSizeMin2 || !fileSizeMax2 )&& !orgForm.value.placePic">Image format .jpg, .jpeg and .png only supported with min 150 Kb to max 2Mb.</p>                            
+                                    </div>
+                        
+                                    <div class="man col-md-2" *ngIf="placePic" >
+                                            <img [src]="placePic" class="image_display">               
+                                    </div>
+                                    <div class="man col-md-2" *ngIf="logo2 && !placePic" >
+                                            <img *ngFor="let item of logo2"  [src]="item" class="image_display">               
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                       </div>
+              </div>
+        
+                <div class="manage-box clearfix">
+                    <div class="col-md-12">
+                        <label><h2>Contact</h2></label>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                         <div class="man col-md-4">
+                            <h4 class="text-left">Website</h4>
+                            <input class="text-col-md-3" type="text" formControlName="website" placeholder="Enter Website" pattern="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})">
+                            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('website').valid && orgForm.get('website').touched">
+                                    Website is required.
+                            </div>    
+                         </div>
+                         <div class="man col-md-4">
+                            <h4 class="text-left">Email<a style="color:#f00 !important;">*</a></h4>
+                            <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" required placeholder="Enter Email">
+                            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('email').valid && orgForm.get('email').touched">
+                                    Email is required or invalid.
+                            </div>     
+                        </div>
+                        <div class="man col-md-4">
+                            <h4 class="text-left">Telephone</h4>
+                            <input class="text-col-md-3" type="text" formControlName="phonenumber" pattern="^\+{0,2}([\-\. ])?(\(?\d{0,3}\))?([\-\. ])?\(?\d{0,3}\)?([\-\. ])?\d{3}([\-\. ])?\d{4}" placeholder="Enter Telephone">
+                            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('phonenumber').valid && orgForm.get('phonenumber').touched">
+                                    Telphone is required.
+                            </div> 
+                        </div>
+                        <div class="man col-md-6" *ngIf="!_id" >
+                            <h4 class="text-left">Password<a style="color:#f00 !important;">*</a></h4>
+                            <input class="text-col-md-3" type="password" formControlName="password" required placeholder="Enter password">   
+                        </div>
+                    </div>
+                     </div>
+                </div>
+                 
+                <div class="manage-box clearfix">    
+                    <div class="col-md-12">
+                         <label><h2>Sports</h2></label>
+                    </div>
+                     <div class="man col-md-12">
+                            <h4 class="text-left">Choose<a style="color:#f00 !important;">*</a></h4>
+                            <div class="multi-wrap">
+                            <app-multiselect [mArray]='spots' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="spots? spots.length > 0 : spots" ></app-multiselect></div>
+                            <div class="col-md-12" *ngIf="!spots? spots == [] : spots.length == 0">
+                                <h4 class="text-left col-md-4">Add Sport</h4>                        
+                                <button class="btn btn_green" [routerLink]="['/sports/manage']"> 
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('sports').valid && orgForm.get('sports').touched">
+                                    Sports is required.
+                            </div> 
+        
                     </div>
                     
-                            <div class="man col-md-2" *ngIf="placePic" >
-                                    <img [src]="placePic" class="image_display">               
+                </div>
+        
+                <div class="manage-box radio-box clearfix"> 
+                     <div class="col-md-12">
+                             <label><h2>Affiliation</h2></label>                               
+                     </div>
+                     <div class="man col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="radio" class="bgradio-input" id="test1" name="affilation"  value="opened" formControlName="affilation">
+                                <label for="test1">Opened</label>
                             </div>
-                            <div class="man col-md-2" *ngIf="logo2 && !placePic" >
-                                    <img *ngFor="let item of logo2"  [src]="item" class="image_display">               
+                            <div class="col-md-6">
+                                <input type="radio" name="affilation" id="test2"  value="closed" formControlName="affilation">
+                                <label for="test2">Closed</label>
                             </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('affilation').valid && orgForm.get('affilation').touched">
+                                    Affiliation is required.
+                            </div> 
                         </div>
-                    </div>
-               </div>
-               </div>
-      </div>
-
-        <div class="manage-box clearfix">
-            <div class="col-md-12">
-                <label><h2>Contact</h2></label>
-            </div>
-            <div class="col-md-12">
-                <div class="row">
-                 <div class="man col-md-4">
-                    <h4 class="text-left">Website</h4>
-                    <input class="text-col-md-3" type="text" formControlName="website" placeholder="Enter Website" pattern="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})">
-                    <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('website').valid && orgForm.get('website').touched">
-                            Website is required.
-                    </div>    
-                 </div>
-                 <div class="man col-md-4">
-                    <h4 class="text-left">Email<a style="color:#f00 !important;">*</a></h4>
-                    <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" required placeholder="Enter Email">
-                    <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('email').valid && orgForm.get('email').touched">
-                            Email is required or invalid.
-                    </div>     
+                     </div>
                 </div>
-                <div class="man col-md-4">
-                    <h4 class="text-left">Telephone</h4>
-                    <input class="text-col-md-3" type="text" formControlName="phonenumber" pattern="^\+{0,2}([\-\. ])?(\(?\d{0,3}\))?([\-\. ])?\(?\d{0,3}\)?([\-\. ])?\d{3}([\-\. ])?\d{4}" placeholder="Enter Telephone">
-                    <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('phonenumber').valid && orgForm.get('phonenumber').touched">
-                            Telphone is required.
-                    </div> 
-                </div>
-                <div class="man col-md-6" *ngIf="!_id" >
-                    <h4 class="text-left">Password<a style="color:#f00 !important;">*</a></h4>
-                    <input class="text-col-md-3" type="password" formControlName="password" required placeholder="Enter password">   
-                </div>
-            </div>
-             </div>
         </div>
-         
-        <div class="manage-box clearfix">    
-            <div class="col-md-12">
-                 <label><h2>Sports</h2></label>
+        </form>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-white" [routerLink]="['/organizer']">Back</button>
             </div>
-             <div class="man col-md-12">
-                    <h4 class="text-left">Choose<a style="color:#f00 !important;">*</a></h4>
-                    <div class="multi-wrap">
-                    <app-multiselect [mArray]='spots' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="spots? spots.length > 0 : spots" ></app-multiselect></div>
-                    <div class="col-md-12" *ngIf="!spots? spots == [] : spots.length == 0">
-                        <h4 class="text-left col-md-4">Add Sport</h4>                        
-                        <button class="btn btn_green" [routerLink]="['/sports/manage']"> 
-                            <i class="fa fa-plus"></i>
-                        </button>
-                    </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('sports').valid && orgForm.get('sports').touched">
-                            Sports is required.
-                    </div> 
-
-            </div>
-            
+            <div class="col-md-6 text-right">
+                <button class="btn btn_green" [disabled]="!orgForm.valid" (click)='addOrg()'>Save</button>       
+            </div>  
         </div>
-
-        <div class="manage-box radio-box clearfix"> 
-             <div class="col-md-12">
-                     <label><h2>Affiliation</h2></label>                               
-             </div>
-             <div class="man col-md-12">
-                <div class="row">
-                    <div class="col-md-6">
-                        <input type="radio" class="bgradio-input" id="test1" name="affilation"  value="opened" formControlName="affilation">
-                        <label for="test1">Opened</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input type="radio" name="affilation" id="test2"  value="closed" formControlName="affilation">
-                        <label for="test2">Closed</label>
-                    </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('affilation').valid && orgForm.get('affilation').touched">
-                            Affiliation is required.
-                    </div> 
-                </div>
-             </div>
+        
         </div>
-</div>
-</form>
-
-<div class="row">
-    <div class="col-md-6">
-        <button class="btn btn-white" [routerLink]="['/organizer']">Back</button>
-    </div>
-    <div class="col-md-6 text-right">
-        <button class="btn btn_green" [disabled]="!orgForm.valid" (click)='addOrg()'>Save</button>       
-    </div>  
-</div>
-
+        </div>
+        
+        </tab>
+        <tab heading="Members" [disabled]="!_id"><app-member></app-member><app-orgmembers></app-orgmembers></tab>
+        <tab heading="Seasons" [disabled]="!_id"><app-manage-seasons></app-manage-seasons><app-seasons></app-seasons></tab>
+        <tab heading="Classifications" [disabled]="!_id" ><app-manage-organizer-classifications></app-manage-organizer-classifications><app-organizer-classifications></app-organizer-classifications></tab>
+        <tab heading="Competitions" [disabled]="!_id"><app-manage-organizer-competitions></app-manage-organizer-competitions><app-organizer-competitions></app-organizer-competitions></tab>
+    </tabset>
 </div>

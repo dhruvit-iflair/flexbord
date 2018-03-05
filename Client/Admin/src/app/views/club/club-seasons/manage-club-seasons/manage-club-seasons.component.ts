@@ -7,6 +7,7 @@ import { Router ,ActivatedRoute} from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup,FormControl,Validators,FormBuilder } from "@angular/forms";
 import { start } from 'repl';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-manage-club-seasons',
@@ -19,14 +20,34 @@ export class ManageClubSeasonsComponent implements OnInit {
   public _id: any;
   public seasonForm : FormGroup;
   public start_date = new Date();
+  public endMinDate = new Date();
+
+  public maxDate = new Date();
+  public maxDate2 = new Date();
+  public bsConfig: Partial<BsDatepickerConfig>;
+
   constructor(public fb: FormBuilder,private toastr : ToastrService,public http:Http,private router: Router,public activeRouter:ActivatedRoute,public location:Location) {
     // this.start_ate = new Date();
+    this.bsConfig = {
+      containerClass: 'theme-orange',
+      dateInputFormat :'DD/MM/YY',
+      showWeekNumbers:false
+    };
+    this.maxDate.setDate(this.maxDate.getDate() + 365);
+    this.maxDate2.setDate(this.maxDate2.getDate() + 365);
     this.seasonForm = this.fb.group({
       'name' : ["",[Validators.required]],
       'start_date' : [this.start_date,[Validators.required]],
       'end_date' : [null,[Validators.required]],
       "club":[""]
-    },{validator:this.dateLessThan('start_date', 'end_date')})
+    },{validator:this.dateLessThan('start_date', 'end_date')});
+    this.seasonForm.get('start_date').valueChanges.subscribe(d=>{
+      this.dateMin(d);
+    })
+  }
+  dateMin(e){
+    var t = new Date(e);
+    this.endMinDate.setDate(t.getDate()+1);
   }
   dateLessThan(start_date: string, end_date : string) {
     return (group: FormGroup): {[key: string]: any} => {
@@ -43,16 +64,16 @@ export class ManageClubSeasonsComponent implements OnInit {
  
   addSesons(){
     // //console.log(this.seasonForm.value); clubSeasons
-    var h = new Date().getHours();
-    var m = new Date().getMinutes();
-    var s = new Date(this.seasonForm.value.start_date);
-    s.setHours(h);
-    s.setMinutes(m);
-    var e = new Date(this.seasonForm.value.end_date);
-    e.setHours(h);
-    e.setMinutes(m); 
-    this.seasonForm.value.start_date= s;
-    this.seasonForm.value.end_date= e
+    // var h = new Date().getHours();
+    // var m = new Date().getMinutes();
+    // var s = new Date(this.seasonForm.value.start_date);
+    // s.setHours(h);
+    // s.setMinutes(m);
+    // var e = new Date(this.seasonForm.value.end_date);
+    // e.setHours(h);
+    // e.setMinutes(m); 
+    // this.seasonForm.value.start_date= s;
+    // this.seasonForm.value.end_date= e
     if (this.seasonForm.valid) {
     var clubid=localStorage.getItem('clubid');
     this.seasonForm.value.club=clubid;
@@ -95,6 +116,7 @@ export class ManageClubSeasonsComponent implements OnInit {
     this.location.back();
   }
   ngOnInit() {
+    
     this.sub = this.activeRouter.params.subscribe(params => {
       // //console.log(params._id);
       if (params._id) {
@@ -109,7 +131,10 @@ export class ManageClubSeasonsComponent implements OnInit {
                       'name' : [fagdf[0].name,[Validators.required]],
                       'start_date' : [ss,[Validators.required]],
                       'end_date' : [es,[Validators.required]]
-                    },{validator:this.dateLessThan('start_date', 'end_date')})
+                    },{validator:this.dateLessThan('start_date', 'end_date')});
+                    this.seasonForm.get('start_date').valueChanges.subscribe(d=>{
+                      this.dateMin(d);
+                    })
                  }
                  else {
                     this.toastr.error('Error!! No Seasons found!', 'Error');
@@ -119,14 +144,14 @@ export class ManageClubSeasonsComponent implements OnInit {
                   this.toastr.error('Error!! Something went wrong! try again later', 'Error');
                 });
       }
-      else{
-        this.seasonForm = this.fb.group({
-          'name' : ["",[Validators.required]],
-          'start_date' : [this.start_date,[Validators.required]],
-          'end_date' : [null,[Validators.required]],
-          'club':['']          
-        },{validator:this.dateLessThan('start_date', 'end_date')})
-      }
+      // else{
+      //   this.seasonForm = this.fb.group({
+      //     'name' : ["",[Validators.required]],
+      //     'start_date' : [this.start_date,[Validators.required]],
+      //     'end_date' : [null,[Validators.required]],
+      //     'club':['']          
+      //   },{validator:this.dateLessThan('start_date', 'end_date')})
+      // }
    });
   }
 

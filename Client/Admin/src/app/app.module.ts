@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Auth24Guard } from "./components/common/guard/auth24.guard";
-import { PaginationModule ,ModalModule,BsDatepickerModule,TimepickerModule} from "ngx-bootstrap";
+import { TabsModule,PaginationModule ,ModalModule,BsDatepickerModule,TimepickerModule} from "ngx-bootstrap";
 import { DataTablesModule } from 'angular-datatables';
 
 // App views
@@ -38,7 +38,7 @@ import { AccessorService } from "./components/common/accessor.service";
 import { BreadCrumbService } from "./components/services/bread-crumb";
 import { EmailService } from "./components/services/email.service";
 import { EmailTypeService } from './components/services/email-type.service';
-
+import { OrganizerService } from "./components/services/organizer.service";
 import {Ng5BreadcrumbModule,BreadcrumbService} from 'ng5-breadcrumb';
 import { BackLocationDirective } from "./components/directive/backButton";
 import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
@@ -196,11 +196,12 @@ import { ImportClubMembersComponent } from './views/club/club-members/import-clu
     ProfileModule,
     // Modules
     LayoutsModule,
+    TabsModule.forRoot(),
 
     RouterModule.forRoot(ROUTES),
     Ng5BreadcrumbModule.forRoot(),
   ],
-  providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService,EmailService,EmailTypeService],
+  providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService,EmailService,EmailTypeService,OrganizerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

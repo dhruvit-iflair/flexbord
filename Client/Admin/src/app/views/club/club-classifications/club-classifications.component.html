@@ -4,7 +4,9 @@
           <label><h2>Classification</h2></label>
       </div>
       <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
-          <button class="btn btn_green" [routerLink]="['/club/classifications/manage']">New Classification</button>                         
+          <button class="btn btn_green" [routerLink]="['/club/classifications/manage']">
+            <i class="fa fa-plus"></i> Add New Classification
+          </button>                         
       </div>
       <div class="col-md-12">
         <table datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
@@ -20,7 +22,9 @@
               <tr *ngFor="let r of rows" >
                 <td style="display:none">{{r._id}}</td>
                 <td>{{r.name}}</td>
-                <td>{{r.value}}</td>
+                <td>
+                    <span *ngFor="let v of r.value; let i = index" >{{v}}<span *ngIf="i != r.value.length -1">, </span></span>
+                </td>
                 <td>
                   <a class="btn btn_green tab_btn"  routerLink="/club/classifications/manage/{{r._id}}" *ngIf="hasEditPerm">
                     <i class="fa fa-pencil" aria-hidden="true"></i>

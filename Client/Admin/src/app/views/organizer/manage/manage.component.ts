@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation,OnDestroy } from '@angular/core';
 import { fakedb } from "../../../components/common/fakedb";
 import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
@@ -8,6 +8,8 @@ import { Router ,ActivatedRoute} from "@angular/router";
 import { FormGroup,FormControl,FormBuilder,Validators,AbstractControl } from "@angular/forms";
 import { forEach } from '@angular/router/src/utils/collection';
 import { UserService } from '../../../components/services/users';
+import { OrganizerService } from '../../../components/services/organizer.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-manage',
@@ -37,10 +39,11 @@ export class ManageOrganizerComponent implements OnInit {
   public fileSizeMax2:Boolean = false;
   public role:any; 
   public user:any; 
+  public subscription: Subscription;
 
   // public value : any = 9;
   // public value2 : Array<string> =["0: 1", "1: 2", "2: 3", "3: 4", "4: 5"];
-  constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public userSer:UserService) {
+  constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public userSer:UserService,public orgService:OrganizerService) {
     this.orgForm = this.fb.group({
       name: ["",[Validators.required]],
       subDomain: ["",[Validators.required]],
@@ -65,10 +68,14 @@ export class ManageOrganizerComponent implements OnInit {
       affilated:  [""],
       affilation:  ["closed"],
       registered: [null]
-    })
+    })  
+    this.orgForm.get('capacity').valueChanges.subscribe(val => {
+        (val > 0)? val: val = Math.abs(val);
+        return val;
+    });
    }
 
-  ngOnInit() {    
+  ngOnInit() {  
     this.http.get(environment.api + '/roles').subscribe((res)=>{
       var r = [];
       r = res.json();
@@ -76,15 +83,14 @@ export class ManageOrganizerComponent implements OnInit {
       this.orgForm.patchValue({roles :this.role[0]._id});
     });
     this.userSer.getUsers().subscribe((user)=>{ this.user = user; });
-    this.http.get(environment.api + '/organizer')
-            .subscribe((res)=>{
-              this.items2 = res.json();
+    this.subscription = this.orgService.getSingleOrganizersList().subscribe((res)=>{
+              this.items2 = res;
               this.sub = this.activeRouter.params.subscribe(params => {
                 if (params._id) {
                     this.items = this.items2.filter(af=> af._id != params._id);
                 }
                 else{
-                  this.items = res.json();
+                  this.items = res;
                 }
               });
             });
@@ -96,6 +102,7 @@ export class ManageOrganizerComponent implements OnInit {
       // //console.log(params._id);
       if (params._id) {
         this._id = params._id;
+        this.orgService.collectAlldata(this._id);
         this.http.get(environment.api + '/organizer/'+ params._id)
                  .subscribe((res)=>{
                    var fagdf = res.json();
@@ -122,6 +129,9 @@ export class ManageOrganizerComponent implements OnInit {
                 });
       }
    });
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   readUrl(event:any) {
@@ -288,7 +298,7 @@ export class ManageOrganizerComponent implements OnInit {
                         var d = res.json();
                         if (d._id) {
                           this.toastr.success('Organizer Registered Successfully', 'Success');
-                          this.router.navigate(['/organizer']);
+                          this.router.navigate(['/organizer/manage/'+d._id]);
                         }
                       },(error)=>{
                         this.toastr.error('Something went wrong !! Please try again later', 'Error');

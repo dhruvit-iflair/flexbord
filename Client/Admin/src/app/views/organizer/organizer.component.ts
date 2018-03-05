@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs/Subject';
 import { AccessorService } from "../../components/common/accessor.service";
+import { OrganizerService } from '../../components/services/organizer.service';
+import { Subscription } from 'rxjs/Subscription';
 
 // import { ConfirmService } from "../../components/services/confirm.services";
 @Component({
@@ -23,8 +25,8 @@ export class OrganizerComponent implements OnInit {
   public dataRenderer = false;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;hasCompetitionsPerm;
-
-  constructor(public http: Http, private router: Router, private toastr: ToastrService,private accr: AccessorService ) {  }
+  public subscription :Subscription;
+  constructor(public http: Http, private router: Router, private toastr: ToastrService,private accr: AccessorService,public orgService:OrganizerService ) {  }
   ngAfterContentInit() {
     this.dtOptions = {
       pagingType: 'simple_numbers',
@@ -33,9 +35,9 @@ export class OrganizerComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.http.get(environment.api + "/organizer")
-      .subscribe((res) => {
-        this.rows = res.json();
+  this.orgService.getAllOrganizers();
+  this.subscription = this.orgService.getSingleOrganizersList().subscribe((res) => {
+        this.rows = res;
         if (this.rows) {
           this.rows.forEach(item => {
             var src = environment.picpoint + 'orglogos/' + item.logo;
@@ -44,7 +46,6 @@ export class OrganizerComponent implements OnInit {
             item['button'] = item._id;
           });
           this.length = this.rows.length;
-          this.dataRenderer = true;
         }
       });
     this.checkpermissions();
@@ -97,19 +98,7 @@ export class OrganizerComponent implements OnInit {
     // this.confirmBox.display();
     var del = confirm("Confirm to delete this Organizer!");
     if (del) {
-      this.http.delete(environment.api + "/organizer/" + id)
-        .subscribe((res) => {
-          var d = res.json();
-          if (d._id) {
-            this.dataRenderer = false;
-            this.toastr.success('Organizer Deleted Successfully', 'Success');
-            // this.router.navigate(['/organizer']);
-            // this.rows.splice(d,1);
-            this.ngOnInit();
-          }
-        }, (error) => {
-          this.toastr.error('Something went wrong !! Please try again later', 'Error');
-        })
+      this.orgService.deleteOrganizer(id);
     }
   }
 }

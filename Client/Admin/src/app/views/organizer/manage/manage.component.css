@@ -85,3 +85,7 @@ button.btn.btn-lg.dropdown-toggle.col-md-12 {
 .manage-box .man select{
     height: 40px;
 }
+li.nav-item.active,
+.nav > li.active, .nav > li:hover{
+    background-color: #fff;
+}

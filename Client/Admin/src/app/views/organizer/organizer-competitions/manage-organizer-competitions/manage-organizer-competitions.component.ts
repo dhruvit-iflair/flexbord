@@ -67,38 +67,38 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
                       this.router.navigate(['/organizer/competitions']);
       });
     
-    this.sub = this.activeRouter.params.subscribe(params => {
-      if (params._id) {
-        this._id = params._id;
-        this.http.get(environment.api + '/orgCompetitions/'+ params._id)
-               .subscribe((res)=>{
-                 var fagdf = res.json();
-                 if(fagdf.length > 0){
-                   this.classValue = this.classifications.filter(ad => ad._id == fagdf[0].organizerClassifications._id); 
-                   this.comForm.patchValue(fagdf[0]);
-                   this.comForm.controls['seasons'].setValue(fagdf[0].seasons._id, {onlySelf: true});
-                   this.comForm.controls['organizerClassifications'].setValue(fagdf[0].organizerClassifications._id, {onlySelf: true});
-                   this.comForm.controls['organizerClassificationsValue'].setValue(fagdf[0].organizerClassificationsValue, {onlySelf: true});
-                 }
-                 else {
-                      this.toastr.error('Error!! No Competitions found!', 'Error');
-                      this.router.navigate(['/organizer/competitions']);
-                  }
-                 },(error)=>{
-                      this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-                });
-      }
-      else{
-        this.comForm = this.fb.group({
-          name: ["",[Validators.required]],
-          description: [""],
-          sports: [null,[Validators.required]],
-          seasons: ["",[Validators.required]],
-          organizerClassifications: ["",[Validators.required]],
-          organizerClassificationsValue: ["",[Validators.required]]
-        })
-      }
-   });
+  //   this.sub = this.activeRouter.params.subscribe(params => {
+  //     if (params._id) {
+  //       this._id = params._id;
+  //       this.http.get(environment.api + '/orgCompetitions/'+ params._id)
+  //              .subscribe((res)=>{
+  //                var fagdf = res.json();
+  //                if(fagdf.length > 0){
+  //                  this.classValue = this.classifications.filter(ad => ad._id == fagdf[0].organizerClassifications._id); 
+  //                  this.comForm.patchValue(fagdf[0]);
+  //                  this.comForm.controls['seasons'].setValue(fagdf[0].seasons._id, {onlySelf: true});
+  //                  this.comForm.controls['organizerClassifications'].setValue(fagdf[0].organizerClassifications._id, {onlySelf: true});
+  //                  this.comForm.controls['organizerClassificationsValue'].setValue(fagdf[0].organizerClassificationsValue, {onlySelf: true});
+  //                }
+  //               //  else {
+  //               //       this.toastr.error('Error!! No Competitions found!', 'Error');
+  //               //       this.router.navigate(['/organizer/competitions']);
+  //               //   }
+  //                },(error)=>{
+  //                     this.toastr.error('Error!! Something went wrong! try again later', 'Error');
+  //               });
+  //     }
+  //     else{
+  //       this.comForm = this.fb.group({
+  //         name: ["",[Validators.required]],
+  //         description: [""],
+  //         sports: [null,[Validators.required]],
+  //         seasons: ["",[Validators.required]],
+  //         organizerClassifications: ["",[Validators.required]],
+  //         organizerClassificationsValue: ["",[Validators.required]]
+  //       })
+  //     }
+  //  });
   }
   saveVal(){
    if (this.comForm.valid) {
