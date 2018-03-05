@@ -18,10 +18,15 @@ export class NavigationComponent {
     public isProfileSet;
     public perms; haspermission = []; checker = [];
     public profilePhoto;
-    public u: any;
+    public u: any={
+        firstname:'',
+        lastname:''
+    };
     public modules = this.accr.getmodules();
     public modulesize = this.modules.length * 4;
-    public roles: any;
+    public roles: any={
+        title : ''
+    };
     public check: Boolean = true;
     constructor(private router: Router, private accr: AccessorService, public userSer: UserService) { }
 
@@ -32,10 +37,10 @@ export class NavigationComponent {
                 this.u = respo[0];
                // var xy = this.accr.getCurrentUser();
                 //this.u = JSON.parse(localStorage.getItem('uToken'));
-                try {
+                if(localStorage.getItem('roles')) {
                     this.roles = JSON.parse(localStorage.getItem('roles'));
                 }
-                catch (err) {
+                else{
                     this.router.navigate(['/login']);
                 }
                 if (this.u.person_photo) {
