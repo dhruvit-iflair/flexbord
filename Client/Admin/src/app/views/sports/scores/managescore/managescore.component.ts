@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation ,OnDestroy} from '@angular/core';
 import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
 import { environment } from "../../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from "@angular/forms";
+import { Subscription } from 'rxjs/Subscription';
+import { SportsService } from '../../../../components/services/sports.service';
 
 @Component({
   selector: 'app-managescore',
@@ -12,47 +14,40 @@ import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from
   styleUrls: ['./managescore.component.css']
 })
 export class ManagescoreComponent implements OnInit {
-  public paramdetails = false;
+  public _id:any;
   public userId;
   public former = { wins: 0, draws: 0, losses: 0};
-
-  constructor(private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute) { }
+  public subscription : Subscription;
+  constructor(private http: Http, 
+              private toastr: ToastrService, 
+              private router: Router, 
+              public activeRouter: ActivatedRoute,
+              public sportService:SportsService) { }
 
   ngOnInit() {
-    this.activeRouter.params.subscribe(params => {
-      this.userId = params._id;
-      if (this.userId) {
-        this.paramdetails = true;
-        this.http.get(environment.api + '/sportscores/' + this.userId)
-          .subscribe(res => {
-            var x = res.json();
-            this.former=x[0];
-          });
-      }
-    });
+    this.subscription = this.sportService.getSingleScoreData().subscribe(res=>{
+      this.former = res[0];
+      this._id = res[0]._id;
+    })
   }
-
+  reset(){
+    this.former = { wins: 0, draws: 0, losses: 0};
+    this._id = false;
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
   savedata(gotcha) {
     var sptid = localStorage.getItem('sptid');
     var janudata = gotcha;
     janudata.sports = sptid;
-    if (this.paramdetails) {
-      this.http.patch(environment.api + "/sportscores/" + this.userId, janudata)
-        .subscribe(res => {
-          this.toastr.success('Scores Updated Successfully', 'Success');
-          this.router.navigate(['/sports/scores']);
-        }, (error) => {
-          this.toastr.error('Something went wrong !! Please try again later', 'Error');
-        });
+    if (this._id) {
+        this.sportService.updateScore(this._id,janudata);
+        this.reset();
     }
     else {
-      this.http.post(environment.api + "/sportscores", janudata)
-        .subscribe(res => {
-          this.toastr.success('Scores added successfully', 'Success');
-          this.router.navigate(['/sports/scores']);
-        }, (error) => {
-          this.toastr.error('Something went wrong !! Please try again later', 'Error');
-        });
+      this.sportService.saveScore(janudata);
+      this.reset();      
     }
   }
 }

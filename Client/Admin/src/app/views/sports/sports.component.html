@@ -10,7 +10,7 @@
         <div class="col-md-12 no_padd mar_btt">
         </div>
           <br>
-        <table datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
+        <table datatable [dtOptions]="dtOptions" class="row-border hover">
                 <thead>
                   <tr>
                       <th>_id</th>                      
@@ -29,13 +29,13 @@
                     <td>{{item.typeofgame | firstcapitalize}}</td>
                     <td>{{item.typeofteam | firstcapitalize}}</td>
                     <td>
-                      <a class="btn btn_green tab_btn" routerLink="/sports/manage/{{item._id}}"  title="Edit" *ngIf="hasEditPerm">
+                      <a class="btn btn_green tab_btn" (click)="edit(item._id)" title="Edit" *ngIf="hasEditPerm">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                       </a>
                      <a class="btn btn_red tab_btn delete-btn" (click)="delClub(item._id)" title="Delete" *ngIf="hasDeletePerm">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                       </a>
-                      <a class="btn btn_1 tab_btn" (click)="movetopoints(item._id)" title="Points" *ngIf="hasPointsPerm">
+                      <!-- <a class="btn btn_1 tab_btn" (click)="movetopoints(item._id)" title="Points" *ngIf="hasPointsPerm">
                         <i class="fa fa-trophy" aria-hidden="true"></i>
                       </a>
                       <a class="btn btn_green tab_btn" (click)="movetostatus(item._id)" title="Player Status" *ngIf="hasStatusPerm">
@@ -46,7 +46,7 @@
                       </a>
                       <a class="btn btn_red tab_btn" (click)="movetofouls(item._id)" title="Fouls" *ngIf="hasFoulsPerm">
                         <i class="fa fa-wheelchair" aria-hidden="true"></i>
-                      </a>
+                      </a> -->
                     </td>
                   </tr>
                 </tbody>

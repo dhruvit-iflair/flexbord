@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation,OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation,OnDestroy,ViewChild } from '@angular/core';
 import { fakedb } from "../../../components/common/fakedb";
 import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
@@ -10,6 +10,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 import { UserService } from '../../../components/services/users';
 import { OrganizerService } from '../../../components/services/organizer.service';
 import { Subscription } from 'rxjs/Subscription';
+import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-manage',
@@ -18,6 +19,8 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./manage.component.css']
 })
 export class ManageOrganizerComponent implements OnInit {
+  @ViewChild('staticTabs') staticTabs: TabsetComponent;
+
   public orgdata:any;
   public items:Array<any> ;
   public items2:Array<any> ;
@@ -40,7 +43,7 @@ export class ManageOrganizerComponent implements OnInit {
   public role:any; 
   public user:any; 
   public subscription: Subscription;
-
+  public tabz: any;
   // public value : any = 9;
   // public value2 : Array<string> =["0: 1", "1: 2", "2: 3", "3: 4", "4: 5"];
   constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public userSer:UserService,public orgService:OrganizerService) {
@@ -84,16 +87,21 @@ export class ManageOrganizerComponent implements OnInit {
     });
     this.userSer.getUsers().subscribe((user)=>{ this.user = user; });
     this.subscription = this.orgService.getSingleOrganizersList().subscribe((res)=>{
-              this.items2 = res;
-              this.sub = this.activeRouter.params.subscribe(params => {
-                if (params._id) {
-                    this.items = this.items2.filter(af=> af._id != params._id);
-                }
-                else{
-                  this.items = res;
-                }
-              });
-            });
+        if (res) {
+          this.items2 = res;
+          this.sub = this.activeRouter.params.subscribe(params => {
+            if (params._id) {
+                this.items = this.items2.filter(af=> af._id != params._id);
+            }
+            else{
+              this.items = res;
+            }
+          });
+        }         
+    });
+    this.subscription = this.orgService.getTabActive().subscribe(id=>{
+      this.tabz = id;
+    })
     this.http.get(environment.api + '/sports')
             .subscribe((res)=>{
               this.spots = res.json();

@@ -9,3 +9,14 @@ line-height: 4;
 div>span{
     padding-left: 15px !important;
 }
+li.nav-item.active,
+.nav > li.active, .nav > li:hover{
+   background: #fff !important;    
+}
+li.nav-item.active,
+.nav > li.active{
+    background: #fff !important;
+}
+.nav-item {
+    background: #fff !important;
+}

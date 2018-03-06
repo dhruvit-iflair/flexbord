@@ -1,0 +1,4 @@
+li.nav-item.active,
+.nav > li.active, .nav > li:hover{
+    background-color: #fff;
+}

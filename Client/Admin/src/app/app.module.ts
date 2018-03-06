@@ -34,12 +34,18 @@ import { DateValueAccessor } from "./components/directive/date-proper";
 import { dateFormatPipe } from "./components/pipes/dateFormate";
 import { OrgmembersComponent } from './views/organizer/orgmembers/orgmembers.component';
 import { MemberComponent } from './views/organizer/orgmembers/member/member.component';
+
+// Services
 import { AccessorService } from "./components/common/accessor.service";
 import { BreadCrumbService } from "./components/services/bread-crumb";
 import { EmailService } from "./components/services/email.service";
 import { EmailTypeService } from './components/services/email-type.service';
 import { OrganizerService } from "./components/services/organizer.service";
 import {Ng5BreadcrumbModule,BreadcrumbService} from 'ng5-breadcrumb';
+
+
+
+
 import { BackLocationDirective } from "./components/directive/backButton";
 import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
 import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
@@ -99,6 +105,7 @@ import { ManageEmailComponent } from './views/email/manage-email/manage-email.co
 import { CkEditorDirective } from './components/directive/ck-editor.directive';
 import { ImportOrgMembersComponent } from './views/organizer/orgmembers/import-org-members/import-org-members.component';
 import { ImportClubMembersComponent } from './views/club/club-members/import-club-members/import-club-members.component';
+import { SportsService } from './components/services/sports.service';
 
 @NgModule({
   declarations: [
@@ -201,7 +208,18 @@ import { ImportClubMembersComponent } from './views/club/club-members/import-clu
     RouterModule.forRoot(ROUTES),
     Ng5BreadcrumbModule.forRoot(),
   ],
-  providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService,EmailService,EmailTypeService,OrganizerService],
+  providers: [
+    Auth24Guard,
+    ClubService,
+    UserService,
+    AccessorService,
+    BreadCrumbService,
+    BreadcrumbService,
+    EmailService,
+    EmailTypeService,
+    OrganizerService,
+    SportsService
+  ],    
   bootstrap: [AppComponent]
 })
 export class AppModule { }
