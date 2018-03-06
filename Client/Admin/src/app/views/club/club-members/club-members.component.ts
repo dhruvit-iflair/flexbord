@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from "../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { AccessorService } from "../../../components/common/accessor.service";
+import { Subscription } from 'rxjs/Subscription';
+import { ClubService } from '../../../components/services/club.service';
 
 @Component({
   selector: 'app-club-members',
@@ -11,14 +13,30 @@ import { AccessorService } from "../../../components/common/accessor.service";
   styleUrls: ['./club-members.component.css']
 })
 export class ClubMembersComponent implements OnInit {
-  members; dtOptions; clubid;
+  public members; 
+  public dtOptions;
+  public clubid;
   public dataRenderer = false;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
-  constructor(public http: HttpClient, private router: Router, private aroute: ActivatedRoute, private toastr: ToastrService, private accr: AccessorService) { }
+  public subscription :Subscription;
+  public picEnv = environment.picpoint+"clubMembersPhoto/";
+
+  constructor(public http: HttpClient, 
+              private router: Router, 
+              private aroute: ActivatedRoute, 
+              private toastr: ToastrService, 
+              private accr: AccessorService,
+              public clubService:ClubService) { }
 
   ngOnInit() {
     this.clubid = localStorage.getItem('clubid');
+    this.subscription = this.clubService.getMembersList().subscribe((res) => { 
+      this.members = res; 
+    });    
     this.gotcha();
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
   gotcha(){
     this.dtOptions={
@@ -26,31 +44,12 @@ export class ClubMembersComponent implements OnInit {
       order:[[ 0, 'desc' ]],
       columns: [{ "visible":false },{ "orderable": false },null,null,null,null,null,{ "orderable": false }]
     }
-    this.http.get(environment.api + '/clubmembers/getByClub/' + this.clubid)
-      .subscribe((res) => {
-
-        this.members = res;
-        this.members.forEach(item => {
-          var src = environment.picpoint + 'clubMembersPhoto/' + item.photo;
-          item.photo = src;
-        });
-        this.dataRenderer = true;
-      });
-      this.checkpermissions();
+    this.checkpermissions();
   }
   deletemember(id) {
     var del = confirm("Delete this Member?");
     if (del) {
-      this.http.delete(environment.api + "/clubmembers/" + id)
-        .subscribe((res) => {
-          if (res) {
-            this.dataRenderer = false;
-            this.toastr.success('Member Deleted Successfully', 'Success');
-          }
-          this.gotcha();
-        }, (error) => {
-          this.toastr.error('Something went wrong !! Please try again later', 'Error');
-        });
+      this.clubService.deleteMember(id);
     }
   }
   checkpermissions() {
@@ -68,27 +67,12 @@ export class ClubMembersComponent implements OnInit {
     }
   }
   changeStatusA(id) {
-    this.http.get(environment.api + "/clubmembers/statusA/" + id)
-      .subscribe((res) => {
-        if (res) {
-          this.dataRenderer = false;
-          this.toastr.success('Member Status Changed Successfully', 'Success');
-        }
-        this.gotcha();
-      }, (error) => {
-        this.toastr.error('Something went wrong !! Please try again later', 'Error');
-      });
+    this.clubService.changeStatusA(id);
   }
   changeStatusP(id) {
-    this.http.get(environment.api + "/clubmembers/statusP/" + id)
-      .subscribe((res) => {
-        if (res) {
-          this.dataRenderer = false;
-          this.toastr.success('Member Status Changed Successfully', 'Success');
-        }
-        this.gotcha();
-      }, (error) => {
-        this.toastr.error('Something went wrong !! Please try again later', 'Error');
-      });
+    this.clubService.changeStatusP(id);    
+  }
+  editMember(id){
+    this.clubService.getSingleMember(id);
   }
 }

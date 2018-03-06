@@ -35,6 +35,7 @@ export class ClubComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.clubService.getAllClubList();
     this.subscription = this.clubService.getClubList().subscribe((res) => {
         this.rows = res;
         this.length = this.rows.length;
@@ -92,20 +93,15 @@ export class ClubComponent implements OnInit {
     localStorage.setItem('clubid', idw);
     this.router.navigate(['/club/tournaments']);
   }
+  editClub(id){
+    this.clubService.collectData(id);
+    this.clubService.getSingleClub(id);
+    this.router.navigate(['/club/manage/'+id]);
+  }
   delClub(id){
       var del = confirm("Confirm to delete this Club!");
       if (del) {
-        this.http.delete(environment.api + "/club/" + id)
-          .subscribe((res) => {
-            var d = res.json();
-            if (d._id) {
-              this.dataRenderer = false;
-              this.toastr.success('Organizer Deleted Successfully', 'Success');
-              this.ngOnInit();
-            }
-          }, (error) => {
-            this.toastr.error('Something went wrong !! Please try again later', 'Error');
-          })
+        this.clubService.deleteClub(id);
       }
     }
   }

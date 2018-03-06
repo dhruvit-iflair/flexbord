@@ -33,13 +33,16 @@
                     <td>{{item.registered | dateFormatPipe :'dd/MM/yy hh:mm a'}}</td>
                     <td>{{item.email}}</td>
                     <td>
-                      <a class="btn btn_green tab_btn" routerLink="/club/manage/{{item._id}}"  title="Edit" *ngIf="hasEditPerm">
+                      <a class="btn btn_green tab_btn" (click)="editClub(item._id)"  title="Edit" *ngIf="hasEditPerm">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                       </a>
                      <a class="btn btn_red tab_btn delete-btn" (click)="delClub(item._id)" title="Delete" *ngIf="hasDeletePerm">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                       </a>
-                      <a class="btn btn_1 tab_btn" (click)="movetomember(item._id)" title="Members" *ngIf="hasMembersPerm">
+                      <a class="btn btn_red tab_btn" (click)="movetoteam(item._id)" title="Teams" *ngIf="hasTeamsPerm">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                      </a>
+                      <!-- <a class="btn btn_1 tab_btn" (click)="movetomember(item._id)" title="Members" *ngIf="hasMembersPerm">
                         <i class="fa fa-user" aria-hidden="true"></i>
                       </a>
                       <a class="btn btn_2 tab_btn" (click)="movetoseason(item._id)" title="Seasons" *ngIf="hasSeasonsPerm">
@@ -53,7 +56,7 @@
                       </a>
                       <a class="btn btn_grey tab_btn" (click)="movetotournament(item._id)" title="Tournaments">
                         <i class="fa fa-compass" aria-hidden="true"></i>
-                      </a> 
+                      </a>  -->
                     </td>
                   </tr>
                 </tbody>

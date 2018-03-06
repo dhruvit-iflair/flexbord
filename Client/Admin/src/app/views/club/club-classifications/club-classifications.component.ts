@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,OnDestroy} from '@angular/core';
 import { environment } from "../../../../environments/environment";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
 import { AccessorService } from "../../../components/common/accessor.service";
+import { Subscription } from 'rxjs/Subscription';
+import { ClubService } from '../../../components/services/club.service';
 
 @Component({
   selector: 'app-club-classifications',
@@ -16,8 +18,9 @@ export class ClubClassificationsComponent implements OnInit {
   public rows: Array<any>;
   public dataRenderer = false; clubid;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  public subscription:Subscription;
 
-  constructor(private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute, private accr: AccessorService) { }
+  constructor(private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute, private accr: AccessorService,public clubService:ClubService) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -26,14 +29,13 @@ export class ClubClassificationsComponent implements OnInit {
       columns: [{ "visible": false }, null, null, { "orderable": false }]
     };
     this.clubid = localStorage.getItem('clubid');
-    this.http.get(environment.api + '/clubClassifications/byclub/' + this.clubid)
-      .subscribe((res) => {
-        this.rows = res.json();
-        this.dataRenderer = true;
-      }, (error) => {
-        this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-      });
+    this.subscription = this.clubService.getClassificationsList().subscribe((res) => {
+        this.rows = res;
+    });
     this.checkpermissions();
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
@@ -52,19 +54,11 @@ export class ClubClassificationsComponent implements OnInit {
   delClas(id) {
     var del = confirm("Confirm to delete this Classifications!");
     if (del) {
-      this.http.delete(environment.api + "/clubClassifications/" + id)
-        .subscribe((res) => {
-          var d = res.json();
-          if (d._id) {
-            this.dataRenderer = false;
-            this.toastr.success('Classifications Deleted Successfully', 'Success');
-            // this.router.navigate(['/organizer']);
-            this.ngOnInit();
-          }
-        }, (error) => {
-          this.toastr.error('Something went wrong !! Please try again later', 'Error');
-        })
+      this.clubService.deleteClassifications(id);
     }
+  }
+  edit(id){
+    this.clubService.getSingleClassifications(id);
   }
 
 }

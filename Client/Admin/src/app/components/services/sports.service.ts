@@ -26,6 +26,7 @@ export class SportsService {
   constructor(public http:Http,
               public toastr:ToastrService,
               public activeRouter : ActivatedRoute){
+    this.getAllSports();
     if (localStorage.getItem('sptid')) { 
       this.sportsId = localStorage.getItem('sptid');
       this.collectData();

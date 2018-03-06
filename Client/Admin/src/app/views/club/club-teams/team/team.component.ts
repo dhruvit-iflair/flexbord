@@ -43,56 +43,56 @@ export class TeamComponent implements OnInit {
 
   ngOnInit() {
     this.sportsdata = fakedb.sport;
-    this.activeRouter.params.subscribe(params => {
-      this.userId = params._id;
-      if (this.userId) {
-        this.paramdetails = true;
-        this.http.get(environment.api + '/clubteams/' + this.userId)
-          .subscribe(res => {
-            var datapatcher = res.json();
-            this.teamForm.controls['name'].setValue(datapatcher[0].name);
-            this.teamForm.controls['sport'].setValue(datapatcher[0].sport);
-            this.teamForm.controls['address'].setValue(datapatcher[0].address);
-            this.teamForm.controls['building'].setValue(datapatcher[0].building);
-            this.teamForm.controls['street'].setValue(datapatcher[0].street);
-            this.teamForm.controls['city'].setValue(datapatcher[0].city);
-            this.teamForm.controls['state'].setValue(datapatcher[0].state);
-            this.teamForm.controls['country'].setValue(datapatcher[0].country);
-            this.teamForm.controls['zipcode'].setValue(datapatcher[0].zipcode);
-            this.logo = environment.picpoint + 'clubteamlogos/' + datapatcher[0].logo;
-            this.teamForm.value.logo = datapatcher[0].logo;
-            this.imgdt = datapatcher[0].logo;
+    // this.activeRouter.params.subscribe(params => {
+    //   this.userId = params._id;
+    //   if (this.userId) {
+    //     this.paramdetails = true;
+    //     this.http.get(environment.api + '/clubteams/' + this.userId)
+    //       .subscribe(res => {
+    //         var datapatcher = res.json();
+    //         this.teamForm.controls['name'].setValue(datapatcher[0].name);
+    //         this.teamForm.controls['sport'].setValue(datapatcher[0].sport);
+    //         this.teamForm.controls['address'].setValue(datapatcher[0].address);
+    //         this.teamForm.controls['building'].setValue(datapatcher[0].building);
+    //         this.teamForm.controls['street'].setValue(datapatcher[0].street);
+    //         this.teamForm.controls['city'].setValue(datapatcher[0].city);
+    //         this.teamForm.controls['state'].setValue(datapatcher[0].state);
+    //         this.teamForm.controls['country'].setValue(datapatcher[0].country);
+    //         this.teamForm.controls['zipcode'].setValue(datapatcher[0].zipcode);
+    //         this.logo = environment.picpoint + 'clubteamlogos/' + datapatcher[0].logo;
+    //         this.teamForm.value.logo = datapatcher[0].logo;
+    //         this.imgdt = datapatcher[0].logo;
 
-            for (var j = 0; j < datapatcher[0].availability.length; j++) {
-              this.avail.daychecker[datapatcher[0].availability[j].day] = true;
+    //         for (var j = 0; j < datapatcher[0].availability.length; j++) {
+    //           this.avail.daychecker[datapatcher[0].availability[j].day] = true;
 
-              //janu coding chalu
+    //           //janu coding chalu
 
-              var patcher = datapatcher[0].availability[j].fromtimer;
-              var patcher1 = datapatcher[0].availability[j].totimer;
-              var hs = new Date(patcher).getHours();
-              var ms = new Date(patcher).getMinutes();
+    //           var patcher = datapatcher[0].availability[j].fromtimer;
+    //           var patcher1 = datapatcher[0].availability[j].totimer;
+    //           var hs = new Date(patcher).getHours();
+    //           var ms = new Date(patcher).getMinutes();
 
-              var he = new Date(patcher1).getHours();
-              var me = new Date(patcher1).getMinutes();
-              var s = new Date(patcher);
-              s.setHours(hs);
-              s.setMinutes(ms);
-              var e = new Date(patcher1);
-              e.setHours(he);
-              e.setMinutes(me);
+    //           var he = new Date(patcher1).getHours();
+    //           var me = new Date(patcher1).getMinutes();
+    //           var s = new Date(patcher);
+    //           s.setHours(hs);
+    //           s.setMinutes(ms);
+    //           var e = new Date(patcher1);
+    //           e.setHours(he);
+    //           e.setMinutes(me);
 
-              this.avail.fromtimer[datapatcher[0].availability[j].day] = s;
-              this.avail.totimer[datapatcher[0].availability[j].day] = e;
+    //           this.avail.fromtimer[datapatcher[0].availability[j].day] = s;
+    //           this.avail.totimer[datapatcher[0].availability[j].day] = e;
 
-              //janu coding puru
+    //           //janu coding puru
 
-              // this.avail.fromtimer[datapatcher[0].availability[j].day] = datapatcher[0].availability[j].fromtimer;
-              // this.avail.totimer[datapatcher[0].availability[j].day] = datapatcher[0].availability[j].totimer;
-            }
-          });
-      }
-    });
+    //           // this.avail.fromtimer[datapatcher[0].availability[j].day] = datapatcher[0].availability[j].fromtimer;
+    //           // this.avail.totimer[datapatcher[0].availability[j].day] = datapatcher[0].availability[j].totimer;
+    //         }
+    //       });
+    //   }
+    // });
   }
 
   getmodeldata(avail) {
