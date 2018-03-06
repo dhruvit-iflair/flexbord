@@ -8,19 +8,19 @@
               </div>
               <div class="col-md-12">
               <div class="row">
-                  <div class="man col-md-6">
+                  <div class="man col-md-4">
                         <h4 class="text-left">First Name</h4>
                         <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="firstname" placeholder="Enter Name" required>
                   </div>
-                  <div class="man col-md-6">
+                  <div class="man col-md-4">
                         <h4 class="text-left">Last Name</h4>
                         <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="lastname" placeholder="Enter Name" required>
                   </div>
-                  <div class="man col-md-6">
+                  <div class="man col-md-4">
                         <h4 class="text-left">Email<a style="color:#f00 !important;">*</a></h4>
                         <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" required placeholder="Enter Email">
                   </div>
-                  <div class="man col-md-6"><h4 class="text-left">Assign Role</h4>
+                  <div class="man col-md-4"><h4 class="text-left">Assign Role</h4>
                         <!-- <input class="text-col-md-3" type="text" formControlName="roles" placeholder="Select Roles"> -->
                         <ss-multiselect-dropdown class="margBott" [options]="rolesOptions" [settings]='mySettings' formControlName="roles"></ss-multiselect-dropdown>
                         <!-- <select class="form-control" name="" multiple="multiple" data-placeholder="Select Brands" style="width: 100% !important;">
@@ -28,11 +28,11 @@
                           </select> -->
         
                   </div> 
-                  <div class="man col-md-6" *ngIf="!_id" >
+                  <div class="man col-md-4" *ngIf="!_id" >
                         <h4 class="text-left">Password<a style="color:#f00 !important;">*</a></h4>
                         <input class="text-col-md-3" type="password" formControlName="password" placeholder="Enter Password">
                   </div>
-                  <div class="man col-md-6" *ngIf="!_id">
+                  <div class="man col-md-4" *ngIf="!_id">
                         <h4 class="text-left">Confirm Password<a style="color:#f00 !important;">*</a></h4>
                         <input class="text-col-md-3" type="password" formControlName="confirmPassword" placeholder="Confirm Password">
                         <!-- <div class="alert alert-danger" *ngIf="userForm.controls.confirmPassword.errors?.MutchPassword">Password not match</div> -->
