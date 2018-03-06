@@ -2,20 +2,22 @@
   <div class="row">
     <form class="manage-component-form">
       <div class="col-md-12">
-          <div class="row1">
+          <div class="row">
             <div class="manage-box clearfix">
               <div class="col-md-12">
                 <label><h2>Structures</h2></label>
               </div>
               <div class="col-md-12">
                 <div class="row">
-                  <div class="man col-md-12">
+                  <div class="man col-md-6">
                     <h4 class="text-left">Point</h4>
-                    <div class="col-md-2"><input class="text-col-md-3" type="number" [(ngModel)]="mForm.altname.point" [ngModelOptions]="{standalone: true}"></div>
-                    <div class="col-md-2"><h4 class="text-left" style="text-align: center;">to</h4></div>
-                    <div class="col-md-8"><input class="text-col-md-3" type="text" [(ngModel)]="mForm.altname.name" [ngModelOptions]="{standalone: true}"></div>
+                    <div class="row">
+                        <div class="col-md-2"><input class="text-col-md-3" type="number" [(ngModel)]="mForm.altname.point" [ngModelOptions]="{standalone: true}"></div>
+                        <div class="col-md-1"><h4 class="text-left" style="text-align: center;">to</h4></div>
+                        <div class="col-md-9"><input class="text-col-md-3" type="text" [(ngModel)]="mForm.altname.name" [ngModelOptions]="{standalone: true}"></div>
+                    </div>
                   </div>
-                  <div class="man col-md-12">
+                  <div class="man col-md-6">
                     <h4 class="text-left">Level Name</h4>
                     <input class="text-col-md-3" type="text" [(ngModel)]="mForm.level" [ngModelOptions]="{standalone: true}">
                   </div>

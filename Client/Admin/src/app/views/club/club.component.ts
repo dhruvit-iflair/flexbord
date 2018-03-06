@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Http } from "@angular/http";
 import { Router } from "@angular/router";
 import { environment } from "../../../environments/environment";
@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs/Subject';
 import { AccessorService } from "../../components/common/accessor.service";
+import { Subscription } from 'rxjs/Subscription';
+import { ClubService } from '../../components/services/club.service';
 
 @Component({
   selector: 'app-club',
@@ -17,12 +19,14 @@ export class ClubComponent implements OnInit {
   public rows: Array<any> = [];
   public data: Array<any> = [];
   public length: number = 0;
+  public subscription: Subscription;
   public dtOptions;
   public dataRenderer = false;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public modules = this.accr.getmodules();
+  public picEnv = environment.picpoint + 'clublogos/' ;
   public hasTeamsPerm;hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;
-  constructor(public http: Http, private router: Router, private toastr: ToastrService, private accr: AccessorService) { }
+  constructor(public http: Http, public clubService: ClubService, private router: Router, private toastr: ToastrService, private accr: AccessorService) { }
   ngAfterContentInit() {
     this.dtOptions = {
       pagingType: 'simple_numbers',
@@ -31,21 +35,14 @@ export class ClubComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.http.get(environment.api + "/club")
-      .subscribe((res) => {
-        this.rows = res.json();
-        if (this.rows) {
-          this.rows.forEach(item => {
-            var src = environment.picpoint + 'clublogos/' + item.logo;
-            item['logo'] = src;
-            // item['button'] = '<a class="btn btn_green tab_btn" style="background-color: #089468;color: #fff;"  [routerLink]="["/organizer/manage/'+item+']");" ><i class="fa fa-pencil" aria-hidden="true"></i></a><a [routerLink]="["/organizer/manage/'+item+']");" class="btn btn_red tab_btn"  style="background-color: #f55f5f;color: #fff;  margin-left:10px" (click)="delete('+item+');" ><i class="fa fa-trash" aria-hidden="true"></i></a>';
-            item['button'] = item._id;
-          });
-          this.length = this.rows.length;
-          this.dataRenderer = true;
-        }
+    this.subscription = this.clubService.getClubList().subscribe((res) => {
+        this.rows = res;
+        this.length = this.rows.length;
       });
     this.checkpermissions();
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
   checkpermissions() {
     var perms = this.accr.getUserPermissions();

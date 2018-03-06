@@ -41,6 +41,7 @@ import { BreadCrumbService } from "./components/services/bread-crumb";
 import { EmailService } from "./components/services/email.service";
 import { EmailTypeService } from './components/services/email-type.service';
 import { OrganizerService } from "./components/services/organizer.service";
+import { ClubService } from "./components/services/club.service";
 import {Ng5BreadcrumbModule,BreadcrumbService} from 'ng5-breadcrumb';
 
 
@@ -58,7 +59,7 @@ import { TeamComponent } from './views/club/club-teams/team/team.component';
 import { ManageClubComponent } from './views/club/manage-club/manage-club.component';
 // import { ConfirmService } from "./components/services/confirm.services";
 import { placeDirectiveWithModel } from "./components/directive/placeLookupWithModel";
-import { ClubService } from "./components/services/club.services";
+// import { ClubService } from "./components/services/club.services";
 import { ClubMembersComponent } from './views/club/club-members/club-members.component';
 import { ManageClubMembersComponent } from './views/club/club-members/manage-club-members/manage-club-members.component';
 import { AccessorComponent } from './views/accessor/accessor.component';

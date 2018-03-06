@@ -23,7 +23,8 @@
     </div>
     <div class="col-md-4">
         <label>User Type<a style="color:#f00 !important;">*</a></label>
-        <input type="radio" value="organizeradmin" name="utype" required #utype="ngModel" id="utype" [(ngModel)]="mForm.userType" [ngModelOptions]="{standalone: true}" checked="true" selected="true"> Organizer Admin
+        <input type="radio" value="organizeradmin" name="utype" required #utype="ngModel" id="utype" [(ngModel)]="mForm.userType" [ngModelOptions]="{standalone: true}"> 
+        <label for="utype">Organizer Admin</label>
         <div *ngIf="utype.errors && (utype.dirty || utype.touched)" class="alert alert-danger">
             <span *ngIf="utype.errors.required">Usertype is required</span>
         </div>
