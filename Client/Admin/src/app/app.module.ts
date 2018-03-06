@@ -39,6 +39,7 @@ import { BreadCrumbService } from "./components/services/bread-crumb";
 import { EmailService } from "./components/services/email.service";
 import { EmailTypeService } from './components/services/email-type.service';
 import { OrganizerService } from "./components/services/organizer.service";
+import { ClubService } from "./components/services/club.service";
 import {Ng5BreadcrumbModule,BreadcrumbService} from 'ng5-breadcrumb';
 import { BackLocationDirective } from "./components/directive/backButton";
 import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
@@ -52,7 +53,7 @@ import { TeamComponent } from './views/club/club-teams/team/team.component';
 import { ManageClubComponent } from './views/club/manage-club/manage-club.component';
 // import { ConfirmService } from "./components/services/confirm.services";
 import { placeDirectiveWithModel } from "./components/directive/placeLookupWithModel";
-import { ClubService } from "./components/services/club.services";
+// import { ClubService } from "./components/services/club.services";
 import { ClubMembersComponent } from './views/club/club-members/club-members.component';
 import { ManageClubMembersComponent } from './views/club/club-members/manage-club-members/manage-club-members.component';
 import { AccessorComponent } from './views/accessor/accessor.component';
@@ -201,7 +202,7 @@ import { ImportClubMembersComponent } from './views/club/club-members/import-clu
     RouterModule.forRoot(ROUTES),
     Ng5BreadcrumbModule.forRoot(),
   ],
-  providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService,EmailService,EmailTypeService,OrganizerService],
+  providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService,EmailService,EmailTypeService,OrganizerService, ClubService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
