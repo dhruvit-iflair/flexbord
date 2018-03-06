@@ -50,7 +50,7 @@ export class ClubClassificationsComponent implements OnInit {
     }
   }
   delClas(id) {
-    var del = confirm("Confirm to delete this Season!");
+    var del = confirm("Confirm to delete this Classifications!");
     if (del) {
       this.http.delete(environment.api + "/clubClassifications/" + id)
         .subscribe((res) => {

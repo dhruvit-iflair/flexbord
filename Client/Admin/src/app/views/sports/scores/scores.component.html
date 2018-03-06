@@ -4,7 +4,7 @@
           <label><h2>Ranking Scores</h2></label>
       </div>
       <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
-          <button class="btn btn_green" [routerLink]="['/sports/scores/manage']">New Score</button>                         
+          <button class="btn btn_green" [routerLink]="['/sports/scores/manage']"><i class="fa fa-plus"></i> Add New Score</button>                         
       </div>
       <div class="col-md-12" id="tabl">
         <table datatable  [dtOptions]="dtOptions" class="row-border hover" onchange="gotcha()" *ngIf="dataRenderer">

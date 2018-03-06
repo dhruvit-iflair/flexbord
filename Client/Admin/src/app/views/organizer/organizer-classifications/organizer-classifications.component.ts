@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
+import { Subscription } from 'rxjs/Subscription';
+import { OrganizerService } from '../../../components/services/organizer.service';
 
 @Component({
   selector: 'app-organizer-classifications',
@@ -16,8 +18,13 @@ export class OrganizerClassificationsComponent implements OnInit {
   public rows: Array<any>;
   public dataRenderer = false; orgid;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
-
-  constructor(private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute, private accr: AccessorService) { }
+  public subscribe : Subscription;
+  constructor(private http: Http,
+              private toastr: ToastrService,
+              private router: Router,
+              public activeRouter: ActivatedRoute,
+              private accr: AccessorService,
+              public orgService : OrganizerService) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -25,14 +32,9 @@ export class OrganizerClassificationsComponent implements OnInit {
       order: [[0, 'desc']],
       columns: [{ "visible": false }, null, null, { "orderable": false }]
     };
-    this.orgid = localStorage.getItem('orgid');
-    this.http.get(environment.api + '/organizerClassifications/byorg/' + this.orgid)
-      .subscribe((res) => {
-        this.rows = res.json();
-        this.dataRenderer = true;
-      }, (error) => {
-        this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-      });
+    this.subscribe = this.orgService.getClassificationList().subscribe(res=>{
+      this.rows = res;
+    })
     this.checkpermissions();
   }
   checkpermissions() {
@@ -49,21 +51,13 @@ export class OrganizerClassificationsComponent implements OnInit {
       }
     }
   }
+  edit(id){
+    this.orgService.setClassificationData(id);
+  }
   delClas(id) {
     var del = confirm("Confirm to delete this Classification!");
     if (del) {
-      this.http.delete(environment.api + "/organizerClassifications/" + id)
-        .subscribe((res) => {
-          var d = res.json();
-          if (d._id) {
-            this.dataRenderer = false;
-            this.toastr.success('Classifications Deleted Successfully', 'Success');
-            // this.router.navigate(['/organizer']);
-            this.ngOnInit();
-          }
-        }, (error) => {
-          this.toastr.error('Something went wrong !! Please try again later', 'Error');
-        })
+      this.orgService.deleteClassificationData(id);
     }
   }
 

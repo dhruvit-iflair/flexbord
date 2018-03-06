@@ -4,7 +4,7 @@
           <label><h2 style="margin-top: 0;">Club Members</h2></label>
       </div>
       <div class="col-md-4 text-right" *ngIf="hasCreatePerm">
-          <button class="btn btn_green" [routerLink]="['/club/members/manage']" style="margin-top: 0;margin-bottom: 15px;">New Member</button>                         
+          <button class="btn btn_green" [routerLink]="['/club/members/manage']" style="margin-top: 0;margin-bottom: 15px;"><i class="fa fa-plus"></i> Add New Member</button>                         
           <button class="btn btn_black" [routerLink]="['/club/members/import']" style="margin-bottom: 15px;">Import Members</button>                         
       </div>
       <div class="col-md-12" id="tabl">

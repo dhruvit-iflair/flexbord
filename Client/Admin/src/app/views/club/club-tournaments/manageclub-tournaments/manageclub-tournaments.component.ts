@@ -60,11 +60,11 @@ export class ManageclubTournamentsComponent implements OnInit {
     if (this.comForm.valid) {
           if (this._id) {
               this.http.put(environment.api + "/clubTournaments/"+this._id,this.comForm.value).subscribe((res) => {
-                    if(res) this.router.navigate(['/club/tournaments']); this.toastr.success('Successfully updated tournamnet','Success');
+                    if(res) this.router.navigate(['/club/tournaments']); this.toastr.success('Successfully updated tournament','Success');
               }) 
           } else {
               this.http.post(environment.api + "/clubTournaments",this.comForm.value).subscribe((res) => {
-                    if(res) this.router.navigate(['/club/tournaments']); this.toastr.success('Successfully saved tournamnet','Success');
+                    if(res) this.router.navigate(['/club/tournaments']); this.toastr.success('Successfully saved tournament','Success');
               }) 
           }
     } else {
