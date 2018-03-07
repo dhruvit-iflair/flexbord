@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Http } from "@angular/http";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { environment } from "../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs/Subject';
 import { AccessorService } from "../../../components/common/accessor.service";
+import { GamesettingsService } from "../gamesettings.service";
+import { ManagescoreboardComponent } from "./managescoreboard/managescoreboard.component";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-scoreboards',
@@ -17,29 +20,36 @@ export class ScoreboardsComponent implements OnInit {
   public rows: Array<any> = [];
   public data: Array<any> = [];
   public length: number = 0;
-  public dtOptions;settingid;
+  public dtOptions; settingid;
   public dataRenderer = false;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public modules = this.accr.getmodules();
+  public subscription:Subscription;
 
-  constructor(public http: Http, private router: Router, private toastr: ToastrService, private accr: AccessorService) { }
+  constructor(public http: Http, private router: Router, private toastr: ToastrService, private accr: AccessorService, private activatedRoute: ActivatedRoute, private settingservice: GamesettingsService, public compodata: ManagescoreboardComponent) { }
 
   ngAfterContentInit() {
     this.dtOptions = {
       pagingType: 'simple_numbers',
       order: [[0, 'desc']],
-      columns: [{ "visible": false }, null, null,null, { "orderable": false }]
+      columns: [{ "visible": false }, null, null, null, { "orderable": false }]
     }
   }
   ngOnInit(): void {
-    this.settingid = localStorage.getItem('setting');
-    this.http.get(environment.api + "/scoreboards/bysetting/" + this.settingid)
-      .subscribe((res) => {
-        this.rows = res.json();
+    //this.settingid = localStorage.getItem('setting');
+    // this.http.get(environment.api + "/scoreboards/bysetting/" + this.settingid)
+    this.activatedRoute.params.subscribe(params => {
+      this.settingid = params._id;
+       this.settingservice.getAllScoreBordsByGameSetting(this.settingid);
+      this.subscription=this.settingservice.getScoreBordList()
+        .subscribe((res) => {
+          this.rows = res.json();
           this.length = this.rows.length;
           this.dataRenderer = true;
-      });
-    this.checkpermissions();
+          console.log(this.rows);
+        });
+      this.checkpermissions();
+    });
   }
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
@@ -55,22 +65,31 @@ export class ScoreboardsComponent implements OnInit {
       }
     }
   }
-
-  delClub(id){
-      var del = confirm("Confirm to delete this Setting?");
-      if (del) {
-        this.http.delete(environment.api + "/scoreboards/" + id)
-          .subscribe((res) => {
-            var d = res.json();
-            if (d._id) {
-              this.dataRenderer = false;
-              this.toastr.success('Setting Deleted Successfully', 'Success');
-              this.ngOnInit();
-            }
-          }, (error) => {
-            this.toastr.error('Something went wrong !! Please try again later', 'Error');
-          });
-      }
+  editboard(id){
+    // this.settingservice.editsboard(id).subscribe(res=>{
+    //   var x=res.json();
+    //   this.compodata.assigndata(x[0]);
+    // });
+    this.settingservice.getSingleScoreBord(id);
+  }
+  delClub(id) {
+    var del = confirm("Confirm to delete this Setting?");
+    if (del) {
+      this.http.delete(environment.api + "/scoreboards/" + id)
+        .subscribe((res) => {
+          var d = res.json();
+          if (d._id) {
+            this.dataRenderer = false;
+            this.toastr.success('Setting Deleted Successfully', 'Success');
+            this.ngOnInit();
+          }
+        }, (error) => {
+          this.toastr.error('Something went wrong !! Please try again later', 'Error');
+        });
     }
+  }
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
 
 }

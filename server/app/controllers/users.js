@@ -53,6 +53,9 @@ usersctrl.prototype.create = function (req, res) {
         isAgreemented: req.body.isAgreemented,
         isVerified: 'false'
     }
+    if (req.body.isVerified) {
+        bodydata.isVerified = true;
+    } 
     Users.register(new Users(bodydata), req.body.password, function (err, account) {
         if (err) {
             res.json(err.message);

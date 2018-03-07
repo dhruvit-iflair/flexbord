@@ -12,11 +12,11 @@
                 <div class="row">
                   <div class="man col-md-4">
                     <h4 class="text-left">Name</h4>
-                    <input class="text-col-md-3" style="padding-top:4px;" type="text" [(ngModel)]="mForm.playerconseq.name" [ngModelOptions]="{standalone: true}">
+                    <input class="text-col-md-3" id="name" style="padding-top:4px;" type="text" [(ngModel)]="mForm.playerconseq.name" [ngModelOptions]="{standalone: true}">
                   </div>
                   <div class="man col-md-4">
                     <h4 class="text-left">Color</h4>
-                    <select class="js-example-basic-single text-col-md-3" [(ngModel)]="mForm.playerconseq.color" [ngModelOptions]="{standalone: true}"
+                    <select id="color" class="js-example-basic-single text-col-md-3" [(ngModel)]="mForm.playerconseq.color" [ngModelOptions]="{standalone: true}"
                       required>
                         <option value="yellow">Yellow</option>    
                         <option value="red">Red</option>
@@ -28,7 +28,7 @@
                   </div>
                   <div class="man col-md-4">
                     <h4 class="text-left">Foul Type</h4>
-                    <select class="js-example-basic-single text-col-md-3" [(ngModel)]="mForm.playerconseq.type" [ngModelOptions]="{standalone: true}"
+                    <select id="pctype" class="js-example-basic-single text-col-md-3" [(ngModel)]="mForm.playerconseq.type" [ngModelOptions]="{standalone: true}"
                       required >
                       <option value="" disabled="true" [selected]="true">Choose Type</option>
                         <option *ngFor="let xy of settingsfouldata" [value]="xy._id">{{xy.nameoffoul}}</option>
@@ -36,7 +36,7 @@
                   </div>
                   <div class="man col-md-4">
                     <h4 class="text-left">Value</h4>
-                    <input class="text-col-md-3" type="number" [(ngModel)]="mForm.playerconseq.value" [ngModelOptions]="{standalone: true}">
+                    <input class="text-col-md-3" type="number" id="pcvalue" [(ngModel)]="mForm.playerconseq.value" [ngModelOptions]="{standalone: true}">
                   </div>
                 </div>
               </div>
@@ -51,16 +51,15 @@
                 <label><h2>Team Faults [BONUS]</h2></label>
               </div>
               <div class="col-md-12">
-                     <div class="row">
-                       <div class="man col-md-4">
-                            <div class="man col-md-6">
-                                <input class="text-col-md-3" name="typer" type="radio" value="period" [(ngModel)]="mForm.teamfaults.faulttype" [ngModelOptions]="{standalone: true}">
-                                <label>Period</label>
-                            </div>
-                            <div class="man col-md-6">
-                                <input class="text-col-md-3" name="typer" type="radio" value="game" [(ngModel)]="mForm.teamfaults.faulttype" [ngModelOptions]="{standalone: true}">
-                                <label>Game</label>
-                            </div>
+                <div class="row">
+                        <div class="col-md-6">
+                            <input class="text-col-md-3" id="faulttype" name="typer" type="radio" value="period" [(ngModel)]="mForm.teamfaults.faulttype" [ngModelOptions]="{standalone: true}">
+                            <label>Period</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="text-col-md-3" id="faulttype2" name="typer" type="radio" value="game" [(ngModel)]="mForm.teamfaults.faulttype" [ngModelOptions]="{standalone: true}">
+                            <label>Game</label>
+
                         </div>
                         <div class="man col-md-4">
                             <h4 class="text-left">Foul Type</h4>
@@ -75,6 +74,20 @@
                             <input class="text-col-md-3" type="number" [(ngModel)]="mForm.teamfaults.value" [ngModelOptions]="{standalone: true}">
                           </div>
                     </div>
+                <div class="row">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Foul Type</h4>
+                    <select class="js-example-basic-single text-col-md-3" [(ngModel)]="mForm.teamfaults.type" id="tftype" [ngModelOptions]="{standalone: true}"
+                      required>
+                      <option value="" disabled="true" [selected]="true">Choose Type</option>
+                        <option *ngFor="let xy of settingsfouldata" [value]="xy._id">{{xy.nameoffoul}}</option>                      
+                    </select>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="number" [(ngModel)]="mForm.teamfaults.value" id="tfvalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
               </div>
             </div>
           </div>
