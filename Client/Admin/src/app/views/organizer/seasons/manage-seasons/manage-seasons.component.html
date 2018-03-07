@@ -5,52 +5,29 @@
                   <div class="col-md-12">
                     <label><h2>Manage Seasons</h2></label>
                   </div>
-                    <div class="man col-md-12">
+                    <div class="man col-md-4">
                         <label>Name<a style="color:#f00 !important;">*</a></label>
                         <input class="form-control" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" type="text" placeholder="Season Name" formControlName="name">
                         <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('name').valid && seasonForm.get('name').touched">
                             Name is required.
                         </div>
                     </div>        
-                  <div class="man col-md-6">
+                  <div class="man col-md-4">
                     <label>Start Date<a style="color:#f00 !important;">*</a></label>
-                    <!-- <input type="date" class="form-control col-md-4"  placeholder="Start Date" formControlName="start_date" useValueAsDate> -->
-                    <div class="datePicker">
-                        <input type="text" class="col-md-4 form-control" style="width:70%" [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker [bsConfig]="bsConfig" placeholder="Start Date"  formControlName="start_date" >
+                        <input type="text" class="col-md-4 form-control" style="width:70%" [maxDate]="start_date" #dp="bsDatepicker" bsDatepicker [bsConfig]="bsConfig" placeholder="Start Date"  formControlName="start_date" >
                         <span class="input-group-addon" style="width: 0%;height: 34px;" (click)="dp.toggle()">
                             <span class="glyphicon glyphicon-calendar">
                             </span>
                         </span>
-                    </div>    
-                    <!-- <div>
-                        <timepicker class="col-md-4" style="padding: 0;" [(ngModel)]='startTime' [ngModelOptions]="{standalone: true}" (ngModelChange)="setTimeValue(startTime)"></timepicker>                                                        
-                    </div> -->
-                    <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('start_date').valid && seasonForm.get('start_date').touched">
-                        Start Date is required.
-                    </div>
                   </div>           
-                  <div class="man col-md-6">
+                  <div class="man col-md-4">
                     <label>End Date<a style="color:#f00 !important;">*</a></label>
-                    <!-- <input class="form-control col-md-4" type="date" placeholder="End Date" formControlName="end_date" useValueAsDate> -->
-                    <div class="datePicker">
-                        <input type="text" class="col-md-4 form-control" style="width:70%" [minDate]="endMinDate" [maxDate]="maxDate" #dp2="bsDatepicker" [bsConfig]="bsConfig" placeholder="End Date" formControlName="end_date" bsDatepicker>
+                        <input type="text" class="col-md-4 form-control" style="width:70%" [minDate]="endMinDate" #dp2="bsDatepicker" [bsConfig]="bsConfig" placeholder="End Date" formControlName="end_date" bsDatepicker>
                         <span class="input-group-addon" style="width: 0%;height: 34px;"  (click)="dp2.toggle()" >
                             <span class="glyphicon glyphicon-calendar">
                             </span>
                         </span>
-                    </div>    
-                    <!-- <div>
-                        <timepicker class="col-md-4" style="padding: 0;"  [(ngModel)]='endTime' [ngModelOptions]="{standalone: true}" (ngModelChange)='endTimeValue(endTime)'></timepicker>                                                        
-                    </div> -->
-                    <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('end_date').valid && seasonForm.get('end_date').touched">
-                        End Date is required.
-                    </div>
                   </div>
-                  <div class="alert alert-danger" role="alert" *ngIf="seasonForm.errors && seasonForm.get('start_date').touched && seasonForm.get('end_date').touched">
-                      {{ seasonForm.errors?.dates | json }}
-                  </div>
-          
-                <!--<label *ngIf="seasonForm.errors">{{ seasonForm.errors?.dates | json }}</label>-->
             </div>
         </form>   
 <br>

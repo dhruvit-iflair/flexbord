@@ -23,8 +23,6 @@ export class ManageSeasonsComponent implements OnInit {
   public seasonForm : FormGroup;
   public start_date = new Date();
   public minDate : any;
-  public maxDate = new Date();
-  public maxDate2 = new Date();
   public startTime :Date =  new Date();
   public endTime : Date =  new Date();
   public endMinDate = new Date();
@@ -47,22 +45,27 @@ export class ManageSeasonsComponent implements OnInit {
       showWeekNumbers:false
     };
     this.endMinDate.setDate(this.start_date.getDate() + 1);
-    this.maxDate.setDate(this.maxDate.getDate() + 365);
-    this.maxDate2.setDate(this.maxDate2.getDate() + 365);
     this.seasonForm = this.fb.group({
       'name' : ["",[Validators.required]],
       'start_date' : [this.start_date,[Validators.required]],
-      'end_date' : [null,[Validators.required]],
+      'end_date' : [this.endMinDate,[Validators.required]],
       "organizer":[""]
-    },{validator:this.dateLessThan('start_date', 'end_date')});
+    });
+    // ,{validator:this.dateLessThan('start_date', 'end_date')}
     this.seasonForm.get('start_date').valueChanges.subscribe(d=>{
-      this.dateMin(d);
+      var t = new Date(d)
+      this.endMinDate.setDate(t.getDate() + 1);
+      this.endMinDate.setMonth(t.getMonth());
+      this.endMinDate.setFullYear(t.getFullYear());
+    })
+    this.seasonForm.get('end_date').valueChanges.subscribe(d=>{
+      var t = new Date(d)
+      this.start_date.setDate(t.getDate()-1);
+      this.start_date.setMonth(t.getMonth());
+      this.start_date.setFullYear(t.getFullYear());
     })
   }
-  dateMin(e){
-    var t = new Date(e);
-    this.endMinDate.setDate(t.getDate()+1);
-  }
+
   dateLessThan(start_date: string, end_date : string) {
     return (group: FormGroup): {[key: string]: any} => {
      let f = group.controls[start_date];
@@ -95,12 +98,14 @@ export class ManageSeasonsComponent implements OnInit {
   }
   resetForm(){
     this.seasonForm.reset();
-    this.seasonForm.patchValue({start_date:this.start_date});
+    var t = new Date();
+    this.seasonForm.patchValue({start_date:t});
+    this.seasonForm.patchValue({end_date:t.getDate()+1});
   }
   ngOnInit() {
     this.subscription = this.orgService.getSingleSeason().subscribe(res=>{ 
-      this.seasonForm.patchValue({start_date:new Date(res.start_date)});
-      this.seasonForm.patchValue({end_date:new Date(res.end_date)});
+      this.seasonForm.patchValue({start_date:res.start_date});
+      this.seasonForm.patchValue({end_date:res.end_date});
       this.seasonForm.patchValue({name:res.name});
       this._id = res._id;
     });

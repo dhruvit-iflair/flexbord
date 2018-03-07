@@ -35,16 +35,24 @@ export class ManageClubSeasonsComponent implements OnInit {
       dateInputFormat :'DD/MM/YY',
       showWeekNumbers:false
     };
-    this.maxDate.setDate(this.maxDate.getDate() + 365);
-    this.maxDate2.setDate(this.maxDate2.getDate() + 365);
+    this.endMinDate.setDate(this.start_date.getDate() + 1);
     this.seasonForm = this.fb.group({
       'name' : ["",[Validators.required]],
       'start_date' : [this.start_date,[Validators.required]],
-      'end_date' : [null,[Validators.required]],
+      'end_date' : [this.endMinDate,[Validators.required]],
       "club":[""]
-    },{validator:this.dateLessThan('start_date', 'end_date')});
+    });
     this.seasonForm.get('start_date').valueChanges.subscribe(d=>{
-      this.dateMin(d);
+      var t = new Date(d)
+      this.endMinDate.setDate(t.getDate() + 1);
+      this.endMinDate.setMonth(t.getMonth());
+      this.endMinDate.setFullYear(t.getFullYear());
+    })
+    this.seasonForm.get('end_date').valueChanges.subscribe(d=>{
+      var t = new Date(d)
+      this.start_date.setDate(t.getDate()-1);
+      this.start_date.setMonth(t.getMonth());
+      this.start_date.setFullYear(t.getFullYear());
     })
   }
   ngOnDestroy() {
@@ -89,19 +97,18 @@ export class ManageClubSeasonsComponent implements OnInit {
       var fagdf = res;
       this._id = fagdf[0]._id;
       if(fagdf.length > 0){
-          let ss = new Date(fagdf[0].start_date);
-          let es = new Date(fagdf[0].end_date);
-        this.seasonForm.patchValue({
-            'name' : fagdf[0].name,
-            'start_date' : ss,
-            'end_date' :es
-          });
+          this.seasonForm.patchValue({start_date:fagdf[0].start_date});
+          this.seasonForm.patchValue({end_date:fagdf[0].end_date});
+          this.seasonForm.patchValue({name:fagdf[0].name});
       }
     })
   }
   reset(){
     this.seasonForm.reset();
-    this._id = false;
-    this.seasonForm.patchValue({start_date:this.start_date});
+    var t = new Date();
+    var e = new Date().setDate(t.getDate()+1);
+    this.seasonForm.patchValue({start_date:t});
+    this.seasonForm.patchValue({end_date:e});
+    
   }
 }
