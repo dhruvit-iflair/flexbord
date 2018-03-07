@@ -19,12 +19,12 @@
                 <div class="man col-md-4">
                     <label>Type of Sport<a style="color:#f00 !important;">*</a></label>
                     <div>
-                        <input type="radio" value="opponent" name="typeofsport" required #typeofsport="ngModel" id="typeofsport" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}">
-                        <label for="typeofsport">Opponent</label>                         
+                        <input type="radio" value="opponent" name="typeofsport" required #typeofsport="ngModel" id="typeofsport1" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}" checked="checked">
+                        <label for="typeofsport1">Opponent</label>                         
                     </div>
                     <div>
-                        <input type="radio" value="races" name="typeofsport" required #typeofsport="ngModel" id="typeofsport" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}">
-                        <label for="typeofsport">Races</label>                         
+                        <input type="radio" value="races" name="typeofsport" required #typeofsport="ngModel" id="typeofsport2" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}">
+                        <label for="typeofsport2">Races</label>                         
                     </div>
                     <div *ngIf="typeofsport.errors && (typeofsport.dirty || typeofsport.touched)" class="alert alert-danger">
                         <span *ngIf="typeofsport.errors.required">Sport Type is required</span>
@@ -34,12 +34,12 @@
                 <div class="man col-md-4">
                     <label>Type of Game<a style="color:#f00 !important;">*</a></label>
                     <div>
-                        <input type="radio" value="points" name="typeofgame" required #typeofgame="ngModel" id="typeofgame" [(ngModel)]="mForm.typeofgame" [ngModelOptions]="{standalone: true}"> 
-                        <label for="typeofgame">Points</label>
+                        <input type="radio" value="points" name="typeofgame" required #typeofgame="ngModel" id="typeofgame1" [(ngModel)]="mForm.typeofgame" [ngModelOptions]="{standalone: true}" checked="checked"> 
+                        <label for="typeofgame1">Points</label>
                     </div>
                     <div>
-                        <input type="radio" value="time" name="typeofgame" required #typeofgame="ngModel" id="typeofgame" [(ngModel)]="mForm.typeofgame" [ngModelOptions]="{standalone: true}">
-                        <label for="typeofgame">Time</label>                         
+                        <input type="radio" value="time" name="typeofgame" required #typeofgame="ngModel" id="typeofgame2" [(ngModel)]="mForm.typeofgame" [ngModelOptions]="{standalone: true}">
+                        <label for="typeofgame2">Time</label>                         
                     </div>
                     <div *ngIf="typeofgame.errors && (typeofgame.dirty || typeofgame.touched)" class="alert alert-danger">
                         <span *ngIf="typeofgame.errors.required">Game Type is required</span>
@@ -48,9 +48,18 @@
             
                 <div class="man col-md-4">
                     <label>Type of Team<a style="color:#f00 !important;">*</a></label>
-                    <div><input type="radio" value="individual" name="typeofteam" required #typeofteam="ngModel" id="typeofteam" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> Individual</div>
-                    <div><input type="radio" value="double" name="typeofteam" required #typeofteam="ngModel" id="typeofteam" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> Double</div>
-                    <div><input type="radio" value="team" name="typeofteam" required #typeofteam="ngModel" id="typeofteam" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> Team</div>
+                    <div>
+                        <input type="radio" value="individual" name="typeofteam" required #typeofteam="ngModel" id="typeofteam1" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}" checked="checked">
+                        <label for="typeofteam1">Individual</label>                         
+                    </div>
+                    <div>
+                        <input type="radio" value="double" name="typeofteam" required #typeofteam="ngModel" id="typeofteam2" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> 
+                        <label for="typeofteam2">Double</label>                         
+                        </div>
+                    <div>
+                        <input type="radio" value="team" name="typeofteam" required #typeofteam="ngModel" id="typeofteam3" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> 
+                        <label for="typeofteam3">Team</label>                         
+                    </div>
                     <div *ngIf="typeofteam.errors && (typeofteam.dirty || typeofteam.touched)" class="alert alert-danger">
                         <span *ngIf="typeofteam.errors.required">Team Type is required</span>
                     </div>
@@ -70,10 +79,10 @@
                 </div>
             </div>
       </tab>
-      <tab heading="Points"><app-managepoints></app-managepoints><app-points></app-points></tab>
-      <tab heading="Fouls"><app-managefouls></app-managefouls><app-fouls></app-fouls></tab>
-      <tab heading="Player Status"><app-manageplayerstatus></app-manageplayerstatus><app-playerstatus></app-playerstatus></tab>
-      <tab heading="Ranking Scores"><app-managescore></app-managescore><app-scores></app-scores></tab>
+      <tab heading="Points" [disabled]="!userId"><app-managepoints></app-managepoints><app-points></app-points></tab>
+      <tab heading="Fouls" [disabled]="!userId"><app-managefouls></app-managefouls><app-fouls></app-fouls></tab>
+      <tab heading="Player Status" [disabled]="!userId"><app-manageplayerstatus></app-manageplayerstatus><app-playerstatus></app-playerstatus></tab>
+      <tab heading="Ranking Scores" [disabled]="!userId"><app-managescore></app-managescore><app-scores></app-scores></tab>
     </tabset>
 </div>
 
