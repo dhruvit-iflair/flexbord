@@ -6,6 +6,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { AccessorService } from "../../../components/common/accessor.service";
 import { Subscription } from 'rxjs/Subscription';
 import { OrganizerService } from '../../../components/services/organizer.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-orgmembers',
@@ -17,11 +18,13 @@ export class OrgmembersComponent implements OnInit {
   public dataRenderer = true;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public subscription: Subscription;
+  dtTrigger: Subject<any> = new Subject();
+
   constructor(public http: HttpClient, private router: Router, private aroute: ActivatedRoute, private toastr: ToastrService, private accr: AccessorService,public orgService:OrganizerService) { }
 
   ngOnInit() {
     this.orgid = localStorage.getItem('orgid');
-    this.subscription = this.orgService.getMembersList().subscribe(res =>{  this.members = res.json()});
+    this.subscription = this.orgService.getMembersList().subscribe(res =>{  this.members = res.json(); this.dtTrigger.next();});
     this.gotcha();
   }
   gotcha() {

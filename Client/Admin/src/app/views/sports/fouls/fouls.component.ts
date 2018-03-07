@@ -4,6 +4,8 @@ import { environment } from "../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { AccessorService } from "../../../components/common/accessor.service";
+import { SportsService } from '../../../components/services/sports.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-fouls',
@@ -14,13 +16,20 @@ export class FoulsComponent implements OnInit {
 
   foulsdata; dtOptions; sptid;
   public dataRenderer = false;
+  public subscription :Subscription;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
 
-  constructor(public http: HttpClient, private router: Router, private aroute: ActivatedRoute, private toastr: ToastrService, private accr: AccessorService) { }
+  constructor(public http: HttpClient, 
+              private router: Router, 
+              private aroute: ActivatedRoute, 
+              private toastr: ToastrService, 
+              private accr: AccessorService,
+              public sportService:SportsService) { }
 
   ngOnInit() {
     this.sptid = localStorage.getItem('sptid');
     this.gotcha();
+
   }
   gotcha() {
     this.dtOptions = {
@@ -28,10 +37,8 @@ export class FoulsComponent implements OnInit {
       order: [[0, 'desc']],
       columns: [{ "visible": false }, null, null, null,null,null, { "orderable": false }]
     }
-    this.http.get(environment.api + '/sportfouls/bysport/' + this.sptid)
-      .subscribe((res) => {
+    this.subscription = this.sportService.getFoulssList().subscribe((res) => {
         this.foulsdata = res;
-        this.dataRenderer = true;
       });
     this.checkpermissions();
   }
@@ -49,20 +56,13 @@ export class FoulsComponent implements OnInit {
       }
     }
   }
+  edit(id){
+    this.sportService.getSingleFoul(id);
+  }
   deletemember(id) {
     var del = confirm("Delete this Foul?");
     if (del) {
-      this.http.delete(environment.api + "/sportfouls/" + id)
-        .subscribe((res) => {
-          if (res) {
-            this.dataRenderer = false;
-            this.toastr.success('Foul Deleted Successfully', 'Success');
-          }
-          this.gotcha();
-        }, (error) => {
-          this.toastr.error('Something went wrong !! Please try again later', 'Error');
-        });
+      this.sportService.deleteFoul(id);
     }
   }
-
 }

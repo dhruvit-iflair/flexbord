@@ -5,6 +5,9 @@ import { Router ,ActivatedRoute} from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
+import { Subscription } from 'rxjs/Subscription';
+import { ClubService } from '../../../../components/services/club.service';
+import { SportsService } from '../../../../components/services/sports.service';
 
 @Component({
   selector: 'app-manageclub-tournaments',
@@ -17,61 +20,61 @@ export class ManageclubTournamentsComponent implements OnInit {
   public _id:any;
   public club:any;
   public sports : Array<any>;
+  public fullSports : Array<any>;
   public clubSeasons : Array<any> = [];
   public clubClassifications : Array <any> = [];
   public clubClassificationsValue : Array <any> ;
   public sub: any;
-  constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute){
-      
+  public subscription:Subscription;
+  public clubClassificationsValueDisplay :Boolean=false;
+  public resS :Boolean=false;
+  constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public clubService:ClubService,public sportService:SportsService){
       this.clubId = localStorage.getItem('clubid');
       this.comForm = this.fb.group({ name: ["",[Validators.required]],description: [""],sports: [null,[Validators.required]],clubSeasons: ["",[Validators.required]],clubClassifications: ["",[Validators.required]],clubClassificationsValue: ["",[Validators.required]],club:[this.clubId ,[Validators.required]]});
-      this.http.get(environment.api + "/club/"+this.clubId).subscribe((res) => {
-            this.club = res.json()[0];
-      })      
-      this.http.get(environment.api + "/clubSeasons/byclub/"+this.clubId).subscribe((res) => {
-              this.clubSeasons = res.json();
-      })   
-      this.http.get(environment.api + "/clubClassifications/byclub/"+this.clubId).subscribe((res) => {
-              if (res.json() != []) this.clubClassifications = res.json();
-      })   
-      this.http.get(environment.api + '/sports').subscribe((res)=>{
-              this.sports = res.json();
-      });
+      this.subscription = this.clubService.getSeasonList().subscribe((res) => { this.clubSeasons = res; })   
+
+      this.subscription = this.clubService.getClassificationsList().subscribe((res) => { if (res != []) this.clubClassifications = res;})   
+      this.resS = false;
+      
+      this.subscription = this.sportService.getSportsList().subscribe((res)=>{ this.sports = res; this.fullSports = res; });
   }
 
   ngOnInit() {    
-    this.sub = this.activeRouter.params.subscribe(params => {
-     if (params._id) {
-        this._id = params._id;
-        this.http.get(environment.api + '/clubTournaments/'+ params._id).subscribe((res)=>{
-              var fagdf = res.json();
-              if(fagdf.length > 0){
-                  this.comForm.patchValue(fagdf[0]);
-                  this.comForm.controls['clubSeasons'].setValue(fagdf[0].clubSeasons._id, {onlySelf: true});
-                  this.comForm.controls['clubClassifications'].setValue(fagdf[0].clubClassifications._id, {onlySelf: true});
-                  this.getClasValue(fagdf[0].clubClassifications._id);
-                  this.comForm.controls['clubClassificationsValue'].setValue(fagdf[0].clubClassificationsValue, {onlySelf: true});
-              }
-        });
-      }
-   });
+    this.subscription = this.clubService.getSingleTournamentsData().subscribe(res=>{
+        this.resS = false;
+        this.comForm.patchValue(res[0]);
+        this.comForm.controls['clubSeasons'].setValue(res[0].clubSeasons._id, {onlySelf: true});
+        this.comForm.controls['clubClassifications'].setValue(res[0].clubClassifications._id, {onlySelf: true});
+        this.getClasValue(res[0].clubClassifications._id);
+        this.comForm.controls['clubClassificationsValue'].setValue(res[0].clubClassificationsValue, {onlySelf: true});
+        this._id = res[0]._id;
+    })
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
   saveVal(){
     if (this.comForm.valid) {
           if (this._id) {
-              this.http.put(environment.api + "/clubTournaments/"+this._id,this.comForm.value).subscribe((res) => {
-                    if(res) this.router.navigate(['/club/tournaments']); this.toastr.success('Successfully updated tournament','Success');
-              }) 
+              this.clubService.updateTournaments(this._id,this.comForm.value);
+              this.reset();
           } else {
-              this.http.post(environment.api + "/clubTournaments",this.comForm.value).subscribe((res) => {
-                    if(res) this.router.navigate(['/club/tournaments']); this.toastr.success('Successfully saved tournament','Success');
-              }) 
+              this.clubService.saveTournaments(this.comForm.value);
+              this.reset();              
           }
     } else {
       this.toastr.error('Please fill up all values','Error');
     }
   }
   getClasValue(e:any){
+    this.clubClassificationsValueDisplay = true;
     this.clubClassificationsValue = this.clubClassifications.filter(ad => ad._id == e);
+  }
+  reset(){
+    this.comForm.reset();
+    this.clubClassificationsValueDisplay = false;
+    this.resS = true;
+    this.sports = [];
+    this.sports = this.fullSports;
   }
 }

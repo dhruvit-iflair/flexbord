@@ -22,6 +22,7 @@ export class MultiselectComponent implements ControlValueAccessor,AfterViewInit,
   @Input() isSearch:Boolean;
   @Input() selectedVal:any;
   @Input('value') _value :any;
+  @Input('resS') resS :any;
   
   public onChange: any = () => { };
   public onTouched: any = () => { };
@@ -56,12 +57,18 @@ export class MultiselectComponent implements ControlValueAccessor,AfterViewInit,
       this.onChange(value);
       if (this._value.length > 0) {
         for (let index = 0; index < this._value.length; index++) {
-          this.selectVal(this._value[index]);          
-          if (index == this._value.length -1) {
-            this.readyToEmit = true;
-          }
+          if (index) {
+            this.selectVal(this._value[index]);          
+            if (index == this._value.length -1) {
+              this.readyToEmit = true;
+            }  
+          }           
         }
       }      
+    }
+    else{
+      this.valueNeedToDisplay = []
+      this.valueNeedToSend = []
     }   
   }
 

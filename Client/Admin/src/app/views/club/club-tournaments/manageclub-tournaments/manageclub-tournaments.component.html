@@ -26,7 +26,7 @@
                     <option value="null" disabled="true" [selected]="true">Select your Sports</option>
                     <option *ngFor="let it of sports"  [value]="it.name">{{it.name}}</option>
                 </select> -->
-                <app-multiselect class="form-control"  [mArray]='sports' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="sports? sports.length > 0 : sports"></app-multiselect>
+                <app-multiselect class="form-control" [resS]="resS" [mArray]='sports' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="sports? sports.length > 0 : sports"></app-multiselect>
                 <div class="col-md-12" *ngIf="!sports? sports == [] : sports.length == 0">
                     <label style="float:left; padding-top: 7px;">Add New Sport</label>
                     <button class="btn btn_green" routerLink="/sports/manage" style="float:left;margin-left: 10px;">
@@ -69,7 +69,7 @@
                         Classifications is required.
                 </div>
             </div>     
-            <div class="man col-md-6" *ngIf="clubClassificationsValue " >
+            <div class="man col-md-6" *ngIf="clubClassificationsValueDisplay" >
                 <label>Classification Value<a style="color:#f00 !important;">*</a></label>
                 <select  class=" form-control" formControlName="clubClassificationsValue">
                     <option disabled="true" [selected]="!comForm.value.clubClassificationsValue" value="">Select your Classifications Value</option>                  
@@ -86,11 +86,11 @@
   </div>   
   <div class="col-md-12"> 
     <div class="row">
-      <div class="col-md-6 text-left">
+      <!-- <div class="col-md-6 text-left">
           <button class="btn" [routerLink]="['/club/tournaments']">Back</button>
-      </div>
+      </div> -->
       <div class="col-md-6 text-right">
-          <button (click)='saveVal()' [disabled]='!comForm.valid'  class="btn btn_green" >Save</button>        
+          <button (click)='saveVal()' [disabled]='!comForm.valid'  class="btn btn_green white" >Save</button>        
       </div> 
     </div> 
 </div>

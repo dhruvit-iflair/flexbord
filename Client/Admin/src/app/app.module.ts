@@ -34,12 +34,19 @@ import { DateValueAccessor } from "./components/directive/date-proper";
 import { dateFormatPipe } from "./components/pipes/dateFormate";
 import { OrgmembersComponent } from './views/organizer/orgmembers/orgmembers.component';
 import { MemberComponent } from './views/organizer/orgmembers/member/member.component';
+
+// Services
 import { AccessorService } from "./components/common/accessor.service";
 import { BreadCrumbService } from "./components/services/bread-crumb";
 import { EmailService } from "./components/services/email.service";
 import { EmailTypeService } from './components/services/email-type.service';
 import { OrganizerService } from "./components/services/organizer.service";
+import { ClubService } from "./components/services/club.service";
 import {Ng5BreadcrumbModule,BreadcrumbService} from 'ng5-breadcrumb';
+
+
+
+
 import { BackLocationDirective } from "./components/directive/backButton";
 import { OrganizerClassificationsComponent } from './views/organizer/organizer-classifications/organizer-classifications.component';
 import { ManageOrganizerClassificationsComponent } from './views/organizer/organizer-classifications/manage-organizer-classifications/manage-organizer-classifications.component';
@@ -52,7 +59,7 @@ import { TeamComponent } from './views/club/club-teams/team/team.component';
 import { ManageClubComponent } from './views/club/manage-club/manage-club.component';
 // import { ConfirmService } from "./components/services/confirm.services";
 import { placeDirectiveWithModel } from "./components/directive/placeLookupWithModel";
-import { ClubService } from "./components/services/club.services";
+// import { ClubService } from "./components/services/club.services";
 import { ClubMembersComponent } from './views/club/club-members/club-members.component';
 import { ManageClubMembersComponent } from './views/club/club-members/manage-club-members/manage-club-members.component';
 import { AccessorComponent } from './views/accessor/accessor.component';
@@ -100,6 +107,7 @@ import { CkEditorDirective } from './components/directive/ck-editor.directive';
 import { ImportOrgMembersComponent } from './views/organizer/orgmembers/import-org-members/import-org-members.component';
 import { ImportClubMembersComponent } from './views/club/club-members/import-club-members/import-club-members.component';
 import { GamesettingsService} from './views/gamesettings/gamesettings.service';
+import { SportsService } from './components/services/sports.service';
 
 @NgModule({
   declarations: [
@@ -202,8 +210,9 @@ import { GamesettingsService} from './views/gamesettings/gamesettings.service';
     RouterModule.forRoot(ROUTES),
     Ng5BreadcrumbModule.forRoot(),
   ],
-  providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService,EmailService,EmailTypeService,OrganizerService,
+  providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService,EmailService,EmailTypeService,OrganizerService,SportsService,
   GamesettingsService,ManageconsequenceComponent,ManagestructureComponent,ManageplaylistComponent,ManagescoreboardComponent],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

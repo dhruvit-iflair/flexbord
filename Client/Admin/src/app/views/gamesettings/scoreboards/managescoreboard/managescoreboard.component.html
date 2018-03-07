@@ -33,7 +33,7 @@
               <img src="assets/logo.png" id="teamplayerpenlty" height="35px" width="200px" />
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 minheight">
             <div class="manage-game-clock" *ngIf="mForm.gameclock.isEnable==true" style="line-height:0.8;">
               <div id="gameclocktitle" class="labeledcolor">{{mForm.gameclock.titlevalue}}</div>
               <span id="gameclockvalue">{{mForm.gameclock.value}}</span>
@@ -90,7 +90,7 @@
                 <h4 class="text-left">Style</h4>
                 <input id="dispstyle" class="text-col-md-3" type="text" [(ngModel)]="mForm.dispStyle" [ngModelOptions]="{standalone: true}">
               </div>
-              <div class="man col-md-12">
+              <div class="man col-md-12 autoheight">
                 <h4 class="text-left">Show On</h4>
                 <div>
                   <input id="dispshownontimeout" class="text-col-md-3" type="checkbox" [(ngModel)]="mForm.dispShownOn.timeouts" [ngModelOptions]="{standalone: true}">Timeouts
@@ -594,7 +594,7 @@
     </div>
   </form>
 
-  <div class="row">
+  <div class="row1">
     <div class="col-md-6">
       <button class="btn btn-white" [routerLink]="['/game_settings/scoreboards']">Back</button>
     </div>

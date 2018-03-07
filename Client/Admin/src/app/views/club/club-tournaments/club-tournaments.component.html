@@ -1,15 +1,15 @@
 <div class="row">
   <div class="container">
-      <div class="col-md-9">
+      <!-- <div class="col-md-9">
           <label><h2>Club Tournament</h2></label>
       </div>
       <div class="col-md-3 text-right">
           <button class="btn btn_green" [routerLink]="['/club/tournaments/manage']"><i class="fa fa-plus"></i> Add New Tournaments</button>                         
-      </div>
+      </div> -->
 
       <div class="col-md-12">
          <br>
-        <table id="cmpt" datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
+        <table id="cmpt" datatable [dtOptions]="dtOptions" class="row-border hover" >
             <thead>
               <tr>
                 <th>_ID</th>
@@ -28,7 +28,7 @@
                 <td><span *ngFor="let s of r.sports"> {{s.name}}</span></td>
                 <td>{{r.clubSeasons.name}}</td>
                 <td>
-                  <a class="btn btn_green tab_btn"  routerLink="/club/tournaments/manage/{{r._id}}" >
+                  <a class="btn btn_green tab_btn"  (click)="edit(r._id)" >
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                   </a>
                   <a class="btn btn_red tab_btn delete-btn" (click)="delTour(r._id)">

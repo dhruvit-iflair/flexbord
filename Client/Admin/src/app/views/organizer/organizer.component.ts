@@ -26,6 +26,7 @@ export class OrganizerComponent implements OnInit {
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;hasCompetitionsPerm;
   public subscription :Subscription;
+  public picEnv = environment.picpoint+"orglogos/";
   constructor(public http: Http, private router: Router, private toastr: ToastrService,private accr: AccessorService,public orgService:OrganizerService ) {  }
   ngAfterContentInit() {
     this.dtOptions = {
@@ -38,15 +39,7 @@ export class OrganizerComponent implements OnInit {
   this.orgService.getAllOrganizers();
   this.subscription = this.orgService.getSingleOrganizersList().subscribe((res) => {
         this.rows = res;
-        if (this.rows) {
-          this.rows.forEach(item => {
-            var src = environment.picpoint + 'orglogos/' + item.logo;
-            item['logo'] = src;
-            // item['button'] = '<a class="btn btn_green tab_btn" style="background-color: #089468;color: #fff;"  [routerLink]="["/organizer/manage/'+item+']");" ><i class="fa fa-pencil" aria-hidden="true"></i></a><a [routerLink]="["/organizer/manage/'+item+']");" class="btn btn_red tab_btn"  style="background-color: #f55f5f;color: #fff;  margin-left:10px" (click)="delete('+item+');" ><i class="fa fa-trash" aria-hidden="true"></i></a>';
-            item['button'] = item._id;
-          });
-          this.length = this.rows.length;
-        }
+        this.length = this.rows.length;
       });
     this.checkpermissions();
   }

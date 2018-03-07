@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation ,OnDestroy} from '@angular/core';
 import { fakedb } from "../../../../components/common/fakedb";
 import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
@@ -8,6 +8,8 @@ import { Router ,ActivatedRoute} from "@angular/router";
 import { FormGroup,FormControl,FormBuilder,Validators,AbstractControl } from "@angular/forms";
 import { forEach } from '@angular/router/src/utils/collection';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { ClubService } from '../../../../components/services/club.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-manage-club-members',
@@ -26,8 +28,14 @@ export class ManageClubMembersComponent implements OnInit {
   public fileSupport:Boolean = false;
   public fileSizeMin:Boolean = false;
   public fileSizeMax:Boolean = false;
+  public subscription :Subscription;
 
-  constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute) {
+  constructor(public fb: FormBuilder,
+              private http : Http,
+              private toastr : ToastrService,
+              private router: Router,
+              public activeRouter:ActivatedRoute,
+              public clubService:ClubService) {
     this.bsConfig = {
       containerClass: 'theme-orange',
       dateInputFormat :'DD/MM/YY',
@@ -68,23 +76,17 @@ export class ManageClubMembersComponent implements OnInit {
     }
   }
   ngOnInit() {
-    // this.items = fakedb.org;
-    this.sub = this.activeRouter.params.subscribe(params => {
-      // //console.log(params._id);
-      if (params._id) {
-        this._id = params._id;
-        this.http.get(environment.api + '/clubmembers/'+ params._id)
-                 .subscribe((res)=>{
-                   var fagdf = res.json();
-                   this.clubMemForm.patchValue(fagdf[0]);
-                   this.memberSince =  fagdf[0].memberSince;
-                   var src = environment.picpoint + 'clubMembersPhoto/' + fagdf[0].photo;
-                   this.photo = src;
-                 },(error)=>{
-                  this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-                });
-      }
-   });
+    this.subscription = this.clubService.getSingleMemberData().subscribe((res)=>{
+        var fagdf = res;
+        this.clubMemForm.patchValue(fagdf[0]);
+        this.memberSince =  fagdf[0].memberSince;
+        var src = environment.picpoint + 'clubMembersPhoto/' + fagdf[0].photo;
+        this.photo = src;
+        this._id = fagdf[0]._id;
+    });
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
   readUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
@@ -126,32 +128,19 @@ export class ManageClubMembersComponent implements OnInit {
       }
     }
   }
-
-    addClubMem(){      
-        if (this._id) {
-          this.http.put(environment.api +"/clubmembers/"+this._id,this.clubMemForm.value)
-                  .subscribe((res)=>{
-                    var d = res.json();
-                    if (d._id) {
-                      this.toastr.success('Club Member Updated Successfully', 'Success');
-                      this.router.navigate(['/club/members']);
-                    }
-                  },(error)=>{
-                    this.toastr.error('Something went wrong !! Please try again later', 'Error');
-                  })
-        } 
-        else {
-          this.http.post(environment.api +"/clubmembers",this.clubMemForm.value)
-                  .subscribe((res)=>{
-                    var d = res.json();
-                    if (d._id) {
-                      this.toastr.success('Club Member Registered Successfully', 'Success');
-                      this.router.navigate(['/club/members']);
-                    }
-                  },(error)=>{
-                    this.toastr.error('Something went wrong !! Please try again later', 'Error');
-                  })
-        }
+  reset(){
+    this._id = false;
+    this.clubMemForm.reset();
+  }
+  addClubMem(){      
+      if (this._id) {
+        this.clubService.updateMember(this._id,this.clubMemForm.value);
+        this.reset();
+      } 
+      else {
+        this.clubService.saveMember(this.clubMemForm.value);
+        this.reset();        
+      }
   }
   setAdd(e){
     this.clubMemForm.patchValue({address:e.formatted_address});

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { environment } from "../../../../environments/environment";
 import { AccessorService } from "../../../components/common/accessor.service";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -36,6 +36,9 @@ export class OrganizerClassificationsComponent implements OnInit {
       this.rows = res;
     })
     this.checkpermissions();
+  }
+  ngOnDestroy() {
+    this.subscribe.unsubscribe();
   }
   checkpermissions() {
     var perms = this.accr.getUserPermissions();

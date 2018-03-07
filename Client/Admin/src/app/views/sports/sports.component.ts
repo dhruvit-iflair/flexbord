@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,OnDestroy} from '@angular/core';
 import { Http } from "@angular/http";
 import { Router } from "@angular/router";
 import { environment } from "../../../environments/environment";
@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs/Subject';
 import { AccessorService } from "../../components/common/accessor.service";
+import { Subscription } from 'rxjs/Subscription';
+import { SportsService } from '../../components/services/sports.service';
 
 @Component({
   selector: 'app-sports',
@@ -21,8 +23,13 @@ export class SportsComponent implements OnInit {
   public dataRenderer = false;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public modules = this.accr.getmodules();
+  public subscripton:Subscription
   public hasTeamsPerm;hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;hasPointsPerm;hasStatusPerm;hasScoresPerm;hasFoulsPerm;
-  constructor(public http: Http, private router: Router, private toastr: ToastrService, private accr: AccessorService) { }
+  constructor(public http: Http,
+              private router: Router,
+              private toastr: ToastrService,
+              private accr: AccessorService,
+              public sportService:SportsService) { }
   ngAfterContentInit() {
     this.dtOptions = {
       pagingType: 'simple_numbers',
@@ -31,14 +38,17 @@ export class SportsComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.http.get(environment.api + "/sports")
-      .subscribe((res) => {
-        this.rows = res.json();
-          this.length = this.rows.length;
-          this.dataRenderer = true;
+    this.sportService.getAllSports();
+    this.subscripton = this.sportService.getSportsList().subscribe((res) => {
+        this.rows = res;
+        this.length = this.rows.length;
       });
     this.checkpermissions();
   }
+  edit(id){
+    this.sportService.setSportsID(id);
+    this.router.navigate(['/sports/manage/'+id]);
+  };
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
@@ -86,17 +96,7 @@ export class SportsComponent implements OnInit {
   delClub(id){
       var del = confirm("Confirm to delete this Sport?");
       if (del) {
-        this.http.delete(environment.api + "/sports/" + id)
-          .subscribe((res) => {
-            var d = res.json();
-            if (d._id) {
-              this.dataRenderer = false;
-              this.toastr.success('Sport Deleted Successfully', 'Success');
-              this.ngOnInit();
-            }
-          }, (error) => {
-            this.toastr.error('Something went wrong !! Please try again later', 'Error');
-          });
+        this.sportService.deleteSport(id);
       }
     }
 }

@@ -2,22 +2,22 @@
   <div class="row">
     <form class="manage-component-form">
       <div class="col-md-12">
-        <div class="row1">
+        <div class="row">
           <div class="manage-box clearfix">
             <div class="col-md-12">
               <label><h2>Playlists</h2></label>
             </div>
             <div class="col-md-12">
               <div class="row">
-                <div class="man col-md-12">
+                <div class="man col-md-4">
                   <h4 class="text-left">Playlist Name</h4>
                   <input class="text-col-md-3" type="text" id="asname" [(ngModel)]="psForm.name" [ngModelOptions]="{standalone: true}">
                 </div>
-                <div class="man col-md-12">
+                <div class="man col-md-4">
                   <h4 class="text-left">Item Name</h4>
                   <input class="text-col-md-3" type="text" id="iname" [(ngModel)]="psForm.itemName" [ngModelOptions]="{standalone: true}">
                 </div>
-                <div class="man col-md-12">
+                <div class="man col-md-4">
                   <h4 class="text-left">Item Type</h4>
                   <select class="js-example-basic-single text-col-md-3" id="itype" [(ngModel)]="psForm.itemType" [ngModelOptions]="{standalone: true}">
                      <option value="" disabled="true" [selected]="true">Media Type</option>    
