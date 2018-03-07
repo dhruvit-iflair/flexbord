@@ -61,6 +61,8 @@ module.exports = function (db) {
     require('../app/routes/scoreboards')(app);
     require('../app/routes/email')(app);
     require('../app/routes/emailType')(app);
+    require('../app/routes/player')(app);
+    require('../app/routes/staff')(app);
 
     return server;
 };

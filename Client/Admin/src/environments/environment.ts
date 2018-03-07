@@ -7,4 +7,5 @@ export const environment = {
   production: false,
   api: 'http://192.168.1.37:5002/api',
   picpoint:'http://192.168.1.37:5002/uploads/'
+
 };

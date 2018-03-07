@@ -17,6 +17,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class TeamComponent implements OnInit {
 
+  public _id: any = '';
   public sportsdata: Array<any>;
   public url: any;
   public logo: any;
