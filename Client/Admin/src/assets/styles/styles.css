@@ -1050,7 +1050,7 @@ body span.caret {
 
 [type="radio"]:checked,
 [type="radio"]:not(:checked) {
-    position: absolute;
+    /*position: absolute;*/
     left: -9999px;
 }
 [type="radio"]:checked + label,

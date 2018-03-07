@@ -11,13 +11,13 @@
                 <div class="row">
                   <div class="man col-md-12">
                     <h4 class="text-left">Point</h4>
-                    <div class="col-md-2"><input class="text-col-md-3" type="number" [(ngModel)]="mForm.altname.point" [ngModelOptions]="{standalone: true}"></div>
+                    <div class="col-md-2"><input class="text-col-md-3" id="point" type="number" [(ngModel)]="sForm.altname.point" [ngModelOptions]="{standalone: true}"></div>
                     <div class="col-md-2"><h4 class="text-left" style="text-align: center;">to</h4></div>
-                    <div class="col-md-8"><input class="text-col-md-3" type="text" [(ngModel)]="mForm.altname.name" [ngModelOptions]="{standalone: true}"></div>
+                    <div class="col-md-8"><input class="text-col-md-3" id="aname" type="text" [(ngModel)]="sForm.altname.name" [ngModelOptions]="{standalone: true}"></div>
                   </div>
                   <div class="man col-md-12">
                     <h4 class="text-left">Level Name</h4>
-                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.level" [ngModelOptions]="{standalone: true}">
+                    <input class="text-col-md-3" id="level" type="text" [(ngModel)]="sForm.level" [ngModelOptions]="{standalone: true}">
                   </div>
                 </div>
               </div>
@@ -32,7 +32,7 @@
         <button class="btn btn-white" [routerLink]="['/game_settings/structures']">Back</button>
       </div>
       <div class="col-md-6 text-right">
-        <button class="btn btn_green" [disabled]="!mForm.level || !mForm.altname.point || !mForm.altname.name" (click)='managesetting(mForm)'>Save</button>
+        <button class="btn btn_green" [disabled]="!sForm.level || !sForm.altname.point || !sForm.altname.name" (click)='managesetting(sForm)'>Save</button>
       </div>
     </div>
 

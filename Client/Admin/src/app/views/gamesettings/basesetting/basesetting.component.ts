@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from "../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { Router, Params, ActivatedRoute } from "@angular/router";
+import { GamesettingsService } from "../gamesettings.service";
 
 @Component({
   selector: 'app-basesetting',
@@ -11,13 +12,14 @@ import { Router, Params, ActivatedRoute } from "@angular/router";
 })
 export class BasesettingComponent implements OnInit {
 
-  constructor(public http: HttpClient, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(public http: HttpClient, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute,public settingservice:GamesettingsService) { }
   public mForm = { sports: '', settings: '', settingname: '' };
   public sportsdata; settingsdata;paramdetails;userId;
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.userId = params._id;
       if (this.userId) {
+        this.settingservice.getAllScoreBordsByGameSetting(this.userId);
         this.paramdetails = true;
         this.http.get(environment.api + '/gamesettings/' + this.userId)
           .subscribe(res => {

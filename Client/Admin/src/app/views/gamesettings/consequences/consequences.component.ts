@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from "@angular/http";
-import { Router } from "@angular/router";
+import { Router, Params, ActivatedRoute } from "@angular/router";
 import { environment } from "../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 import { AccessorService } from "../../../components/common/accessor.service";
+import { GamesettingsService } from "../gamesettings.service";
+import { ManageconsequenceComponent } from "./manageconsequence/manageconsequence.component";
+
 
 @Component({
   selector: 'app-consequences',
@@ -22,7 +26,7 @@ public rows: Array<any> = [];
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public modules = this.accr.getmodules();
   
-  constructor(public http: Http, private router: Router, private toastr: ToastrService, private accr: AccessorService) { }
+  constructor(public http: Http, private router: Router, private toastr: ToastrService, private accr: AccessorService, private activatedRoute: ActivatedRoute,private settingservice: GamesettingsService,public compodata: ManageconsequenceComponent) { }
   ngAfterContentInit() {
     this.dtOptions = {
       pagingType: 'simple_numbers',
@@ -31,14 +35,18 @@ public rows: Array<any> = [];
     }
   }
   ngOnInit(): void {
-    this.settingid = localStorage.getItem('setting');
-    this.http.get(environment.api + "/consequences/bysetting/" + this.settingid)
+    //this.settingid = localStorage.getItem('setting');
+    this.activatedRoute.params.subscribe(params => {
+       this.settingid = params._id;
+       this.http.get(environment.api + "/consequences/bysetting/" + this.settingid)
       .subscribe((res) => {
         this.rows = res.json();
           this.length = this.rows.length;
           this.dataRenderer = true;
       });
     this.checkpermissions();
+    });
+    
   }
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
@@ -53,6 +61,13 @@ public rows: Array<any> = [];
         this.hasDeletePerm = true;
       }
     }
+  }
+  editCons(id){
+    this.settingservice.editconsequences(id).subscribe(res=>{
+      var x=res.json();
+      this.compodata.assigndata(x[0]);
+      //this.compodata.mForm.playerconseq.name=x[0].playerconseq.name;
+    });
   }
 
   delClub(id){
