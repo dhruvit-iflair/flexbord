@@ -106,6 +106,7 @@ import { ManageEmailComponent } from './views/email/manage-email/manage-email.co
 import { CkEditorDirective } from './components/directive/ck-editor.directive';
 import { ImportOrgMembersComponent } from './views/organizer/orgmembers/import-org-members/import-org-members.component';
 import { ImportClubMembersComponent } from './views/club/club-members/import-club-members/import-club-members.component';
+import { GamesettingsService} from './views/gamesettings/gamesettings.service';
 import { SportsService } from './components/services/sports.service';
 
 @NgModule({
@@ -209,18 +210,9 @@ import { SportsService } from './components/services/sports.service';
     RouterModule.forRoot(ROUTES),
     Ng5BreadcrumbModule.forRoot(),
   ],
-  providers: [
-    Auth24Guard,
-    ClubService,
-    UserService,
-    AccessorService,
-    BreadCrumbService,
-    BreadcrumbService,
-    EmailService,
-    EmailTypeService,
-    OrganizerService,
-    SportsService
-  ],    
+  providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService,EmailService,EmailTypeService,OrganizerService,SportsService,
+  GamesettingsService,ManageconsequenceComponent,ManagestructureComponent,ManageplaylistComponent,ManagescoreboardComponent],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

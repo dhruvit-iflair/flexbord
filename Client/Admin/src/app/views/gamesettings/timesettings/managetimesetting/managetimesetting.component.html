@@ -9,11 +9,11 @@
           <div class="row">
             <div class="man col-md-6">
               <label>Shot Clock<a style="color:#f00 !important;">*</a></label>
-              <input class="text-col-md-3" type="number" [(ngModel)]="mForm.shotclock" [ngModelOptions]="{standalone: true}">
+              <input class="text-col-md-3" type="number" [(ngModel)]="tsForm.shotclock" [ngModelOptions]="{standalone: true}">
             </div>
             <div class="man col-md-6">
               <label>Foul Shot Clock<a style="color:#f00 !important;">*</a></label>
-              <input class="text-col-md-3" type="number" [(ngModel)]="mForm.foulshotclock" [ngModelOptions]="{standalone: true}">
+              <input class="text-col-md-3" type="number" [(ngModel)]="tsForm.foulshotclock" [ngModelOptions]="{standalone: true}">
             </div>
           </div>
         </div>
@@ -191,7 +191,7 @@
 <div class="col-md-12" style="margin:3%;">
     <div class="row">
       <button class="btn btn_red" style="background:#00DDA0;" (click)="addperiod()">Add Periods</button>
-      <button class="btn btn_red" style="background:#00DDA0;" (click)="addpenalty()">Add Penalties</button>
+      <!--<button class="btn btn_red" style="background:#00DDA0;" (click)="addpenalty()">Add Penalties</button>-->
     </div>
 </div>
 
@@ -226,7 +226,7 @@
         <button class="btn btn-white" [routerLink]="['/game_settings/timesetting']">Back</button>
       </div>
       <div class="col-md-6 text-right">
-        <button class="btn btn_green" (click)='managesetting(mForm)'>Save</button>
+        <button class="btn btn_green" (click)='managesetting(tsForm)'>Save</button>
       </div>
     </div>
 

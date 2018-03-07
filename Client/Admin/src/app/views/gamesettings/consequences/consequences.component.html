@@ -3,9 +3,9 @@
         <div class="col-md-10">
             <label><h2>Consequences</h2></label>
         </div>
-        <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
+        <!--<div class="col-md-2 text-right" *ngIf="hasCreatePerm">
             <button class="btn btn_green" [routerLink]="['/game_settings/consequences/manage']"> <i class="fa fa-plus"></i> Add New</button>                         
-        </div>
+        </div>-->
         <div class="col-md-12" id="tabl">
         <div class="col-md-12 no_padd mar_btt">
         </div>
@@ -29,7 +29,7 @@
                     <td>{{item.playerconseq.color}}</td>
                     <td>{{item.teamfaults.type.nameoffoul}}</td>
                     <td>
-                      <a class="btn btn_green tab_btn" routerLink="/game_settings/consequences/manage/{{item._id}}"  title="Edit" *ngIf="hasEditPerm">
+                      <a class="btn btn_green tab_btn" (click)="editCons(item._id)"  title="Edit" *ngIf="hasEditPerm">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                       </a>
                      <a class="btn btn_red tab_btn delete-btn" (click)="delClub(item._id)" title="Delete" *ngIf="hasDeletePerm">
