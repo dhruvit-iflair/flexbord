@@ -1,0 +1,43 @@
+<div class="container manage-container">
+    <div class="row">
+        <form [formGroup]="staffForm" class="manage-component-form">
+          <div class="row1">
+              <div class="manage-box clearfix">
+                    <div class="col-md-12">
+                      <label><h2>New Staff</h2></label>
+                    </div>
+                    <div class="col-md-12">
+                    <div class="row">
+                        <div class="man col-md-3">
+                            <h4 class="text-left">Member</h4>
+                            <select class="js-example-basic-single text-col-md-3"  name="member" formControlName="member">
+                                <option value="null" disabled="true" value="">Select member</option>    
+                                <option *ngFor="let ite of membersList"  [value]="ite._id">{{ite.firstname}} {{ite.lastname}}</option>
+                            </select>
+                        </div>
+                        <div class="man col-md-3">
+                            <h4 class="text-left">Role</h4>
+                            <select class="js-example-basic-single text-col-md-3"  name="role" formControlName="role">
+                                <option value="null" disabled="true" value="">Select role</option>    
+                                <option>Coach</option>
+                                <option>Assistant Coach</option>
+                                <option>Trainer</option>
+                                <option>Manager</option>
+                                <option>Administrator</option>
+                                <option>Medic</option>
+                                <option>Physiotherapist</option>
+                            </select>
+                        </div>
+                      <br/><br/>
+                        <div class="man col-md-3">
+                        <!-- <div class="col-md-6 text-right"> -->
+                            <button class="btn btn_green" (click)='addStaff()'>Save</button>       
+                        <!-- </div>   -->
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -51,6 +51,8 @@ module.exports = function () {
     require('../app/models/scoreboards');
     require('../app/models/email');
     require('../app/models/emailType');
+    require('../app/models/player');
+    require('../app/models/staff');
 
     return db;
 }
