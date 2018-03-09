@@ -35,7 +35,7 @@ export class TopnavbarComponent {
                 this.roles = JSON.parse(localStorage.getItem('roles'));
             }
             catch (err) {
-                this.router.navigate(['/login']);
+//                this.router.navigate(['/login']);
             }
         }
     }

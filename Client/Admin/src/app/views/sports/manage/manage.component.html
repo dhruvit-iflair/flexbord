@@ -1,56 +1,67 @@
-<div class="manage-box clearfix">
-<div class="col-md-12">
-    <label><h2>Add Sport</h2></label>
-</div>
-<div class="col-md-12">
-  <form class="m-t" role="form" action="#">
-    <div class="row">
-    <div class="col-md-12">
-        <label>Sport Name<a style="color:#f00 !important;">*</a></label>
-        <input type="text" required #name="ngModel" id="name" name="name" class="form-control" [(ngModel)]="mForm.name" placeholder="Sport Name" [ngModelOptions]="{standalone: true}">
-        <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
-            <span *ngIf="name.errors.required">Sport Name is required</span>
-        </div>
-    </div>
-    <!-- </div> -->
-    <div class="man col-md-4">
-        <label>Type of Sport<a style="color:#f00 !important;">*</a></label>
-        <div><input type="radio" value="opponent" name="typeofsport" required #typeofsport="ngModel" id="typeofsport" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}"> <label for="typeofsport">Opponents</label></div>
-        <div><input type="radio" value="races" name="typeofsport" required #typeofsport="ngModel" id="typeofsport1" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}"> <label for="typeofsport1">Races</label></div>
-        <div *ngIf="typeofsport.errors && (typeofsport.dirty || typeofsport.touched)" class="alert alert-danger">
-            <span *ngIf="typeofsport.errors.required">Sport Type is required</span>
-        </div>
-    </div>
-
-    <div class="man col-md-4">
-        <label>Type of Game<a style="color:#f00 !important;">*</a></label>
-        <div><input type="radio" value="points" name="typeofgame" required #typeofgame="ngModel" id="typeofgame" [(ngModel)]="mForm.typeofgame" [ngModelOptions]="{standalone: true}"> <label for="typeofgame">Points</label></div>
-        <div><input type="radio" value="time" name="typeofgame" required #typeofgame="ngModel" id="typeofgame1" [(ngModel)]="mForm.typeofgame" [ngModelOptions]="{standalone: true}"> <label for="typeofgame1">Time</label></div>
-        <div *ngIf="typeofgame.errors && (typeofgame.dirty || typeofgame.touched)" class="alert alert-danger">
-            <span *ngIf="typeofgame.errors.required">Game Type is required</span>
-        </div>
-    </div>
-
-    <div class="man col-md-4">
-        <label>Type of Team<a style="color:#f00 !important;">*</a></label>
-        <div><input type="radio" value="individual" name="typeofteam" required #typeofteam="ngModel" id="typeofteam" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> <label for="typeofteam">Individual</label></div>
-        <div><input type="radio" value="double" name="typeofteam" required #typeofteam="ngModel" id="typeofteam1" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> <label for="typeofteam1">Double</label></div>
-        <div><input type="radio" value="team" name="typeofteam" required #typeofteam="ngModel" id="typeofteam2" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> <label for="typeofteam2">Team</label></div>
-        <div *ngIf="typeofteam.errors && (typeofteam.dirty || typeofteam.touched)" class="alert alert-danger">
-            <span *ngIf="typeofteam.errors.required">Team Type is required</span>
-        </div>
-    </div>
-</div>
-</form>
-</div>
-</div>
-<div class="man col-md-12">
-    <div class="row">
-            <div class="col-md-6 text-left">
-                <a class="btn btn-sm btn-white" [routerLink]="['/sports']">Back</a>
+<div>
+    <tabset>
+      <tab heading="Base">
+        <div class="manage-box clearfix">
+            <div class="col-md-12">
+                <label><h2>Add Sport</h2></label>
             </div>
-            <div class="col-md-6 text-right">
-                <button [disabled]="name.errors || typeofsport.errors || typeofgame.errors || typeofteam.errors" class="btn btn-sm btn-primary" (click)="addMember(mForm)">Save</button>
+            <div class="col-md-12">
+              <form class="m-t" role="form" action="#">
+                <div class="row">
+                <div class="col-md-12">
+                    <label>Sport Name<a style="color:#f00 !important;">*</a></label>
+                    <input type="text" required #name="ngModel" id="name" name="name" class="form-control" [(ngModel)]="mForm.name" placeholder="Sport Name" [ngModelOptions]="{standalone: true}">
+                    <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
+                        <span *ngIf="name.errors.required">Sport Name is required</span>
+                    </div>
+                </div>
+                <!-- </div> -->
+                <div class="man col-md-4">
+                    <label>Type of Sport<a style="color:#f00 !important;">*</a></label>
+                    <div><input type="radio" value="opponent" name="typeofsport" required #typeofsport="ngModel" id="typeofsport" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}"> Opponents</div>
+                    <div><input type="radio" value="races" name="typeofsport" required #typeofsport="ngModel" id="typeofsport" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}"> Races</div>
+                    <div *ngIf="typeofsport.errors && (typeofsport.dirty || typeofsport.touched)" class="alert alert-danger">
+                        <span *ngIf="typeofsport.errors.required">Sport Type is required</span>
+                    </div>
+                </div>
+            
+                <div class="man col-md-4">
+                    <label>Type of Game<a style="color:#f00 !important;">*</a></label>
+                    <div><input type="radio" value="points" name="typeofgame" required #typeofgame="ngModel" id="typeofgame" [(ngModel)]="mForm.typeofgame" [ngModelOptions]="{standalone: true}"> Points</div>
+                    <div><input type="radio" value="time" name="typeofgame" required #typeofgame="ngModel" id="typeofgame" [(ngModel)]="mForm.typeofgame" [ngModelOptions]="{standalone: true}"> Time</div>
+                    <div *ngIf="typeofgame.errors && (typeofgame.dirty || typeofgame.touched)" class="alert alert-danger">
+                        <span *ngIf="typeofgame.errors.required">Game Type is required</span>
+                    </div>
+                </div>
+            
+                <div class="man col-md-4">
+                    <label>Type of Team<a style="color:#f00 !important;">*</a></label>
+                    <div><input type="radio" value="individual" name="typeofteam" required #typeofteam="ngModel" id="typeofteam" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> Individual</div>
+                    <div><input type="radio" value="double" name="typeofteam" required #typeofteam="ngModel" id="typeofteam" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> Double</div>
+                    <div><input type="radio" value="team" name="typeofteam" required #typeofteam="ngModel" id="typeofteam" [(ngModel)]="mForm.typeofteam" [ngModelOptions]="{standalone: true}"> Team</div>
+                    <div *ngIf="typeofteam.errors && (typeofteam.dirty || typeofteam.touched)" class="alert alert-danger">
+                        <span *ngIf="typeofteam.errors.required">Team Type is required</span>
+                    </div>
+                </div>
             </div>
-    </div>
+            </form>
+            </div>
+            </div>
+            <div class="man col-md-12">
+                <div class="row">
+                        <div class="col-md-6 text-left">
+                            <a class="btn btn-sm btn-white" [routerLink]="['/sports']">Back</a>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button [disabled]="name.errors || typeofsport.errors || typeofgame.errors || typeofteam.errors" class="btn btn_green white" (click)="addMember(mForm)">Save</button>
+                        </div>
+                </div>
+            </div>
+      </tab>
+      <tab heading="Points"><app-managepoints></app-managepoints><app-points></app-points></tab>
+      <tab heading="Fouls"><app-managefouls></app-managefouls><app-fouls></app-fouls></tab>
+      <tab heading="Player Status"><app-manageplayerstatus></app-manageplayerstatus><app-playerstatus></app-playerstatus></tab>
+      <tab heading="Ranking Scores"><app-managescore></app-managescore><app-scores></app-scores></tab>
+    </tabset>
 </div>
+

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation ,OnDestroy} from '@angular/core';
 import { fakedb } from "../../../../components/common/fakedb";
 import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { forEach } from '@angular/router/src/utils/collection';
+import { SportsService } from '../../../../components/services/sports.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-managepoints',
@@ -14,47 +16,43 @@ import { forEach } from '@angular/router/src/utils/collection';
   styleUrls: ['./managepoints.component.css']
 })
 export class ManagepointsComponent implements OnInit {
-  public paramdetails = false;
-  public userId;
+  public _id:any = false;
+  public subscripton : Subscription;
   public former = { nameofpoint: '', valueofpoint: 0, valueofpointopt: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };
+  public myForm:any;
   public items = ['Subtracted', 'Apply to contender', 'Fault'];
-  constructor(private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute) { }
+  constructor(private http: Http, 
+              private toastr: ToastrService, 
+              private router: Router, 
+              public activeRouter: ActivatedRoute,
+              public sportsService:SportsService) { }
 
   ngOnInit() {
-    this.activeRouter.params.subscribe(params => {
-      this.userId = params._id;
-      if (this.userId) {
-        this.paramdetails = true;
-        this.http.get(environment.api + '/sportpoints/' + this.userId)
-          .subscribe(res => {
-            var x = res.json();
-            this.former=x[0];
-          });
-      }
-    });
+    this.subscripton = this.sportsService.getSinglePointsData().subscribe(res=>{
+      this.former=res[0];
+      this._id = res[0]._id;
+    })
   }
-
+  ngOnDestroy() {
+    this.subscripton.unsubscribe();
+    this.former = { nameofpoint: '', valueofpoint: 0, valueofpointopt: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };
+    
+  }
   savedata(gotcha) {
     var sptid = localStorage.getItem('sptid');
     var janudata = gotcha;
     janudata.sports = sptid;
-    if (this.paramdetails) {
-      this.http.patch(environment.api + "/sportpoints/" + this.userId, janudata)
-        .subscribe(res => {
-          this.toastr.success('Points Updated Successfully', 'Success');
-          this.router.navigate(['/sports/points']);
-        }, (error) => {
-          this.toastr.error('Something went wrong !! Please try again later', 'Error');
-        });
+    if (this._id) {
+        this.sportsService.updatePoint(this._id,janudata);
+        this._id = false;
+        this.former = { nameofpoint: '', valueofpoint: 0, valueofpointopt: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };
+        // this.myForm.reset();
     }
     else {
-      this.http.post(environment.api + "/sportpoints", janudata)
-        .subscribe(res => {
-          this.toastr.success('Points added successfully', 'Success');
-          this.router.navigate(['/sports/points']);
-        }, (error) => {
-          this.toastr.error('Something went wrong !! Please try again later', 'Error');
-        });
+        this.sportsService.savePoint(janudata);
+        this._id = false;
+        this.former = { nameofpoint: '', valueofpoint: 0, valueofpointopt: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };    
+        // this.myForm.reset();
     }
   }
 }

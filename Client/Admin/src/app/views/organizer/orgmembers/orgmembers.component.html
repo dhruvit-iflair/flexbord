@@ -10,7 +10,7 @@
           <button class="btn btn_black" [routerLink]="['/organizer/orgmembers/import']">Import</button>                         
       </div> -->
       <div class="col-md-12" id="tabl">
-        <table datatable  [dtOptions]="dtOptions" class="row-border hover" >
+        <table datatable  [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" >
           <thead>
             <tr>
               <th>_id</th>

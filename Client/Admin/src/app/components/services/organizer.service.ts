@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 @Injectable()
 export class OrganizerService {
+  public tab = new Subject<any>();
   public orgSubject = new Subject<any>();
   public orgSingleSubject = new Subject<any>();
   public subject = new Subject<any>();
@@ -15,6 +16,8 @@ export class OrganizerService {
   public seasonSubSingle = new Subject<any>();
   public classificationSubject = new Subject<any>();
   public classificationSubSingle = new Subject<any>();
+  public competitionSubject = new Subject<any>();
+  public competitionSubSingle = new Subject<any>();
   public members:any;
   public season:any;
   public classification:any;
@@ -38,7 +41,20 @@ export class OrganizerService {
     this.getSeasonsByOrg();
     this.getAllOrganizers();
     this.getClassificationByOrg();
+    this.getAllCompetitions();
   }
+
+  //+++++++++++++++++++ Tabs ++++++++++++++++++++++++//
+
+  changeTab(id:any){
+    this.tab.next(id);
+  }
+  getTabActive():Observable <any>{
+    return this.tab.asObservable();
+  }
+
+  //+++++++++++++++++++ Organizer ++++++++++++++++++++++++//
+
   getAllOrganizers(){
     this.http.get(environment.api + '/organizer').map((res: Response) => <any[]>res.json()).subscribe((res)=>{
       if (res) {
@@ -214,5 +230,61 @@ export class OrganizerService {
     });
   }
 
+  //+++++++++++++++++++ Competition ++++++++++++++++++++++++//
+
+  getAllCompetitions(){
+    this.http.get(environment.api+'/orgCompetitions/byorg/'+this._id).map((res: Response) => <any[]>res.json()).subscribe((res)=>{
+        this.competitionSubject.next(res);
+    },(error)=>{
+        this.toastr.error('Error!! Something went wrong! try again later', 'Error');
+    });  
+  }
+  getCompetitionsList():Observable <any> {
+    return this.competitionSubject.asObservable();
+  }
+  getSingleCompetitionData():Observable <any> {
+    return this.competitionSubSingle.asObservable();
+  }
+  editCompetition(id){
+    this.http.get(environment.api+'/orgCompetitions/'+id).map((res: Response) => <any[]>res.json()).subscribe((res)=>{
+        this.competitionSubSingle.next(res);
+    },(error)=>{
+        this.toastr.error('Error!! Something went wrong! try again later', 'Error');
+    });  
+  }
+  deleteCompetition(id){
+    this.http.delete(environment.api +"/orgCompetitions/"+id).subscribe((res)=>{
+        this.toastr.success('Competition Deleted Successfully', 'Success');
+        this.getAllCompetitions();
+    },(error)=>{
+        this.toastr.error('Something went wrong !! Please try again later', 'Error');
+    }) 
+  }
+  saveCompetition(data:any){
+    this.http.post(environment.api+'/orgCompetitions',data).subscribe((res)=>{
+        if(res){
+          this.toastr.success('Competitions saved successfully', 'Success');
+          this.getAllCompetitions();
+        }
+        else {
+            this.toastr.error('Error!!Something went wrong! try again later!', 'Error');
+        }
+      },(error)=>{
+      this.toastr.error('Error!! Something went wrong! try again later', 'Error');
+    });  
+  }
+  updateCompetition(id:any,data:any){
+    this.http.put(environment.api+'/orgCompetitions/'+id,data).subscribe((res)=>{
+        if(res){
+          this.toastr.success('Competitions updated successfully', 'Success');
+          this.getAllCompetitions();
+        }
+        else {
+            this.toastr.error('Error!!Something went wrong! try again later!', 'Error');
+        }
+      },(error)=>{
+      this.toastr.error('Error!! Something went wrong! try again later', 'Error');
+    });
+  }
 }
 

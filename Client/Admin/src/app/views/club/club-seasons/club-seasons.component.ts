@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Http } from "@angular/http";
 import { environment } from "../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { dateFormatPipe } from "../../../components/pipes/dateFormate";
 import { AccessorService } from "../../../components/common/accessor.service";
+import { Subscription } from 'rxjs/Subscription';
+import { ClubService } from '../../../components/services/club.service';
 
 @Component({
   selector: 'app-club-seasons',
@@ -15,7 +17,8 @@ export class ClubSeasonsComponent implements OnInit {
   public seasons: Array<any>;
   public dataRenderer = false;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
-  constructor(public http: Http, private toastr: ToastrService, private accr: AccessorService) { }
+  public subscription :Subscription
+  constructor(public http: Http, private toastr: ToastrService, private accr: AccessorService,public clubService:ClubService) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -24,12 +27,11 @@ export class ClubSeasonsComponent implements OnInit {
       columns: [{ "visible": false }, null, null, null, { "orderable": false }]
     };
     this.clubid = localStorage.getItem('clubid');
-    this.http.get(environment.api + '/clubSeasons/byclub/' + this.clubid)
-      .subscribe((res) => {
-        this.seasons = res.json();
-        this.dataRenderer = true;
-      });
+    this.subscription = this.clubService.getSeasonList().subscribe((res) => { this.seasons = res; });
     this.checkpermissions();
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
@@ -48,19 +50,11 @@ export class ClubSeasonsComponent implements OnInit {
   delOrg(_id) {
     var del = confirm("Confirm to delete this Season!");
     if (del) {
-      this.http.delete(environment.api + "/clubSeasons/" + _id)
-        .subscribe((res) => {
-          var d = res.json();
-          if (d._id) {
-            this.dataRenderer = false;
-            this.toastr.success('Season Deleted Successfully', 'Success');
-            // this.router.navigate(['/organizer']);
-            this.ngOnInit();
-          }
-        }, (error) => {
-          this.toastr.error('Something went wrong !! Please try again later', 'Error');
-        })
+      this.clubService.deleteSeason(_id);
     }
+  }
+  edit(id){
+    this.clubService.getSingleSeason(id);
   }
 
 }

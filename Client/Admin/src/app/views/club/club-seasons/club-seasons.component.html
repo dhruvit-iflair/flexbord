@@ -1,17 +1,17 @@
 <div class="row">
   <div class="container">
-      <div class="col-md-10">
+      <!-- <div class="col-md-10">
           <label><h2>Club Seasons</h2></label>
       </div>
       <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
           <button class="btn btn_green" [routerLink]="['/club/seasons/manage']"><i class="fa fa-plus"></i> Add New Season</button>                         
-      </div>
+      </div> -->
       <div class="col-md-12" id="tabl">
         <div class="col-md-12 no_padd mar_btt">
        
         </div>
         <br>
-        <table datatable  [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
+        <table datatable  [dtOptions]="dtOptions" class="row-border hover" >
           <thead>
             <tr>
               <th>_id</th>              
@@ -28,7 +28,7 @@
               <td>{{s.start_date | dateFormatPipe :'dd/MM/yy hh:mm a'}} </td>
               <td>{{s.end_date | dateFormatPipe :'dd/MM/yy hh:mm a'}}</td>
               <td>
-                <a class="btn btn_green tab_btn"  routerLink="/club/seasons/manage/{{s._id}}" *ngIf="hasEditPerm">
+                <a class="btn btn_green tab_btn" (click)="edit(s._id);" *ngIf="hasEditPerm">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
                 <a class="btn btn_red tab_btn delete-btn" (click)="delOrg(s._id)" *ngIf="hasDeletePerm">

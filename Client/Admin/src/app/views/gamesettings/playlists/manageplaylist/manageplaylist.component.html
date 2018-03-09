@@ -2,24 +2,24 @@
   <div class="row">
     <form class="manage-component-form">
       <div class="col-md-12">
-        <div class="row1">
+        <div class="row">
           <div class="manage-box clearfix">
             <div class="col-md-12">
               <label><h2>Playlists</h2></label>
             </div>
             <div class="col-md-12">
               <div class="row">
-                <div class="man col-md-12">
+                <div class="man col-md-4">
                   <h4 class="text-left">Playlist Name</h4>
-                  <input class="text-col-md-3" type="text" [(ngModel)]="mForm.name" [ngModelOptions]="{standalone: true}">
+                  <input class="text-col-md-3" type="text" id="asname" [(ngModel)]="psForm.name" [ngModelOptions]="{standalone: true}">
                 </div>
-                <div class="man col-md-12">
+                <div class="man col-md-4">
                   <h4 class="text-left">Item Name</h4>
-                  <input class="text-col-md-3" type="text" [(ngModel)]="mForm.itemName" [ngModelOptions]="{standalone: true}">
+                  <input class="text-col-md-3" type="text" id="iname" [(ngModel)]="psForm.itemName" [ngModelOptions]="{standalone: true}">
                 </div>
-                <div class="man col-md-12">
+                <div class="man col-md-4">
                   <h4 class="text-left">Item Type</h4>
-                  <select class="js-example-basic-single text-col-md-3" [(ngModel)]="mForm.itemType" [ngModelOptions]="{standalone: true}">
+                  <select class="js-example-basic-single text-col-md-3" id="itype" [(ngModel)]="psForm.itemType" [ngModelOptions]="{standalone: true}">
                      <option value="" disabled="true" [selected]="true">Media Type</option>    
                      <option value="imageUrl">Image URL</option><option value="uploadImage">Upload Image</option>
                      <option value="videoUrl">Video URL</option><option value="uploadVideo">Upload Video</option>
@@ -27,36 +27,36 @@
                   </select>
                 </div>
                 <div class="man col-md-12">
-                  <div class="row" *ngIf="mForm.itemType=='imageUrl' || mForm.itemType=='videoUrl' || mForm.itemType=='webPage'">
+                  <div class="row" *ngIf="psForm.itemType=='imageUrl' || psForm.itemType=='videoUrl' || psForm.itemType=='webPage'">
                     <div class="col-md-12">
                       <h4 class="text-left">URL</h4>
-                      <input class="text-col-md-3" type="text" [(ngModel)]="mForm.itemMedia" [ngModelOptions]="{standalone: true}">
+                      <input class="text-col-md-3" type="text" id="imedia" [(ngModel)]="psForm.itemMedia" [ngModelOptions]="{standalone: true}">
                     </div>
                   </div>
-                  <div class="row" *ngIf="mForm.itemType=='uploadVideo'">
+                  <div class="row" *ngIf="psForm.itemType=='uploadVideo'">
                     <div class="col-md-2">
                       <h4 class="text-left">Choose Video</h4>
                       <input type="file" accept="video/*" #file class="vdo_upload" (change)="readUrlvdo($event)">
                       <button class="btn btn_green" (click)="file.click()"> Upload Video</button>
                     </div>
                   </div>
-                  <div class="row" *ngIf="mForm.itemType=='uploadImage'">
+                  <div class="row" *ngIf="psForm.itemType=='uploadImage'">
                     <div class="col-md-2">
                       <h4 class="text-left">Choose Image</h4>
                       <input type="file" accept="image/*" #file1 class="logo_upload" (change)="readUrl($event)">
                       <button class="btn btn_green" (click)="file1.click()"> Upload Image</button>
                     </div>
-                    <div class="col-md-4" *ngIf="mForm.itemMedia">
+                    <div class="col-md-4" *ngIf="psForm.itemMedia || imgurl">
                       <img [src]="imgurl" class="image_display">
                     </div>
                   </div>
 
                   <!--<h4 class="text-left">Media</h4>
-                  <input class="text-col-md-3" type="file" [(ngModel)]="mForm.itemMedia" [ngModelOptions]="{standalone: true}">-->
+                  <input class="text-col-md-3" type="file" [(ngModel)]="psForm.itemMedia" [ngModelOptions]="{standalone: true}">-->
                 </div>
                 <div class="man col-md-12">
                   <h4 class="text-left">Time</h4>
-                  <input class="text-col-md-3" type="number" [(ngModel)]="mForm.itemTime" [ngModelOptions]="{standalone: true}">
+                  <input class="text-col-md-3" type="number" id="itime" [(ngModel)]="psForm.itemTime" [ngModelOptions]="{standalone: true}">
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@
         <button class="btn btn-white" [routerLink]="['/game_settings/playlists']">Back</button>
       </div>
       <div class="col-md-6 text-right">
-        <button class="btn btn_green" [disabled]="!mForm.itemType || !mForm.itemName || !mForm.name || !mForm.itemTime || !mForm.itemMedia" (click)='managesetting(mForm)'>Save</button>
+        <button class="btn btn_green" [disabled]="!psForm.itemType || !psForm.itemName || !psForm.name || !psForm.itemTime || !psForm.itemMedia" (click)='managesetting(psForm)'>Save</button>
       </div>
     </div>
 

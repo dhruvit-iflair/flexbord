@@ -1,13 +1,13 @@
 <div class="row">
   <div class="container">
-      <div class="col-md-10">
+      <!-- <div class="col-md-10">
           <label><h2>Points</h2></label>
       </div>
       <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
           <button class="btn btn_green" [routerLink]="['/sports/points/manage']"><i class="fa fa-plus"></i> Add New Point</button>                         
-      </div>
+      </div> -->
       <div class="col-md-12" id="tabl">
-        <table datatable  [dtOptions]="dtOptions" class="row-border hover" onchange="gotcha()" *ngIf="dataRenderer">
+        <table datatable  [dtOptions]="dtOptions" class="row-border hover" >
           <thead>
             <tr>
               <th>_id</th>
@@ -28,7 +28,7 @@
               <td>{{m.colorbtndown | firstcapitalize}}</td>
               <td>{{m.hidefromscoreboard | firstcapitalize}}</td>
               <td>
-                <a class="btn btn_green tab_btn"  routerLink="/sports/points/manage/{{m._id}}" *ngIf="hasEditPerm" >
+                <a class="btn btn_green tab_btn" (click)="edit(m._id)"  *ngIf="hasEditPerm" >
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
                 <a class="btn btn_red tab_btn delete-btn" (click)="deletemember(m._id)" *ngIf="hasDeletePerm">

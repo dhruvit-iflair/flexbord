@@ -11,7 +11,7 @@
 
         <div class="col-md-12">
            <br>
-          <table id="cmpt" datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer">
+          <table id="cmpt" datatable [dtOptions]="dtOptions" class="row-border hover">
               <thead>
                 <tr>
                   <th>_ID</th>
@@ -30,7 +30,7 @@
                   <td> <span *ngFor="let s of r.sports"> {{s.name}}</span></td>
                   <td>{{r.seasons.name}}</td>
                   <td>
-                    <a class="btn btn_green tab_btn"  routerLink="/organizer/competitions/manage/{{r._id}}" *ngIf="hasEditPerm" title="Edit">
+                    <a class="btn btn_green tab_btn" (click)="edit(r._id)"  *ngIf="hasEditPerm" title="Edit">
                       <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a>
                     <a class="btn btn_red tab_btn  delete-btn" (click)="delComp(r._id)" *ngIf="hasDeletePerm" title="Delete">

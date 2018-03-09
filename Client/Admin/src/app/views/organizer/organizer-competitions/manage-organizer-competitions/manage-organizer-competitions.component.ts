@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,OnDestroy} from '@angular/core';
 import { environment } from "../../../../../environments/environment";
 import { FormGroup,FormControl,FormBuilder,Validators,AbstractControl } from "@angular/forms";
 import { Router ,ActivatedRoute} from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
+import { OrganizerService } from '../../../../components/services/organizer.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-manage-organizer-competitions',
@@ -22,7 +24,8 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
   public sportsValue : Array<any>;
   public classifications : any;
   public classValue :Array<any>;
-  constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute){
+  public subscripton : Subscription;
+  constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute, public orgService : OrganizerService){
     this.comForm = this.fb.group({
       name: ["",[Validators.required]],
       description: [""],
@@ -38,107 +41,63 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
   }
 
   ngOnInit() {    
-    this.http.get(environment.api + '/seasons').subscribe((res)=>{
-        var fagdf = res.json();
-        this.amki = fagdf;
+    this.subscripton = this.orgService.getSeasonList().subscribe((res)=>{
+        this.amki = res;
         var t = this.amki.filter((rf)=>rf.organizer==  localStorage.getItem('orgid'));
         if(t.length > 0){
           this.season = t;                  
         }
-      },(error)=>{
-          this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-          this.router.navigate(['/organizer/competitions']);
-     });
+    });
      this.http.get(environment.api + '/sports')
             .subscribe((res)=>{
               this.sports = res.json();
             });
-     this.http.get(environment.api + '/organizerClassifications').subscribe((res)=>{
-                var fagdf = res.json();
-                var u = [];
-                u= fagdf;
-                var t = u.filter((rf)=>rf.organizer==  localStorage.getItem('orgid'));
-                   
-                if(t.length > 0){
-                   this.classifications = t;   
-                }
-                },(error)=>{
-                      this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-                      this.router.navigate(['/organizer/competitions']);
-      });
-    
-  //   this.sub = this.activeRouter.params.subscribe(params => {
-  //     if (params._id) {
-  //       this._id = params._id;
-  //       this.http.get(environment.api + '/orgCompetitions/'+ params._id)
-  //              .subscribe((res)=>{
-  //                var fagdf = res.json();
-  //                if(fagdf.length > 0){
-  //                  this.classValue = this.classifications.filter(ad => ad._id == fagdf[0].organizerClassifications._id); 
-  //                  this.comForm.patchValue(fagdf[0]);
-  //                  this.comForm.controls['seasons'].setValue(fagdf[0].seasons._id, {onlySelf: true});
-  //                  this.comForm.controls['organizerClassifications'].setValue(fagdf[0].organizerClassifications._id, {onlySelf: true});
-  //                  this.comForm.controls['organizerClassificationsValue'].setValue(fagdf[0].organizerClassificationsValue, {onlySelf: true});
-  //                }
-  //               //  else {
-  //               //       this.toastr.error('Error!! No Competitions found!', 'Error');
-  //               //       this.router.navigate(['/organizer/competitions']);
-  //               //   }
-  //                },(error)=>{
-  //                     this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-  //               });
-  //     }
-  //     else{
-  //       this.comForm = this.fb.group({
-  //         name: ["",[Validators.required]],
-  //         description: [""],
-  //         sports: [null,[Validators.required]],
-  //         seasons: ["",[Validators.required]],
-  //         organizerClassifications: ["",[Validators.required]],
-  //         organizerClassificationsValue: ["",[Validators.required]]
-  //       })
-  //     }
-  //  });
+    this.subscripton = this.orgService.getClassificationList().subscribe((res)=>{
+        var u= res;
+        if(u.length > 0){
+            this.classifications = u;   
+        }
+    });
+    this.subscripton = this.orgService.getSingleCompetitionData().subscribe(res=>{
+      this.comForm.patchValue(res[0] ,{onlySelf: true});
+      this.comForm.patchValue({seasons: res[0].seasons._id },{onlySelf: true});
+      this.comForm.patchValue({organizerClassifications: res[0].organizerClassifications._id },{onlySelf: true});
+      this.getClasValue();
+      setTimeout(() => {
+        this.comForm.patchValue({organizerClassificationsValue:res[0].organizerClassificationsValue },{onlySelf: true});  
+      }, 100);      
+      this._id = res[0]._id;
+    })
+  }
+  ngOnDestroy() {
+    this.subscripton.unsubscribe();
+  }
+  addSeason(){
+    this.orgService.changeTab(3);
+  }
+  addClass(){
+    this.orgService.changeTab(4);
   }
   saveVal(){
    if (this.comForm.valid) {
      var orid=localStorage.getItem('orgid');
      this.comForm.value.organizer=orid;
-     if (this._id) {
-        this.http.put(environment.api+'/orgCompetitions/'+this._id,this.comForm.value)
-                 .subscribe((res)=>{
-                    var fagdf = res.json();
-                    if(res){
-                      this.toastr.success('Competitions updated successfully', 'Success');
-                      this.router.navigate(['/organizer/competitions']);
-                    }
-                    else {
-                        this.toastr.error('Error!!Something went wrong! try again later!', 'Error');
-                    }
-                  },(error)=>{
-                  this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-                });
-      } 
-      else {
-        this.http.post(environment.api+'/orgCompetitions',this.comForm.value)
-                .subscribe((res)=>{
-                  var fagdf = res.json();
-                  if(res){
-                    this.toastr.success('Competitions saved successfully', 'Success');
-                    this.router.navigate(['/organizer/competitions']);
-                  }
-                  else {
-                      this.toastr.error('Error!!Something went wrong! try again later!', 'Error');
-                  }
-                },(error)=>{
-                this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-              });  
-      }
+        if (this._id) {
+          this.orgService.updateCompetition(this._id,this.comForm.value);
+          this.comForm.reset();   
+          this._id = false;       
+        } 
+        else {
+          this.orgService.saveCompetition(this.comForm.value);
+          this.comForm.reset();
+          this._id = false;       
+          
+        }
      } else {
           this.toastr.warning('Please fill up the required fields!', 'Warning');
      }
   }
-  getClasValue(e:any){
+  getClasValue(){
     this.classValue = this.classifications.filter(ad => ad._id == this.comForm.value.organizerClassifications);
   }
 }

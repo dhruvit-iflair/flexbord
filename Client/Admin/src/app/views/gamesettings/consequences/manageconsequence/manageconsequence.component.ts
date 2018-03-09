@@ -16,17 +16,16 @@ export class ManageconsequenceComponent implements OnInit {
   public mForm = { playerconseq: { name: '', color: '', type: '', value: 0 }, teamfaults: { faulttype: '', type: '', value: 0 } }
 
   ngOnInit() {
-    this.settingid = localStorage.getItem('setting');
-    this.activatedRoute.params.subscribe(params => {
-      this.userId = params._id;
-      if (this.userId) {
-        this.paramdetails = true;
-        this.http.get(environment.api + '/consequences/' + this.userId)
-          .subscribe(res => {
-            this.mForm = res[0];
-          });
-      }
-    });
+    //this.settingid = localStorage.getItem('setting');
+     this.activatedRoute.params.subscribe(params => {
+       this.settingid = params._id;
+    //   if (this.userId) {
+    //     this.paramdetails = true;
+    //     this.http.get(environment.api + '/consequences/' + this.userId)
+    //       .subscribe(res => {
+    //         this.mForm = res[0];
+    //       });
+    //   }
     this.http.get(environment.api + '/gamesettings/' + this.settingid)
       .subscribe(sportsrespo => {
         if (sportsrespo) {
@@ -36,21 +35,49 @@ export class ManageconsequenceComponent implements OnInit {
             });
         }
       });
+     });
+  }
+  assigndata(xd){
+    // var vm=this;
+    // //localStorage.setItem('editmodeconseq',xd);
+    // vm.mForm.playerconseq.name=xd.playerconseq.name;
+    this.mForm=xd;
+    (document.getElementById("name") as HTMLInputElement).value=xd.playerconseq.name;
+    (document.getElementById("color") as HTMLInputElement).value=xd.playerconseq.color;
+    (document.getElementById("pctype") as HTMLInputElement).value=xd.playerconseq.type;
+    (document.getElementById("pcvalue") as HTMLInputElement).value=xd.playerconseq.value;
+    if(xd.teamfaults.faulttype=='game'){
+      (document.getElementById("faulttype2") as HTMLInputElement).checked=true;
+    }
+    else{
+      (document.getElementById("faulttype") as HTMLInputElement).checked=true;
+    }
+    
+    (document.getElementById("tftype") as HTMLInputElement).value=xd.teamfaults.type._id;
+    (document.getElementById("tfvalue") as HTMLInputElement).value=xd.teamfaults.value;
+    localStorage.setItem('editmode','true');
+    localStorage.setItem('uid',xd._id);
+    // //this.mForm.playerconseq.type=xd.playerconseq.type._id;
+    // console.log('form binders:'+JSON.stringify(this.mForm));
   }
   managesetting(gotdata) {
+    var mode=localStorage.getItem('editmode');
+    var uid=localStorage.getItem('uid')
     gotdata.gamesettings = this.settingid;
-    if (this.paramdetails) {
-      this.http.patch(environment.api + '/consequences/' + this.userId, gotdata)
+    if (mode) {
+      this.http.patch(environment.api + '/consequences/' + uid, gotdata)
         .subscribe(result => {
+          localStorage.removeItem('editmode');
+          localStorage.removeItem('uid');
           this.toastr.success('Consequences', 'Updated Successfully.');
-          this.router.navigate(['/game_settings/consequences']);
+          this.router.navigate(['/game_settings']);
         });
     }
     else {
       this.http.post(environment.api + '/consequences', gotdata)
         .subscribe(dt => {
           this.toastr.success('Consequences', 'Added Successfully.');
-          this.router.navigate(['/game_settings/consequences']);
+          this.router.navigate(['/game_settings']);
         });
     }
   }

@@ -1,3 +1,6 @@
+<div>
+    <tabset #staticTabs>
+        <tab heading="Base">
 <div class="container manage-container">
   <div class="row">
     <form class="manage-component-form">
@@ -46,4 +49,12 @@
       </div>
     </div>
   </div>
+</div>
+ </tab>
+        <tab heading="Timesettings" [disabled]="!paramdetails"><app-managetimesetting></app-managetimesetting> <app-timesettings></app-timesettings></tab>
+        <tab heading="Consequences" [disabled]="!paramdetails"><app-manageconsequence></app-manageconsequence><app-consequences></app-consequences></tab>
+        <tab heading="Stuctures" [disabled]="!paramdetails"><app-managestructure></app-managestructure><app-structure></app-structure> </tab>
+        <tab heading="Playlists" [disabled]="!paramdetails"><app-manageplaylist></app-manageplaylist><app-playlists></app-playlists></tab>
+        <tab heading="Scoreboards" [disabled]="!paramdetails"><app-scoreboards></app-scoreboards></tab>
+    </tabset>
 </div>
