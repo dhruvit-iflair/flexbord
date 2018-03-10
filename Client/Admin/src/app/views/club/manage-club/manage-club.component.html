@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="man col-md-3">
                           <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
-                          <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="name" placeholder="Enter Name" required>
+                          <input class="text-col-md-3" type="text" pattern="^[^\s]+(\s+)*$" formControlName="name" placeholder="Enter Name" required>
                     </div>
                     <div class="man col-md-3">
                           <h4 class="text-left">Sub domain<a style="color:#f00 !important;">*</a></h4>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="man col-md-3">
                             <h4 class="text-left">Affiliated</h4>
-                            <select class="js-example-basic-single text-col-md-3"  name="affilated" formControlName="affilated">
+                            <select class="js-example-basic-single text-col-md-3"  name="affilated" formControlName="affilated" style="height: 30px;">
                                 <option value="" disabled="true" [selected]="true">Select Organizer</option>    
                                 <option *ngFor="let ite of items"  [value]="ite._id">{{ite.name}}</option>
                             </select>

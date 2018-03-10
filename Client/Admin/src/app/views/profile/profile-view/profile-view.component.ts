@@ -53,9 +53,11 @@ export class ProfileViewComponent implements OnInit {
         //   this.router.navigate(['/login']);
         // }
         // else {
-          this.user.firstname = this.userForm.value.firstname;
-          this.user.lastname = this.userForm.value.lastname;
-          this.user.person_photo = this.userForm.value.person_photo;
+          // this.user.user.firstname = this.userForm.value.firstname;
+          // this.user.user.lastname = this.userForm.value.lastname;
+          // this.user.user.person_photo = this.userForm.value.person_photo;
+          // this.user.user._id = res._id;
+          this.user.user=res;
           localStorage.removeItem('uToken');
           localStorage.setItem('uToken', JSON.stringify(this.user));
            setTimeout(() => {
