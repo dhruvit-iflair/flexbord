@@ -73,3 +73,8 @@ span.glyphicon.glyphicon-chevron-down.carlet {
     color: #FFFFFF;
     display: inline-block;
 }
+.btn-danger:hover{
+    background-color: #ed5565;
+    border-color: #ed5565;
+    color: #FFFFFF;
+}

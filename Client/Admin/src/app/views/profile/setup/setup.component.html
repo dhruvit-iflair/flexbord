@@ -8,7 +8,7 @@
                     Club
                 </h2>
                 <p>Setup your Club, Import your members, Create teams, and Use our Advance ScoreBord System. Follow your Tournamnet or Competition (Division) </p>
-                <button class="box_btn" (click)='updateProfile()'>
+                <button class="box_btn" (click)='updateProfile(roles[3]._id)'>
                     Club Profile
                 </button>
             </div>
@@ -24,10 +24,10 @@
                         <option *ngFor="let ite of items"  [value]="ite._id">{{ite.name}}</option>
                     </select>
                 </div>
-                <button *ngIf="check == true" class="box_btn org" (click)='updateProfile()'>
+                <button *ngIf="check == true" class="box_btn org" (click)='updateProfile(roles[2]._id)'>
                     Organizer  Profile
                 </button>
-                <button *ngIf="check == false" class="box_btn org" (click)='updateProfile()'>
+                <button *ngIf="check == false" class="box_btn org" (click)='updateProfile(roles[2]._id)'>
                     Join Club
                 </button>
             </div>
@@ -37,7 +37,7 @@
                     Member
                 </h2>
                 <p>Setup your Member Profile, Follow your Tournamnet or Competition (Division) </p>
-                <button class="box_btn" (click)='updateProfile()'>
+                <button class="box_btn" (click)='updateProfile(roles[1]._id)'>
                     Member Profile
                 </button>
             </div>
@@ -46,7 +46,7 @@
                     Trainer
                 </h2>
                 <p>Setup your Trainer, Follow your Tournamnet, Competition (Division) or Club </p>
-                <button class="box_btn" (click)='updateProfile()'>
+                <button class="box_btn" (click)='updateProfile(roles[1]._id)'>
                     Trainer Profile
                 </button>
             </div>        

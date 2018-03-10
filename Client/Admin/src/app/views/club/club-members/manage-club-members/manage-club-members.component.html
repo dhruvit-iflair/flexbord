@@ -32,7 +32,7 @@
                           <h4 class="text-left">DOB<a style="color:#f00 !important;">*</a></h4>
                           <!-- <input class="text-col-md-3" type="date" formControlName="dob" placeholder="Enter DOB"> -->
                           <input type="text" class="text-col-md-3"  [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker  [bsConfig]="bsConfig"  formControlName="dob" placeholder="Enter DOB">  
-                          <span class="input-group-addon" style="width: 0%;height: 34px; display:none;"  (click)="dp.toggle()" >
+                          <span class="input-group-addon" style="width: 0%;height: 34px;"  (click)="dp.toggle()" >
                             <span class="glyphicon glyphicon-calendar">
                             </span>
                         </span>

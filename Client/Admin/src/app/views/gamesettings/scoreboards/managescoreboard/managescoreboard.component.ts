@@ -4,7 +4,7 @@ import { environment } from "../../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { Router, Params, ActivatedRoute } from "@angular/router";
 import { GamesettingsService } from "../../gamesettings.service";
-import { Subscription } from "rxjs";
+// import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-managescoreboard',
@@ -15,7 +15,7 @@ export class ManagescoreboardComponent implements OnInit {
 
   constructor(public http: HttpClient, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute,private settingservice:GamesettingsService) { }
   public settingid; paramdetails; userId; addTeam = false;
-  public subscription:Subscription;
+  // public subscription:Subscription;
   public mForm = {
     dispName: '', dispStyle: '', dispShownOn: { timeouts: false, break: false, period: false },
     gameclock: { isEnable: false, titlestyle: '', valuestyle: '', value: '00:00', titlevalue: '' },
@@ -36,12 +36,13 @@ export class ManagescoreboardComponent implements OnInit {
   // gameclockbanner:{isEnable:false,titlestyle:'',valuestyle:'',value:'',titlevalue:''}
   ngOnInit() {
     //this.settingid = localStorage.getItem('setting');
-    this.subscription=this.settingservice.getSingleScoreBordData().subscribe((res)=>{
-      var x=res.json();
-      this.addTeam=true;
-      this.mForm=x[0];
-      console.log(this.mForm);
-    });
+    // this.subscription=this.settingservice.getSingleScoreBordData().subscribe((res)=>{
+    //   var x=res.json();
+    //   this.addTeam=true;
+    //   debugger;
+    //   this.mForm=x[0];
+    //   console.log(this.mForm);
+    // });
     this.activatedRoute.params.subscribe(params => {
       this.settingid = params._id;
       // if (this.userId) {
@@ -56,9 +57,9 @@ export class ManagescoreboardComponent implements OnInit {
       // }
     });
   }
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
-  }
+  // ngOnDestroy(){
+  //   this.subscription.unsubscribe();
+  // }
   structurepusher() {
     this.temp = [];
     for (var x = 0; x < this.mForm.pointstructure.blocksize; x++) {

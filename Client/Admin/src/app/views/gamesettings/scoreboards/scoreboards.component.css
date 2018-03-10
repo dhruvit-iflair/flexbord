@@ -58,3 +58,104 @@ a.btn.btn_1.tab_btn {
     color: #fff;
     margin-right: 10px;
 }
+/*for managescoreboard*/
+.manage-screener{
+    background: #000;
+    padding-bottom: 25px;
+    margin: 25px 300px;
+    min-height: 250px;
+    border: #f00 3px solid;
+    position: relative;
+}
+
+.manage-game-clock,.manage-game-clock span{
+    text-align: center;
+    color: #fe0;
+    font-family: 'digital';
+    font-size:1.8em;
+}
+.manage-points{
+    line-height: 0.8;
+    margin-top: 15%;
+    text-align: center;
+    color: #5cb85c;
+    font-family: 'digital';
+    font-size:1.8em;
+}
+.pointslabel{
+    font-size: 0.56em;
+    color: white;
+}
+.foulspan{
+     color: #d2322d;
+}
+.statisticsspan{
+    color: white;
+}
+.pointsspan{
+    font-size: 1.9em;
+}
+.manage-team-penalty{
+    margin-top: 3%;
+}
+.manage-pointstructure div{
+  background-color: #00b662;
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+}
+.manage-pointstructure{
+    display: flex;flex-wrap: nowrap;background: #00b662;font-family: 'digital';
+}
+.changedcss{
+    background:#00b662;
+    width:100%;
+    position: absolute;
+    bottom: 0;
+}
+.defaultcss{
+    display: inline-block;
+    background: #00b662;
+    font-size: 15px;
+    color: white;
+}
+.manage-shot-clock{
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    color: #d2322d;
+    font-family: 'digital';
+    font-size:1.8em;
+    line-height: 1;
+}
+.manage-period{
+    position: absolute;
+    width: 100%;
+    top: 45%;
+    text-align: center;
+    color: #fe0;
+    font-family: 'digital';
+    font-size:1.8em;
+    line-height: 1;
+}
+.labeledcolor{
+    color: white;
+}
+input[type=checkbox] {
+    width: auto;
+    margin-left: 2%;
+    margin-right: 1%;
+}
+.resizer{
+    resize: none;
+    height: 100px;
+    border:1px solid #ddd;
+    min-width: 100%;
+}
+@font-face {
+  font-family: 'digital';
+  src: url("../../../../assets/fonts/digital-7__mono_.eot");
+  src: url("../../../../assets/fonts/digital-7__mono_.eot?#iefix") format('embedded-opentype'), url("../../../../assets/fonts/digital-7__mono_.woff") format('woff'), url("../../../../assets/fonts/digital-7__mono_.ttf") format('truetype'), url("../../../../assets/fonts/digital-7__mono_.svg#bpdotsregular") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
