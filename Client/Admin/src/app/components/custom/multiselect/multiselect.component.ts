@@ -52,19 +52,20 @@ export class MultiselectComponent implements ControlValueAccessor,AfterViewInit,
   }
 
   writeValue(value) {
+    
     if (value && value.length > 0) {
       this._value = value;
       this.onChange(value);
-      if (this._value.length > 0) {
+      // if (this._value.length > 0) {
         for (let index = 0; index < this._value.length; index++) {
-          if (index) {
+          // if (index) {
             this.selectVal(this._value[index]);          
             if (index == this._value.length -1) {
               this.readyToEmit = true;
             }  
-          }           
+          // }           
         }
-      }      
+      // }      
     }
     else{
       this.valueNeedToDisplay = []

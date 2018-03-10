@@ -14,15 +14,15 @@
                 <div class="row">
                     <div class="man col-md-3">
                           <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
-                          <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="name" placeholder="Enter Name" required>
+                          <input class="text-col-md-3" type="text" pattern=".{3,}" formControlName="name" placeholder="Enter Name" required>
                     </div>
                     <div class="man col-md-3">
                           <h4 class="text-left">Sub domain<a style="color:#f00 !important;">*</a></h4>
-                          <input class="text-col-md-3" type="text" formControlName="subDomain" placeholder="Enter Sub Domain">
+                          <input class="text-col-md-3" type="text" formControlName="subDomain" placeholder="Enter Sub Domain" pattern=".{1,}" >
                     </div>
                     <div class="man col-md-3">
                           <h4 class="text-left">Abbreviation<a style="color:#f00 !important;">*</a></h4>
-                          <input class="text-col-md-3" type="text" formControlName="abbreviation" placeholder="Enter Abbreviation">
+                          <input class="text-col-md-3" type="text" formControlName="abbreviation" placeholder="Enter Abbreviation" pattern=".{1,}" >
                     </div>
                     <div class="man col-md-3">
                             <h4 class="text-left">Affiliated</h4>
@@ -66,32 +66,32 @@
                     </div>             
                     <div class="man col-md-3">
                         <h4 class="text-left">Building</h4>
-                        <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="building" placeholder="Building">
+                        <input class="text-col-md-3" type="text"  formControlName="building" placeholder="Building">
                     </div>
              
                     <div class="man col-md-3">
                         <h4 class="text-left">Street</h4>
-                        <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="street" placeholder="Street">
+                        <input class="text-col-md-3" type="text"  formControlName="street" placeholder="Street">
                     </div>
              
                     <div class="man col-md-3">
                         <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
-                        <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="country" placeholder="Country">
+                        <input class="text-col-md-3" type="text"  formControlName="country" placeholder="Country">
                     </div>
              
                     <div class="man col-md-3">
                         <h4 class="text-left">State</h4>
-                        <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="state" placeholder="State">
+                        <input class="text-col-md-3" type="text"  formControlName="state" placeholder="State">
                     </div>
              
                     <div class="man col-md-3">
                         <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
-                        <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="city" placeholder="City">
+                        <input class="text-col-md-3" type="text"  formControlName="city" placeholder="City">
                     </div>
              
                     <div class="man col-md-3">
                         <h4 class="text-left">Zipcode</h4>
-                        <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="zipcode" placeholder="Zip">
+                        <input class="text-col-md-3" type="text"  formControlName="zipcode" placeholder="Zip">
                     </div>
              
                     <div class="man col-md-3">
@@ -160,7 +160,7 @@
                         </div>
                 </div>                
             </div>    
-            <div class="manage-box radio-box clearfix"> 
+            <!-- <div class="manage-box radio-box clearfix"> 
                  <div class="col-md-12">
                          <label><h2>Affiliation</h2></label>                               
                  </div>
@@ -176,7 +176,7 @@
                         </div>
                     </div>
                  </div>
-            </div>
+            </div> -->
       </div>
     </form>
     

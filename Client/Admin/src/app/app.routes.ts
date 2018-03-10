@@ -68,7 +68,7 @@ import { ImportClubMembersComponent } from './views/club/club-members/import-clu
 
 export const ROUTES:Routes = [
   // Main redirect
-  { path: '', redirectTo: 'organizer', pathMatch: 'full' },
+  { path: '', redirectTo: 'club', pathMatch: 'full' },
 
   // App views
   {
@@ -104,27 +104,27 @@ export const ROUTES:Routes = [
       { path: 'club/manage', component: ManageClubComponent, canActivate: [Auth24Guard] },
       { path: 'club/manage/:_id', component: ManageClubComponent, canActivate: [Auth24Guard] },
 
-      { path: 'club/seasons', component: ClubSeasonsComponent, canActivate: [Auth24Guard] },
-      { path: 'club/seasons/manage', component: ManageClubSeasonsComponent, canActivate: [Auth24Guard] },
-      { path: 'club/seasons/manage/:_id', component: ManageClubSeasonsComponent, canActivate: [Auth24Guard] },
+      // { path: 'club/seasons', component: ClubSeasonsComponent, canActivate: [Auth24Guard] },
+      // { path: 'club/seasons/manage', component: ManageClubSeasonsComponent, canActivate: [Auth24Guard] },
+      // { path: 'club/seasons/manage/:_id', component: ManageClubSeasonsComponent, canActivate: [Auth24Guard] },
 
-      { path: 'club/members', component: ClubMembersComponent, canActivate: [Auth24Guard] },
-      { path: 'club/members/import', component: ImportClubMembersComponent, canActivate: [Auth24Guard] },
+      // { path: 'club/members', component: ClubMembersComponent, canActivate: [Auth24Guard] },
+      // { path: 'club/members/import', component: ImportClubMembersComponent, canActivate: [Auth24Guard] },
 
-      { path: 'club/members/manage', component: ManageClubMembersComponent, canActivate: [Auth24Guard] },
-      { path: 'club/members/manage/:_id', component: ManageClubMembersComponent, canActivate: [Auth24Guard] },
+      // { path: 'club/members/manage', component: ManageClubMembersComponent, canActivate: [Auth24Guard] },
+      // { path: 'club/members/manage/:_id', component: ManageClubMembersComponent, canActivate: [Auth24Guard] },
 
       { path: 'club/clubteam', component: ClubTeamsComponent, canActivate: [Auth24Guard] },
       { path: 'club/clubteam/team', component: TeamComponent, canActivate: [Auth24Guard] },
       { path: 'club/clubteam/team/:_id', component: TeamComponent, canActivate: [Auth24Guard] },
 
-      { path: 'club/classifications', component: ClubClassificationsComponent, canActivate: [Auth24Guard] },
-      { path: 'club/classifications/manage', component: ManageClubClassificationsComponent, canActivate: [Auth24Guard] },
-      { path: 'club/classifications/manage/:_id', component: ManageClubClassificationsComponent, canActivate: [Auth24Guard] },
+      // { path: 'club/classifications', component: ClubClassificationsComponent, canActivate: [Auth24Guard] },
+      // { path: 'club/classifications/manage', component: ManageClubClassificationsComponent, canActivate: [Auth24Guard] },
+      // { path: 'club/classifications/manage/:_id', component: ManageClubClassificationsComponent, canActivate: [Auth24Guard] },
 
-      { path: 'club/tournaments', component: ClubTournamentsComponent, canActivate: [Auth24Guard] },
-      { path: 'club/tournaments/manage', component: ManageclubTournamentsComponent, canActivate: [Auth24Guard] },
-      { path: 'club/tournaments/manage/:_id', component: ManageclubTournamentsComponent, canActivate: [Auth24Guard] },
+      // { path: 'club/tournaments', component: ClubTournamentsComponent, canActivate: [Auth24Guard] },
+      // { path: 'club/tournaments/manage', component: ManageclubTournamentsComponent, canActivate: [Auth24Guard] },
+      // { path: 'club/tournaments/manage/:_id', component: ManageclubTournamentsComponent, canActivate: [Auth24Guard] },
 
       { path: 'users', component: UsersComponent, canActivate: [Auth24Guard] },
       { path: 'users/manage', component: ManageUsersComponent, canActivate: [Auth24Guard] },
@@ -136,21 +136,21 @@ export const ROUTES:Routes = [
       { path: 'sports/manage', component: ManageComponent, canActivate: [Auth24Guard] },
       { path: 'sports/manage/:_id', component: ManageComponent, canActivate: [Auth24Guard] },
 
-      { path: 'sports/points', component: PointsComponent, canActivate: [Auth24Guard] },
-      { path: 'sports/points/manage', component: ManagepointsComponent, canActivate: [Auth24Guard] },
-      { path: 'sports/points/manage/:_id', component: ManagepointsComponent, canActivate: [Auth24Guard] },
+      // { path: 'sports/points', component: PointsComponent, canActivate: [Auth24Guard] },
+      // { path: 'sports/points/manage', component: ManagepointsComponent, canActivate: [Auth24Guard] },
+      // { path: 'sports/points/manage/:_id', component: ManagepointsComponent, canActivate: [Auth24Guard] },
 
-      { path: 'sports/playerstatus', component: PlayerstatusComponent, canActivate: [Auth24Guard] },
-      { path: 'sports/playerstatus/manage', component: ManageplayerstatusComponent, canActivate: [Auth24Guard] },
-      { path: 'sports/playerstatus/manage/:_id', component: ManageplayerstatusComponent, canActivate: [Auth24Guard] },
+      // { path: 'sports/playerstatus', component: PlayerstatusComponent, canActivate: [Auth24Guard] },
+      // { path: 'sports/playerstatus/manage', component: ManageplayerstatusComponent, canActivate: [Auth24Guard] },
+      // { path: 'sports/playerstatus/manage/:_id', component: ManageplayerstatusComponent, canActivate: [Auth24Guard] },
 
-      { path: 'sports/scores', component: ScoresComponent, canActivate: [Auth24Guard] },
-      { path: 'sports/scores/manage', component: ManagescoreComponent, canActivate: [Auth24Guard] },
-      { path: 'sports/scores/manage/:_id', component: ManagescoreComponent, canActivate: [Auth24Guard] },
+      // { path: 'sports/scores', component: ScoresComponent, canActivate: [Auth24Guard] },
+      // { path: 'sports/scores/manage', component: ManagescoreComponent, canActivate: [Auth24Guard] },
+      // { path: 'sports/scores/manage/:_id', component: ManagescoreComponent, canActivate: [Auth24Guard] },
 
-      { path: 'sports/fouls', component: FoulsComponent, canActivate: [Auth24Guard] },
-      { path: 'sports/fouls/manage', component: ManagefoulsComponent, canActivate: [Auth24Guard] },
-      { path: 'sports/fouls/manage/:_id', component: ManagefoulsComponent, canActivate: [Auth24Guard] },
+      // { path: 'sports/fouls', component: FoulsComponent, canActivate: [Auth24Guard] },
+      // { path: 'sports/fouls/manage', component: ManagefoulsComponent, canActivate: [Auth24Guard] },
+      // { path: 'sports/fouls/manage/:_id', component: ManagefoulsComponent, canActivate: [Auth24Guard] },
 
       { path: 'games', component: GamesComponent, canActivate: [Auth24Guard] },
       { path: 'games/manage', component: ManagegameComponent, canActivate: [Auth24Guard] },

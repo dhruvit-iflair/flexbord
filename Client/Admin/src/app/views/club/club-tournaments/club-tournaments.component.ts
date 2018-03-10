@@ -17,13 +17,19 @@ export class ClubTournamentsComponent implements OnInit {
 
   public dtOptions;clubid;
   public rows :Array<any>;
-  public dataRenderer = false;
+  public dataRenderer = true;
   public subscription:Subscription;
   constructor(private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public clubService:ClubService) { }
 
   ngOnInit() {
     this.initializer();
-    this.subscription = this.clubService.getTournamentsList().subscribe(res=>{ this.rows = res; });
+    this.subscription = this.clubService.getTournamentsList().subscribe(res=>{ 
+      this.rows = res; 
+      this.dataRenderer = false;
+        setTimeout(() => {
+          this.dataRenderer = true;
+        }, 50);
+    });
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

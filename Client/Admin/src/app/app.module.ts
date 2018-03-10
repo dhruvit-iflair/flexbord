@@ -112,6 +112,7 @@ import { PlayerComponent } from './views/club/club-teams/player/player.component
 import { StaffComponent } from './views/club/club-teams/staff/staff.component';
 import { CreatePlayerComponent } from './views/club/club-teams/create-player/create-player.component';
 import { CreateStaffComponent } from './views/club/club-teams/create-staff/create-staff.component';
+import { TableComponent } from './components/custom/table/table.component';
 
 @NgModule({
   declarations: [
@@ -184,7 +185,8 @@ import { CreateStaffComponent } from './views/club/club-teams/create-staff/creat
     PlayerComponent,
     StaffComponent,
     CreatePlayerComponent,
-    CreateStaffComponent
+    CreateStaffComponent,
+    TableComponent
   ],
   imports: [
     // Angular modules

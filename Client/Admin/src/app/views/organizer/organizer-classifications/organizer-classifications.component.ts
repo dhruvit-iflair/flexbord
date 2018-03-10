@@ -16,7 +16,7 @@ import { OrganizerService } from '../../../components/services/organizer.service
 export class OrganizerClassificationsComponent implements OnInit {
   public dtOptions;
   public rows: Array<any>;
-  public dataRenderer = false; orgid;
+  public dataRenderer = true; orgid;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public subscribe : Subscription;
   constructor(private http: Http,
@@ -34,6 +34,10 @@ export class OrganizerClassificationsComponent implements OnInit {
     };
     this.subscribe = this.orgService.getClassificationList().subscribe(res=>{
       this.rows = res;
+      this.dataRenderer = false;
+      setTimeout(() => {
+        this.dataRenderer =true;        
+      }, 50);
     })
     this.checkpermissions();
   }

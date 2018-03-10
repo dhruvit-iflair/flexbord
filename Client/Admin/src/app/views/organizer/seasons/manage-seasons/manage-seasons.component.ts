@@ -27,7 +27,7 @@ export class ManageSeasonsComponent implements OnInit {
   public endTime : Date =  new Date();
   public endMinDate = new Date();
   public subscription: Subscription;
-
+  public click:Boolean = true;
   public bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(
@@ -81,16 +81,25 @@ export class ManageSeasonsComponent implements OnInit {
   setTimeValue(startTime){ this.startTime = startTime; }
   endTimeValue(endTime){ this.endTime = endTime; }
   addSesons(){
-    if (this.seasonForm.valid) {
-    var orid=localStorage.getItem('orgid');
-    this.seasonForm.value.organizer=orid;
-      if (this._id) {
-        this.orgService.updateSeason(this._id,this.seasonForm.value);
-        this._id = false;
-      } 
-      else {
-        this.orgService.saveSeason(this.seasonForm.value);
-      }
+    if(this.click){
+      if (this.seasonForm.valid) {
+        this.click = false;
+        var orid=localStorage.getItem('orgid');
+        this.seasonForm.value.organizer=orid;
+          if (this._id) {
+            this.orgService.updateSeason(this._id,this.seasonForm.value);
+            this._id = false;
+            setTimeout(() => {
+              this.click = true;
+            }, 1000);
+          } 
+          else {
+            this.orgService.saveSeason(this.seasonForm.value);
+            setTimeout(() => {
+              this.click = true;
+            }, 1000);
+          }
+        }
     } 
   }
   back(){
@@ -104,8 +113,10 @@ export class ManageSeasonsComponent implements OnInit {
   }
   ngOnInit() {
     this.subscription = this.orgService.getSingleSeason().subscribe(res=>{ 
-      this.seasonForm.patchValue({start_date:res.start_date});
-      this.seasonForm.patchValue({end_date:res.end_date});
+      var t = new Date(res.start_date);
+      var r = new Date(res.end_date);
+      this.seasonForm.patchValue({start_date:t});
+      this.seasonForm.patchValue({end_date:r});
       this.seasonForm.patchValue({name:res.name});
       this._id = res._id;
     });

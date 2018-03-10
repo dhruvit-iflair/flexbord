@@ -33,6 +33,12 @@ export class ManagepointsComponent implements OnInit {
       this._id = res[0]._id;
     })
   }
+  minZero(e){
+    if (this.former.valueofpoint < -1 || this.former.valueofpoint == -1) {
+      this.former.valueofpoint = 0;
+    }
+  }
+  
   ngOnDestroy() {
     this.subscripton.unsubscribe();
     this.former = { nameofpoint: '', valueofpoint: 0, valueofpointopt: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };

@@ -22,7 +22,9 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
   public amki : Array<any>;
   public sports :  Array<any>;
   public sportsValue : Array<any>;
-  public classifications : any;
+  public classifications : Array<any>;
+  public classificationValues : Array<any> = [];
+  public click : Boolean= true;
   public classValue :Array<any>;
   public subscripton : Subscription;
   constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute, public orgService : OrganizerService){
@@ -31,8 +33,9 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
       description: [""],
       sports: [null,[Validators.required]],
       seasons: ["",[Validators.required]],
-      organizerClassifications: ["",[Validators.required]],
-      organizerClassificationsValue: ["",[Validators.required]]
+      // organizerClassifications: ["",[Validators.required]],
+      organizerClassificationsValue: ["",[Validators.required]],
+      competition: ["opened"]
     })
     this.http.get(environment.api + "/organizer/"+localStorage.getItem('orgid')).subscribe((res) => {
       var r = res.json(); 
@@ -61,8 +64,9 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
     this.subscripton = this.orgService.getSingleCompetitionData().subscribe(res=>{
       this.comForm.patchValue(res[0] ,{onlySelf: true});
       this.comForm.patchValue({seasons: res[0].seasons._id },{onlySelf: true});
-      this.comForm.patchValue({organizerClassifications: res[0].organizerClassifications._id },{onlySelf: true});
-      this.getClasValue();
+      // this.comForm.patchValue({organizerClassifications: res[0].organizerClassifications._id },{onlySelf: true});
+      this.classificationValues =res[0].organizerClassificationsValue;
+      // this.getClasValue();
       setTimeout(() => {
         this.comForm.patchValue({organizerClassificationsValue:res[0].organizerClassificationsValue },{onlySelf: true});  
       }, 100);      
@@ -79,25 +83,39 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
     this.orgService.changeTab(4);
   }
   saveVal(){
-   if (this.comForm.valid) {
-     var orid=localStorage.getItem('orgid');
-     this.comForm.value.organizer=orid;
-        if (this._id) {
-          this.orgService.updateCompetition(this._id,this.comForm.value);
-          this.comForm.reset();   
-          this._id = false;       
-        } 
-        else {
-          this.orgService.saveCompetition(this.comForm.value);
-          this.comForm.reset();
-          this._id = false;       
-          
+    if(this.click){
+      if (this.comForm.valid) {
+        this.click = false;
+        var orid=localStorage.getItem('orgid');
+        this.comForm.value.organizer=orid;
+            if (this._id) {
+              this.orgService.updateCompetition(this._id,this.comForm.value);
+              this.comForm.reset();   
+              this._id = false;    
+              setTimeout(() => {
+                this.click = true;
+                this.classificationValues = [];
+              }, 100);   
+            } 
+            else {
+              this.orgService.saveCompetition(this.comForm.value);
+              this.comForm.reset();
+              this._id = false;       
+              setTimeout(() => {
+                this.click = true;
+                this.classificationValues = [];
+                
+              }, 100);   
+            }
+        } else {
+              this.toastr.warning('Please fill up the required fields!', 'Warning');
         }
-     } else {
-          this.toastr.warning('Please fill up the required fields!', 'Warning');
-     }
+      }
   }
   getClasValue(){
-    this.classValue = this.classifications.filter(ad => ad._id == this.comForm.value.organizerClassifications);
+    console.log(this.classificationValues);
+    this.comForm.patchValue({organizerClassificationsValue:this.classificationValues})
+    // this.classValue = this.classifications.filter(ad => ad._id == this.comForm.value.organizerClassifications);
+    
   }
 }
