@@ -1,6 +1,6 @@
 <div class="container manage-container">
     <div class="row">
-        <form [formGroup]="playerForm" class="manage-component-form">
+        <form [formGroup]="playerForm" class="manage-component-form" novalidate>
           <div class="row1">
               <div class="manage-box clearfix">
                     <div class="col-md-12">
@@ -9,22 +9,26 @@
                     <div class="col-md-12">
                     <div class="row">
                         <div class="man col-md-3">
-                            <h4 class="text-left">Member</h4>
-                            <select class="js-example-basic-single text-col-md-3"  name="member" formControlName="member">
-                                <option value="null" disabled="true" value="">Select member</option>    
+                            <h4 class="text-left">Member*</h4>
+                            <select class="js-example-basic-single text-col-md-3" name="members" formControlName="members">
+                                <option value="">Select member</option>    
                                 <option *ngFor="let ite of membersList"  [value]="ite._id">{{ite.firstname}} {{ite.lastname}}</option>
                             </select>
                         </div>
-                        <div class="man col-md-3">
-                              <h4 class="text-left">Shirt Number*<a style="color:#f00 !important;">*</a></h4>
-                              <input class="text-col-md-3" type="text" formControlName="shirt" required>
+                        <div class="man col-md-3" >
+                              <h4 class="text-left">Shirt Number*<a style="color:#f00 !important;"></a></h4>
+                              <input class="text-col-md-3" type="number" name="shirt_number" formControlName="shirt_number" 
+                              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                              maxlength="3" required>
                         </div>
                         <div class="man col-md-3">
                               <h4 class="text-left">Captain</h4>
-                              <input type="checkbox" name="captain" formControlName="captain" required>
+                              <input type="checkbox" name="captain" formControlName="captain">
                         </div>
                         <div class="man col-md-3">
-                            <button class="btn btn_green" (click)='addPlayer()'>Save</button>       
+                            <button class="btn btn_green" *ngIf="!editting" type="submit" (click)="addPlayer()">Save</button>       
+                            <button class="btn btn_green" *ngIf="editting" type="button" (click)="updatePlayer()">Update</button>
+                            <button class="btn btn_green" type="button" (click)="cancelPlayer()">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -33,3 +37,56 @@
         </form>
     </div>
 </div>
+
+
+<!--Listing -->
+
+<div class="row">
+    <div class="container">
+        <div class="col-md-10">
+            <label><h2>List of players</h2></label>
+        </div>
+        <div class="col-md-12" id="tabl">
+        <div class="col-md-12 no_padd mar_btt">
+        </div>
+          <br>
+        <table datatable [dtOptions]="dtOptions" class="row-border hover" >
+                <thead>
+                  <tr>
+                      <th>Captain</th>
+                      <th>Picture</th>
+                      <th>Licence No.</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Shirt</th>
+                      <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of playersList">
+                    <td>{{item.captain}}</td>
+                    <td>
+                      <img src='{{picEnv}}{{item.members.photo}}' class="image_display" style="width:50px;height:50px;">
+                    </td>
+                    <td>{{item.members.license}}</td>
+                    <td>{{item.members.firstname}}</td>
+                    <td>{{item.members.lastname}}</td>
+                    <td>{{item.shirt_number}}</td>
+                    <td>
+                        <a class="btn btn_red tab_btn" title="Teams">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn_green tab_btn"  title="Edit" (click)="edit(item._id)">
+                          <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                       <a class="btn btn_red tab_btn delete-btn" title="Delete" (click)="delete(item._id)" >
+                          <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                  </tr>
+                </tbody>
+        </table>
+        </div>
+    </div>  
+  </div>
+  
