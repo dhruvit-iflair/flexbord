@@ -18,6 +18,7 @@ export class CreateStaffComponent implements OnInit {
   public editedData: any;
   public picEnv = environment.picpoint+"orglogos/";
   editting: boolean = false;
+  public dataRenderer: boolean = true;
   id: any = '';
 
   members : FormControl;
@@ -72,9 +73,11 @@ export class CreateStaffComponent implements OnInit {
   }
 
   staffList() {
+    this.dataRenderer = false;
     this.http.get(environment.api + '/staff')
       .subscribe(res => {
         this.staffsList = res.json();
+        this.dataRenderer = true;
       })
   }
 

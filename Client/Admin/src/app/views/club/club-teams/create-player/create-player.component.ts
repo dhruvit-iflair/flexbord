@@ -19,6 +19,7 @@ export class CreatePlayerComponent implements OnInit {
   public playersList:Array<any> = [];
   public picEnv = environment.picpoint+"orglogos/";
   editting: boolean = false;
+  public renderer: boolean = true;
   id: any = '';
 
   shirt_number: FormControl;
@@ -87,9 +88,6 @@ export class CreatePlayerComponent implements OnInit {
                 if(this.id != '') {
                   if(this.membersList.findIndex(x => x._id == this.editedData.members._id) == -1) {
                     this.membersList.push(this.editedData.members);
-                    // this.playerForm.patchValue({
-                    //   members: this.editedData.members._id
-                    // })
                   }
                 }
               } else {
@@ -101,9 +99,11 @@ export class CreatePlayerComponent implements OnInit {
   }
 
   playerList() {
+    this.renderer = false
     this.http.get(environment.api + '/player')
       .subscribe(res => {
         this.playersList = res.json();
+        this.renderer = true
       })
   }
 
