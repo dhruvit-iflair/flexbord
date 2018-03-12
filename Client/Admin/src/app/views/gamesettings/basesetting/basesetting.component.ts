@@ -25,8 +25,12 @@ export class BasesettingComponent implements OnInit {
           .subscribe(res => {
             this.mForm = res[0];
             this.mForm.sports = res[0].sports._id;
-            if(res[0].settings)
-            this.mForm.settings = res[0].settings._id;
+            if(res[0].settings && res[0].settings!=null){
+              this.mForm.settings = res[0].settings._id;
+            }
+            else{
+              this.mForm.settings='';
+            }
           });
       }
     });
