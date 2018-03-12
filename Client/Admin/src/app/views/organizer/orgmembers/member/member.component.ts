@@ -13,7 +13,8 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class MemberComponent implements OnInit {
   
-  public mForm = { emailAddress: '', status: 'pending', userType: 'organizeradmin' };
+  // public mForm = { emailAddress: '', status: 'pending', userType: 'organizeradmin' };
+  public mForm = { emailAddress: '', userType: 'organizeradmin' };
   public paramdetails = false;
   public _id : any;
   public userId;

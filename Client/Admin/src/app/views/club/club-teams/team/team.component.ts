@@ -24,6 +24,7 @@ export class TeamComponent implements OnInit {
   public teamForm: FormGroup;
   public paramdetails = false;
   public userId; imgdt;
+  public tabz : any;
   public avail = { pchecker: false, daychecker: [], fromtimer: [], totimer: [] };
   public finalavailability = { availability: [] };
   public dayvalues = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];

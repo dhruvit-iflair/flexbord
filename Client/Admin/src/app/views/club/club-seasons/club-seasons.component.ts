@@ -15,7 +15,7 @@ import { ClubService } from '../../../components/services/club.service';
 export class ClubSeasonsComponent implements OnInit {
   public dtOptions; clubid;
   public seasons: Array<any>;
-  public dataRenderer = false;
+  public dataRenderer = true;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public subscription :Subscription
   constructor(public http: Http, private toastr: ToastrService, private accr: AccessorService,public clubService:ClubService) { }
@@ -27,7 +27,13 @@ export class ClubSeasonsComponent implements OnInit {
       columns: [{ "visible": false }, null, null, null, { "orderable": false }]
     };
     this.clubid = localStorage.getItem('clubid');
-    this.subscription = this.clubService.getSeasonList().subscribe((res) => { this.seasons = res; });
+    this.subscription = this.clubService.getSeasonList().subscribe((res) => { 
+      this.seasons = res;
+      this.dataRenderer = false;
+        setTimeout(() => {
+          this.dataRenderer = true;
+        }, 50);
+    });
     this.checkpermissions();
   }
   ngOnDestroy() {

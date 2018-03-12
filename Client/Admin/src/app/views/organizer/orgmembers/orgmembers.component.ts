@@ -15,7 +15,7 @@ import { Subject } from 'rxjs/Subject';
 })
 export class OrgmembersComponent implements OnInit {
   members; dtOptions; orgid;
-  public dataRenderer = true;
+  public dataRenderer = false;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public subscription: Subscription;
   dtTrigger: Subject<any> = new Subject();
@@ -24,14 +24,20 @@ export class OrgmembersComponent implements OnInit {
 
   ngOnInit() {
     this.orgid = localStorage.getItem('orgid');
-    this.subscription = this.orgService.getMembersList().subscribe(res =>{  this.members = res.json(); this.dtTrigger.next();});
+    this.subscription = this.orgService.getMembersList().subscribe(res =>{  
+      this.members = res.json(); 
+      this.dataRenderer =false;
+      setTimeout(() => {
+        this.dataRenderer =true;        
+      }, 50)  
+    });
     this.gotcha();
   }
   gotcha() {
     this.dtOptions = {
       pagingType: 'simple_numbers',
       order: [[0, 'desc']],
-      columns: [{ "visible": false }, null, null, null, { "orderable": false }]
+      columns: [{ "visible": false }, null, null, { "orderable": false }]
     }
     this.checkpermissions();
   }

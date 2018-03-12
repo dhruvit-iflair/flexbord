@@ -10,7 +10,7 @@ span.boxwitoutTouch{
 }
 a.btn.btn-lg.dropdown-toggle.col-md-12 {
     background-color: #fff;
-    height: 40px;
+    height: 30px;
 }
 span.boxwitoutTouch{
     font-size: 17px;
@@ -31,7 +31,7 @@ span.boxwitoutTouch{
     background-color: #f4f4f4;
     box-shadow: 1px 2px 3px #868686;
     position: relative;
-    top: -5px;
+    top: 0px;
 }
 ul.dropdown-menu.col-md-8 {
     /* padding-left: 14px; */
@@ -50,7 +50,7 @@ li {
 input.no_border.text.col-md-12.ng-untouched.ng-pristine.ng-valid{
     /* width: 95%; */
     border: 1px solid #c3c3c3;
-    height: 39px;
+    height: 30px;
     margin-right: -22px;
 }
 span.box {

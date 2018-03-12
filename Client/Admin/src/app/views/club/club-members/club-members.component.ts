@@ -16,7 +16,7 @@ export class ClubMembersComponent implements OnInit {
   public members; 
   public dtOptions;
   public clubid;
-  public dataRenderer = false;
+  public dataRenderer = true;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public subscription :Subscription;
   public picEnv = environment.picpoint+"clubMembersPhoto/";
@@ -32,6 +32,10 @@ export class ClubMembersComponent implements OnInit {
     this.clubid = localStorage.getItem('clubid');
     this.subscription = this.clubService.getMembersList().subscribe((res) => { 
       this.members = res; 
+      this.dataRenderer = false;
+        setTimeout(() => {
+          this.dataRenderer = true;
+        }, 50);
     });    
     this.gotcha();
   }

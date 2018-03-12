@@ -25,9 +25,11 @@ export class ManagescoreComponent implements OnInit {
               public sportService:SportsService) { }
 
   ngOnInit() {
-    this.subscription = this.sportService.getSingleScoreData().subscribe(res=>{
-      this.former = res[0];
-      this._id = res[0]._id;
+    this.subscription = this.sportService.getScoreList().subscribe(res=>{
+      if (res) {
+        this.former = res[0];
+        this._id = res[0]._id; 
+      }
     })
   }
   reset(){

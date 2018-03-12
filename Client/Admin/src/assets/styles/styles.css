@@ -189,7 +189,7 @@ ul.nav-second-level {
 }
 .nav > li.active {
   border-left: 4px solid #F3825B;
-  background: #293846;
+  background: transparent !important;
 }
 .nav.nav-second-level > li.active {
   border: none;
@@ -1181,7 +1181,7 @@ body bs-datepicker-container, body bs-daterangepicker-container {
 }
 body input[type="number"] {
   width: 100%;
-  height: 34px;
+  height: 30px;
     
 }
 
@@ -9350,9 +9350,9 @@ ul.nav.metismenu li.nav-header span.email,ul.nav.metismenu li.nav-header span.em
 form.m-t.ng-untouched.ng-pristine.ng-valid select {
     height: 34px;
 }
-.manage-box .man select {
+/* .manage-box .man select {
     height: 35px;
-}
+} */
 .dataTables_wrapper.no-footer .dataTables_length label {
     font-size: 13px;
     font-weight: normal;
@@ -9375,7 +9375,6 @@ i.fa.fa-pencil {
 body .button-group .btn.btn-lg.dropdown-toggle span.boxwitoutTouch {
     font-size: 13px;
 }
-
 a.btn.btn_pending.tab_btn {
     background: #191919 !important;
 }
@@ -9484,3 +9483,32 @@ a.btn.btn_pending.tab_btn {
 .nav > li.active, .nav > li:hover, .navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus{
     background: #fff !important;
 } */
+a.nav-link.disabled {
+  display: none;
+}
+.form-control[disabled], fieldset[disabled] .form-control {
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.54);
+}
+
+/* 9March */
+.man.col-md-6 .form-control.ng-untouched.ng-pristine.ng-invalid a {
+	height: 32px;
+}
+.man.col-md-6 .form-control.ng-untouched.ng-pristine.ng-invalid .caret {
+	left: 97% !important;
+	top: -24px;
+}
+.manage-component-form.ng-untouched.ng-pristine.ng-valid .col-md-4 .manage-box.clearfix .text-left {
+	float: left;
+	width: auto;
+}
+.manage-component-form.ng-untouched.ng-pristine.ng-valid .col-md-4 .manage-box.clearfix input[type="checkbox"] {
+	width: auto;
+	display: inline-block;
+	margin-left: 10px;
+}
+.button-group {
+  padding: 0;
+  margin: -5px;
+}

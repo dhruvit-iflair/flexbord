@@ -13,10 +13,10 @@ li.nav-item.active,
 .nav > li.active, .nav > li:hover{
    background: #fff !important;    
 }
-li.nav-item.active,
-.nav > li.active{
+tabset.tab-container > ul.nav.nav-tabs >li.nav-item.active, .nav > li:hover,
+.navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus {
     background: #fff !important;
 }
-.nav-item {
-    background: #fff !important;
+a.nav-link.disabled {
+    display: none;
 }

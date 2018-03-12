@@ -13,7 +13,7 @@
        
         </div>
         <br>
-        <table datatable  [dtOptions]="dtOptions" class="row-border hover">
+        <table datatable  [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer" >
           <thead>
             <tr>
               <th>_id</th>              
@@ -30,11 +30,11 @@
               <td>{{s.start_date | dateFormatPipe :'dd/MM/yy'}} </td>
               <td>{{s.end_date | dateFormatPipe :'dd/MM/yy'}}</td>
               <td>
-                <a class="btn btn_green tab_btn"  (click)="editSeason(s._id);" *ngIf="hasEditPerm" title='Edit'>
-                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                <a class="btn btn_green tab_btn"  title='Edit' alt='Edit' (click)="editSeason(s._id);" *ngIf="hasEditPerm" >
+                  <i class="fa fa-pencil"></i>
                 </a>
-                <a class="btn btn_red tab_btn delete-btn" (click)="delOrg(s._id)" *ngIf="hasDeletePerm" title="Delete">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
+                <a class="btn btn_red tab_btn delete-btn" title="Delete" alt="Delete" (click)="delOrg(s._id)" *ngIf="hasDeletePerm" >
+                  <i class="fa fa-trash"></i>
                 </a>
               </td>
             </tr>            

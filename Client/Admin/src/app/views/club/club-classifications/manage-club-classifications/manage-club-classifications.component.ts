@@ -89,9 +89,12 @@ export class ManageClubClassificationsComponent implements OnInit {
     return index;
   }
   delVal(index){
-    if (this.value.length > 1) {
-      this.value.splice(index,1);      
-    }
+    var del = confirm("Confirm to delete this Value!");
+    if (del) {
+      if (this.value.length > 1) {
+        this.value.splice(index,1);      
+      }
+    }    
     //console.log(index);
   }
 }

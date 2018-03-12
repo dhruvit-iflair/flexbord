@@ -44,6 +44,7 @@ export class ManageOrganizerComponent implements OnInit {
   public user:any; 
   public subscription: Subscription;
   public tabz: any;
+  public click :Boolean = true;
   // public value : any = 9;
   // public value2 : Array<string> =["0: 1", "1: 2", "2: 3", "3: 4", "4: 5"];
   constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public userSer:UserService,public orgService:OrganizerService) {
@@ -52,12 +53,12 @@ export class ManageOrganizerComponent implements OnInit {
       subDomain: ["",[Validators.required]],
       abbreviation: ["",[Validators.required]],
       logo: [""], 
-      address: ["",[Validators.required]],
+      address: [""],
       building: [""],
       street: [""],
       city: ["",[Validators.required]],
       state: [""],
-      country: [""],
+      country: ["",[Validators.required]],
       zipcode: [""],
       website: [""],
       email: ["",[Validators.email]],
@@ -65,11 +66,11 @@ export class ManageOrganizerComponent implements OnInit {
       roles: [''],
       // phonenumber: [null,[Validators.required,Validators.minLength(10),Validators.maxLength(12)]],
       phonenumber: [null],
-      sports: [""],
-      capacity:  [0],
+      sports: [[]],
+      capacity:  [1],
       placePic: [null],
       affilated:  [""],
-      affilation:  ["closed"],
+      affilation:  ["opened"],
       registered: [null]
     })  
     this.orgForm.get('capacity').valueChanges.subscribe(val => {
@@ -117,12 +118,19 @@ export class ManageOrganizerComponent implements OnInit {
                  if(fagdf.length > 0){
                     var comming = res.json();
                     this.orgdata = comming[0];
-                    this.logo = environment.picpoint +'orglogos/'+ comming[0].logo;
+                    if (comming[0].logo) {
+                      this.logo = environment.picpoint +'orglogos/'+ comming[0].logo;                      
+                    } else {
+                      this.logo = "assets/noimage.jpg";
+                    }
                     var yaar = [];
                     if (comming[0].placePic) {
                       comming[0].placePic.forEach((asd)=>{
                         yaar.push(environment.picpoint +'orgplacepics/'+ asd);
                       })
+                    }
+                    else {
+                      this.logo2 = ["assets/noimage.jpg"];
                     }
                     this.logo2 = yaar;
                     this.orgForm.patchValue( comming[0]);
@@ -263,55 +271,44 @@ export class ManageOrganizerComponent implements OnInit {
       
     }
   }
-    addOrg(){     
-      var usn = this.user.filter((u)=>{ 
-        return u.username == this.orgForm.value.email;
-      });
-      // if (this.orgForm.value.logo == "" || this.orgForm.value.placePic == null || usn[0]) {
-      //   if (this.orgForm.value.logo == "") {
-      //     this.toastr.warning('Please upload logo ', 'Warning');
-      //   }
-      //   if (this.orgForm.value.placePic == null) {
-      //     this.toastr.warning('Please upload placepic images', 'Warning');
-      //   }
-      //   if (usn[0]) {
-      //     console.log(usn)
-      //     this.toastr.error('This Email is already taken', 'Error');
-      //   }
-      // }
-      // else{
-            if (this._id) {
-              // this.orgForm.patchValue({sports :this.spotsIns});    
-              this.http.put(environment.api +"/organizer/"+this._id,this.orgForm.value)
-                      .subscribe((res)=>{
-                        var d = res.json();
-                        if (d._id) {
-                          this.toastr.success('Organizer Updated Successfully', 'Success');
-                          this.router.navigate(['/organizer']);
-                        }
-                      },(error)=>{
-                        this.toastr.error('Something went wrong !! Please try again later', 'Error');
-                      })
-            } 
-            else {
-              var h = new Date().getHours();
-              var m = new Date().getMinutes();
-              var r = new Date();
-              r.setHours(h);
-              r.setMinutes(m);
-              // this.orgForm.patchValue({sports :this.spotsIns});                              
-              this.orgForm.patchValue({registered :r});                              
-              this.http.post(environment.api +"/organizer",this.orgForm.value)
-                      .subscribe((res)=>{
-                        var d = res.json();
-                        if (d._id) {
-                          this.toastr.success('Organizer Registered Successfully', 'Success');
-                          this.router.navigate(['/organizer/manage/'+d._id]);
-                        }
-                      },(error)=>{
-                        this.toastr.error('Something went wrong !! Please try again later', 'Error');
-                      })
-            }
-     // }
+    addOrg(){   
+      if (this.click) {
+        this.click = false;
+        var usn = this.user.filter((u)=>{ 
+            return u.username == this.orgForm.value.email;
+        });
+        if (this._id) {
+          this.http.put(environment.api +"/organizer/"+this._id,this.orgForm.value).subscribe((res)=>{
+              this.click = true;
+              var d = res.json();
+              if (d._id) {
+                  this.toastr.success('Organizer Updated Successfully', 'Success');
+                  this.router.navigate(['/organizer']);
+              }
+          },(error)=>{
+              this.click = true
+              this.toastr.error('Something went wrong !! Please try again later', 'Error');
+          })
+        } 
+        else {
+          var h = new Date().getHours();
+          var m = new Date().getMinutes();
+          var r = new Date();
+          r.setHours(h);
+          r.setMinutes(m);
+          this.orgForm.patchValue({registered :r});                              
+          this.http.post(environment.api +"/organizer",this.orgForm.value).subscribe((res)=>{
+              this.click = true;
+              var d = res.json();
+              if (d._id) {
+                this.toastr.success('Organizer Registered Successfully', 'Success');
+                this.router.navigate(['/organizer/manage/'+d._id]);
+              }
+          },(error)=>{
+              this.click = true;
+              this.toastr.error('Something went wrong !! Please try again later', 'Error');
+          })
+        }
+      } 
     }
 }

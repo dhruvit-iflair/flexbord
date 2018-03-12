@@ -9,7 +9,7 @@
           </button>                         
       </div> -->
       <div class="col-md-12">
-        <table datatable [dtOptions]="dtOptions" class="row-border hover">
+        <table datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer" >
             <thead>
               <tr>
                 <th>_ID</th>

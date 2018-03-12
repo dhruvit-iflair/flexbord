@@ -52,11 +52,11 @@
           </div>
           <div class="man col-md-4">
             <label>Scoring Dependable?</label>
-            <input type="checkbox" class="form-control" [(ngModel)]="former.isscoringdependable" [ngModelOptions]="{standalone: true}">
+            <input type="checkbox" class="form-control" [(ngModel)]="former.isscoringdependable" [ngModelOptions]="{standalone: true}" disabled>
           </div>
           <div class="man col-md-4">
             <label>Possession Dependable?</label>
-            <input type="checkbox" class="form-control" [(ngModel)]="former.ispossessiondependable" [ngModelOptions]="{standalone: true}">
+            <input type="checkbox" class="form-control" [(ngModel)]="former.ispossessiondependable" [ngModelOptions]="{standalone: true}" disabled>
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@
 
         <div class="man col-md-6">
           <label>Minus Time</label>
-          <input type="text" class="form-control" [(ngModel)]="former.minustime" placeholder=" " [ngModelOptions]="{standalone: true}">
+          <input type="text" class="form-control" [(ngModel)]="former.minustime" placeholder=" " [ngModelOptions]="{standalone: true}" disabled>
         </div>
         
     </form>
