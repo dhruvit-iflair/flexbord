@@ -19,7 +19,8 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
   public value : Array<any> = [''];
   public sub : any;
   public _id : any;orgid;
-  public subscription:Subscription
+  public subscription:Subscription;
+  public click :Boolean = true;
   constructor(public fb: FormBuilder,
               private http : Http,
               private toastr : ToastrService,
@@ -46,32 +47,6 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
     this.sub = this.activeRouter.params.subscribe(params => {
       if (params._id) {
          this.orgid = params._id;
-    //     this.http.get(environment.api + '/organizerClassifications/'+ params._id)
-    //            .subscribe((res)=>{
-    //              var fagdf = res.json();
-    //              if(fagdf.length > 0){
-    //                   this.claForm = this.fb.group({
-    //                     name: [fagdf[0].name,[Validators.required]],
-    //                     value: [fagdf[0].value,[Validators.required]]
-    //                   })
-    //                   this.value = [];
-    //                   fagdf[0].value.forEach(element => {
-    //                       this.value.push(element);
-    //                   });
-    //              }
-    //             //  else {
-    //             //       this.toastr.error('Error!! No Classifications found!', 'Error');
-    //             //       this.router.navigate(['/organizer/classifications']);
-    //             //   }
-    //              },(error)=>{
-    //                   this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-    //             });
-    //   }
-    //   else{
-    //     this.claForm = this.fb.group({
-    //       name: ["",[Validators.required]],
-    //       value: [null,[Validators.required]]
-    //     })
       }
    });
   }
@@ -99,39 +74,52 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
       }
     }
     this.claForm.patchValue({value:this.value});
-    if (this.claForm.valid && p && !isDuplicate) {
-      this.claForm.value.organizer=this.orgid;
-      if (this._id) {
-        this.orgService.updateClassificationData(this._id,this.claForm.value);
-        this._id = false;
-        this.value = [""];
-        this.claForm.reset();        
-      }     
-      else if (this.claForm.value.value[0] == ''){
-        this.toastr.warning('One values is required', 'Warning');    
+    if(this.click){
+        if (this.claForm.valid && p && !isDuplicate) {
+          this.claForm.value.organizer=this.orgid;
+          this.click = false;
+          if (this._id) {
+            this.orgService.updateClassificationData(this._id,this.claForm.value);
+            this._id = false;
+            this.value = [""];
+            this.claForm.reset();    
+            setTimeout(() => {
+              this.click = true;
+            }, 1000);    
+          }     
+          else if (this.claForm.value.value[0] == ''){
+            this.toastr.warning('One values is required', 'Warning');  
+            setTimeout(() => {
+              this.click = true;
+            }, 100);      
+          }
+          else {
+            this.orgService.saveClassification(this.claForm.value);
+            this.claForm.reset();
+            this.value = [""];
+            setTimeout(() => {
+              this.click = true;
+            }, 1000);    
+          }
+        }
+        else if(isDuplicate){
+          this.toastr.warning('Duplicate Value not allowed', 'Warning');    
+        }
+        else{
+          this.toastr.warning('Please fill up all the values', 'Warning');
+        }
       }
-      else {
-        this.orgService.saveClassification(this.claForm.value);
-        this.claForm.reset();
-        this.value = [""];
-        
-      }
-    }
-    else if(isDuplicate){
-      this.toastr.warning('Duplicate Value not allowed', 'Warning');    
-    }
-    else{
-      this.toastr.warning('Please fill up all the values', 'Warning');
-    }
   }
   trackByIndex(index: number, value: number) {
     return index;
   }
   delVal(index){
-    if (this.value.length > 1) {
-      this.value.splice(index,1);      
-    }
-    //console.log(index);
+    var del = confirm("Confirm to delete this Value!");
+    if (del) {
+      if (this.value.length > 1) {
+        this.value.splice(index,1);      
+      }
+    }      
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

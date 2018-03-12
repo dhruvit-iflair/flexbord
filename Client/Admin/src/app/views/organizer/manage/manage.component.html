@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="man col-md-3">
                               <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
-                              <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="name" required placeholder="Enter Full Name">
+                              <input class="text-col-md-3" type="text" pattern=".{3,}" formControlName="name" required placeholder="Enter Full Name">
                               <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('name').valid && orgForm.get('name').touched">
                                     Name is required.
                               </div>
@@ -57,10 +57,12 @@
                                     </span>           -->
                                 </div>
                                 <div class="man col-md-4" *ngIf="logo && !url" >
-                                      <img [src]="logo" class="image_display">               
+                                      <img [src]="logo" class="image_display" *ngIf="logo != ''">               
+                                      <img src="assets/noimage.jpg" *ngIf="logo == ''" >
                                 </div>
                                 <div class="man col-md-4" *ngIf="url" >
-                                      <img [src]="url" class="image_display">               
+                                      <img [src]="url" class="image_display" *ngIf="url" >               
+                                      <img src="assets/noimage.jpg" *ngIf="url == ''" >                                      
                                 </div>
                                 <div class="col-md-12" style="padding-top: 10px; color:red">
                                     <p style="font-size: small; color:red;" *ngIf="fileSizeMin" >Min Size of image should be 150 Kb.</p>
@@ -79,7 +81,7 @@
                    </div>
                     <div class="col-md-12">
                         <div class="row">
-                        <div class="man col-md-3"><h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
+                        <div class="man col-md-3"><h4 class="text-left">Address</h4>
                             <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event);" Googleplace #box >
                             <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('address').valid && orgForm.get('address').touched">
                                     Address is required.
@@ -88,37 +90,37 @@
                  
                         <div class="man col-md-3">
                             <h4 class="text-left">Building</h4>
-                            <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="building" placeholder="Building">
+                            <input class="text-col-md-3"   type="text"  formControlName="building" placeholder="Building">
                         </div>
                  
                         <div class="man col-md-3">
                             <h4 class="text-left">Street</h4>
-                            <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="street" placeholder="Street">
+                            <input class="text-col-md-3"   type="text"  formControlName="street" placeholder="Street">
                         </div>
                  
                         <div class="man col-md-3">
                             <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
-                            <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="country" placeholder="Country">
+                            <input class="text-col-md-3"   type="text"  formControlName="country" placeholder="Country">
                         </div>
                  
                         <div class="man col-md-3">
                             <h4 class="text-left">State</h4>
-                            <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="state" placeholder="State">
+                            <input class="text-col-md-3"   type="text"  formControlName="state" placeholder="State">
                         </div>
                  
                         <div class="man col-md-3">
                             <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
-                            <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="city" placeholder="City">
+                            <input class="text-col-md-3"   type="text"  formControlName="city" placeholder="City">
                         </div>
                  
                         <div class="man col-md-3">
                             <h4 class="text-left">Zip code</h4>
-                            <input class="text-col-md-3" disabled="disabled" type="text"  formControlName="zipcode" placeholder="Zip code">
+                            <input class="text-col-md-3"   type="text"  formControlName="zipcode" placeholder="Zip code">
                         </div>
                  
                         <div class="man col-md-3">
                             <h4 class="text-left">Capacity</h4>
-                            <input class="text-col-sm-3"  type="number" formControlName="capacity" max="9999999" style="width: 100%;" value="0" min="0" oninput="validity.valid||(value='');">
+                            <input class="text-col-sm-3"  type="number" formControlName="capacity" max="9999999" style="width: 100%;" value="1" min="1" oninput="validity.valid||(value='');">
                             <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('capacity').valid && orgForm.get('capacity').touched">
                                     Capicity is required.
                             </div>
@@ -189,7 +191,7 @@
                          <label><h2>Sports</h2></label>
                     </div>
                      <div class="man col-md-12">
-                            <h4 class="text-left">Choose<a style="color:#f00 !important;">*</a></h4>
+                            <h4 class="text-left">Choose</h4>
                             <div class="multi-wrap">
                             <app-multiselect [mArray]='spots' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="spots? spots.length > 0 : spots" ></app-multiselect></div>
                             <div class="col-md-12" *ngIf="!spots? spots == [] : spots.length == 0">

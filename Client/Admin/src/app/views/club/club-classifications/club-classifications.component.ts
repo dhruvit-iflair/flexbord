@@ -16,7 +16,7 @@ import { ClubService } from '../../../components/services/club.service';
 export class ClubClassificationsComponent implements OnInit {
   public dtOptions;
   public rows: Array<any>;
-  public dataRenderer = false; clubid;
+  public dataRenderer = true; clubid;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public subscription:Subscription;
 
@@ -31,6 +31,10 @@ export class ClubClassificationsComponent implements OnInit {
     this.clubid = localStorage.getItem('clubid');
     this.subscription = this.clubService.getClassificationsList().subscribe((res) => {
         this.rows = res;
+        this.dataRenderer = false;
+        setTimeout(() => {
+          this.dataRenderer = true;
+        }, 50);
     });
     this.checkpermissions();
   }

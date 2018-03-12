@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class OrganizerCompetitionsComponent implements OnInit {
   public dtOptions;orgid;
   public rows :Array<any>;
-  public dataRenderer = false;
+  public dataRenderer = true;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public subscription :Subscription
   constructor(private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,private accr: AccessorService,public orgService:OrganizerService) { }
@@ -25,6 +25,10 @@ export class OrganizerCompetitionsComponent implements OnInit {
   ngOnInit() {
     this.subscription = this.orgService.getCompetitionsList().subscribe(res=>{
         this.rows = res;
+        this.dataRenderer = false;
+        setTimeout(() => {
+          this.dataRenderer = true;
+        }, 50);
     })
     this.initializer();
   }

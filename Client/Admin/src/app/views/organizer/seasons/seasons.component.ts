@@ -14,7 +14,7 @@ import { OrganizerService } from '../../../components/services/organizer.service
 export class SeasonsComponent implements OnInit {
   public dtOptions;
   public seasons: Array<any>;
-  public dataRenderer = false;
+  public dataRenderer = true;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public subscription: Subscription;
   constructor(public http: Http, private toastr: ToastrService, private accr: AccessorService,public orgService:OrganizerService ) { }
@@ -25,7 +25,13 @@ export class SeasonsComponent implements OnInit {
       order: [[0, 'desc']],
       columns: [{ "visible": false }, null, null, null, { "orderable": false }]
     };
-    this.subscription = this.orgService.getSeasonList().subscribe(res=>{ this.seasons = res;})
+    this.subscription = this.orgService.getSeasonList().subscribe(res=>{ 
+      this.seasons = res;
+      this.dataRenderer = false;
+      setTimeout(() => {
+        this.dataRenderer =true;        
+      }, 50);
+    })
     this.checkpermissions();
   }
   ngOnDestroy() {

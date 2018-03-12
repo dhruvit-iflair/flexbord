@@ -1,3 +1,611 @@
+<div class="container manage-container">
+  <div class="row">
+    <div class="manage-screener clearfix">
+      <div id="screener">
+        <div class="col-md-12" style="padding:0px;" *ngIf="addTeam">
+          <div class="col-md-4">
+            <div class="manage-team-logo" *ngIf="mForm.teamslogo.isEnable==true">
+              <div id="teamlogotitle" class="labeledcolor">{{mForm.teamslogo.titlevalue}}</div>
+              <img src="assets/logo.png" id="teamlogo" height="35px" width="150px" />
+            </div>
+            <div class="manage-points" *ngIf="mForm.points.isEnable==true">
+              <div id="teampointstitle" class="pointslabel">{{mForm.points.titlevalue}}</div>
+              <span id="teampointsvalue" class="pointsspan">{{mForm.points.value}}</span>
+            </div>
+            <div class="manage-points" *ngIf="mForm.bonus.isEnable==true">
+              <div id="teambonustitle" class="pointslabel">{{mForm.bonus.titlevalue}}</div>
+              <!--<span id="teampointsvalue">{{mForm.points.value}}</span>-->
+            </div>
+            <div class="manage-points" *ngIf="mForm.statistics.isEnable==true">
+              <div id="teamstatisticstitle" class="statisticslabel">{{mForm.statistics.titlevalue}}</div>
+              <span id="teamstatisticsvalue" class="statisticsspan">{{mForm.statistics.value}}</span>
+            </div>
+            <div class="manage-points" *ngIf="mForm.fouls.isEnable==true">
+              <div id="teamfoulstitle" class="pointslabel">{{mForm.fouls.titlevalue}}</div>
+              <span id="teamfoulsvalue" class="foulspan">{{mForm.fouls.value}}</span>
+            </div>
+            <div class="manage-points" *ngIf="mForm.timeouts.isEnable==true">
+              <div id="teamtimeoutstitle" class="pointslabel">{{mForm.timeouts.titlevalue}}</div>
+              <span id="teamtimeoutsvalue" class="foulspan">{{mForm.timeouts.value}}</span>
+            </div>
+            <div class="manage-team-penalty" *ngIf="mForm.playerpenlty.isEnable==true">
+              <div id="teamplayerpenltytitle" class="labeledcolor">{{mForm.playerpenlty.titlevalue}}</div>
+              <img src="assets/logo.png" id="teamplayerpenlty" height="35px" width="200px" />
+            </div>
+          </div>
+          <div class="col-md-4 minheight">
+            <div class="manage-game-clock" *ngIf="mForm.gameclock.isEnable==true" style="line-height:0.8;">
+              <div id="gameclocktitle" class="labeledcolor">{{mForm.gameclock.titlevalue}}</div>
+              <span id="gameclockvalue">{{mForm.gameclock.value}}</span>
+            </div>
+            <!--<div class="manage-period" *ngIf="mForm.gameperiod.isEnable==true" style="line-height:0.8;">
+                  <div id="periodtitle" class="labeledcolor">{{mForm.gameperiod.titlevalue}}</div>
+                  <span id="periodvalue">{{mForm.gameperiod.value}}</span>
+                </div>-->
+            <div class="manage-shot-clock" *ngIf="mForm.gameshotclock.isEnable==true">
+              <div id="shotclocktitle" class="labeledcolor">{{mForm.gameshotclock.titlevalue}}</div>
+              <span id="shotclockvalue">{{mForm.gameshotclock.value}}</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+        <div id="pointstructural" class="col-md-12 changedcss" *ngIf="addTeam">
+          <div id="teampointstructuretitle" class="manage-pointstructure" *ngIf="mForm.pointstructure.isEnable==true">
+            <div> </div>
+            <div *ngFor="let x of temp">
+              <div class="defaultcss">
+                {{x}}
+              </div>
+            </div>
+          </div>
+          <div id="teampointstructurevalue" class="manage-pointstructure" *ngIf="mForm.pointstructure.isEnable==true">
+            <div>P 1</div>
+            <div *ngFor="let x of temp">
+              <div class="defaultcss">
+                0
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <form class="manage-component-form">
+    <div class="col-md-12">
+      <div class="row1">
+        <div class="manage-box clearfix">
+          <div class="col-md-12">
+            <label><h2>Scoreboards</h2></label>
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="man col-md-12">
+                <h4 class="text-left">Display Name</h4>
+                <input class="text-col-md-3" type="text" [(ngModel)]="mForm.dispName" [ngModelOptions]="{standalone: true}">
+              </div>
+              <div class="man col-md-12">
+                <h4 class="text-left">Style</h4>
+                <input class="text-col-md-3" type="text" [(ngModel)]="mForm.dispStyle" [ngModelOptions]="{standalone: true}">
+              </div>
+              <div class="man col-md-12 autoheight">
+                <h4 class="text-left">Show On</h4>
+                <div>
+                  <input class="text-col-md-3" type="checkbox" [(ngModel)]="mForm.dispShownOn.timeouts" [ngModelOptions]="{standalone: true}">Timeouts
+                  <input class="text-col-md-3" type="checkbox" [(ngModel)]="mForm.dispShownOn.break" [ngModelOptions]="{standalone: true}">Break
+                  <input class="text-col-md-3" type="checkbox" [(ngModel)]="mForm.dispShownOn.period" [ngModelOptions]="{standalone: true}">Period
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="manage-box clearfix">
+          <div class="col-md-12">
+            <label style="display: inline-block;"><h2>Game Clock</h2></label>
+            <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="checkenable()" [(ngModel)]="mForm.gameclock.isEnable"
+              [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="col-md-12" *ngIf="mForm.gameclock.isEnable==true">
+            <div class="row">
+              <div class="man col-md-12">
+                <div class="man col-md-6">
+                  <h4 class="text-left">Style</h4>
+                  <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.gameclock.valuestyle" (ngModelChange)="setgamevaluestyler()"
+                    [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+                <div class="man col-md-6">
+                  <h4 class="text-left">Title Style</h4>
+                  <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.gameclock.titlestyle" (ngModelChange)="setgametitlestyler()" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+              </div>
+              <div class="man col-md-12">
+                <div class="man col-md-6">
+                  <h4 class="text-left">Value</h4>
+                  <input class="text-col-md-3" type="time" [(ngModel)]="mForm.gameclock.value" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="man col-md-6">
+                  <h4 class="text-left">Title Value</h4>
+                  <input class="text-col-md-3" type="text" [(ngModel)]="mForm.gameclock.titlevalue" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="manage-box clearfix">
+          <div class="col-md-12">
+            <label style="display: inline-block;"><h2>Shot Clock</h2></label>
+            <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="shotcheckenable()" [(ngModel)]="mForm.gameshotclock.isEnable"
+              [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="col-md-12" *ngIf="mForm.gameshotclock.isEnable==true">
+            <div class="row">
+              <div class="man col-md-12">
+                <div class="man col-md-6">
+                  <h4 class="text-left">Style</h4>
+                  <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.gameshotclock.valuestyle" (ngModelChange)="setshotvaluestyler()"
+                    [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+                <div class="man col-md-6">
+                  <h4 class="text-left">Title Style</h4>
+                  <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.gameshotclock.titlestyle" (ngModelChange)="setshottitlestyler()"
+                    [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+              </div>
+              <div class="man col-md-12">
+                <div class="man col-md-6">
+                  <h4 class="text-left">Value</h4>
+                  <input class="text-col-md-3" type="number" [(ngModel)]="mForm.gameshotclock.value" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="man col-md-6">
+                  <h4 class="text-left">Title Value</h4>
+                  <input class="text-col-md-3" type="text" [(ngModel)]="mForm.gameshotclock.titlevalue" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--<div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Period</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="periodcheckenable()" [(ngModel)]="mForm.gameperiod.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.gameperiod.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.gameperiod.valuestyle" (ngModelChange)="setperiodvaluestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.gameperiod.titlestyle" (ngModelChange)="setperiodtitlestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="number" [(ngModel)]="mForm.gameperiod.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.gameperiod.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>-->
+
+        <div class="manage-box clearfix">
+          <div class="col-md-12">
+            <label style="display: inline-block;"><h2>Period Title</h2></label>
+            <input style="float: right;" class="text-col-md-3" type="checkbox" [(ngModel)]="mForm.gameperiodtitle.isEnable" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="col-md-12" *ngIf="mForm.gameperiodtitle.isEnable==true">
+            <div class="row">
+              <div class="man col-md-12">
+                <div class="man col-md-6">
+                  <h4 class="text-left">Style</h4>
+                  <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.gameperiodtitle.valuestyle" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+                <div class="man col-md-6">
+                  <h4 class="text-left">Title Style</h4>
+                  <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.gameperiodtitle.titlestyle" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+              </div>
+              <div class="man col-md-12">
+                <div class="man col-md-6">
+                  <h4 class="text-left">Value</h4>
+                  <input class="text-col-md-3" type="number" [(ngModel)]="mForm.gameperiodtitle.value" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="man col-md-6">
+                  <h4 class="text-left">Title Value</h4>
+                  <input class="text-col-md-3" type="text" [(ngModel)]="mForm.gameperiodtitle.titlevalue" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--<div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Clock Banner</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" [(ngModel)]="mForm.gameclockbanner.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.gameclockbanner.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.gameclockbanner.valuestyle"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.gameclockbanner.titlestyle"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="number" [(ngModel)]="mForm.gameclockbanner.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.gameclockbanner.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>-->
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn_red" (click)="addTeam=!addTeam;">Add Team</button>
+          </div>
+        </div>
+        <div class="col-md-12" *ngIf="addTeam">
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Logo</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="checkteamslogoenable()" [(ngModel)]="mForm.teamslogo.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.teamslogo.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.teamslogo.valuestyle" (ngModelChange)="setteamslogovaluestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.teamslogo.titlestyle" (ngModelChange)="setteamslogotitlestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.teamslogo.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.teamslogo.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Points</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="checkpointsenable()" [(ngModel)]="mForm.points.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.points.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.points.valuestyle" (ngModelChange)="setpointsvaluestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.points.titlestyle" (ngModelChange)="setpointstitlestyler()" [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.points.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.points.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Bonus</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="checkbonusenable()" [(ngModel)]="mForm.bonus.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.bonus.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.bonus.valuestyle" (ngModelChange)="setbonusvaluestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.bonus.titlestyle" (ngModelChange)="setbonustitlestyler()" [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.bonus.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.bonus.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Fouls</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="checkfoulsenable()" [(ngModel)]="mForm.fouls.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.fouls.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.fouls.valuestyle" (ngModelChange)="setfoulsvaluestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.fouls.titlestyle" (ngModelChange)="setfoulstitlestyler()" [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.fouls.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.fouls.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Timeouts</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="checktimeoutsenable()" [(ngModel)]="mForm.timeouts.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.timeouts.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.timeouts.valuestyle" (ngModelChange)="settimeoutsvaluestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.timeouts.titlestyle" (ngModelChange)="settimeoutstitlestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.timeouts.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.timeouts.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Direction (Symbol)</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="checkdirectionsenable()" [(ngModel)]="mForm.directions.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.directions.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.directions.valuestyle" (ngModelChange)="setdirectionsvaluestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.directions.titlestyle" (ngModelChange)="setdirectionstitlestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-4">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.directions.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-4">
+                    Uploader
+                  </div>
+                  <div class="man col-md-4">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.directions.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Statistics</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="checkstatisticsenable()" [(ngModel)]="mForm.statistics.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.statistics.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.statistics.valuestyle" (ngModelChange)="setstatisticsvaluestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.statistics.titlestyle" (ngModelChange)="setstatisticstitlestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.statistics.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.statistics.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Player Penalty</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="checkplayerpenltyenable()" [(ngModel)]="mForm.playerpenlty.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.playerpenlty.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.playerpenlty.valuestyle" (ngModelChange)="setplayerpenltyvaluestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.playerpenlty.titlestyle" (ngModelChange)="setplayerpenltytitlestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.playerpenlty.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.playerpenlty.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manage-box clearfix">
+            <div class="col-md-12">
+              <label style="display: inline-block;"><h2>Point Structure</h2></label>
+              <input style="float: right;" class="text-col-md-3" type="checkbox" (change)="checkpointstructureenable()" [(ngModel)]="mForm.pointstructure.isEnable"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-md-12" *ngIf="mForm.pointstructure.isEnable==true">
+              <div class="row">
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Style</h4>
+                    <textarea class="man col-md-3 resizer" style="padding-top:9px;" [(ngModel)]="mForm.pointstructure.valuestyle" (ngModelChange)="setpointstructurevaluestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Style</h4>
+                    <textarea class="text-col-md-3 resizer" [(ngModel)]="mForm.pointstructure.titlestyle" (ngModelChange)="setpointstructuretitlestyler()"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.pointstructure.value" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Title Value</h4>
+                    <input class="text-col-md-3" type="text" [(ngModel)]="mForm.pointstructure.titlevalue" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+                <div class="man col-md-12">
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Block Size</h4>
+                    <input class="text-col-md-3" type="number" [(ngModel)]="mForm.pointstructure.blocksize" (ngModelChange)="structurepusher()"
+                      [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="man col-md-6">
+                    <h4 class="text-left">Block Height (%)</h4>
+                    <input class="text-col-md-3" type="number" [(ngModel)]="mForm.pointstructure.blockheight" (ngModelChange)="setstructuralblock()" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="row1">
+    <div class="col-md-6">
+      <button class="btn btn-white" [routerLink]="['/game_settings/scoreboards']">Back</button>
+    </div>
+    <div class="col-md-6 text-right">
+      <button class="btn btn_green" [disabled]="!mForm.dispName || !mForm.dispStyle" (click)='managesetting(mForm)'>Save</button>
+    </div>
+  </div>
+</div>
+
+<!--divider for manage & listing-->
+
 <div class="row">
     <div class="container">
         <div class="col-md-10">

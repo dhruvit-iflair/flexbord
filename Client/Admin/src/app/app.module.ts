@@ -110,6 +110,7 @@ import { GamesettingsService} from './views/gamesettings/gamesettings.service';
 import { SportsService } from './components/services/sports.service';
 import { CreatePlayerComponent } from './views/club/club-teams/create-player/create-player.component';
 import { CreateStaffComponent } from './views/club/club-teams/create-staff/create-staff.component';
+import { TableComponent } from './components/custom/table/table.component';
 
 @NgModule({
   declarations: [
@@ -180,7 +181,8 @@ import { CreateStaffComponent } from './views/club/club-teams/create-staff/creat
     ImportOrgMembersComponent,
     ImportClubMembersComponent,
     CreatePlayerComponent,
-    CreateStaffComponent
+    CreateStaffComponent,
+    TableComponent
   ],
   imports: [
     // Angular modules

@@ -10,13 +10,13 @@
           <button class="btn btn_black" [routerLink]="['/organizer/orgmembers/import']">Import</button>                         
       </div> -->
       <div class="col-md-12" id="tabl">
-        <table datatable  [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" >
+        <table datatable  [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRenderer" >
           <thead>
             <tr>
               <th>_id</th>
               <th>Email</th>
               <th>User Type</th>
-              <th>Status</th>
+              <!-- <th>Status</th> -->
               <th>Action</th>
             </tr>
           </thead>
@@ -25,7 +25,7 @@
               <td style="display:none;">{{m._id}}</td>
               <td>{{m.emailAddress}} </td>
               <td>{{m.userType}} </td>
-              <td>{{m.status}}</td>
+              <!-- <td>{{m.status}}</td> -->
               <td>
                 <a class="btn btn_green tab_btn"  (click)="editMember(m._id)" *ngIf="hasEditPerm"  title="Edit">
                   <i class="fa fa-pencil" aria-hidden="true"></i>

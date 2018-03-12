@@ -41,7 +41,7 @@ export class NavigationComponent {
                     this.roles = JSON.parse(localStorage.getItem('roles'));
                 }
                 else{
-                    this.router.navigate(['/login']);
+                    //this.router.navigate(['/login']);
                 }
                 if (this.u.person_photo) {
                     this.profilePhoto = environment.picpoint + this.u.person_photo;

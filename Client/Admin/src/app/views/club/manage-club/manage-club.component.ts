@@ -55,9 +55,9 @@ export class ManageClubComponent implements OnInit {
     this.clubForm = this.fb.group({
       name: ["",[Validators.required]],subDomain: ["",[Validators.required]],
       abbreviation: ["",[Validators.required]],logo: [""], address: ["",[Validators.required]],
-      building: [""],street: [""],city: [""],state: [""],country: [""],zipcode: [""],website: [""],email: [""],
+      building: [""],street: [""],city: ["",[Validators.required]],state: [""],country: ["",[Validators.required]],zipcode: [""],website: [""],email: [""],
       // phonenumber: [null,[Validators.required,Validators.minLength(10),Validators.maxLength(12)]],
-      phonenumber: [null],sports: [null],capacity:  [null],placePic: [null],affilated:  [""],affilation:  [""],
+      phonenumber: [null],sports: [null],capacity:  [1],placePic: [null],affilated:  [""],affilation:  [""],
       registered: [null]
     })
    }

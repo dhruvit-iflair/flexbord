@@ -21,7 +21,7 @@ export class ClubComponent implements OnInit {
   public length: number = 0;
   public subscription: Subscription;
   public dtOptions;
-  public dataRenderer = false;
+  public dataRenderer = true;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public modules = this.accr.getmodules();
   public picEnv = environment.picpoint + 'clublogos/' ;
@@ -39,6 +39,10 @@ export class ClubComponent implements OnInit {
     this.subscription = this.clubService.getClubList().subscribe((res) => {
         this.rows = res;
         this.length = this.rows.length;
+        this.dataRenderer = false;
+        setTimeout(() => {
+          this.dataRenderer = true;
+        }, 50);
       });
     this.checkpermissions();
   }

@@ -17,7 +17,7 @@ input.capacity.ng-pristine.ng-invalid.ng-touched {
 }
 .capacity {
     width: 150px;
-    height: 35px;
+    height: 30px;
     margin-top: 2px;
     padding-left: 14px;
 }
@@ -33,4 +33,8 @@ button.btn.btn-lg.dropdown-toggle.col-md-12 {
 li.nav-item.active,
 .nav > li.active, .nav > li:hover{
     background-color: #fff;
+}
+select.js-example-basic-single.text-col-md-3 ,
+.manage-box[_ngcontent-c4]   .man[_ngcontent-c4]   select[_ngcontent-c4] {
+    height: 30px;
 }

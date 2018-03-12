@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-10">
                   <label>Name<a style="color:#f00 !important;">*</a></label>
-                  <input class=" form-control" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$"  placeholder="Classification Name" formControlName="name">
+                  <input class=" form-control" type="text" placeholder="Classification Name" formControlName="name">
                 
                   <div class="alert alert-danger" role="alert" *ngIf="!claForm.get('name').valid && claForm.get('name').touched">
                     Name is required.
@@ -24,9 +24,9 @@
             <div class="row">
               <div class="col-md-10">
                 <label>Value<a style="color:#f00 !important;">*</a></label>
-                <input type="text" class="form-control" id="i"  placeholder="Value" [(ngModel)]='value[i]' [ngModelOptions]="{standalone: true}" required min="0" max="999" maxlength="999">
+                <input type="text" class="form-control" id="i"  placeholder="Value" [(ngModel)]='value[i]' [ngModelOptions]="{standalone: true}" required>
                 <!-- (ngModelChange)="maxLengthCheck(this,i)" -->
-                <div *ngIf="i.errors && (i.dirty || i.touched)" class="alert alert-danger">
+                <div *ngIf="(i.dirty || i.touched)" class="alert alert-danger">
                   Value is required
                 </div>       
               </div>

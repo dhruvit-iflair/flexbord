@@ -32,7 +32,7 @@
                           <h4 class="text-left">DOB<a style="color:#f00 !important;">*</a></h4>
                           <!-- <input class="text-col-md-3" type="date" formControlName="dob" placeholder="Enter DOB"> -->
                           <input type="text" class="text-col-md-3"  [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker  [bsConfig]="bsConfig"  formControlName="dob" placeholder="Enter DOB">  
-                          <span class="input-group-addon" style="width: 0%;height: 34px; display:none;"  (click)="dp.toggle()" >
+                          <span class="input-group-addon" style="width: 0%;height: 34px;"  (click)="dp.toggle()" >
                             <span class="glyphicon glyphicon-calendar">
                             </span>
                         </span>
@@ -42,7 +42,7 @@
                   <div class="man col-md-4">
                           <h4 class="text-left">Member Since</h4>
                           <!-- <input class="text-col-md-3" type="date" formControlName="memberSince" placeholder="Enter Date"> -->
-                          <label for="">{{memberSince | dateFormatPipe :'dd/MM/yy'}}</label>
+                          <label for="">{{memberSince | dateFormatPipe :'dd/MM/yy hh:mm a'}}</label>
                   </div>
                   <div class="alert-danger col-md-12" role="alert" *ngIf="clubMemForm.errors && clubMemForm.get('dob').touched && clubMemForm.get('memberSince').touched">
                     {{ clubMemForm.errors?.dates | json }}
@@ -145,7 +145,7 @@
                     <option value="Pending">Pending</option>
                     <option value="Approved">Approved</option>
                 </select>
-        </div>            
+              </div>            
           </div>    
     </div>
   </form>

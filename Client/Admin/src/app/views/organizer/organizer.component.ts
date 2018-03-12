@@ -40,6 +40,10 @@ export class OrganizerComponent implements OnInit {
   this.subscription = this.orgService.getSingleOrganizersList().subscribe((res) => {
         this.rows = res;
         this.length = this.rows.length;
+        this.dataRenderer =false;
+        setTimeout(() => {
+          this.dataRenderer =true;        
+        }, 50);
       });
     this.checkpermissions();
   }

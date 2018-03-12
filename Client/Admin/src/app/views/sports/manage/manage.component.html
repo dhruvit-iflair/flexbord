@@ -23,7 +23,7 @@
                         <label for="typeofsport1">Opponent</label>                         
                     </div>
                     <div>
-                        <input type="radio" value="races" name="typeofsport" required #typeofsport="ngModel" id="typeofsport2" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}">
+                        <input type="radio" value="races" name="typeofsport" required #typeofsport="ngModel" id="typeofsport2" [(ngModel)]="mForm.typeofsport" [ngModelOptions]="{standalone: true}" disabled>
                         <label for="typeofsport2">Races</label>                         
                     </div>
                     <div *ngIf="typeofsport.errors && (typeofsport.dirty || typeofsport.touched)" class="alert alert-danger">
@@ -79,10 +79,22 @@
                 </div>
             </div>
       </tab>
-      <tab heading="Points" [disabled]="!userId"><app-managepoints></app-managepoints><app-points></app-points></tab>
-      <tab heading="Fouls" [disabled]="!userId"><app-managefouls></app-managefouls><app-fouls></app-fouls></tab>
-      <tab heading="Player Status" [disabled]="!userId"><app-manageplayerstatus></app-manageplayerstatus><app-playerstatus></app-playerstatus></tab>
-      <tab heading="Ranking Scores" [disabled]="!userId"><app-managescore></app-managescore><app-scores></app-scores></tab>
+      <tab heading="Points" [disabled]="!userId">
+          <app-managepoints></app-managepoints>
+          <app-points></app-points>
+      </tab>
+      <tab heading="Fouls" [disabled]="!userId || mForm.typeofgame == 'points'">
+          <app-managefouls></app-managefouls>
+          <app-fouls></app-fouls>
+      </tab>
+      <tab heading="Player Status" [disabled]="!userId">
+          <app-manageplayerstatus></app-manageplayerstatus>
+          <app-playerstatus></app-playerstatus>
+      </tab>
+      <tab heading="Ranking Scores" [disabled]="!userId">
+          <app-managescore></app-managescore>
+        <!-- <app-scores></app-scores> -->
+      </tab>
     </tabset>
 </div>
 

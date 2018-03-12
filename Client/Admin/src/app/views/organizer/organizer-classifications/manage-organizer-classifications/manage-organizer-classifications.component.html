@@ -8,24 +8,28 @@
           <div class="row">
               <div class="col-md-10">
                 <label>Name<a style="color:#f00 !important;">*</a></label>
-                <input class=" form-control" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$"  placeholder="Classification Name" formControlName="name">
+<<<<<<< HEAD
+                <input class=" form-control" type="text" pattern=".{3,}"  placeholder="Classification Name" formControlName="name">
+=======
+                <input class=" form-control" type="text" placeholder="Classification Name" formControlName="name">
+>>>>>>> 3a6d279c24dc2f59739a735cc9c9a662c2bac592
               
                 <div class="alert alert-danger" role="alert" *ngIf="!claForm.get('name').valid && claForm.get('name').touched">
                   Name is required.
                 </div>
               </div>        
               <div class="col-md-2">
-                <button class="btn btn_green marTop" (click)='addVal()'>Add Value</button>
+                <button class="btn btn_green marTop28" (click)='addVal()'>Add Value</button>
               </div>        
           </div>
-      </div>        
+      </div>
         
       <div class="col-md-12 pad man clearfix" *ngFor="let v of value; let i = index; trackBy:trackByIndex" >
           <div class="row">
             <div class="col-md-10">
               <label>Value<a style="color:#f00 !important;">*</a></label>
-              <input type="text" class="form-control" id="i"  placeholder="Value" [(ngModel)]='value[i]' [ngModelOptions]="{standalone: true}" min="0" max="999" maxlength="999" pattern="^[a-zA-Z0-9_]*$" (ngModelChange)="maxLengthCheck(this,i)" value="0">
-              <div *ngIf="i.errors && (i.dirty || i.touched)" class="alert alert-danger">
+              <input type="text" class="form-control" id="i"  placeholder="Value" [(ngModel)]='value[i]' [ngModelOptions]="{standalone: true}" value="0">
+              <div *ngIf="(i.dirty || i.touched)" class="alert alert-danger">
                 Value is required
               </div>       
             </div>
