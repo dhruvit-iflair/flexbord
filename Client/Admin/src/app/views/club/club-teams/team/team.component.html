@@ -37,11 +37,14 @@
                     <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)">
                     <button class="btn btn_green" (click)="file.click()"> Upload</button>
                   </div>
-                  <div class="col-md-4" *ngIf="logo && !url">
-                    <img [src]="logo" class="image_display">
+                  <div class="col-md-4"  *ngIf="logo && !url">
+                    <img src="{{picEnv}}{{logo}}" class="image_display">
+                  </div>
+                  <div class="col-md-4" *ngIf="!logo && !url">
+                      <img src="assets/noimage.jpg" class="image_display">                    
                   </div>
                   <div class="col-md-4" *ngIf="url">
-                    <img [src]="url" class="image_display">
+                    <img [src]="url" class="image_display">                 
                   </div>
                 </div>
               </div>

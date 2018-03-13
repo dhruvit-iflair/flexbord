@@ -43,10 +43,15 @@
                                 <button class="btn btn_green" (click)="file.click()"> Upload</button>   
                             </div>
                             <div class="col-md-4" *ngIf="logo && !url" >
-                                  <img [src]="logo" class="image_display">               
+                                  <img src="{{picEnv}}{{logo}}" class="image_display" *ngIf="logo && !url">               
+                                  <!-- <img src="assets/noimage.jpg" *ngIf="!logo|| !url"  class="image_display" > -->
                             </div>
-                            <div class="col-md-4" *ngIf="url" >
-                                  <img [src]="url" class="image_display">               
+                            <div class="col-md-4" *ngIf="!logo">
+                                <img src="assets/noimage.jpg"  class="image_display">
+                            </div>
+                              <div class="col-md-4">
+                                  <img [src]="url" class="image_display" *ngIf="url">               
+                                  <!-- <img src="assets/noimage.jpg" *ngIf="url == ''" *ngIf="!url" class="image_display">                                       -->
                             </div>
                             <div class="col-md-12" style="padding-top: 10px;">
                                 <p style="font-size: small; color:red;" *ngIf="fileSizeMin" >Min Size of image should be 150 Kb.</p>
@@ -65,7 +70,7 @@
                </div>
                 <div class="col-md-12">
                     <div class="row">
-                    <div class="man col-md-3"><h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
+                    <div class="man col-md-3"><h4 class="text-left">Address</h4>
                         <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace placeholder="Enter Address">
                     </div>             
                     <div class="man col-md-3">
@@ -197,8 +202,8 @@
     </div>
 </tab>
     <tab heading="Members" [disabled]="!_id"><app-manage-club-members></app-manage-club-members><app-club-members></app-club-members></tab>
-    <tab heading="Seasons" [disabled]="!_id"><app-manage-club-seasons></app-manage-club-seasons><app-club-seasons></app-club-seasons></tab>
-    <tab heading="Classifications" [disabled]="!_id" ><app-manage-club-classifications></app-manage-club-classifications><app-club-classifications></app-club-classifications></tab>
+    <tab heading="Seasons" [disabled]="!_id" [active]="tabz == 2"><app-manage-club-seasons></app-manage-club-seasons><app-club-seasons></app-club-seasons></tab>
+    <tab heading="Classifications" [disabled]="!_id" [active]="tabz == 3" ><app-manage-club-classifications></app-manage-club-classifications><app-club-classifications></app-club-classifications></tab>
     <tab heading="Tournaments" [disabled]="!_id"><app-manageclub-tournaments></app-manageclub-tournaments><app-club-tournaments></app-club-tournaments></tab>
 </tabset>
 </div>

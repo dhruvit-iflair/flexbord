@@ -30,7 +30,9 @@ export class ManageClubComponent implements OnInit {
   public value : any;
   public value2 : Array<string>;
   public sub: any;
+  public tabz: any;
   public logo: any;
+  public picEnv = environment.picpoint +'clublogos/';
   public logo2: any;
   public _id: any;
   public fileSupport:Boolean = false;
@@ -39,6 +41,7 @@ export class ManageClubComponent implements OnInit {
   public fileSupport2:Boolean = false;
   public fileSizeMin2:Boolean = false;
   public fileSizeMax2:Boolean = false;
+  public click:Boolean = true;
   public clubForm : FormGroup;
   constructor(public fb: FormBuilder,
               private http : Http,
@@ -54,7 +57,7 @@ export class ManageClubComponent implements OnInit {
     });
     this.clubForm = this.fb.group({
       name: ["",[Validators.required]],subDomain: ["",[Validators.required]],
-      abbreviation: ["",[Validators.required]],logo: [""], address: ["",[Validators.required]],
+      abbreviation: ["",[Validators.required]],logo: [""], address: [""],
       building: [""],street: [""],city: ["",[Validators.required]],state: [""],country: ["",[Validators.required]],zipcode: [""],website: [""],email: [""],
       // phonenumber: [null,[Validators.required,Validators.minLength(10),Validators.maxLength(12)]],
       phonenumber: [null],sports: [null],capacity:  [1],placePic: [null],affilated:  [""],affilation:  [""],
@@ -68,6 +71,9 @@ export class ManageClubComponent implements OnInit {
     this.subscription = this.orgService.getSingleOrganizersList().subscribe((res)=>{
       this.items = res;
     });
+    this.subscription = this.clubService.getTabActive().subscribe(id=>{
+      this.tabz = id;
+    })
     this.sub = this.activeRouter.params.subscribe(params => {
       if (params._id) {
         this._id = params._id;
@@ -77,7 +83,9 @@ export class ManageClubComponent implements OnInit {
           if(fagdf.length > 0){
               var comming = res.json();
               this.orgdata = comming[0];
-              this.logo = environment.picpoint +'clublogos/'+ comming[0].logo;
+              if (comming[0].logo) {
+                this.logo =  comming[0].logo;
+              }
               var yaar = [];
               if (comming[0].placePic) {
                 comming[0].placePic.forEach((asd)=>{
@@ -215,12 +223,37 @@ export class ManageClubComponent implements OnInit {
       }
     }
   }
-  addOrg(){      
-    if (this._id) {   
-      this.clubService.updateClub(this._id,this.clubForm.value);
-    } 
-    else {
-      this.clubService.saveClub(this.clubForm.value);
+  addOrg(){
+    if(this.click){
+      this.click = false ;
+      if (this._id) {   
+        this.clubService.updateClub(this._id,this.clubForm.value);
+        setTimeout(() => {
+          this.click=true;
+        }, 150);
+      } 
+      else {
+        this.clubService.saveClub(this.clubForm.value);
+        var h = new Date().getHours();
+        var m = new Date().getMinutes();
+        var r = new Date();
+        r.setHours(h);
+        r.setMinutes(m);                         
+        this.clubForm.value.registered =r ;                              
+        this.http.post(environment.api +"/club",this.clubForm.value).subscribe((res)=>{
+            var d = res.json();
+            if (d._id) {
+                setTimeout(() => {
+                  this.click=true;
+                }, 150);
+                this.toastr.success('Club Registered Successfully', 'Success');
+                this.router.navigate(['/club/manage/'+d._id]);
+                this.clubService.getAllClubList();
+            }
+        },(error)=>{
+            this.toastr.error('Something went wrong !! Please try again later', 'Error');
+        })
+      }
     }
   }
 }

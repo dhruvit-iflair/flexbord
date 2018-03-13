@@ -1037,7 +1037,7 @@ body .breadcrumb > .active {
 .dataTable a.btn.btn_2.tab_btn, .dataTable a.btn.btn_1.tab_btn, .dataTable .btn.btn_red {
     background: #F3825B !important;
 }
-body .button-group .btn.btn-lg.dropdown-toggle span.boxwitoutTouch[_ngcontent-c5] {
+body .button-group .btn.btn-lg.dropdown-toggle span.boxwitoutTouch {
     background: #F3825B !important;
     color: #fff !important;
     border-color: #F3825B !important;
@@ -1195,10 +1195,10 @@ app-multiselect.form-control.ng-untouched.ng-pristine.ng-invalid a {
 }
 body a.btn.btn-lg.dropdown-toggle.col-md-12[_ngcontent-c5] {
     height: 32px;
-    padding: 6px 12px;
+    padding: 7px 3px;
 }
 app-multiselect.form-control.ng-untouched.ng-pristine.ng-invalid span.caret[_ngcontent-c5] {
-    top: -24px;
+    top: -26px;
 }
 .manage-box .man select {
     font-size: 13px;
@@ -9511,4 +9511,67 @@ a.nav-link.disabled {
 .button-group {
   padding: 0;
   margin: -5px;
+}
+
+/* 12March */
+.button-group .caret {
+	left: 98% !important;
+}
+.mini-navbar #side-menu li a:hover span {
+	display: block;
+	position: absolute;
+	right: auto;
+	background-color: black;
+	z-index: 99;
+	top: 0;
+	height: 100%;
+	left: 70px;
+	width: 100px;
+	text-align: center;
+	line-height: 48px;
+}
+.mini-navbar #side-menu li.active {
+	border: none;
+}
+.button-group.open {
+	position: relative;
+}
+.button-group.open .dropdown-menu.col-md-8{
+	padding: 15px;
+	width: 100%;		
+	position: absolute;
+	top: 36px;
+	margin: 0;
+}
+#classTab .manage-box.clearfix .col-md-12.pad .col-md-2 {
+	padding-top: 27px;
+}
+.nav li.nav-header:hover {
+	background-color: #191919 !important;
+}
+.manage-component-form .man.col-md-4 select {
+	height: 30px !important;
+}
+.tab-pane .row .col-md-6.text-right .btn.btn_green {
+	background: #F3825B;
+}
+.tab-pane .row .col-md-6.text-right .btn.btn_green:hover{
+	background: #191919;
+}
+.input-datepicker {
+  position: relative;
+}
+.input-datepicker span.input-group-addon {
+  position: absolute;
+  top: 1px;
+  background-color: white;
+  right: 6px;
+  height: 28px !important;
+  width: 28px !important;
+}
+.man.col-md-4 timepicker.text-col-md-3 table {
+  text-align: center;
+  width: 100%;
+  max-width: 165px;
+  margin: 0 auto;
 }

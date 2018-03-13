@@ -24,15 +24,12 @@
             <div class="row">
               <div class="col-md-10">
                 <label>Value<a style="color:#f00 !important;">*</a></label>
-                <input type="text" class="form-control" id="i"  placeholder="Value" [(ngModel)]='value[i]' [ngModelOptions]="{standalone: true}" required>
+                <input type="text" class="form-control" [className]="my_Class" id="i"  placeholder="Value" [(ngModel)]='value[i]' [ngModelOptions]="{standalone: true}"  required>
                 <!-- (ngModelChange)="maxLengthCheck(this,i)" -->
                 <div *ngIf="(i.dirty || i.touched)" class="alert alert-danger">
                   Value is required
                 </div>       
               </div>
-              <div class="col-md-2">
-                <button class="btn btn_red marTop" *ngIf="value.length != 1"  (click)="delVal(i)"><i class="fa fa-times" aria-hidden="true"></i></button>
-              </div>   
             </div>           
         </div>
       </form>
@@ -43,7 +40,6 @@
         <button class="btn" [routerLink]="['/club/classifications']">Back</button>
     </div> -->
     <div class="col-md-6 text-right">
-        <button (click)='saveVal()' class="btn btn_green white" >Save</button>        
-        <!-- [disabled]='!orgForm.valid' -->
+        <button (click)="saveVal(); my_Class = 'form-control ng-untouched ng-pristine ng-invalid'"  class="btn btn_green white" >Save</button>        
     </div>  
 </div>   

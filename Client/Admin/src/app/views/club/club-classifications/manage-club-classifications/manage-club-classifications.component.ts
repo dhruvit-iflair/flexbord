@@ -19,8 +19,10 @@ export class ManageClubClassificationsComponent implements OnInit {
   public claForm : FormGroup;
   public value : Array<any> = [''];
   public sub : any;
+  public my_Class :string = "form-control ng-untouched ng-pristine ng-invalid ";
   public _id : any;orgid;
   public subscription:Subscription;
+  public click :Boolean=true;
   constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public clubService:ClubService){
     this.claForm = this.fb.group({
       name: ["",[Validators.required]],
@@ -35,7 +37,7 @@ export class ManageClubClassificationsComponent implements OnInit {
   //   }
   // }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.subscription = this.clubService.getSingleClassificationsData().subscribe(res=>{
       var data = res[0];
       this.claForm.patchValue({
@@ -52,6 +54,9 @@ export class ManageClubClassificationsComponent implements OnInit {
   reset(){
     this.claForm.reset();
     this.value = [''];
+    setTimeout(() => {
+      this.click = true;
+    }, 100);
   }
   addVal(){
     this.value.push('');
@@ -66,24 +71,27 @@ export class ManageClubClassificationsComponent implements OnInit {
       }
     }
     this.claForm.patchValue({value:this.value});
-    if (this.claForm.valid && p) {
-      var clubid=localStorage.getItem('clubid');
-      this.claForm.value.club=clubid;
-      if (this._id) {
-        this.clubService.updateClassifications(this._id,this.claForm.value);
-        this.reset();
-      } 
-      else if (this.claForm.value.value[0] == ''){
-        this.toastr.warning('One values is required', 'Warning');    
-      }
-      else {
-        this.clubService.saveClassifications(this.claForm.value);        
-        this.reset();        
-      }
-    }
-    else{
-      this.toastr.warning('Please fill up all the values', 'Warning');
-    }
+    if(this.click){
+        if (this.claForm.valid && p) {
+          this.click =false;
+          var clubid=localStorage.getItem('clubid');
+          this.claForm.value.club=clubid;
+          if (this._id) {
+            this.clubService.updateClassifications(this._id,this.claForm.value);
+            this.reset();
+          } 
+          else if (this.claForm.value.value[0] == ''){
+            this.toastr.warning('One values is required', 'Warning');    
+          }
+          else {
+            this.clubService.saveClassifications(this.claForm.value);        
+            this.reset();        
+          }
+        }
+        else{
+          this.toastr.warning('Please fill up all the values', 'Warning');
+        }
+      }    
   }
   trackByIndex(index: number, value: number) {
     return index;

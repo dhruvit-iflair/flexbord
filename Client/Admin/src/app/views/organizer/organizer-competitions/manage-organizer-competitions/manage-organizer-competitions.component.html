@@ -92,7 +92,7 @@
           <button class="btn" [routerLink]="['/organizer/competitions']">Back</button>
       </div> -->
       <div class="col-md-6 text-right">
-          <button (click)='saveVal()' [disabled]='!comForm.valid || classificationValues.length < classifications.length'  class="btn btn_green white" >Save</button>        
+          <button (click)='saveVal()' [disabled]='!comForm.valid || classificationValues.length != classifications.length'  class="btn btn_green white" >Save</button>        
           <!-- [disabled]='!orgForm.valid' -->
       </div> 
     </div> 

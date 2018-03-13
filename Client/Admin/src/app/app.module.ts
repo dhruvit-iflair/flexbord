@@ -43,7 +43,7 @@ import { EmailTypeService } from './components/services/email-type.service';
 import { OrganizerService } from "./components/services/organizer.service";
 import { ClubService } from "./components/services/club.service";
 import {Ng5BreadcrumbModule,BreadcrumbService} from 'ng5-breadcrumb';
-
+import { ConfirmBoxService } from "./components/services/confirm-box.service";
 
 
 
@@ -113,6 +113,8 @@ import { StaffComponent } from './views/club/club-teams/staff/staff.component';
 import { CreatePlayerComponent } from './views/club/club-teams/create-player/create-player.component';
 import { CreateStaffComponent } from './views/club/club-teams/create-staff/create-staff.component';
 import { TableComponent } from './components/custom/table/table.component';
+import { ConfirmBoxComponent } from './components/custom/confirm-box/confirm-box.component';
+import { importType } from '@angular/compiler/src/output/output_ast';
 
 @NgModule({
   declarations: [
@@ -186,7 +188,8 @@ import { TableComponent } from './components/custom/table/table.component';
     StaffComponent,
     CreatePlayerComponent,
     CreateStaffComponent,
-    TableComponent
+    TableComponent,
+    ConfirmBoxComponent
   ],
   imports: [
     // Angular modules
@@ -221,7 +224,7 @@ import { TableComponent } from './components/custom/table/table.component';
     Ng5BreadcrumbModule.forRoot(),
   ],
   providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService,EmailService,EmailTypeService,OrganizerService,SportsService,
-  GamesettingsService,ManageconsequenceComponent,ManagestructureComponent,ManageplaylistComponent,ManagescoreboardComponent],
+  GamesettingsService,ManageconsequenceComponent,ManagestructureComponent,ManageplaylistComponent,ManagescoreboardComponent,ConfirmBoxService],
 
   bootstrap: [AppComponent]
 })

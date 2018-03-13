@@ -31,14 +31,11 @@
                   <div class="man col-md-4">
                           <h4 class="text-left">DOB<a style="color:#f00 !important;">*</a></h4>
                           <!-- <input class="text-col-md-3" type="date" formControlName="dob" placeholder="Enter DOB"> -->
-                          <input type="text" class="text-col-md-3"  [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker  [bsConfig]="bsConfig"  formControlName="dob" placeholder="Enter DOB">  
-                          <span class="input-group-addon" style="width: 0%;height: 34px;"  (click)="dp.toggle()" >
-                            <span class="glyphicon glyphicon-calendar">
-                            </span>
-                        </span>
-                        
-
-                  </div>
+                         <div class="input-datepicker">
+                           <input type="text" class="text-col-md-3 width-85"  [maxDate]="maxDate" #dp="bsDatepicker" bsDatepicker  [bsConfig]="bsConfig"  formControlName="dob" placeholder="Enter DOB">  
+                           <span class="input-group-addon" style="width: 0%;height: 34px;"  (click)="dp.toggle()" ><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
                   <div class="man col-md-4">
                           <h4 class="text-left">Member Since</h4>
                           <!-- <input class="text-col-md-3" type="date" formControlName="memberSince" placeholder="Enter Date"> -->
@@ -61,6 +58,9 @@
                           </div>
                           <div class="col-md-4" *ngIf="photo" >
                                 <img [src]="photo" class="image_display">               
+                          </div>
+                          <div class="col-md-4" *ngIf="!photo">
+                                <img src="assets/noimage.jpg" class="image_display">
                           </div>
                       </div>
                   </div>

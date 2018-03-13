@@ -8,6 +8,7 @@ import { Subject } from 'rxjs/Subject';
 import { AccessorService } from "../../components/common/accessor.service";
 import { Subscription } from 'rxjs/Subscription';
 import { ClubService } from '../../components/services/club.service';
+import { ConfirmBoxService } from '../../components/services/confirm-box.service';
 
 @Component({
   selector: 'app-club',
@@ -26,7 +27,7 @@ export class ClubComponent implements OnInit {
   public modules = this.accr.getmodules();
   public picEnv = environment.picpoint + 'clublogos/' ;
   public hasTeamsPerm;hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;
-  constructor(public http: Http, public clubService: ClubService, private router: Router, private toastr: ToastrService, private accr: AccessorService) { }
+  constructor(public http: Http, public clubService: ClubService, private router: Router, private toastr: ToastrService, private accr: AccessorService,public conformService:ConfirmBoxService) { }
   ngAfterContentInit() {
     this.dtOptions = {
       pagingType: 'simple_numbers',
@@ -102,10 +103,11 @@ export class ClubComponent implements OnInit {
     this.clubService.getSingleClub(id);
     this.router.navigate(['/club/manage/'+id]);
   }
-  delClub(id){
-      var del = confirm("Confirm to delete this Club!");
-      if (del) {
-        this.clubService.deleteClub(id);
-      }
+  delClub(data){
+    this.conformService.confirm({title:"Delete",text:'Do you want to delete '+ data.name +'?'},function(){
+        this.clubService.deleteClub(data._id);
+      },function(){
+
+      })
     }
   }

@@ -11,6 +11,7 @@ span.boxwitoutTouch{
 a.btn.btn-lg.dropdown-toggle.col-md-12 {
     background-color: #fff;
     height: 30px;
+    padding: 6px 3px;
 }
 span.boxwitoutTouch{
     font-size: 17px;
@@ -31,7 +32,7 @@ span.boxwitoutTouch{
     background-color: #f4f4f4;
     box-shadow: 1px 2px 3px #868686;
     position: relative;
-    top: 0px;
+    top: -5px;
 }
 ul.dropdown-menu.col-md-8 {
     /* padding-left: 14px; */
@@ -61,5 +62,8 @@ span.caret {
     position: relative;
     right: 0;
     left: 98.5%;
-    top: -29px;
+    top: -26px;
+}
+a.btn.btn-lg.dropdown-toggle.col-md-12 {
+    margin: 0px auto 0px auto;
 }

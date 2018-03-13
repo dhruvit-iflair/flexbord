@@ -28,6 +28,7 @@ export class ManageClubMembersComponent implements OnInit {
   public fileSupport:Boolean = false;
   public fileSizeMin:Boolean = false;
   public fileSizeMax:Boolean = false;
+  public click:Boolean = true;
   public subscription :Subscription;
 
   constructor(public fb: FormBuilder,
@@ -131,8 +132,13 @@ export class ManageClubMembersComponent implements OnInit {
   reset(){
     this._id = false;
     this.clubMemForm.reset();
+    setTimeout(() => {
+      this.click = true;
+    }, 150);
   }
-  addClubMem(){      
+  addClubMem(){    
+    if(this.click){  
+      this.click = false;
       if (this._id) {
         this.clubService.updateMember(this._id,this.clubMemForm.value);
         this.reset();
@@ -141,6 +147,7 @@ export class ManageClubMembersComponent implements OnInit {
         this.clubService.saveMember(this.clubMemForm.value);
         this.reset();        
       }
+    }
   }
   setAdd(e){
     this.clubMemForm.patchValue({address:e.formatted_address});

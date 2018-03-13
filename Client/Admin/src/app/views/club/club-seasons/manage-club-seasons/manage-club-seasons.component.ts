@@ -27,6 +27,7 @@ export class ManageClubSeasonsComponent implements OnInit {
   public maxDate = new Date();
   public maxDate2 = new Date();
   public bsConfig: Partial<BsDatepickerConfig>;
+  public click :Boolean = true;
 
   constructor(public fb: FormBuilder,private toastr : ToastrService,public http:Http,private router: Router,public activeRouter:ActivatedRoute,public location:Location,public clubService:ClubService) {
     // this.start_ate = new Date();
@@ -50,6 +51,7 @@ export class ManageClubSeasonsComponent implements OnInit {
     })
     this.seasonForm.get('end_date').valueChanges.subscribe(d=>{
       var t = new Date(d)
+      this.seasonForm.patchValue({start_date:this.seasonForm.value.start_date});
       this.start_date.setDate(t.getDate()-1);
       this.start_date.setMonth(t.getMonth());
       this.start_date.setFullYear(t.getFullYear());
@@ -76,18 +78,21 @@ export class ManageClubSeasonsComponent implements OnInit {
   }
  
   addSesons(){
-    if (this.seasonForm.valid) {
-    var clubid=localStorage.getItem('clubid');
-    this.seasonForm.value.club=clubid;
-      if (this._id) {
-        this.clubService.updateSeason(this._id,this.seasonForm.value);
-        this.reset();
-      } 
-      else {
-        this.clubService.saveSeason(this.seasonForm.value);
-        this.reset();        
-      }
-    } 
+    if(this.click){
+      if (this.seasonForm.valid) {
+        this.click = false;
+        var clubid=localStorage.getItem('clubid');
+        this.seasonForm.value.club=clubid;
+          if (this._id) {
+            this.clubService.updateSeason(this._id,this.seasonForm.value);
+            this.reset();
+          } 
+          else {
+            this.clubService.saveSeason(this.seasonForm.value);
+            this.reset();        
+          }
+       }
+     } 
   }
   back(){
     this.location.back();
@@ -106,9 +111,13 @@ export class ManageClubSeasonsComponent implements OnInit {
   reset(){
     this.seasonForm.reset();
     var t = new Date();
-    var e = new Date().setDate(t.getDate()+1);
+    var e = new Date();
+    e.setDate(t.getDate()+1);
     this.seasonForm.patchValue({start_date:t});
     this.seasonForm.patchValue({end_date:e});
+    setTimeout(() => {
+      this.click = true;
+    }, 150);
     
   }
 }

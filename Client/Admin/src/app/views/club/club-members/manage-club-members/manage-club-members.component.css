@@ -5,7 +5,7 @@ img.image_display {
 select,
 .manage-component-form .text-col-md-3, .manage-component-form select, .select2-container .select2-selection--single {
     background-color: #fff;
-    height: 39px;
+    height: 30px;
 }
 .alert-danger {
     color: #a94442;
@@ -14,4 +14,7 @@ select,
 }
 /* input.text-col-md-3.ng-untouched.ng-pristine.ng-invalid {
     border: 1px solid red;
+} */
+/* .width-85{
+    width: 85%;
 } */

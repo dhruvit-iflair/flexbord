@@ -113,7 +113,6 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
       }
   }
   getClasValue(){
-    console.log(this.classificationValues);
     this.comForm.patchValue({organizerClassificationsValue:this.classificationValues})
     // this.classValue = this.classifications.filter(ad => ad._id == this.comForm.value.organizerClassifications);
     
