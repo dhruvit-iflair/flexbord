@@ -12,6 +12,7 @@ var clubTournamentsSchema=new Schema({
     clubSeasons: { type: Schema.Types.ObjectId, ref: 'clubSeasons' },
     club:{ type: Schema.Types.ObjectId, ref: 'club' },
     clubClassifications: { type: Schema.Types.ObjectId, ref: 'clubClassifications' },
-    clubClassificationsValue:String
+    clubClassificationsValue:Array,
+    competition:String
 });
 module.exports = mongoose.model('clubTournaments',clubTournamentsSchema);
