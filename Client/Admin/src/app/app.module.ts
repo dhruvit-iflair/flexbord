@@ -108,8 +108,6 @@ import { ImportOrgMembersComponent } from './views/organizer/orgmembers/import-o
 import { ImportClubMembersComponent } from './views/club/club-members/import-club-members/import-club-members.component';
 import { GamesettingsService} from './views/gamesettings/gamesettings.service';
 import { SportsService } from './components/services/sports.service';
-import { PlayerComponent } from './views/club/club-teams/player/player.component';
-import { StaffComponent } from './views/club/club-teams/staff/staff.component';
 import { CreatePlayerComponent } from './views/club/club-teams/create-player/create-player.component';
 import { CreateStaffComponent } from './views/club/club-teams/create-staff/create-staff.component';
 import { TableComponent } from './components/custom/table/table.component';
@@ -184,8 +182,6 @@ import { importType } from '@angular/compiler/src/output/output_ast';
     CkEditorDirective,
     ImportOrgMembersComponent,
     ImportClubMembersComponent,
-    PlayerComponent,
-    StaffComponent,
     CreatePlayerComponent,
     CreateStaffComponent,
     TableComponent,
