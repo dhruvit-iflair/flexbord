@@ -16,7 +16,7 @@ export class PlayerstatusComponent implements OnInit {
 
   pstatus; dtOptions; sptid;
   public dataRenderer = false;
-  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
   public subscription : Subscription;
   constructor(public http: HttpClient, 
               private router: Router, 
@@ -46,6 +46,9 @@ export class PlayerstatusComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "sportplayerstatus0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
       if (Object.keys(perms[z]).toString().toLowerCase() == "sportplayerstatus1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from "../../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { Router, Params, ActivatedRoute } from "@angular/router";
+import { AccessorService } from "../../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-manageconsequence',
@@ -11,8 +12,8 @@ import { Router, Params, ActivatedRoute } from "@angular/router";
 })
 export class ManageconsequenceComponent implements OnInit {
 
-  constructor(public http: HttpClient, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute) { }
-  public settingid; paramdetails; userId; settingsfouldata;
+  constructor(public http: HttpClient,private accr: AccessorService, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  public settingid; paramdetails; userId; settingsfouldata;hasCreatePerm;
   public mForm = { playerconseq: { name: '', color: '', type: '', value: 0 }, teamfaults: { faulttype: '', type: '', value: 0 } }
 
   ngOnInit() {
@@ -36,6 +37,15 @@ export class ManageconsequenceComponent implements OnInit {
         }
       });
      });
+     this.checkpermissions();
+  }
+    checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "gamesettingconsequences1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+    }
   }
   assigndata(xd){
     // var vm=this;

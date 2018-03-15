@@ -10,6 +10,7 @@ import { start } from 'repl';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { Subscription } from 'rxjs/Subscription';
 import { ClubService } from '../../../../components/services/club.service';
+import { AccessorService } from "../../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-manage-club-seasons',
@@ -27,8 +28,8 @@ export class ManageClubSeasonsComponent implements OnInit {
   public maxDate = new Date();
   public maxDate2 = new Date();
   public bsConfig: Partial<BsDatepickerConfig>;
-
-  constructor(public fb: FormBuilder,private toastr : ToastrService,public http:Http,private router: Router,public activeRouter:ActivatedRoute,public location:Location,public clubService:ClubService) {
+public hasCreatePerm;
+  constructor(public fb: FormBuilder,private toastr : ToastrService,private accr: AccessorService,public http:Http,private router: Router,public activeRouter:ActivatedRoute,public location:Location,public clubService:ClubService) {
     // this.start_ate = new Date();
     this.bsConfig = {
       containerClass: 'theme-orange',
@@ -57,6 +58,14 @@ export class ManageClubSeasonsComponent implements OnInit {
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+  checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubseasons1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+    }
   }
   dateMin(e){
     var t = new Date(e);
@@ -101,7 +110,8 @@ export class ManageClubSeasonsComponent implements OnInit {
           this.seasonForm.patchValue({end_date:fagdf[0].end_date});
           this.seasonForm.patchValue({name:fagdf[0].name});
       }
-    })
+    });
+        this.checkpermissions();
   }
   reset(){
     this.seasonForm.reset();

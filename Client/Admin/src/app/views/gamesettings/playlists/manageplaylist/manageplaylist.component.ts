@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from "../../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { Router, Params, ActivatedRoute } from "@angular/router";
+import { AccessorService } from "../../../../components/common/accessor.service";
 // import { FormGroup,FormControl } from "@angular/forms";
 
 @Component({
@@ -12,8 +13,8 @@ import { Router, Params, ActivatedRoute } from "@angular/router";
 })
 export class ManageplaylistComponent implements OnInit {
 
-  constructor(public http: HttpClient, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute) { }
-  public settingid; paramdetails; userId; imgurl; mediaUrl;
+  constructor(public http: HttpClient,private accr: AccessorService, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  public settingid; paramdetails; userId; imgurl; mediaUrl;hasCreatePerm;
   public psForm = { name: '', itemMedia: '', itemName: '', itemType: '', itemTime: '' };
 
   ngOnInit() {
@@ -36,8 +37,16 @@ export class ManageplaylistComponent implements OnInit {
       //     });
       // }
     });
+    this.checkpermissions();
   }
-
+ checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "gamesettingplaylist1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+    }
+  }
   assigndata(xd) {
     this.psForm = xd;
     (document.getElementById("asname") as HTMLInputElement).value = xd.name;

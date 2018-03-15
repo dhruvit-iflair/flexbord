@@ -244,9 +244,9 @@
         </div>
         
         </tab>
-        <tab heading="Members" [disabled]="!_id" id="memberTab" [active]="tabz == 2"><app-member></app-member><app-orgmembers></app-orgmembers></tab>
-        <tab heading="Seasons" [disabled]="!_id" id="seasonTab" [active]="tabz == 3"><app-manage-seasons></app-manage-seasons><app-seasons></app-seasons></tab>
-        <tab heading="Classifications" [disabled]="!_id" id="classTab" [active]="tabz == 4"><app-manage-organizer-classifications></app-manage-organizer-classifications><app-organizer-classifications></app-organizer-classifications></tab>
-        <tab heading="Competitions" [disabled]="!_id" id="compTab" [active]="tabz == 5"><app-manage-organizer-competitions></app-manage-organizer-competitions><app-organizer-competitions></app-organizer-competitions></tab>
+        <tab heading="Members" [disabled]="!_id" *ngIf="hasMembersPerm" id="memberTab" [active]="tabz == 2"><app-member></app-member><app-orgmembers></app-orgmembers></tab>
+        <tab heading="Seasons" [disabled]="!_id" *ngIf="hasSeasonsPerm" id="seasonTab" [active]="tabz == 3"><app-manage-seasons></app-manage-seasons><app-seasons></app-seasons></tab>
+        <tab heading="Classifications" [disabled]="!_id" *ngIf="hasClassificationsPerm" id="classTab" [active]="tabz == 4"><app-manage-organizer-classifications></app-manage-organizer-classifications><app-organizer-classifications></app-organizer-classifications></tab>
+        <tab heading="Competitions" [disabled]="!_id" *ngIf="hasCompetitionsPerm" id="compTab" [active]="tabz == 5"><app-manage-organizer-competitions></app-manage-organizer-competitions><app-organizer-competitions></app-organizer-competitions></tab>
     </tabset>
 </div>

@@ -4,6 +4,7 @@ Created By : Hardik Lakhani(hardik.lakhani@iflair.com)
 module.exports=function(){
     return config={
         "dbName":"flexboard",
+        //"connection":"mongodb://superAdmin:F1exb0rd@13.78.166.170/",
         "connection":"mongodb://127.0.0.1/",
         "Imailer":"shivani.bisht@iflair.com",
         "mailToken":"p?~exbz9rb/HyBsZ",

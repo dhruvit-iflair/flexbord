@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from "../../../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { Router, Params, ActivatedRoute } from "@angular/router";
+import { AccessorService } from "../../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-managestructure',
@@ -11,8 +12,8 @@ import { Router, Params, ActivatedRoute } from "@angular/router";
 })
 export class ManagestructureComponent implements OnInit {
 
-  constructor(public http: HttpClient, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute) { }
-  public settingid;paramdetails;userId;
+  constructor(public http: HttpClient, private toastr: ToastrService,private accr: AccessorService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  public settingid;paramdetails;userId;hasCreatePerm;
 
 public sForm={altname:{point:0,name:''},level:''};
 
@@ -20,6 +21,7 @@ public sForm={altname:{point:0,name:''},level:''};
      this.activatedRoute.params.subscribe(params => {
        this.settingid = params._id;
      });
+     this.checkpermissions();
     // this.settingid = localStorage.getItem('setting');
     //   this.activatedRoute.params.subscribe(params => {
     //   this.userId = params._id;
@@ -42,7 +44,14 @@ public sForm={altname:{point:0,name:''},level:''};
     localStorage.setItem('editmode','true');
     localStorage.setItem('uid',xd._id);
   }
-
+checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "gamesettingstructure1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+    }
+  }
   managesetting(gotdata){
      var mode=localStorage.getItem('editmode');
     var uid=localStorage.getItem('uid');

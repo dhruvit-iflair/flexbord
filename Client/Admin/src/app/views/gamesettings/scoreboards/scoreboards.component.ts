@@ -20,7 +20,7 @@ export class ScoreboardsComponent implements OnInit {
   public length: number = 0;
   public dtOptions; settingid;
   public dataRenderer = false;
-  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
   public modules = this.accr.getmodules();
   public paramdetails; userId; addTeam = false;
   public mForm = {
@@ -66,6 +66,9 @@ export class ScoreboardsComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
+       if (Object.keys(perms[z]).toString().toLowerCase() == "gamesettingscoreboard0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
       if (Object.keys(perms[z]).toString().toLowerCase() == "gamesettingscoreboard1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }
@@ -111,6 +114,7 @@ export class ScoreboardsComponent implements OnInit {
     this.shotcheckenable();
     this.checkteamslogoenable();
     // this.periodcheckenable();
+    this.checkbonusenable();
     this.checkpointsenable();
     this.checkfoulsenable();
     this.checkstatisticsenable();
@@ -174,7 +178,12 @@ export class ScoreboardsComponent implements OnInit {
       this.setplayerpenltytitlestyler();
     }
   }
-
+checkbonusenable(){
+  if (this.mForm.bonus.isEnable) {
+      this.setbonustitlestyler();
+      this.setbonusvaluestyler();
+    }
+}
   setpointstructuretitlestyler() {
     if (document.getElementById('teampointstructuretitle'))
       document.getElementById('teampointstructuretitle').setAttribute('style', this.mForm.pointstructure.titlestyle);

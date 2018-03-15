@@ -11,6 +11,7 @@ import { UserService } from '../../../components/services/users';
 import { OrganizerService } from '../../../components/services/organizer.service';
 import { Subscription } from 'rxjs/Subscription';
 import { TabsetComponent } from 'ngx-bootstrap';
+import { AccessorService } from "../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-manage',
@@ -45,9 +46,10 @@ export class ManageOrganizerComponent implements OnInit {
   public subscription: Subscription;
   public tabz: any;
   public click :Boolean = true;
+   public hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;hasCompetitionsPerm;
   // public value : any = 9;
   // public value2 : Array<string> =["0: 1", "1: 2", "2: 3", "3: 4", "4: 5"];
-  constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public userSer:UserService,public orgService:OrganizerService) {
+  constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public userSer:UserService,public orgService:OrganizerService,private accr: AccessorService) {
     this.orgForm = this.fb.group({
       name: ["",[Validators.required]],
       subDomain: ["",[Validators.required]],
@@ -145,6 +147,7 @@ export class ManageOrganizerComponent implements OnInit {
                 });
       }
    });
+   this.checkpermissions();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -269,6 +272,23 @@ export class ManageOrganizerComponent implements OnInit {
         }
       }    
       
+    }
+  }
+    checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizerseasons0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasSeasonsPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizerclassifications0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasClassificationsPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizercompetitions0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCompetitionsPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizermembers0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasMembersPerm = true;
+      }
     }
   }
     addOrg(){   

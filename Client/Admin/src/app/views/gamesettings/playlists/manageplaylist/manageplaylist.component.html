@@ -1,4 +1,4 @@
-<div class="container manage-container">
+<div class="container manage-container" *ngIf="hasCreatePerm">
   <div class="row">
     <form class="manage-component-form">
       <div class="col-md-12">
@@ -74,5 +74,5 @@
         <button class="btn btn_green" [disabled]="!psForm.itemType || !psForm.itemName || !psForm.name || !psForm.itemTime || !psForm.itemMedia" (click)='managesetting(psForm)'>Save</button>
       </div>
     </div>
-
+  </div>
   </div>

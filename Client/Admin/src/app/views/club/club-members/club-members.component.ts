@@ -17,7 +17,7 @@ export class ClubMembersComponent implements OnInit {
   public dtOptions;
   public clubid;
   public dataRenderer = true;
-  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
   public subscription :Subscription;
   public picEnv = environment.picpoint+"clubMembersPhoto/";
 
@@ -59,6 +59,9 @@ export class ClubMembersComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubmembers0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
       if (Object.keys(perms[z]).toString().toLowerCase() == "clubmembers1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }

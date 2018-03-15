@@ -51,10 +51,10 @@
   </div>
 </div>
  </tab>
-        <tab heading="Timesettings" [disabled]="!paramdetails"><app-managetimesetting></app-managetimesetting> <app-timesettings></app-timesettings></tab>
-        <tab heading="Consequences" [disabled]="!paramdetails"><app-manageconsequence></app-manageconsequence><app-consequences></app-consequences></tab>
-        <tab heading="Stuctures" [disabled]="!paramdetails"><app-managestructure></app-managestructure><app-structure></app-structure> </tab>
-        <tab heading="Playlists" [disabled]="!paramdetails"><app-manageplaylist></app-manageplaylist><app-playlists></app-playlists></tab>
-        <tab heading="Scoreboards" [disabled]="!paramdetails"><app-scoreboards></app-scoreboards></tab>
+        <tab heading="Timesettings" [disabled]="!paramdetails" *ngIf="hastimesettingPerm"><app-managetimesetting></app-managetimesetting> <app-timesettings></app-timesettings></tab>
+        <tab heading="Consequences" [disabled]="!paramdetails" *ngIf="hasconsequencesPerm"><app-manageconsequence></app-manageconsequence><app-consequences></app-consequences></tab>
+        <tab heading="Stuctures" [disabled]="!paramdetails" *ngIf="hasstructurePerm"><app-managestructure></app-managestructure><app-structure></app-structure> </tab>
+        <tab heading="Playlists" [disabled]="!paramdetails" *ngIf="hasplaylistPerm"><app-manageplaylist></app-manageplaylist><app-playlists></app-playlists></tab>
+        <tab heading="Scoreboards" [disabled]="!paramdetails" *ngIf="hasscoreboardPerm"><app-scoreboards></app-scoreboards></tab>
     </tabset>
 </div>

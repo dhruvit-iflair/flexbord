@@ -1,4 +1,4 @@
-<div class="container manage-container">
+<div class="container manage-container" *ngIf="hasCreatePerm">
   <div class="row">
     <div class="manage-screener clearfix">
       <div id="screener">
@@ -72,7 +72,7 @@
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="hasCreatePerm">
   <form class="manage-component-form">
     <div class="col-md-12">
       <div class="row1">
@@ -607,7 +607,7 @@
 <!--divider for manage & listing-->
 
 <div class="row">
-    <div class="container">
+    <div class="container" *ngIf="hasViewPerm">
         <div class="col-md-10">
             <label><h2>Scoreboards</h2></label>
         </div>

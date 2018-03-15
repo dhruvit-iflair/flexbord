@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { SportsService } from '../../../../components/services/sports.service';
 import { Subscription } from 'rxjs/Subscription';
+import { AccessorService } from "../../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-managefouls',
@@ -15,13 +16,14 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class ManagefoulsComponent implements OnInit {
   public _id:any;
-  public userId;
+  public userId;hasCreatePerm;
   public subscription : Subscription;
   public former = { nameoffoul:'',valueoffoul:'',isplayer:false,iscoach:false,isteam:false,istimepenalty:false,isscoringdependable:false,ispossessiondependable:false,duration:'',minustime:'',colorbtndown:'',colorbtnup:'' };
   
   constructor(private http: Http, 
               private toastr: ToastrService, 
               private router: Router, 
+              private accr: AccessorService,              
               public activeRouter: ActivatedRoute,
               public sportService:SportsService) { }
 
@@ -30,6 +32,7 @@ export class ManagefoulsComponent implements OnInit {
       this.former=res[0];
       this._id = res[0]._id;
     })
+    this.checkpermissions();
     // this.activeRouter.params.subscribe(params => {
     //   this.userId = params._id;
     //   if (this.userId) {
@@ -45,7 +48,14 @@ export class ManagefoulsComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
+    checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "sportfouls1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+    }
+  }
   savedata(gotcha) {
     var sptid = localStorage.getItem('sptid');
     var janudata = gotcha;

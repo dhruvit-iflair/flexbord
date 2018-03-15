@@ -7,6 +7,7 @@ import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
 import { Subscription } from 'rxjs/Subscription';
 import { ClubService } from '../../../../components/services/club.service';
+import { AccessorService } from "../../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-manage-club-classifications',
@@ -21,7 +22,9 @@ export class ManageClubClassificationsComponent implements OnInit {
   public sub : any;
   public _id : any;orgid;
   public subscription:Subscription;
-  constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public clubService:ClubService){
+    public hasCreatePerm;
+
+  constructor(public fb: FormBuilder,private http : Http,private accr: AccessorService, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public clubService:ClubService){
     this.claForm = this.fb.group({
       name: ["",[Validators.required]],
       value: [null,[Validators.required]]
@@ -45,9 +48,18 @@ export class ManageClubClassificationsComponent implements OnInit {
       this.value = data.value;
       this._id = res[0]._id;
     });
+    this.checkpermissions();
   }
   ngOnDestroy() {
      this.subscription.unsubscribe();
+  }
+  checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubclassifications1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+    }
   }
   reset(){
     this.claForm.reset();

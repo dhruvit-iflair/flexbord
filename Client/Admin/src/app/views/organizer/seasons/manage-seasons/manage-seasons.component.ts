@@ -10,6 +10,7 @@ import { start } from 'repl';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { OrganizerService } from '../../../../components/services/organizer.service';
 import { Subscription } from 'rxjs/Subscription';
+import { AccessorService } from "../../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-manage-seasons',
@@ -29,7 +30,7 @@ export class ManageSeasonsComponent implements OnInit {
   public subscription: Subscription;
   public click:Boolean = true;
   public bsConfig: Partial<BsDatepickerConfig>;
-
+  public hasCreatePerm;
   constructor(
               public fb: FormBuilder,
               private toastr : ToastrService,
@@ -37,6 +38,7 @@ export class ManageSeasonsComponent implements OnInit {
               private router: Router,
               public activeRouter:ActivatedRoute,
               public location:Location,
+              private accr: AccessorService,
               public orgService:OrganizerService) {
     // this.start_ate = new Date();
     this.bsConfig = {
@@ -120,8 +122,17 @@ export class ManageSeasonsComponent implements OnInit {
       this.seasonForm.patchValue({name:res.name});
       this._id = res._id;
     });
+    this.checkpermissions();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+    checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizerseasons1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+    }
   }
 }

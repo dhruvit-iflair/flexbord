@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { ClubService } from '../../../components/services/club.service';
 import { OrganizerService } from '../../../components/services/organizer.service';
 import { SportsService } from '../../../components/services/sports.service';
+import { AccessorService } from "../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-manage-club',
@@ -39,6 +40,7 @@ export class ManageClubComponent implements OnInit {
   public fileSupport2:Boolean = false;
   public fileSizeMin2:Boolean = false;
   public fileSizeMax2:Boolean = false;
+  public hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;hasTournamentsPerm;
   public clubForm : FormGroup;
   constructor(public fb: FormBuilder,
               private http : Http,
@@ -46,6 +48,7 @@ export class ManageClubComponent implements OnInit {
               private router: Router,
               public activeRouter:ActivatedRoute,
               public clubService: ClubService,
+              private accr: AccessorService,
               public orgService:OrganizerService,
               public sportService:SportsService) {
     this.sportService.getAllSports();
@@ -97,6 +100,7 @@ export class ManageClubComponent implements OnInit {
       });
     }
   });
+  this.checkpermissions();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -212,6 +216,23 @@ export class ManageClubComponent implements OnInit {
           this.fileSupport2 = true;
           this.toastr.error('Only .jpg, .png, .jpeg type of Image supported ', 'Error');                                  
         }
+      }
+    }
+  }
+    checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubtournaments0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasTournamentsPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubmembers0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasMembersPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubseasons0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasSeasonsPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubclassifications0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasClassificationsPerm = true;
       }
     }
   }
