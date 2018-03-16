@@ -24,6 +24,7 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
   public sportsValue : Array<any>;
   public classifications : Array<any>;
   public classificationValues : Array<any> = [];
+  public my_Class :string = "form-control ng-untouched ng-pristine ng-invalid ";
   public click : Boolean= true;
   public classValue :Array<any>;
   public subscripton : Subscription;
@@ -95,6 +96,7 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
               setTimeout(() => {
                 this.click = true;
                 this.classificationValues = [];
+                this.my_Class = 'form-control ng-untouched ng-pristine ng-invalid';
               }, 100);   
             } 
             else {
@@ -104,6 +106,7 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
               setTimeout(() => {
                 this.click = true;
                 this.classificationValues = [];
+                this.my_Class = 'form-control ng-untouched ng-pristine ng-invalid';
                 
               }, 100);   
             }

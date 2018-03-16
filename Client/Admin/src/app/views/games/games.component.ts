@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs/Subject';
 import { AccessorService } from "../../components/common/accessor.service";
+import { GameService } from '../../components/services/game.service';
 
 @Component({
   selector: 'app-games',
@@ -19,12 +20,20 @@ export class GamesComponent implements OnInit {
   public data: Array<any> = [];
   public length: number = 0;
   public dtOptions;
-  public dataRenderer = false;
+  public dataRenderer = true;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public modules = this.accr.getmodules();
+  public isInTeam = false;
+
   public hasTeamsPerm;hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;hasPointsPerm;hasStatusPerm;hasScoresPerm;hasFoulsPerm;
-  constructor(public http: Http, private router: Router, private toastr: ToastrService, private accr: AccessorService) { }
+  constructor(public http: Http, private router: Router, private toastr: ToastrService, private accr: AccessorService,public gameService:GameService) { }
   ngAfterContentInit() {
+    if(window.location.pathname.indexOf('team') > -1){
+      this.isInTeam = true
+    }
+    else {
+        this.isInTeam = false
+    }
     this.dtOptions = {
       pagingType: 'simple_numbers',
       order: [[0, 'desc']],
@@ -32,12 +41,14 @@ export class GamesComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.http.get(environment.api + "/games")
-      .subscribe((res) => {
-        this.rows = res.json();
+    this.gameService.getGameList().subscribe((res) => {
+          this.dataRenderer = false;
+          this.rows = res.json();
           this.length = this.rows.length;
-          this.dataRenderer = true;
-      });
+          setTimeout(() => {
+            this.dataRenderer = true;            
+          }, 150);
+    });
     this.checkpermissions();
   }
   checkpermissions() {
@@ -85,19 +96,12 @@ export class GamesComponent implements OnInit {
     this.router.navigate(['/sports/fouls']);
   }
   delClub(id){
-      var del = confirm("Confirm to delete this Sport?");
-      if (del) {
-        this.http.delete(environment.api + "/sports/" + id)
-          .subscribe((res) => {
-            var d = res.json();
-            if (d._id) {
-              this.dataRenderer = false;
-              this.toastr.success('Sport Deleted Successfully', 'Success');
-              this.ngOnInit();
-            }
-          }, (error) => {
-            this.toastr.error('Something went wrong !! Please try again later', 'Error');
-          });
-      }
+    var del = confirm("Confirm to delete this Game?");
+    if (del) {
+        this.gameService.deleteGame(id);
     }
+  }
+  edit(id){
+    this.gameService.getSingleGame(id);
+  }
 }

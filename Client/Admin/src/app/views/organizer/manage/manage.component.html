@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="man col-md-3">
                               <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
-                              <input class="text-col-md-3" type="text" pattern=".{3,}" formControlName="name" required placeholder="Enter Full Name">
+                              <input class="text-col-md-3" type="text" pattern=".{3,}" formControlName="name" placeholder="Enter Full Name">
                               <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('name').valid && orgForm.get('name').touched">
                                     Name is required.
                               </div>
@@ -87,40 +87,72 @@
                                     Address is required.
                             </div>   
                         </div>
-                 
-                        <div class="man col-md-3">
-                            <h4 class="text-left">Building</h4>
-                            <input class="text-col-md-3"   type="text"  formControlName="building" placeholder="Building">
+                        <div *ngIf="_id" >
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Building</h4>
+                                <input class="text-col-md-3"   type="text"  formControlName="building" placeholder="Building">
+                            </div>
+                     
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Street</h4>
+                                <input class="text-col-md-3"   type="text"  formControlName="street" placeholder="Street">
+                            </div>
+                     
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
+                                <input class="text-col-md-3"   type="text"  formControlName="country" placeholder="Country"> 
+                            </div>
+                     
+                            <div class="man col-md-3">
+                                <h4 class="text-left">State</h4>
+                                <input class="text-col-md-3"   type="text"  formControlName="state" placeholder="State">
+                            </div>
+                     
+                            <div class="man col-md-3">
+                                <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
+                                <input class="text-col-md-3"   type="text"  formControlName="city" placeholder="City" >
+                            </div>
+                     
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Zipcode</h4>
+                                <input class="text-col-md-3"   type="text"  formControlName="zipcode" placeholder="Zipcode">
+                            </div>
                         </div>
-                 
-                        <div class="man col-md-3">
-                            <h4 class="text-left">Street</h4>
-                            <input class="text-col-md-3"   type="text"  formControlName="street" placeholder="Street">
+                        <div *ngIf="!_id">
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Building</h4>
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="building" placeholder="Building">
+                            </div>
+                        
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Street</h4>
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="street" placeholder="Street">
+                            </div>
+                        
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="country" placeholder="Country"> 
+                            </div>
+                        
+                            <div class="man col-md-3">
+                                <h4 class="text-left">State</h4>
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="state" placeholder="State">
+                            </div>
+                        
+                            <div class="man col-md-3">
+                                <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="city" placeholder="City" >
+                            </div>
+                        
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Zipcode</h4>
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="zipcode" placeholder="Zipcode">
+                            </div>
                         </div>
-                 
-                        <div class="man col-md-3">
-                            <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
-                            <input class="text-col-md-3"   type="text"  formControlName="country" placeholder="Country">
-                        </div>
-                 
-                        <div class="man col-md-3">
-                            <h4 class="text-left">State</h4>
-                            <input class="text-col-md-3"   type="text"  formControlName="state" placeholder="State">
-                        </div>
-                 
-                        <div class="man col-md-3">
-                            <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
-                            <input class="text-col-md-3"   type="text"  formControlName="city" placeholder="City">
-                        </div>
-                 
-                        <div class="man col-md-3">
-                            <h4 class="text-left">Zip code</h4>
-                            <input class="text-col-md-3"   type="text"  formControlName="zipcode" placeholder="Zip code">
-                        </div>
-                 
+                    
                         <div class="man col-md-3">
                             <h4 class="text-left">Capacity</h4>
-                            <input class="text-col-sm-3"  type="number" formControlName="capacity" max="9999999" style="width: 100%;" value="1" min="1" oninput="validity.valid||(value='');">
+                            <input class="text-col-sm-3"  type="number" formControlName="capacity" max="9999999" style="width: 100%;" value="1" min="0" oninput="validity.valid||(value='');">
                             <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('capacity').valid && orgForm.get('capacity').touched">
                                     Capicity is required.
                             </div>
@@ -166,7 +198,7 @@
                          </div>
                          <div class="man col-md-4">
                             <h4 class="text-left">Email<a style="color:#f00 !important;">*</a></h4>
-                            <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" required placeholder="Enter Email">
+                            <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" placeholder="Enter Email">
                             <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('email').valid && orgForm.get('email').touched">
                                     Email is required or invalid.
                             </div>     
@@ -236,7 +268,7 @@
                 <button class="btn btn-white" [routerLink]="['/organizer']">Back</button>
             </div>
             <div class="col-md-6 text-right">
-                <button class="btn btn_green" [disabled]="!orgForm.valid" (click)='addOrg()'>Save</button>       
+                <button class="btn btn_green" [disabled]="!orgForm.valid || !isCountry || !isCity" (click)='addOrg()'>Save</button>       
             </div>  
         </div>
         

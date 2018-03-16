@@ -58,8 +58,9 @@ export class ClubClassificationsComponent implements OnInit {
   }
   delClas(id) {
     console.log(id);    
+    var that = this;
     this.conformService.confirm({title:"Delete",text:'Do you want to delete this Classifications!'},function(){
-      this.clubService.deleteClassifications(id);
+      that.clubService.deleteClassifications(id);
     },function(){
 
     })

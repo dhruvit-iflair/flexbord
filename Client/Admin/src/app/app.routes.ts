@@ -109,7 +109,7 @@ export const ROUTES:Routes = [
       // { path: 'club/seasons/manage/:_id', component: ManageClubSeasonsComponent, canActivate: [Auth24Guard] },
 
       // { path: 'club/members', component: ClubMembersComponent, canActivate: [Auth24Guard] },
-      // { path: 'club/members/import', component: ImportClubMembersComponent, canActivate: [Auth24Guard] },
+      { path: 'club/members/import', component: ImportClubMembersComponent, canActivate: [Auth24Guard] },
 
       // { path: 'club/members/manage', component: ManageClubMembersComponent, canActivate: [Auth24Guard] },
       // { path: 'club/members/manage/:_id', component: ManageClubMembersComponent, canActivate: [Auth24Guard] },

@@ -29,6 +29,7 @@ export class ManageClubMembersComponent implements OnInit {
   public fileSizeMin:Boolean = false;
   public fileSizeMax:Boolean = false;
   public click:Boolean = true;
+  public isPhoto:Boolean= false;
   public subscription :Subscription;
 
   constructor(public fb: FormBuilder,
@@ -59,7 +60,7 @@ export class ManageClubMembersComponent implements OnInit {
       zipcode:  [""],
       email:  [""],
       phonenumber:  [""],          
-      usertype :  [""], 
+      usertype :  ["admin"], 
       status:["Pending"],
       club :  [localStorage.getItem('clubid'),[Validators.required]]
     })
@@ -80,9 +81,16 @@ export class ManageClubMembersComponent implements OnInit {
     this.subscription = this.clubService.getSingleMemberData().subscribe((res)=>{
         var fagdf = res;
         this.clubMemForm.patchValue(fagdf[0]);
+        this.clubMemForm.patchValue({ dob:new Date(fagdf[0].dob)});
         this.memberSince =  fagdf[0].memberSince;
         var src = environment.picpoint + 'clubMembersPhoto/' + fagdf[0].photo;
         this.photo = src;
+        if (fagdf[0].photo) {
+          this.isPhoto= true;
+        }
+        else{
+          this.isPhoto = false;
+        }
         this._id = fagdf[0]._id;
     });
   }
@@ -110,10 +118,12 @@ export class ManageClubMembersComponent implements OnInit {
         var reader = new FileReader();
           reader.onload = (event:any) => {     
           this.photo = event.target.result;
+          this.isPhoto= true;
         }
         reader.readAsDataURL(event.target.files[0]);
       } 
       else {
+        this.isPhoto= false;
         if (file.type == 'image/jpeg' &&  file.size > 2000000 || file.type == 'image/png'   &&  file.size > 2000000) {
           this.fileSizeMax = true; 
           this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');                        
@@ -153,23 +163,37 @@ export class ManageClubMembersComponent implements OnInit {
     this.clubMemForm.patchValue({address:e.formatted_address});
     this.clubMemForm.patchValue({phonenumber:e.formatted_phone_number});
     this.clubMemForm.patchValue({website:e.website});
-    e.address_components.forEach((add)=>{
-      if (add.types[0] == "postal_code") {
-        this.clubMemForm.patchValue({zipcode:add.long_name});
-      } 
-      if (add.types[0] == "country") {
-        this.clubMemForm.patchValue({country:add.long_name});
-      } 
-      if (add.types[0] == "administrative_area_level_1") {
-        this.clubMemForm.patchValue({state:add.long_name});
-      }
-      if (add.types[0] == "administrative_area_level_2") {
-        this.clubMemForm.patchValue({city:add.long_name});
-      } 
-      if (add.types[0] == "route") {
-        this.clubMemForm.patchValue({street:add.long_name});
-      } 
-    });
+    var address = { zipcode:'', country:'', state:'', city:'', street:'', building:'' }
+     for (var i = 0; i < e.address_components.length; i++) {
+          var add = e.address_components[i].types[0];
+          if (add == "postal_code") {
+            address.zipcode = e.address_components[i].long_name;
+          } 
+          else if (add == "country") {
+            address.country = e.address_components[i].long_name;
+          } 
+          else if (add == "administrative_area_level_1") {
+            address.state = e.address_components[i].long_name;
+          }
+          else if (add == "administrative_area_level_2") {
+            address.city = e.address_components[i].long_name;
+          } 
+          else if (add == "route") {
+            address.street = e.address_components[i].long_name;
+          } 
+          else {
+            var st = e.formatted_address.split(',');
+            if (st[0] && st[1] != undefined) {
+              address.building = st[0]+ ", " +st[1];
+            } else {
+              address.building = st[0];   
+              
+            }
+          }
+          if (i == e.address_components.length -1) {
+            this.clubMemForm.patchValue(address);
+          }
+    }
     // this.clubMemForm.value.address = e.formatted_address;
     // this.clubMemForm.value.phonenumber = e.formatted_phone_number;
   }

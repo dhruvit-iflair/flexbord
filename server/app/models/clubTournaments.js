@@ -8,7 +8,7 @@ var clubTournamentsSchema=new Schema({
     name:String,    
     description: String,
     // sports: String,
-    sports:[{ type: Schema.Types.ObjectId, ref: 'sports' }],
+    sports:{ type: Schema.Types.ObjectId, ref: 'sports' },
     clubSeasons: { type: Schema.Types.ObjectId, ref: 'clubSeasons' },
     club:{ type: Schema.Types.ObjectId, ref: 'club' },
     clubClassifications: { type: Schema.Types.ObjectId, ref: 'clubClassifications' },

@@ -104,8 +104,9 @@ export class ClubComponent implements OnInit {
     this.router.navigate(['/club/manage/'+id]);
   }
   delClub(data){
-    this.conformService.confirm({title:"Delete",text:'Do you want to delete '+ data.name +'?'},function(){
-        this.clubService.deleteClub(data._id);
+    var that = this;
+    this.conformService.confirm({title:"Delete",text:'Do you want to delete "'+ data.name +'"?'},function(){
+        that.clubService.deleteClub(data._id);
       },function(){
 
       })

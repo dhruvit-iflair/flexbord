@@ -1,9 +1,9 @@
 <div class="row">
     <div class="container">
-        <div class="col-md-10">
+        <div class="col-md-10" *ngIf="!isInTeam">
             <label><h2>Games</h2></label>
         </div>
-        <div class="col-md-2 text-right" *ngIf="hasCreatePerm">
+        <div class="col-md-2 text-right" *ngIf="hasCreatePerm && !isInTeam">
             <button class="btn btn_green" [routerLink]="['/games/manage']"><i class="fa fa-plus"></i> Add New Game</button>                         
         </div>
         <div class="col-md-12" id="tabl">
@@ -33,7 +33,10 @@
                     <td>{{item.hometeam.name | firstcapitalize}}</td>
                     <td>{{item.visitorteam.name | firstcapitalize}}</td>
                     <td>
-                      <a class="btn btn_green tab_btn" routerLink="/games/manage/{{item._id}}"  title="Edit" *ngIf="hasEditPerm">
+                      <a class="btn btn_green tab_btn" routerLink="/games/manage/{{item._id}}"  title="Edit" *ngIf="hasEditPerm && !isInTeam">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                      </a>
+                      <a class="btn btn_green tab_btn" (click)="edit(item._id)" title="Edit" *ngIf="hasEditPerm && isInTeam">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                       </a>
                      <a class="btn btn_red tab_btn delete-btn" (click)="delClub(item._id)" title="Delete" *ngIf="hasDeletePerm">

@@ -34,7 +34,7 @@ export class ManageclubTournamentsComponent implements OnInit {
   public click :Boolean=true;
   constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public clubService:ClubService,public sportService:SportsService){
       this.clubId = localStorage.getItem('clubid');
-      this.comForm = this.fb.group({ name: ["",[Validators.required]],description: [""],sports: [null,[Validators.required]],clubSeasons: ["",[Validators.required]],clubClassificationsValue: [[],[Validators.required]],club:[this.clubId ,[Validators.required]],competition:["opened"]});
+      this.comForm = this.fb.group({ name: ["",[Validators.required]],description: [""],sports: [null,[Validators.required]],clubSeasons: [null,[Validators.required]],clubClassificationsValue: [[],[Validators.required]],club:[this.clubId ,[Validators.required]],competition:["opened"]});
       this.subscription = this.clubService.getSeasonList().subscribe((res) => { this.clubSeasons = res; })   
 
       this.subscription = this.clubService.getClassificationsList().subscribe((res) => { if (res != []) this.clubClassifications = res;})   

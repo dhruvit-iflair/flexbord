@@ -57,12 +57,13 @@ input.no_border.text.col-md-12.ng-untouched.ng-pristine.ng-valid{
 span.box {
     float: left;
     color: #535353;
+    padding-left:10px
 }
 span.caret {
     position: relative;
     right: 0;
     left: 98.5%;
-    top: -26px;
+    top: -23px;
 }
 a.btn.btn-lg.dropdown-toggle.col-md-12 {
     margin: 0px auto 0px auto;

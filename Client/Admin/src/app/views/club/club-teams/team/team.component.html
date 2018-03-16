@@ -141,13 +141,16 @@
   </div>
 </div>
   </tab>
-    <tab heading="Players" id="memberTab" [active]="tabz == 2"><app-create-player></app-create-player>
-      <!-- <app-club-player></app-club-player> -->
+    <tab heading="Players" id="memberTab" [active]="tabz == 2">
+      <app-create-player></app-create-player>
     </tab>
-    <tab heading="Staff" id="seasonTab" [active]="tabz == 3"><app-create-staff></app-create-staff>
-      <!-- <app-club-staff></app-club-staff> -->
+    <tab heading="Game" id="gameTab" [active]="tabz == 4">
+        <app-managegame></app-managegame>
+        <app-games></app-games>
     </tab>
-    <!-- <tab heading="Classifications" [disabled]="!_id" id="classTab" [active]="tabz == 4"><app-manage-organizer-classifications></app-manage-organizer-classifications><app-organizer-classifications></app-organizer-classifications></tab>
-    <tab heading="Competitions" [disabled]="!_id" id="compTab" [active]="tabz == 5"><app-manage-organizer-competitions></app-manage-organizer-competitions><app-organizer-competitions></app-organizer-competitions></tab> -->
-  </tabset>
+    <tab heading="Staff" id="seasonTab" [active]="tabz == 3">
+        <app-create-staff></app-create-staff>
+    </tab>
+        
+    </tabset>
 </div>

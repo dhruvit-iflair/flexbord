@@ -55,7 +55,7 @@
             </div>
             <div class="man col-md-6" *ngFor="let it of classifications; let i = index;" >
                 <label>{{it.name}}<a style="color:#f00 !important;">*</a></label>
-                <select  class=" form-control" name="organizerClassifications"  [(ngModel)]="classificationValues[i]" [ngModelOptions]="{standalone: true}" *ngIf="!classifications == []" (ngModelChange)="getClasValue()" required>
+                <select  class=" form-control" [className]="my_Class" name="organizerClassifications"  [(ngModel)]="classificationValues[i]" [ngModelOptions]="{standalone: true}" *ngIf="!classifications == []" (ngModelChange)="getClasValue()" required>
                     <option disabled="true" value="undefined" selected>Select your Classification Value</option>                  
                     <option *ngFor="let val of it.value "  [value]="val">{{val}}</option>
                 </select>
@@ -92,7 +92,7 @@
           <button class="btn" [routerLink]="['/organizer/competitions']">Back</button>
       </div> -->
       <div class="col-md-6 text-right">
-          <button (click)='saveVal()' [disabled]='!comForm.valid || classificationValues.length != classifications.length'  class="btn btn_green white" >Save</button>        
+          <button (click)="saveVal(); my_Class = 'form-control ng-untouched ng-pristine ng-invalid'" [disabled]='!comForm.valid || classificationValues.length != classifications.length'  class="btn btn_green white" >Save</button>        
           <!-- [disabled]='!orgForm.valid' -->
       </div> 
     </div> 

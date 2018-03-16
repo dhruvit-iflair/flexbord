@@ -44,7 +44,7 @@ import { OrganizerService } from "./components/services/organizer.service";
 import { ClubService } from "./components/services/club.service";
 import {Ng5BreadcrumbModule,BreadcrumbService} from 'ng5-breadcrumb';
 import { ConfirmBoxService } from "./components/services/confirm-box.service";
-
+import { GameService } from "./components/services/game.service";
 
 
 import { BackLocationDirective } from "./components/directive/backButton";
@@ -220,7 +220,7 @@ import { importType } from '@angular/compiler/src/output/output_ast';
     Ng5BreadcrumbModule.forRoot(),
   ],
   providers: [Auth24Guard,ClubService,UserService,AccessorService,BreadCrumbService,BreadcrumbService,EmailService,EmailTypeService,OrganizerService,SportsService,
-  GamesettingsService,ManageconsequenceComponent,ManagestructureComponent,ManageplaylistComponent,ManagescoreboardComponent,ConfirmBoxService],
+  GamesettingsService,ManageconsequenceComponent,ManagestructureComponent,ManageplaylistComponent,ManagescoreboardComponent,ConfirmBoxService,GameService],
 
   bootstrap: [AppComponent]
 })

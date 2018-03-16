@@ -17,7 +17,7 @@
 <!-- <<<<<<< HEAD -->
                           <!-- <input class="text-col-md-3" type="text" pattern=".{3,}" formControlName="name" placeholder="Enter Name" required> -->
 <!-- ======= -->
-                          <input class="text-col-md-3" type="text" pattern="^[^\s]+(\s+)*$" formControlName="name" placeholder="Enter Name" required>
+                          <input class="text-col-md-3" type="text" pattern=".{1,}" formControlName="name" placeholder="Enter Name" required>
 <!-- >>>>>>> 3a6d279c24dc2f59739a735cc9c9a662c2bac592 -->
                     </div>
                     <div class="man col-md-3">
@@ -73,35 +73,69 @@
                     <div class="man col-md-3"><h4 class="text-left">Address</h4>
                         <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace placeholder="Enter Address">
                     </div>             
-                    <div class="man col-md-3">
-                        <h4 class="text-left">Building</h4>
-                        <input class="text-col-md-3" type="text"  formControlName="building" placeholder="Building">
-                    </div>
-             
-                    <div class="man col-md-3">
-                        <h4 class="text-left">Street</h4>
-                        <input class="text-col-md-3" type="text"  formControlName="street" placeholder="Street">
-                    </div>
-             
-                    <div class="man col-md-3">
-                        <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
-                        <input class="text-col-md-3" type="text"  formControlName="country" placeholder="Country">
-                    </div>
-             
-                    <div class="man col-md-3">
-                        <h4 class="text-left">State</h4>
-                        <input class="text-col-md-3" type="text"  formControlName="state" placeholder="State">
-                    </div>
-             
-                    <div class="man col-md-3">
-                        <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
-                        <input class="text-col-md-3" type="text"  formControlName="city" placeholder="City">
-                    </div>
-             
-                    <div class="man col-md-3">
-                        <h4 class="text-left">Zipcode</h4>
-                        <input class="text-col-md-3" type="text"  formControlName="zipcode" placeholder="Zip">
-                    </div>
+                    <div *ngIf="_id" >
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Building</h4>
+                                <input class="text-col-md-3"   type="text"  formControlName="building" placeholder="Building">
+                            </div>
+                     
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Street</h4>
+                                <input class="text-col-md-3"   type="text"  formControlName="street" placeholder="Street">
+                            </div>
+                     
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
+                                <input class="text-col-md-3"   type="text"  formControlName="country" placeholder="Country"> 
+                            </div>
+                     
+                            <div class="man col-md-3">
+                                <h4 class="text-left">State</h4>
+                                <input class="text-col-md-3"   type="text"  formControlName="state" placeholder="State">
+                            </div>
+                     
+                            <div class="man col-md-3">
+                                <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
+                                <input class="text-col-md-3"   type="text"  formControlName="city" placeholder="City" >
+                            </div>
+                     
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Zipcode</h4>
+                                <input class="text-col-md-3"   type="text"  formControlName="zipcode" placeholder="Zipcode">
+                            </div>
+                        </div>
+                        <div *ngIf="!_id">
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Building</h4>
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="building" placeholder="Building">
+                            </div>
+                        
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Street</h4>
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="street" placeholder="Street">
+                            </div>
+                        
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="country" placeholder="Country"> 
+                            </div>
+                        
+                            <div class="man col-md-3">
+                                <h4 class="text-left">State</h4>
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="state" placeholder="State">
+                            </div>
+                        
+                            <div class="man col-md-3">
+                                <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="city" placeholder="City" >
+                            </div>
+                        
+                            <div class="man col-md-3">
+                                <h4 class="text-left">Zipcode</h4>
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="zipcode" placeholder="Zipcode">
+                            </div>
+                        </div>
+                    
              
                     <div class="man col-md-3">
                         <h4 class="text-left">Capacity</h4>
