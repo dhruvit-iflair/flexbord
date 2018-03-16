@@ -14,6 +14,7 @@ export class ManageComponent implements OnInit {
   constructor(public http: HttpClient, private toastr: ToastrService, private router: Router, private activatedRoute: ActivatedRoute) { }
   public mForm = { name: '', typeofsport: '', typeofgame: '', typeofteam:'' };
   public paramdetails = false;
+  public click = true;
   public userId;
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
@@ -28,19 +29,29 @@ export class ManageComponent implements OnInit {
     });
   }
   addMember(gotdata) {
-    if (this.paramdetails) {
-      this.http.patch(environment.api + '/sports/' + this.userId, gotdata)
-        .subscribe(result => {
-          this.toastr.success('Updated Successfully.','Success');
-          // this.router.navigate(['/sports']);
-        });
+    if (this.click) {
+      this.click = false;
+      if (this.paramdetails) {
+        this.http.patch(environment.api + '/sports/' + this.userId, gotdata)
+          .subscribe(result => {
+            this.toastr.success('Updated Successfully.','Success');
+            // this.router.navigate(['/sports']);
+            setTimeout(() => {
+              this.click = true;
+            }, 150);
+          });
+      }
+      else {
+        this.http.post(environment.api + '/sports', gotdata)
+          .subscribe(dt => {
+            this.toastr.success('Added Successfully.','Success');
+            setTimeout(() => {
+              this.click = true;
+            }, 150);
+            this.router.navigate(['/sports/manage/'+dt['_id']]);
+          });
+      }
     }
-    else {
-      this.http.post(environment.api + '/sports', gotdata)
-        .subscribe(dt => {
-          this.toastr.success('Added Successfully.','Success');
-          this.router.navigate(['/sports/manage/'+dt['_id']]);
-        });
-    }
+    
   }
 }

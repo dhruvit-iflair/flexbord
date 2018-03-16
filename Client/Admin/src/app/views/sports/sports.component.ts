@@ -20,7 +20,7 @@ export class SportsComponent implements OnInit {
   public data: Array<any> = [];
   public length: number = 0;
   public dtOptions;
-  public dataRenderer = false;
+  public dataRenderer = true;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;
   public modules = this.accr.getmodules();
   public subscripton:Subscription
@@ -40,9 +40,13 @@ export class SportsComponent implements OnInit {
   ngOnInit(): void {
     this.sportService.getAllSports();
     this.subscripton = this.sportService.getSportsList().subscribe((res) => {
+        this.dataRenderer = false;
         this.rows = res;
         this.length = this.rows.length;
-      });
+        setTimeout(() => {
+          this.dataRenderer = true;
+        }, 200);
+    });
     this.checkpermissions();
   }
   edit(id){
