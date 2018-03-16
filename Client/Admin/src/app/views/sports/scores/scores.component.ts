@@ -16,14 +16,14 @@ export class ScoresComponent implements OnInit {
 
   scores; dtOptions; sptid;
   public dataRenderer = false;
-  public hasEditPerm; hasDeletePerm; hasCreatePerm;
-  public subscription : Subscription;
-  constructor(public http: HttpClient, 
-              private router: Router, 
-              private aroute: ActivatedRoute, 
-              private toastr: ToastrService, 
-              private accr: AccessorService,
-              private sportService:SportsService) { }
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
+  public subscription: Subscription;
+  constructor(public http: HttpClient,
+    private router: Router,
+    private aroute: ActivatedRoute,
+    private toastr: ToastrService,
+    private accr: AccessorService,
+    private sportService: SportsService) { }
 
   ngOnInit() {
     this.sptid = localStorage.getItem('sptid');
@@ -46,6 +46,9 @@ export class ScoresComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "sportscores0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
       if (Object.keys(perms[z]).toString().toLowerCase() == "sportscores1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }
@@ -63,7 +66,7 @@ export class ScoresComponent implements OnInit {
       this.sportService.deleteScore(id);
     }
   }
-  edit(id){
+  edit(id) {
     this.sportService.getSingleScore(id);
   }
 

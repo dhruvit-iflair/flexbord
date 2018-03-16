@@ -9,6 +9,7 @@ import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from
 import { forEach } from '@angular/router/src/utils/collection';
 import { SportsService } from '../../../../components/services/sports.service';
 import { Subscription } from 'rxjs/Subscription';
+import { AccessorService } from "../../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-managepoints',
@@ -18,12 +19,14 @@ import { Subscription } from 'rxjs/Subscription';
 export class ManagepointsComponent implements OnInit {
   public _id:any = false;
   public subscripton : Subscription;
+  public hasCreatePerm;
   public former = { nameofpoint: '', valueofpoint: 0, valueofpointopt: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };
   public myForm:any;
   public items = ['Subtracted', 'Apply to contender', 'Fault'];
   constructor(private http: Http, 
               private toastr: ToastrService, 
               private router: Router, 
+              private accr: AccessorService,
               public activeRouter: ActivatedRoute,
               public sportsService:SportsService) { }
 
@@ -32,13 +35,21 @@ export class ManagepointsComponent implements OnInit {
       this.former=res[0];
       this._id = res[0]._id;
     })
+    this.checkpermissions();
   }
   minZero(e){
     if (this.former.valueofpoint < -1 || this.former.valueofpoint == -1) {
       this.former.valueofpoint = 0;
     }
   }
-  
+  checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "sportpoints1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+    }
+  }
   ngOnDestroy() {
     this.subscripton.unsubscribe();
     this.former = { nameofpoint: '', valueofpoint: 0, valueofpointopt: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };

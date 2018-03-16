@@ -8,6 +8,7 @@ import { HttpObserve } from '@angular/common/http/src/client';
 import { Subscription } from 'rxjs/Subscription';
 import { ClubService } from '../../../../components/services/club.service';
 import { SportsService } from '../../../../components/services/sports.service';
+import { AccessorService } from "../../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-manageclub-tournaments',
@@ -31,8 +32,10 @@ export class ManageclubTournamentsComponent implements OnInit {
   public subscription:Subscription;
   public clubClassificationsValueDisplay :Boolean=false;
   public resS :Boolean=false;
+  public hasCreatePerm;
   public click :Boolean=true;
-  constructor(public fb: FormBuilder,private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public clubService:ClubService,public sportService:SportsService){
+  constructor(public fb: FormBuilder,private http : Http,private accr: AccessorService, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public clubService:ClubService,public sportService:SportsService){
+
       this.clubId = localStorage.getItem('clubid');
       this.comForm = this.fb.group({ name: ["",[Validators.required]],description: [""],sports: [null,[Validators.required]],clubSeasons: [null,[Validators.required]],clubClassificationsValue: [[],[Validators.required]],club:[this.clubId ,[Validators.required]],competition:["opened"]});
       this.subscription = this.clubService.getSeasonList().subscribe((res) => { this.clubSeasons = res; })   
@@ -54,9 +57,18 @@ export class ManageclubTournamentsComponent implements OnInit {
         this.comForm.controls['clubClassificationsValue'].setValue(res[0].clubClassificationsValue, {onlySelf: true});
         this._id = res[0]._id;
     })
+    this.checkpermissions();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+    checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubtournaments1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+    }
   }
   saveVal(){
     if (this.click) {      

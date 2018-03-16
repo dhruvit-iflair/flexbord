@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { environment } from "../../../../environments/environment";
-import { Router ,ActivatedRoute} from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
@@ -15,41 +15,44 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./organizer-competitions.component.css']
 })
 export class OrganizerCompetitionsComponent implements OnInit {
-  public dtOptions;orgid;
-  public rows :Array<any>;
+  public dtOptions; orgid;
+  public rows: Array<any>;
   public dataRenderer = true;
-  public hasEditPerm; hasDeletePerm; hasCreatePerm;
-  public subscription :Subscription
-  constructor(private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,private accr: AccessorService,public orgService:OrganizerService) { }
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
+  public subscription: Subscription
+  constructor(private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute, private accr: AccessorService, public orgService: OrganizerService) { }
 
   ngOnInit() {
-    this.subscription = this.orgService.getCompetitionsList().subscribe(res=>{
-        this.rows = res;
-        this.dataRenderer = false;
-        setTimeout(() => {
-          this.dataRenderer = true;
-        }, 50);
+    this.subscription = this.orgService.getCompetitionsList().subscribe(res => {
+      this.rows = res;
+      this.dataRenderer = false;
+      setTimeout(() => {
+        this.dataRenderer = true;
+      }, 50);
     })
     this.initializer();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  edit(id){
+  edit(id) {
     this.orgService.editCompetition(id);
   }
-  initializer(){
+  initializer() {
     this.dtOptions = {
       pagingType: 'simple_numbers',
-      order:[[ 0, 'desc' ]],
-      columns: [{"visible":false},null,null,null,null,{ "orderable": false }]
+      order: [[0, 'desc']],
+      columns: [{ "visible": false }, null, null, null, null, { "orderable": false }]
     };
-    this.orgid=localStorage.getItem('orgid');
+    this.orgid = localStorage.getItem('orgid');
     this.checkpermissions();
   }
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizercompetitions0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
       if (Object.keys(perms[z]).toString().toLowerCase() == "organizercompetitions1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }
@@ -61,11 +64,11 @@ export class OrganizerCompetitionsComponent implements OnInit {
       }
     }
   }
-  delComp(id){
-      var del = confirm("Confirm to delete this Competition!");
-      if (del) {
-          this.orgService.deleteCompetition(id);
-      }
+  delComp(id) {
+    var del = confirm("Confirm to delete this Competition!");
+    if (del) {
+      this.orgService.deleteCompetition(id);
     }
+  }
 
 }

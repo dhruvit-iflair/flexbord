@@ -8,6 +8,9 @@ var GameSettingsCtrl = function () { };
 
 
 GameSettingsCtrl.prototype.create = function (req, res) {
+    if (req.body.settings==""){
+        req.body.settings="123456789012345678901234";
+    }
     var urole = new GameSetting(req.body);
     urole.save(function (err, dta) {
         if (err) {
@@ -44,6 +47,9 @@ GameSettingsCtrl.prototype.getbyid = function (req, res) {
 }
 
 GameSettingsCtrl.prototype.update = function (req, res) {
+    if (req.body.settings==""){
+        req.body.settings="123456789012345678901234";
+    }
     var updateObject = req.body;
     GameSetting.update({ _id: req.params.id }, { $set: updateObject }, function (er, dt) {
         if (er) {

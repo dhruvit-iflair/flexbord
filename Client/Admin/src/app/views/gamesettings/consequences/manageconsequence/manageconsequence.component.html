@@ -1,4 +1,4 @@
-<div class="container manage-container">
+<div class="container manage-container" *ngIf="hasCreatePerm">
   <div class="row">
     <form class="manage-component-form">
       <div class="col-md-12">
@@ -103,5 +103,5 @@
         <button class="btn btn_green" [disabled]="!mForm.playerconseq.name || !mForm.playerconseq.color || !mForm.playerconseq.value || !mForm.playerconseq.type || !mForm.teamfaults.type" (click)='managesetting(mForm)'>Save</button>
       </div>
     </div>
-
+  </div>
   </div>

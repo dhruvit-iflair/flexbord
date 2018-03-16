@@ -79,19 +79,19 @@
                 </div>
             </div>
       </tab>
-      <tab heading="Points" [disabled]="!userId">
+      <tab heading="Points" [disabled]="!userId" *ngIf="hasPointsPerm">
           <app-managepoints></app-managepoints>
           <app-points></app-points>
       </tab>
-      <tab heading="Fouls" [disabled]="!userId || mForm.typeofgame == 'points'">
+      <tab heading="Fouls" [disabled]="!userId || mForm.typeofgame == 'points'" *ngIf="hasFoulsPerm">
           <app-managefouls></app-managefouls>
           <app-fouls></app-fouls>
       </tab>
-      <tab heading="Player Status" [disabled]="!userId">
+      <tab heading="Player Status" [disabled]="!userId" *ngIf="hasStatusPerm">
           <app-manageplayerstatus></app-manageplayerstatus>
           <app-playerstatus></app-playerstatus>
       </tab>
-      <tab heading="Ranking Scores" [disabled]="!userId">
+      <tab heading="Ranking Scores" [disabled]="!userId" *ngIf="hasScoresPerm">
           <app-managescore></app-managescore>
         <!-- <app-scores></app-scores> -->
       </tab>

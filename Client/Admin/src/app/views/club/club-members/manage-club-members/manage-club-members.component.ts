@@ -10,6 +10,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { ClubService } from '../../../../components/services/club.service';
 import { Subscription } from 'rxjs/Subscription';
+import { AccessorService } from "../../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-manage-club-members',
@@ -31,11 +32,13 @@ export class ManageClubMembersComponent implements OnInit {
   public click:Boolean = true;
   public isPhoto:Boolean= false;
   public subscription :Subscription;
+public hasCreatePerm;
 
   constructor(public fb: FormBuilder,
               private http : Http,
               private toastr : ToastrService,
               private router: Router,
+              private accr: AccessorService,
               public activeRouter:ActivatedRoute,
               public clubService:ClubService) {
     this.bsConfig = {
@@ -93,6 +96,7 @@ export class ManageClubMembersComponent implements OnInit {
         }
         this._id = fagdf[0]._id;
     });
+    this.checkpermissions();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -156,6 +160,14 @@ export class ManageClubMembersComponent implements OnInit {
       else {
         this.clubService.saveMember(this.clubMemForm.value);
         this.reset();        
+      }
+    }
+  }
+  checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubmembers1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
       }
     }
   }

@@ -7,6 +7,7 @@ import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
 import { OrganizerService } from '../../../../components/services/organizer.service';
 import { Subscription } from 'rxjs/Subscription';
+import { AccessorService } from "../../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-manage-organizer-classifications',
@@ -21,10 +22,12 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
   public _id : any;orgid;
   public subscription:Subscription;
   public click :Boolean = true;
+  public hasCreatePerm;
   constructor(public fb: FormBuilder,
               private http : Http,
               private toastr : ToastrService,
               private router: Router,
+              private accr: AccessorService,
               public activeRouter:ActivatedRoute,
               public orgService : OrganizerService){
     this.claForm = this.fb.group({
@@ -49,6 +52,7 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
          this.orgid = params._id;
       }
    });
+   this.checkpermissions();
   }
 
   addVal(){
@@ -120,6 +124,14 @@ export class ManageOrganizerClassificationsComponent implements OnInit {
         this.value.splice(index,1);      
       }
     }      
+  }
+        checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizerclassifications1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+    }
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

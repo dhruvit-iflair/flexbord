@@ -1,4 +1,4 @@
-<div class="container manage-container">
+<div class="container manage-container" *ngIf="hasCreatePerm">
   <div class="row">
     <form class="manage-component-form">
       <div class="col-md-12">
@@ -35,5 +35,5 @@
         <button class="btn btn_green" [disabled]="!sForm.level || !sForm.altname.point || !sForm.altname.name" (click)='managesetting(sForm)'>Save</button>
       </div>
     </div>
-
+  </div>
   </div>

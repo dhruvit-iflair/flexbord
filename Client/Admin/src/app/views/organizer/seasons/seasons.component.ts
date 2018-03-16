@@ -15,7 +15,7 @@ export class SeasonsComponent implements OnInit {
   public dtOptions;
   public seasons: Array<any>;
   public dataRenderer = true;
-  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
   public subscription: Subscription;
   constructor(public http: Http, private toastr: ToastrService, private accr: AccessorService,public orgService:OrganizerService ) { }
 
@@ -43,6 +43,9 @@ export class SeasonsComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizerseasons0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
       if (Object.keys(perms[z]).toString().toLowerCase() == "organizerseasons1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }

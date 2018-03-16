@@ -17,7 +17,7 @@ export class PointsComponent implements OnInit {
   points; dtOptions; sptid;
   public dataRenderer = false;
   public subscription:Subscription;
-  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
 
   constructor(public http: HttpClient, 
               private router: Router, 
@@ -49,6 +49,9 @@ export class PointsComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
+       if (Object.keys(perms[z]).toString().toLowerCase() == "sportpoints0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
       if (Object.keys(perms[z]).toString().toLowerCase() == "sportpoints1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }

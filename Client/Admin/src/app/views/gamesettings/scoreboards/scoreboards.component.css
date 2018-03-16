@@ -110,7 +110,7 @@ a.btn.btn_1.tab_btn {
 .changedcss{
     background:#00b662;
     width:100%;
-    position: absolute;
+    position: inherit;
     bottom: 0;
 }
 .defaultcss{
@@ -158,4 +158,10 @@ input[type=checkbox] {
   src: url("../../../../assets/fonts/digital-7__mono_.eot?#iefix") format('embedded-opentype'), url("../../../../assets/fonts/digital-7__mono_.woff") format('woff'), url("../../../../assets/fonts/digital-7__mono_.ttf") format('truetype'), url("../../../../assets/fonts/digital-7__mono_.svg#bpdotsregular") format('svg');
   font-weight: normal;
   font-style: normal;
+}
+.scorebord {
+    padding-bottom: 0 !important;
+}
+.col-md-4.minheight {
+    min-height: 400px;
 }

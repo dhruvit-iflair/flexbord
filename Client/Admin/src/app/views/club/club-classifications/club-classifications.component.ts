@@ -18,7 +18,7 @@ export class ClubClassificationsComponent implements OnInit {
   public dtOptions;
   public rows: Array<any>;
   public dataRenderer = true; clubid;
-  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
   public subscription:Subscription;
 
   constructor(private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute, private accr: AccessorService,public clubService:ClubService,public conformService:ConfirmBoxService) { }
@@ -45,6 +45,9 @@ export class ClubClassificationsComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubclassifications0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
       if (Object.keys(perms[z]).toString().toLowerCase() == "clubclassifications1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }

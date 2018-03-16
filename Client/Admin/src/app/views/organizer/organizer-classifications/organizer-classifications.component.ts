@@ -17,7 +17,7 @@ export class OrganizerClassificationsComponent implements OnInit {
   public dtOptions;
   public rows: Array<any>;
   public dataRenderer = true; orgid;
-  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
   public subscribe : Subscription;
   constructor(private http: Http,
               private toastr: ToastrService,
@@ -47,6 +47,9 @@ export class OrganizerClassificationsComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizerclassifications0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
       if (Object.keys(perms[z]).toString().toLowerCase() == "organizerclassifications1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }

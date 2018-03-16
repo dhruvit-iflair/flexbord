@@ -6,6 +6,7 @@ import { Http } from "@angular/http";
 import { HttpObserve } from '@angular/common/http/src/client';
 import { Subscription } from 'rxjs/Subscription';
 import { ClubService } from '../../../components/services/club.service';
+import { AccessorService } from "../../../components/common/accessor.service";
 
 
 @Component({
@@ -16,10 +17,11 @@ import { ClubService } from '../../../components/services/club.service';
 export class ClubTournamentsComponent implements OnInit {
 
   public dtOptions;clubid;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
   public rows :Array<any>;
   public dataRenderer = true;
   public subscription:Subscription;
-  constructor(private http : Http, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public clubService:ClubService) { }
+  constructor(private http : Http, private toastr : ToastrService,private accr: AccessorService, private router: Router,public activeRouter:ActivatedRoute,public clubService:ClubService) { }
 
   ngOnInit() {
     this.initializer();
@@ -30,9 +32,27 @@ export class ClubTournamentsComponent implements OnInit {
           this.dataRenderer = true;
         }, 50);
     });
+    this.checkpermissions();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+    checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+       if (Object.keys(perms[z]).toString().toLowerCase() == "clubtournaments0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubtournaments1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubtournaments2" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasEditPerm = true;
+      }
+      if (Object.keys(perms[z]).toString().toLowerCase() == "clubtournaments3" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasDeletePerm = true;
+      }
+    }
   }
   initializer(){
     this.dtOptions = {

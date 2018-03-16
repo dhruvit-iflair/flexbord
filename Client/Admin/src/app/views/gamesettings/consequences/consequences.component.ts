@@ -23,7 +23,7 @@ public rows: Array<any> = [];
   public length: number = 0;
   public dtOptions;settingid;
   public dataRenderer = false;
-  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
   public modules = this.accr.getmodules();
   
   constructor(public http: Http, private router: Router, private toastr: ToastrService, private accr: AccessorService, private activatedRoute: ActivatedRoute,private settingservice: GamesettingsService,public compodata: ManageconsequenceComponent) { }
@@ -51,6 +51,9 @@ public rows: Array<any> = [];
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
+       if (Object.keys(perms[z]).toString().toLowerCase() == "gamesettingconsequences0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
       if (Object.keys(perms[z]).toString().toLowerCase() == "gamesettingconsequences1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }

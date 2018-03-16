@@ -20,7 +20,7 @@ export class PlaylistsComponent implements OnInit {
   public length: number = 0;
   public dtOptions; settingid;
   public dataRenderer = false;
-  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
   public modules = this.accr.getmodules();
   constructor(public http: Http, private router: Router, private activatedRoute: ActivatedRoute, private toastr: ToastrService, private accr: AccessorService, private settingservice: GamesettingsService, public compodata: ManageplaylistComponent) { }
   ngAfterContentInit() {
@@ -46,6 +46,9 @@ export class PlaylistsComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
+       if (Object.keys(perms[z]).toString().toLowerCase() == "gamesettingplaylist0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
       if (Object.keys(perms[z]).toString().toLowerCase() == "gamesettingplaylist1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }

@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { Subscription } from 'rxjs/Subscription';
 import { SportsService } from '../../../../components/services/sports.service';
+import { AccessorService } from "../../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-managescore',
@@ -16,11 +17,13 @@ import { SportsService } from '../../../../components/services/sports.service';
 export class ManagescoreComponent implements OnInit {
   public _id:any;
   public userId;
+  public hasCreatePerm;
   public former = { wins: 0, draws: 0, losses: 0};
   public subscription : Subscription;
   constructor(private http: Http, 
               private toastr: ToastrService, 
               private router: Router, 
+              private accr: AccessorService,
               public activeRouter: ActivatedRoute,
               public sportService:SportsService) { }
 
@@ -31,6 +34,7 @@ export class ManagescoreComponent implements OnInit {
         this._id = res[0]._id; 
       }
     })
+    this.checkpermissions();
   }
   reset(){
     this.former = { wins: 0, draws: 0, losses: 0};
@@ -38,6 +42,14 @@ export class ManagescoreComponent implements OnInit {
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+  checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "sportscores2" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+    }
   }
   savedata(gotcha) {
     var sptid = localStorage.getItem('sptid');

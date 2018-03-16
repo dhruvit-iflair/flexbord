@@ -9,6 +9,7 @@ import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from
 import { forEach } from '@angular/router/src/utils/collection';
 import { Subscription } from 'rxjs/Subscription';
 import { SportsService } from '../../../../components/services/sports.service';
+import { AccessorService } from "../../../../components/common/accessor.service";
 
 @Component({
   selector: 'app-manageplayerstatus',
@@ -17,13 +18,14 @@ import { SportsService } from '../../../../components/services/sports.service';
 })
 export class ManageplayerstatusComponent implements OnInit {
   public _id :any;
-  public userId;
+  public userId;hasCreatePerm;
   public former = { playerstatus: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };
   public items = ['Subtracted', 'Apply to contender', 'Fault'];
   public subscription:Subscription
   constructor(private http: Http, 
               private toastr: ToastrService, 
               private router: Router, 
+              private accr: AccessorService,
               public activeRouter: ActivatedRoute,
               public sportService:SportsService) { }
 
@@ -43,6 +45,7 @@ export class ManageplayerstatusComponent implements OnInit {
       this.former=res[0];
       this._id = res[0]._id;
     })
+    this.checkpermissions();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -50,6 +53,14 @@ export class ManageplayerstatusComponent implements OnInit {
   reset(){
     this.former = { playerstatus: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };
     this._id = false;
+  }
+   checkpermissions() {
+    var perms = this.accr.getUserPermissions();
+    for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "sportplayerstatus1" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasCreatePerm = true;
+      }
+    }
   }
   savedata(gotcha) {
     var sptid = localStorage.getItem('sptid');

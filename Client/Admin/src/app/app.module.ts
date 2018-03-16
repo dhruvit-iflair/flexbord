@@ -111,8 +111,9 @@ import { SportsService } from './components/services/sports.service';
 import { CreatePlayerComponent } from './views/club/club-teams/create-player/create-player.component';
 import { CreateStaffComponent } from './views/club/club-teams/create-staff/create-staff.component';
 import { TableComponent } from './components/custom/table/table.component';
+
+import { RankingComponent } from './views/club/club-teams/ranking/ranking.component';
 import { ConfirmBoxComponent } from './components/custom/confirm-box/confirm-box.component';
-import { importType } from '@angular/compiler/src/output/output_ast';
 
 @NgModule({
   declarations: [
@@ -185,6 +186,7 @@ import { importType } from '@angular/compiler/src/output/output_ast';
     CreatePlayerComponent,
     CreateStaffComponent,
     TableComponent,
+    RankingComponent,
     ConfirmBoxComponent
   ],
   imports: [

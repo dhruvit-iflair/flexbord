@@ -17,7 +17,7 @@ export class FoulsComponent implements OnInit {
   foulsdata; dtOptions; sptid;
   public dataRenderer = false;
   public subscription :Subscription;
-  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
 
   constructor(public http: HttpClient, 
               private router: Router, 
@@ -45,6 +45,9 @@ export class FoulsComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
+       if (Object.keys(perms[z]).toString().toLowerCase() == "sportfouls0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
       if (Object.keys(perms[z]).toString().toLowerCase() == "sportfouls1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }

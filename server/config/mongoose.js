@@ -7,6 +7,7 @@ const options = {
   useMongoClient: true
 };
 module.exports = function () {
+    console.log(config.connection + config.dbName);
     var db = mongoose.connect(config.connection + config.dbName,options);    
     mongoose.connection.on('connected', function () {
         console.log('Mongoose default connection open for: ' + config.dbName);

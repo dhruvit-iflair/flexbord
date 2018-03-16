@@ -16,7 +16,7 @@ import { Subject } from 'rxjs/Subject';
 export class OrgmembersComponent implements OnInit {
   members; dtOptions; orgid;
   public dataRenderer = false;
-  public hasEditPerm; hasDeletePerm; hasCreatePerm;
+  public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
   public subscription: Subscription;
   dtTrigger: Subject<any> = new Subject();
 
@@ -44,6 +44,9 @@ export class OrgmembersComponent implements OnInit {
   checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
+      if (Object.keys(perms[z]).toString().toLowerCase() == "organizermembers0" && perms[z][Object.keys(perms[z]).toString()] == true) {
+        this.hasViewPerm = true;
+      }
       if (Object.keys(perms[z]).toString().toLowerCase() == "organizermembers1" && perms[z][Object.keys(perms[z]).toString()] == true) {
         this.hasCreatePerm = true;
       }
