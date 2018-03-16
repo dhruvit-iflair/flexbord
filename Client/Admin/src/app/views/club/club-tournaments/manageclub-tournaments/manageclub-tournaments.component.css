@@ -57,3 +57,6 @@ body .dataTable a.btn.btn_green.tab_btn, a.btn.btn_green.tab_btn {
     position: inherit;
     margin-top: 10px;
 }
+select{
+    background: white;
+}

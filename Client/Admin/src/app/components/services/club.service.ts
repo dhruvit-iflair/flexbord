@@ -19,6 +19,7 @@ export class ClubService {
     public singleClubClassifications = new Subject<any>();
     public clubTournamentssList = new Subject<any>();
     public singleClubTournaments = new Subject<any>();
+    public tab = new Subject<any>();
     constructor(public http:Http,public toastr:ToastrService,public activeRouter:ActivatedRoute) {
         this.sub = this.activeRouter.params.subscribe(params => {
             this.id = params._id;
@@ -33,7 +34,12 @@ export class ClubService {
         this.getAllClassificationsByClub();
         this.getAllTournamentsByClub();
     }
-
+    changeTab(id:any){
+        this.tab.next(id);
+    }
+    getTabActive():Observable <any>{
+        return this.tab.asObservable();
+    }
     //++++++++++++++++ Club ++++++++++++++++++++++++++++++ 
 
     getAllClubList() {

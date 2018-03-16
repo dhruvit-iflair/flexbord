@@ -21,18 +21,23 @@ export class ManageclubTournamentsComponent implements OnInit {
   public _id:any;
   public club:any;
   public sports : Array<any>;
+  public my_Class :string = "form-control ng-untouched ng-pristine ng-invalid ";
+  public value : Array<any>;
   public fullSports : Array<any>;
   public clubSeasons : Array<any> = [];
   public clubClassifications : Array <any> = [];
-  public clubClassificationsValue : Array <any> ;
+  public clubClassificationsValue : Array <any> = [] ;
+  
   public sub: any;
   public subscription:Subscription;
   public clubClassificationsValueDisplay :Boolean=false;
   public resS :Boolean=false;
   public hasCreatePerm;
+  public click :Boolean=true;
   constructor(public fb: FormBuilder,private http : Http,private accr: AccessorService, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public clubService:ClubService,public sportService:SportsService){
+
       this.clubId = localStorage.getItem('clubid');
-      this.comForm = this.fb.group({ name: ["",[Validators.required]],description: [""],sports: [null,[Validators.required]],clubSeasons: ["",[Validators.required]],clubClassifications: ["",[Validators.required]],clubClassificationsValue: ["",[Validators.required]],club:[this.clubId ,[Validators.required]]});
+      this.comForm = this.fb.group({ name: ["",[Validators.required]],description: [""],sports: [null,[Validators.required]],clubSeasons: [null,[Validators.required]],clubClassificationsValue: [[],[Validators.required]],club:[this.clubId ,[Validators.required]],competition:["opened"]});
       this.subscription = this.clubService.getSeasonList().subscribe((res) => { this.clubSeasons = res; })   
 
       this.subscription = this.clubService.getClassificationsList().subscribe((res) => { if (res != []) this.clubClassifications = res;})   
@@ -46,8 +51,9 @@ export class ManageclubTournamentsComponent implements OnInit {
         this.resS = false;
         this.comForm.patchValue(res[0]);
         this.comForm.controls['clubSeasons'].setValue(res[0].clubSeasons._id, {onlySelf: true});
-        this.comForm.controls['clubClassifications'].setValue(res[0].clubClassifications._id, {onlySelf: true});
-        this.getClasValue(res[0].clubClassifications._id);
+        // this.comForm.controls['clubClassifications'].setValue(res[0].clubClassifications._id, {onlySelf: true});
+        this.clubClassificationsValue = res[0].clubClassificationsValue;
+        // this.getClasValue(res[0].clubClassifications._id);
         this.comForm.controls['clubClassificationsValue'].setValue(res[0].clubClassificationsValue, {onlySelf: true});
         this._id = res[0]._id;
     })
@@ -65,27 +71,48 @@ export class ManageclubTournamentsComponent implements OnInit {
     }
   }
   saveVal(){
-    if (this.comForm.valid) {
-          if (this._id) {
-              this.clubService.updateTournaments(this._id,this.comForm.value);
-              this.reset();
-          } else {
-              this.clubService.saveTournaments(this.comForm.value);
-              this.reset();              
-          }
-    } else {
-      this.toastr.error('Please fill up all values','Error');
+    if (this.click) {      
+      if (this.comForm.valid) {
+        this.click =false;
+            if (this._id) {
+                this.clubService.updateTournaments(this._id,this.comForm.value);
+                this.reset();
+            } else {
+                this.clubService.saveTournaments(this.comForm.value);
+                this.reset();
+            }
+      } else {
+        console.log(this.comForm.value);
+        this.toastr.error('Please fill up all values','Error');
+      }
     }
   }
+  addSeason(){
+    this.clubService.changeTab(2);
+  }
+  addClass(){
+    this.clubService.changeTab(3);
+  }
   getClasValue(e:any){
-    this.clubClassificationsValueDisplay = true;
-    this.clubClassificationsValue = this.clubClassifications.filter(ad => ad._id == e);
+    // this.clubClassificationsValueDisplay = true;
+    // this.clubClassificationsValue = this.clubClassifications.filter(ad => ad._id == e);
+    this.comForm.patchValue({clubClassificationsValue:this.clubClassificationsValue})
+
   }
   reset(){
     this.comForm.reset();
-    this.clubClassificationsValueDisplay = false;
     this.resS = true;
     this.sports = [];
+    // var u = this.clubClassifications;
+    // this.clubClassifications = [];
+    // this.clubClassifications = u;
+    // var v = this.clubClassificationsValue;
+    this.clubClassificationsValue = [];
+    // this.clubClassificationsValue = v;
     this.sports = this.fullSports;
+    this.comForm.patchValue({club:this.clubId,competition:"opened"});
+    setTimeout(() => {
+      this.click = true;    
+    }, 150);
   }
 }

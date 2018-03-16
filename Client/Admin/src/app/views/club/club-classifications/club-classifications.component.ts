@@ -7,6 +7,7 @@ import { HttpObserve } from '@angular/common/http/src/client';
 import { AccessorService } from "../../../components/common/accessor.service";
 import { Subscription } from 'rxjs/Subscription';
 import { ClubService } from '../../../components/services/club.service';
+import { ConfirmBoxService } from '../../../components/services/confirm-box.service';
 
 @Component({
   selector: 'app-club-classifications',
@@ -20,7 +21,7 @@ export class ClubClassificationsComponent implements OnInit {
   public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
   public subscription:Subscription;
 
-  constructor(private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute, private accr: AccessorService,public clubService:ClubService) { }
+  constructor(private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute, private accr: AccessorService,public clubService:ClubService,public conformService:ConfirmBoxService) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -59,10 +60,17 @@ export class ClubClassificationsComponent implements OnInit {
     }
   }
   delClas(id) {
-    var del = confirm("Confirm to delete this Classifications!");
-    if (del) {
-      this.clubService.deleteClassifications(id);
-    }
+    console.log(id);    
+    var that = this;
+    this.conformService.confirm({title:"Delete",text:'Do you want to delete this Classifications!'},function(){
+      that.clubService.deleteClassifications(id);
+    },function(){
+
+    })
+    // var del = confirm("Confirm to delete this Classifications!");
+    // if (del) {
+    //   this.clubService.deleteClassifications(id);
+    // }
   }
   edit(id){
     this.clubService.getSingleClassifications(id);

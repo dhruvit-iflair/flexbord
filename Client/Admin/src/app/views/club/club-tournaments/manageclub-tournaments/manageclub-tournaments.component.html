@@ -23,11 +23,11 @@
             </div>
             <div class="man col-md-6">
                 <label>Sport<a style="color:#f00 !important;">*</a></label>
-                <!-- <select  class=" form-control" placeholder="sports"  name="sports"  formControlName="sports">
+                <select  class=" form-control" placeholder="sports"  name="sports"  formControlName="sports" *ngIf="sports? sports.length > 0 : sports">
                     <option value="null" disabled="true" [selected]="true">Select your Sports</option>
-                    <option *ngFor="let it of sports"  [value]="it.name">{{it.name}}</option>
-                </select> -->
-                <app-multiselect class="form-control" [resS]="resS" [mArray]='sports' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="sports? sports.length > 0 : sports"></app-multiselect>
+                    <option *ngFor="let it of sports"  [value]="it._id">{{it.name}}</option>
+                </select>
+                <!-- <app-multiselect class="form-control" [resS]="resS" [mArray]='sports' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="sports? sports.length > 0 : sports"></app-multiselect> -->
                 <div class="col-md-12" *ngIf="!sports? sports == [] : sports.length == 0">
                     <label style="float:left; padding-top: 7px;">Add New Sport</label>
                     <button class="btn btn_green" routerLink="/sports/manage" style="float:left;margin-left: 10px;">
@@ -41,12 +41,12 @@
             <div class="man col-md-6">
                 <label>Seasons<a style="color:#f00 !important;">*</a></label>
                 <select  class=" form-control" placeholder="Season"  name="clubSeasons"  formControlName="clubSeasons" *ngIf="clubSeasons.length" >
-                  <option disabled="true" [selected]="true" value="null">Select your Season</option>
+                  <option disabled="true" value="null" selected>Select your Season</option>
                   <option *ngFor="let it of clubSeasons"  [value]="it._id">{{it.name}}</option>
                 </select>
                 <div class="add_new row" *ngIf="!clubSeasons.length" >
                     <label style="float:left; padding-top: 7px;">Add New Season</label>
-                    <button class="btn btn_green" routerLink="/club/seasons/manage" style="float:left;margin-left: 10px;">
+                    <button class="btn btn_green" (click)="addSeason();" style="float:left;margin-left: 10px;">
                             <i class="fa fa-plus "></i>
                     </button>
                 </div>
@@ -54,7 +54,33 @@
                         Seasons is required.
                 </div>
             </div>
-            <div class="man col-md-6">
+            <div class="man col-md-6" *ngFor="let it of clubClassifications; let i = index;" >
+                <label>{{it.name}}<a style="color:#f00 !important;">*</a></label>
+                <select  class=" form-control" [className]="my_Class" name="clubClassifications"  [(ngModel)]="clubClassificationsValue[i]" [ngModelOptions]="{standalone: true}" *ngIf="!clubClassifications == []" (ngModelChange)="getClasValue()" required>
+                    <option disabled="true" value="undefined" selected>Select your Classification Value</option>                  
+                    <option *ngFor="let val of it.value "  [value]="val">{{val}}</option>
+                </select>
+                <div class="add_new row" style="width: 150%;" *ngIf="!clubClassifications" >
+                    <label style="float:left; padding-top: 7px;">Add New Classifications</label>
+                    <button class="btn btn_green" (click)="addClass();" style="float:left;margin-left: 10px;">
+                            <i class="fa fa-plus "></i>
+                    </button>
+                </div>
+            </div>
+            <div class="man col-md-12">
+                <label>Competition<a style="color:#f00 !important;">*</a></label>                
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="radio" class="bgradio-input" id="test1" name="competition"  value="opened" formControlName="competition">
+                        <label for="test1">Opened</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" name="competition" id="test2"  value="closed" formControlName="competition">
+                        <label for="test2">Closed</label>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="man col-md-6">
                 <label>Classification<a style="color:#f00 !important;">*</a></label>
                 <select  class=" form-control" name="clubClassifications"  formControlName="clubClassifications" *ngIf="clubClassifications.length" (change)="getClasValue($event.target.value)">
                     <option value="null" disabled="true" [selected]="true" value="">Select your Classifications</option>                  
@@ -70,7 +96,8 @@
                         Classifications is required.
                 </div>
             </div>     
-            <div class="man col-md-6" *ngIf="clubClassificationsValueDisplay" >
+             -->
+            <!-- <div class="man col-md-6" *ngIf="clubClassificationsValueDisplay" >
                 <label>Classification Value<a style="color:#f00 !important;">*</a></label>
                 <select  class=" form-control" formControlName="clubClassificationsValue">
                     <option disabled="true" [selected]="!comForm.value.clubClassificationsValue" value="">Select your Classifications Value</option>                  
@@ -79,7 +106,7 @@
                 <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('clubClassificationsValue').valid && comForm.get('clubClassificationsValue').touched">
                         Classifications Value is required.
                 </div>
-            </div>     
+            </div>      -->
           </div>                              
         </div>        
       </form>
@@ -91,7 +118,7 @@
           <button class="btn" [routerLink]="['/club/tournaments']">Back</button>
       </div> -->
       <div class="col-md-6 text-right">
-          <button (click)='saveVal()' [disabled]='!comForm.valid'  class="btn btn_green white" >Save</button>        
+          <button (click)="saveVal(); my_Class = 'form-control ng-untouched ng-pristine ng-invalid'"  class="btn btn_green white" >Save</button>        
       </div> 
     </div> 
 </div>

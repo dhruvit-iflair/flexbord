@@ -6,14 +6,14 @@
                     <div class="col-md-12">
                       <label><h2>Manage Club Seasons</h2></label>
                     </div>
-                    <div class="man col-md-12">
+                    <div class="man col-md-4">
                         <label>Name<a style="color:#f00 !important;">*</a></label>
                         <input class="form-control" type="text" placeholder="Season Name" formControlName="name">
                         <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('name').valid && seasonForm.get('name').touched">
                             Name is required.
                         </div>
                     </div>        
-                    <div class="man col-md-6">
+                    <div class="man col-md-4">
                       <label>Start Date<a style="color:#f00 !important;">*</a></label>
                       <!-- <input type="date" class="form-control col-md-4"  placeholder="Start Date" formControlName="start_date" useValueAsDate> -->
                       <input type="text" class="col-md-4 form-control" style="width:70%"  [maxDate]="start_date" #dp="bsDatepicker" bsDatepicker [bsConfig]="bsConfig" formControlName="start_date">
@@ -24,7 +24,7 @@
                           Start Date is required.
                       </div>
                     </div>           
-                    <div class="man col-md-6">
+                    <div class="man col-md-4">
                       <label>End Date<a style="color:#f00 !important;">*</a></label>
                       <!-- <input class="form-control col-md-4" type="date" placeholder="End Date" formControlName="end_date" useValueAsDate> -->
                       <input type="text" class="col-md-4 form-control" style="width:70%" [minDate]="endMinDate"  #dp2="bsDatepicker" [bsConfig]="bsConfig" placeholder="End Date" formControlName="end_date" bsDatepicker>

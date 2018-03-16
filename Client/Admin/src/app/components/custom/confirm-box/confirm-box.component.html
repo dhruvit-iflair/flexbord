@@ -1,0 +1,28 @@
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+           <div class="row">
+               <div class="col-md-1">
+                    <i class="fa fa-exclamation-triangle"></i>
+               </div>
+               <div class="col-md-10">
+                    <h2 class="head">{{message.title || ''}}</h2>
+               </div>
+               <div class="col-md-1">
+                    <span class="close" (click)="close();" >&times;</span>
+               </div>
+           </div> 
+        </div>
+        <div class="modal-body">
+            <div class="inn">
+                <p>{{message.text || ''}}</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+              <button class="btn btn_green tab_btn" (click)="message.siFn(); close();">Delete</button>
+              <!-- <button class="btn btn-default btn-cancle" (click)="message.noFn(); close();">Cancle</button> -->
+              <button class="dataTable btn btn_red tab_btn delete-btn" (click)="message.noFn(); close();">Cancle</button>
+              
+        </div>
+    </div>  
+</div>

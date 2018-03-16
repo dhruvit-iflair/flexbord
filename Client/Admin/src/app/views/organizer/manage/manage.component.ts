@@ -43,8 +43,12 @@ export class ManageOrganizerComponent implements OnInit {
   public fileSizeMax2:Boolean = false;
   public role:any; 
   public user:any; 
+  public isCity =false;
+  public isCountry = false;
   public subscription: Subscription;
   public tabz: any;
+  public  address = {address:'', phonenumber:'',website:'', zipcode:'', country:'', state:'', city:'', street:'', building:'' };
+  
   public click :Boolean = true;
    public hasMembersPerm;hasSeasonsPerm;hasClassificationsPerm;hasCompetitionsPerm;
   // public value : any = 9;
@@ -79,6 +83,12 @@ export class ManageOrganizerComponent implements OnInit {
         (val > 0)? val: val = Math.abs(val);
         return val;
     });
+    this.orgForm.get('city').valueChanges.subscribe(val => {
+        (val)? this.isCity = true: this.isCity = false;
+    });
+    this.orgForm.get('country').valueChanges.subscribe(val => {
+        (val)? this.isCountry = true: this.isCountry = false;
+    });
    }
 
   ngOnInit() {  
@@ -89,9 +99,11 @@ export class ManageOrganizerComponent implements OnInit {
       this.orgForm.patchValue({roles :this.role[0]._id});
     });
     this.userSer.getUsers().subscribe((user)=>{ this.user = user; });
+    this.orgService.getAllOrganizers();
     this.subscription = this.orgService.getSingleOrganizersList().subscribe((res)=>{
         if (res) {
           this.items2 = res;
+          this.items = res;          
           this.sub = this.activeRouter.params.subscribe(params => {
             if (params._id) {
                 this.items = this.items2.filter(af=> af._id != params._id);
@@ -125,6 +137,8 @@ export class ManageOrganizerComponent implements OnInit {
                     } else {
                       this.logo = "assets/noimage.jpg";
                     }
+                    if (comming[0].city) this.isCity = true;
+                    if (comming[0].country) this.isCountry = true;
                     var yaar = [];
                     if (comming[0].placePic) {
                       comming[0].placePic.forEach((asd)=>{
@@ -136,6 +150,7 @@ export class ManageOrganizerComponent implements OnInit {
                     }
                     this.logo2 = yaar;
                     this.orgForm.patchValue( comming[0]);
+                    this.address = comming[0];
                     this.orgForm.controls['affilated'].setValue(fagdf[0].affilated, {onlySelf: true}); 
                   }
                   else {
@@ -200,38 +215,43 @@ export class ManageOrganizerComponent implements OnInit {
     }
   }
   setAdd(e){
-    this.orgForm.patchValue({address:e.formatted_address});
-    this.orgForm.patchValue({phonenumber:e.formatted_phone_number});
-    this.orgForm.patchValue({website:e.website});
-    var address = { zipcode:'', country:'', state:'', city:'', street:'', building:'' };
+    this.isCity = false;
+    this.isCountry = false;
+    this.address = {address:'', phonenumber:'',website:'',zipcode:'', country:'', state:'', city:'', street:'', building:'' };
+    this.address.address=e.formatted_address;
+    this.address.phonenumber=e.formatted_phone_number;
+    this.address.website=e.website;
+    
      for (var i = 0; i < e.address_components.length; i++) {
           var add = e.address_components[i].types[0];
           if (add == "postal_code") {
-            address.zipcode = e.address_components[i].long_name;
+            this.address.zipcode = e.address_components[i].long_name;
           } 
           else if (add == "country") {
-            address.country = e.address_components[i].long_name;
+            this.address.country = e.address_components[i].long_name;
+            this.isCountry = true;
           } 
           else if (add == "administrative_area_level_1") {
-            address.state = e.address_components[i].long_name;
+            this.address.state = e.address_components[i].long_name;
           }
           else if (add == "administrative_area_level_2") {
-            address.city = e.address_components[i].long_name;
+            this.address.city = e.address_components[i].long_name;
+            this.isCity = true;
           } 
           else if (add == "route") {
-            address.street = e.address_components[i].long_name;
+            this.address.street = e.address_components[i].long_name;
           } 
           else {
             var st = e.formatted_address.split(',');
             if (st[0] && st[1] != undefined) {
-              address.building = st[0]+ ", " +st[1];
+              this.address.building = st[0]+ ", " +st[1];
             } else {
-              address.building = st[0];   
+              this.address.building = st[0];   
               
             }
         }
         if (i == e.address_components.length -1) {
-          this.orgForm.patchValue(address);
+          this.orgForm.patchValue(this.address);
         }
     }
   }

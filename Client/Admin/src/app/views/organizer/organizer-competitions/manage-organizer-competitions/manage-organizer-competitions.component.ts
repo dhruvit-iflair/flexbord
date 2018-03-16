@@ -16,6 +16,7 @@ import { AccessorService } from "../../../../components/common/accessor.service"
 })
 export class ManageOrganizerCompetitionsComponent implements OnInit {
 
+
   public comForm: FormGroup;
   public sub: any;
   public _id: any;
@@ -29,6 +30,7 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
   public classValue: Array<any>;
   public subscripton: Subscription;
     public hasCreatePerm;
+  public my_Class :string = "form-control ng-untouched ng-pristine ng-invalid ";
 
   constructor(public fb: FormBuilder,private accr: AccessorService, private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute, public orgService: OrganizerService) {
     this.comForm = this.fb.group({
@@ -90,29 +92,31 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
     if (this.click) {
       if (this.comForm.valid) {
         this.click = false;
-        var orid = localStorage.getItem('orgid');
-        this.comForm.value.organizer = orid;
-        if (this._id) {
-          this.orgService.updateCompetition(this._id, this.comForm.value);
-          this.comForm.reset();
-          this._id = false;
-          setTimeout(() => {
-            this.click = true;
-            this.classificationValues = [];
-          }, 100);
-        }
-        else {
-          this.orgService.saveCompetition(this.comForm.value);
-          this.comForm.reset();
-          this._id = false;
-          setTimeout(() => {
-            this.click = true;
-            this.classificationValues = [];
-
-          }, 100);
-        }
-      } else {
-        this.toastr.warning('Please fill up the required fields!', 'Warning');
+        var orid=localStorage.getItem('orgid');
+        this.comForm.value.organizer=orid;
+            if (this._id) {
+              this.orgService.updateCompetition(this._id,this.comForm.value);
+              this.comForm.reset();   
+              this._id = false;    
+              setTimeout(() => {
+                this.click = true;
+                this.classificationValues = [];
+                this.my_Class = 'form-control ng-untouched ng-pristine ng-invalid';
+              }, 100);   
+            } 
+            else {
+              this.orgService.saveCompetition(this.comForm.value);
+              this.comForm.reset();
+              this._id = false;       
+              setTimeout(() => {
+                this.click = true;
+                this.classificationValues = [];
+                this.my_Class = 'form-control ng-untouched ng-pristine ng-invalid';
+                
+              }, 100);   
+            }
+        } else {
+              this.toastr.warning('Please fill up the required fields!', 'Warning');
       }
     }
   }
