@@ -30,8 +30,8 @@
                     <td>{{item.gamedate | date:'dd-MM-yyyy'}}</td>
                     <td>{{item.gametime | date:'shortTime'}}</td>
                     <td>{{item.gamelocation | firstcapitalize}}</td>
-                    <td>{{item.hometeam.name | firstcapitalize}}</td>
-                    <td>{{item.visitorteam.name | firstcapitalize}}</td>
+                    <td>{{item.hometeam.name}}</td>
+                    <td>{{item.visitorteam.name}}</td>
                     <td>
                       <a class="btn btn_green tab_btn" routerLink="/games/manage/{{item._id}}"  title="Edit" *ngIf="hasEditPerm && !isInTeam">
                         <i class="fa fa-pencil" aria-hidden="true"></i>

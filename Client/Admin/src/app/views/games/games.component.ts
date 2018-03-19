@@ -41,6 +41,7 @@ export class GamesComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.gameService.getAllGames();
     this.gameService.getGameList().subscribe((res) => {
           this.dataRenderer = false;
           this.rows = res.json();

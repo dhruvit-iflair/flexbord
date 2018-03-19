@@ -117,6 +117,9 @@ import { CompetitionsComponent } from './views/club/club-teams/competitions/comp
 import { FetchsettingPipe } from './components/pipes/fetchsetting.pipe';
 import { SelectcompetitionComponent } from './views/club/club-teams/competitions/selectcompetition/selectcompetition.component';
 
+import { ClubTeamsRankingComponent } from './views/club/club-teams/club-teams-ranking/club-teams-ranking.component';
+import { ManageClubTeamRankingComponent } from './views/club/club-teams/club-teams-ranking/manage-club-team-ranking/manage-club-team-ranking.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -188,10 +191,12 @@ import { SelectcompetitionComponent } from './views/club/club-teams/competitions
     CreatePlayerComponent,
     CreateStaffComponent,
     TableComponent,
-    ConfirmBoxComponent,
     CompetitionsComponent,
     FetchsettingPipe,
-    SelectcompetitionComponent
+    SelectcompetitionComponent,
+    ConfirmBoxComponent,
+    ClubTeamsRankingComponent,
+    ManageClubTeamRankingComponent
   ],
   imports: [
     // Angular modules

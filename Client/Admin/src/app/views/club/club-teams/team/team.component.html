@@ -22,13 +22,13 @@
 
               <div class="man col-md-6">
                 <h4 class="text-left">Sport<a style="color:#f00 !important;">*</a></h4>
-                <select class="js-example-basic-single text-col-md-3" name="sport" formControlName="sport">
-                            <option value="null" disabled="true" [selected]="true">Select Sport</option>    
-                            <option *ngFor="let ite of sportsdata" [value]="ite.name">{{ite.name}}</option>
+                <select class="js-example-basic-single text-col-md-3" name="sports" formControlName="sports">
+                            <option value="undefined" disabled="true">Select Sport</option>    
+                            <option *ngFor="let ite of sportsdata" [value]="ite._id">{{ite.name}}</option>
                         </select>
-                <div class="alert alert-danger" role="alert" *ngIf="!teamForm.get('sport').valid && teamForm.get('sport').touched">
+                <!-- <div class="alert alert-danger" role="alert" *ngIf="!teamForm.get('sports').valid && teamForm.get('sports').touched">
                   Sport is required.
-                </div>
+                </div> -->
               </div>
               <div class="man col-md-12">
                 <div class="row">
@@ -141,16 +141,21 @@
   </div>
 </div>
   </tab>
-    <tab heading="Players" id="memberTab" [active]="tabz == 2">
-      <app-create-player></app-create-player>
-    </tab>
     <tab heading="Game" id="gameTab" [active]="tabz == 4">
         <app-managegame></app-managegame>
         <app-games></app-games>
     </tab>
+    <tab heading="Ranking" id="rakingTab" [active]="tabz == 6">
+        <!-- <app-manage-club-team-ranking></app-manage-club-team-ranking> -->
+        <app-club-teams-ranking></app-club-teams-ranking>
+    </tab>
+    <tab heading="Players" id="memberTab" [active]="tabz == 2">
+      <app-create-player></app-create-player>
+    </tab>
     <tab heading="Staff" id="seasonTab" [active]="tabz == 3">
         <app-create-staff></app-create-staff>
     </tab>
+
     <tab heading="Competitions" id="competitionTab" [active]="tabz == 5">
         <app-competitions></app-competitions>
     </tab>

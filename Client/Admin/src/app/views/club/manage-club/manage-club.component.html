@@ -237,6 +237,7 @@
 </tab>
     <tab heading="Members" [disabled]="!_id" *ngIf="hasMembersPerm"><app-manage-club-members></app-manage-club-members><app-club-members></app-club-members></tab>
     <tab heading="Seasons" [disabled]="!_id" *ngIf="hasSeasonsPerm" [active]="tabz == 2"><app-manage-club-seasons></app-manage-club-seasons><app-club-seasons></app-club-seasons></tab>
+
     <tab heading="Classifications" [disabled]="!_id" *ngIf="hasClassificationsPerm" [active]="tabz == 3"><app-manage-club-classifications></app-manage-club-classifications><app-club-classifications></app-club-classifications></tab>
     <tab heading="Tournaments" [disabled]="!_id" *ngIf="hasTournamentsPerm"><app-manageclub-tournaments></app-manageclub-tournaments><app-club-tournaments></app-club-tournaments></tab>
 
