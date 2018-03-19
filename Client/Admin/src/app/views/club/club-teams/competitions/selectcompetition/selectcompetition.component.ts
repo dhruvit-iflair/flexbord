@@ -16,6 +16,7 @@ export class SelectcompetitionComponent implements OnInit {
   public rows: Array<any> = [];
   public data: Array<any> = [];
   public length: number = 0;
+  public settings:any;
   public dtOptions; manipulateddata; sportdt; settingsdata;
   public dataRenderer = false;
 

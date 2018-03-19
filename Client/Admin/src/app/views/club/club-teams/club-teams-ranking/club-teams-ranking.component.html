@@ -13,8 +13,8 @@
                     </select>
                 </div>
                 <div class="man col-md-6">
-                    <button class="btn btn_green white" [ngClass]="tournamnet" [disabled]="!isSelected" (click)="filterTournament(); isSelected = !isSelected ">Tournamnet</button>
-                    <button class="btn btn_green white" [ngClass]="divisiom" [disabled]="isSelected" (click)="filterDivision(); isSelected = !isSelected ">Division</button>
+                    <button class="btn btn_green white" [disabled]="!isSelected" (click)="filterTournament(); isSelected = !isSelected ">Tournamnet</button>
+                    <button class="btn btn_green white" [disabled]="isSelected" (click)="filterDivision(); isSelected = !isSelected ">Division</button>
                 </div>
             </div>
             <div class="col-md-12">
