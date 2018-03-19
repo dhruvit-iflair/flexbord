@@ -114,6 +114,8 @@ import { TableComponent } from './components/custom/table/table.component';
 
 import { RankingComponent } from './views/club/club-teams/ranking/ranking.component';
 import { ConfirmBoxComponent } from './components/custom/confirm-box/confirm-box.component';
+import { ClubTeamsRankingComponent } from './views/club/club-teams/club-teams-ranking/club-teams-ranking.component';
+import { ManageClubTeamRankingComponent } from './views/club/club-teams/club-teams-ranking/manage-club-team-ranking/manage-club-team-ranking.component';
 
 @NgModule({
   declarations: [
@@ -187,7 +189,9 @@ import { ConfirmBoxComponent } from './components/custom/confirm-box/confirm-box
     CreateStaffComponent,
     TableComponent,
     RankingComponent,
-    ConfirmBoxComponent
+    ConfirmBoxComponent,
+    ClubTeamsRankingComponent,
+    ManageClubTeamRankingComponent
   ],
   imports: [
     // Angular modules

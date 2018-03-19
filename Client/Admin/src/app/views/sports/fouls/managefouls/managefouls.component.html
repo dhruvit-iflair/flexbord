@@ -11,19 +11,28 @@
               <input type="text" required #nameoffoul="ngModel" id="nameoffoul" name="nameoffoul" class="form-control" [(ngModel)]="former.nameoffoul"
                 [ngModelOptions]="{standalone: true}">
             </div>
-
+ 
             <div class="col-md-4">
-              <div class="man col-md-4">
+              <div class="col-md-4 per-tabbox">
                 <label>Player</label>
-                <input type="checkbox" class="form-control" [(ngModel)]="former.isplayer" [ngModelOptions]="{standalone: true}">
+                <div class="td">
+                    <input type="checkbox" class="form-control text-col-md-3 " [(ngModel)]="former.isplayer" [ngModelOptions]="{standalone: true}">
+                    <span></span>   
+                </div>               
               </div>
-              <div class="man col-md-4">
+              <div class="col-md-4 per-tabbox">
                 <label>Coach</label>
-                <input type="checkbox" class="form-control" [(ngModel)]="former.iscoach" [ngModelOptions]="{standalone: true}">
+                <div class="td">
+                    <input type="checkbox" class="form-control text-col-md-3" [(ngModel)]="former.iscoach" [ngModelOptions]="{standalone: true}">
+                    <span></span>
+                </div>
               </div>
-              <div class="man col-md-4">
+              <div class="col-md-4 per-tabbox">
                 <label>Team</label>
-                <input type="checkbox" class="form-control" [(ngModel)]="former.isteam" [ngModelOptions]="{standalone: true}">
+                <div class="td">
+                    <input type="checkbox" class="form-control text-col-md-3" [(ngModel)]="former.isteam" [ngModelOptions]="{standalone: true}">
+                    <span></span>
+                </div>                
               </div>
             </div>
 
@@ -40,22 +49,22 @@
             </div>
         </div>
        <div class="row">
-        <div class="col-md-4">
+        <div class="man col-md-4">
           <label>Color Button Down</label>
           <input type="text" #colorbtndown="ngModel" id="colorbtndown" name="colorbtndown" class="form-control" [(ngModel)]="former.colorbtndown"
             placeholder=" #333FFF " [ngModelOptions]="{standalone: true}">
         </div>
 
         <div class="col-md-4">
-          <div class="man col-md-4">
+          <div class=" col-md-4">
             <label>Time Penalty</label>
             <input type="checkbox" class="form-control" [(ngModel)]="former.istimepenalty" [ngModelOptions]="{standalone: true}">
           </div>
-          <div class="man col-md-4">
+          <div class=" col-md-4">
             <label>Scoring Dependable?</label>
             <input type="checkbox" class="form-control" [(ngModel)]="former.isscoringdependable" [ngModelOptions]="{standalone: true}" disabled>
           </div>
-          <div class="man col-md-4">
+          <div class=" col-md-4">
             <label>Possession Dependable?</label>
             <input type="checkbox" class="form-control" [(ngModel)]="former.ispossessiondependable" [ngModelOptions]="{standalone: true}" disabled>
           </div>

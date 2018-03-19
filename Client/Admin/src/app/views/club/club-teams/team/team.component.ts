@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { forEach } from '@angular/router/src/utils/collection';
+import { SportsService } from '../../../../components/services/sports.service';
 
 @Component({
   selector: 'app-team',
@@ -30,7 +31,7 @@ export class TeamComponent implements OnInit {
   public avail = { pchecker: false, daychecker: [], fromtimer: [], totimer: [] };
   public finalavailability = { availability: [] };
   public dayvalues = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  constructor(public fb: FormBuilder, private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute) {
+  constructor(public fb: FormBuilder, private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute,public sportsService:SportsService) {
     this.teamForm = this.fb.group({
       name: ["", [Validators.required]],
       logo: [""],
@@ -41,12 +42,15 @@ export class TeamComponent implements OnInit {
       state: [""],
       country: [""],
       zipcode: [""],
-      sport: [null, [Validators.required]]
+      sports: [null, [Validators.required]]
     });
   }
 
   ngOnInit() {
-    this.sportsdata = fakedb.sport;
+    this.sportsService.getAllSports();
+    this.sportsService.getSportsList().subscribe(res=>{
+      this.sportsdata = res;
+    })
     this.activeRouter.params.subscribe(params => {
       this.userId = params._id;
       if (this.userId) {
@@ -55,7 +59,7 @@ export class TeamComponent implements OnInit {
           .subscribe(res => {
             var datapatcher = res.json();
             this.teamForm.controls['name'].setValue(datapatcher[0].name);
-            this.teamForm.controls['sport'].setValue(datapatcher[0].sport);
+            this.teamForm.controls['sports'].setValue(datapatcher[0].sports);
             this.teamForm.controls['address'].setValue(datapatcher[0].address);
             this.teamForm.controls['building'].setValue(datapatcher[0].building);
             this.teamForm.controls['street'].setValue(datapatcher[0].street);
@@ -179,7 +183,7 @@ export class TeamComponent implements OnInit {
           country: this.teamForm.value.country,
           logo: this.teamForm.value.logo,
           name: this.teamForm.value.name,
-          sport: this.teamForm.value.sport,
+          sports: this.teamForm.value.sports,
           state: this.teamForm.value.state,
           street: this.teamForm.value.street,
           zipcode: this.teamForm.value.zipcode,
@@ -207,7 +211,7 @@ export class TeamComponent implements OnInit {
           country: this.teamForm.value.country,
           logo: this.teamForm.value.logo,
           name: this.teamForm.value.name,
-          sport: this.teamForm.value.sport,
+          sports: this.teamForm.value.sports,
           state: this.teamForm.value.state,
           street: this.teamForm.value.street,
           zipcode: this.teamForm.value.zipcode,

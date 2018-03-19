@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="container">
+        <div class="manage-box clearfix">
+            <div class="col-md-12">
+                <label><h2>Ranking List</h2></label>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <label><h3>Competition </h3></label>
+                    <select name="" id="">
+                        <option value="" selected="selected">Test Competition</option>
+                        <option value="">Test Competition 2</option>
+                    </select>
+                </div>
+                <div class="man col-md-6">
+                    <button class="btn btn_green white" [ngClass]="tournamnet" [disabled]="!isSelected" (click)="filterTournament(); isSelected = !isSelected ">Tournamnet</button>
+                    <button class="btn btn_green white" [ngClass]="divisiom" [disabled]="isSelected" (click)="filterDivision(); isSelected = !isSelected ">Division</button>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <table datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="dataRemderer" >
+                    <thead>
+                        <tr>
+                            <th>_ID</th>
+                            <th>Rank</th>
+                            <th>Team</th>
+                            <th>Logo</th>
+                            <th>Played</th>
+                            <th>Points</th>
+                            <th>Wins</th>
+                            <th>Draws</th>
+                            <th>Losses</th>
+                            <th>Score</th>
+                            <th>Against</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of rows">
+                            <td style="display:none">{{row._id}}</td>
+                            <td>{{row.rank}}</td>
+                            <td>{{row.team}}</td>
+                            <td>{{row.logo}}</td>
+                            <td>{{row.played}}</td>
+                            <td>{{row.wins}}</td>
+                            <td>{{row.draws}}</td>
+                            <td>{{row.losses}}</td>
+                            <td>{{row.scores}}</td>
+                            <td>{{row.against}}</td>
+                            <td>{{row.type}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+  
