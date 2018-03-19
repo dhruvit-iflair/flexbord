@@ -46,6 +46,16 @@ GameSettingsCtrl.prototype.getbyid = function (req, res) {
     });
 }
 
+GameSettingsCtrl.prototype.getbysport = function (req, res) {
+    GameSetting.find({ sports: req.params.id }).populate('sports').populate({
+        path: 'settings',
+        model: 'gamesettings'
+    }).exec(function (err, gdt) {
+        if (err) console.log('error occured..' + err);
+        res.json(gdt);
+    });
+}
+
 GameSettingsCtrl.prototype.update = function (req, res) {
     if (req.body.settings==""){
         req.body.settings="123456789012345678901234";

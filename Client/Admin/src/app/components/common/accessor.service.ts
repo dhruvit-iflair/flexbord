@@ -21,6 +21,7 @@ export class AccessorService {
     return JSON.parse(localStorage.getItem('uToken'));
   }
   getUserPermissions() {
+    this.setUserPermissions();//aana vina bhi chale add karayeli che for parallel perm check
     var x = JSON.parse(localStorage.getItem('fullPerms'));
     return x;
   }

@@ -63,6 +63,7 @@ module.exports = function (db) {
     require('../app/routes/emailType')(app);
     require('../app/routes/player')(app);
     require('../app/routes/staff')(app);
+    require('../app/routes/clubCompetition')(app);
 
     return server;
 };

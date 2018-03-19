@@ -45,6 +45,13 @@ clubTournamentsCtrl.prototype.getbyclub = function (req, res) {
     });
 }
 
+clubTournamentsCtrl.prototype.getbysetting = function (req, res) {
+    clubTournaments.find({ sports: req.params.id }).populate('clubSeasons').populate('club').populate('clubClassifications').populate('sports').exec(function (err, gd) {
+        if (err) console.log('error occured..' + err);
+        res.json(gd);
+    });
+}
+
 clubTournamentsCtrl.prototype.update = function (req, res) {
     clubTournaments.findByIdAndUpdate({_id:req.params.id},req.body,{new:true},function (er, dt) {
         if (er) {

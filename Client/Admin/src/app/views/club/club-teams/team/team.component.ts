@@ -54,6 +54,7 @@ export class TeamComponent implements OnInit {
         this.http.get(environment.api + '/clubteams/' + this.userId)
           .subscribe(res => {
             var datapatcher = res.json();
+            localStorage.setItem('4tPatcher',datapatcher[0].sport);
             this.teamForm.controls['name'].setValue(datapatcher[0].name);
             this.teamForm.controls['sport'].setValue(datapatcher[0].sport);
             this.teamForm.controls['address'].setValue(datapatcher[0].address);

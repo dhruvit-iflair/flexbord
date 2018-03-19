@@ -13,5 +13,7 @@ module.exports = function (app) {
         .get(settings.getbyid)
         .patch(settings.update)
         .delete(settings.delete);
+    settingsRoute.route('/bysport/:id')
+        .get(settings.getbysport);
     app.use('/api/gamesettings', settingsRoute);
 };

@@ -112,8 +112,10 @@ import { CreatePlayerComponent } from './views/club/club-teams/create-player/cre
 import { CreateStaffComponent } from './views/club/club-teams/create-staff/create-staff.component';
 import { TableComponent } from './components/custom/table/table.component';
 
-import { RankingComponent } from './views/club/club-teams/ranking/ranking.component';
 import { ConfirmBoxComponent } from './components/custom/confirm-box/confirm-box.component';
+import { CompetitionsComponent } from './views/club/club-teams/competitions/competitions.component';
+import { FetchsettingPipe } from './components/pipes/fetchsetting.pipe';
+import { SelectcompetitionComponent } from './views/club/club-teams/competitions/selectcompetition/selectcompetition.component';
 
 @NgModule({
   declarations: [
@@ -186,8 +188,10 @@ import { ConfirmBoxComponent } from './components/custom/confirm-box/confirm-box
     CreatePlayerComponent,
     CreateStaffComponent,
     TableComponent,
-    RankingComponent,
-    ConfirmBoxComponent
+    ConfirmBoxComponent,
+    CompetitionsComponent,
+    FetchsettingPipe,
+    SelectcompetitionComponent
   ],
   imports: [
     // Angular modules

@@ -65,6 +65,7 @@ import { ManagescoreboardComponent } from './views/gamesettings/scoreboards/mana
 import { EmailComponent } from './views/email/email.component';
 import { ManageEmailComponent } from './views/email/manage-email/manage-email.component';
 import { ImportClubMembersComponent } from './views/club/club-members/import-club-members/import-club-members.component';
+import { SelectcompetitionComponent } from './views/club/club-teams/competitions/selectcompetition/selectcompetition.component';
 
 export const ROUTES:Routes = [
   // Main redirect
@@ -184,6 +185,8 @@ export const ROUTES:Routes = [
       {path: 'email/manage', component: ManageEmailComponent , canActivate: [Auth24Guard]},
       {path: 'email/manage/:_id', component: ManageEmailComponent , canActivate: [Auth24Guard]},
 
+      {path: 'selectcompetition', component: SelectcompetitionComponent , canActivate: [Auth24Guard]},
+      
     ]
   },
   {

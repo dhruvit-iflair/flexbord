@@ -16,5 +16,7 @@ module.exports=function(app){
                 .delete(clubTournaments.delete);
         clubTournamentsRoute.route('/byclub/:id')
                 .get(clubTournaments.getbyclub);
+        clubTournamentsRoute.route('/bysetting/:id')
+                .get(clubTournaments.getbysetting);
     app.use('/api/clubTournaments',clubTournamentsRoute);
 };

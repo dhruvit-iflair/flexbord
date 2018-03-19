@@ -54,6 +54,6 @@ module.exports = function () {
     require('../app/models/emailType');
     require('../app/models/player');
     require('../app/models/staff');
-
+    require('../app/models/clubCompetition');
     return db;
 }
