@@ -25,7 +25,7 @@ export class ManageclubTournamentsComponent implements OnInit {
   public value : Array<any>;
   public fullSports : Array<any>;
   public clubSeasons : Array<any> = [];
-  public clubClassifications : Array <any> = [];
+  public clubClassifications : Array <any>;
   public clubClassificationsValue : Array <any> = [] ;
   
   public sub: any;
@@ -37,13 +37,13 @@ export class ManageclubTournamentsComponent implements OnInit {
   constructor(public fb: FormBuilder,private http : Http,private accr: AccessorService, private toastr : ToastrService, private router: Router,public activeRouter:ActivatedRoute,public clubService:ClubService,public sportService:SportsService){
 
       this.clubId = localStorage.getItem('clubid');
-      this.comForm = this.fb.group({ name: ["",[Validators.required]],description: [""],sports: [null,[Validators.required]],clubSeasons: [null,[Validators.required]],clubClassificationsValue: [[],[Validators.required]],club:[this.clubId ,[Validators.required]],competition:["opened"]});
+      this.comForm = this.fb.group({ name: ["",[Validators.required]],description: [""],sports: [null,[Validators.required]],clubSeasons: [null,[Validators.required]],clubClassificationsValue: [[]],club:[this.clubId ,[Validators.required]],competition:["opened"]});
       this.subscription = this.clubService.getSeasonList().subscribe((res) => { this.clubSeasons = res; })   
-
-      this.subscription = this.clubService.getClassificationsList().subscribe((res) => { if (res != []) this.clubClassifications = res;})   
+      this.clubService.getAllClassificationsByClub();
+      this.subscription = this.clubService.getClassificationsList().subscribe((res) => {this.clubClassifications = res;})   
       this.resS = false;
       
-      this.subscription = this.sportService.getSportsList().subscribe((res)=>{ this.sports = res; this.fullSports = res; });
+      this.subscription = this.sportService.getSportsList().subscribe((res)=>{ this.sports = res; this.fullSports = res;});
   }
 
   ngOnInit() {    
@@ -107,6 +107,7 @@ export class ManageclubTournamentsComponent implements OnInit {
     // this.clubClassifications = [];
     // this.clubClassifications = u;
     // var v = this.clubClassificationsValue;
+    this.my_Class = "form-control ng-untouched ng-pristine ng-invalid "
     this.clubClassificationsValue = [];
     // this.clubClassificationsValue = v;
     this.sports = this.fullSports;

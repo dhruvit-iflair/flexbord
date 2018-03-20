@@ -10,7 +10,7 @@
                 <div class="row">
                 <div class="col-md-12">
                     <label>Sport Name<a style="color:#f00 !important;">*</a></label>
-                    <input type="text" required #name="ngModel" id="name" name="name" class="form-control" [(ngModel)]="mForm.name" placeholder="Sport Name" [ngModelOptions]="{standalone: true}" pattern=".{3,}">
+                    <input type="text" required #name="ngModel" id="name" name="name" class="form-control" [(ngModel)]="mForm.name" placeholder="Sport Name" [ngModelOptions]="{standalone: true}" pattern="\s*(\S\s*){3,}">
                     <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
                         <span *ngIf="name.errors.required">Sport Name is required</span>
                     </div>

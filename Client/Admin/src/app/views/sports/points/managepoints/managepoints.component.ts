@@ -22,6 +22,7 @@ export class ManagepointsComponent implements OnInit {
   public hasCreatePerm;
   public former = { nameofpoint: '', valueofpoint: 0, valueofpointopt: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };
   public myForm:any;
+  public myClass:string = 'form-control text-col-md-3 ng-dirty ng-touched ng-valid';
   public items = ['Subtracted', 'Apply to contender', 'Fault'];
   constructor(private http: Http, 
               private toastr: ToastrService, 
@@ -63,12 +64,18 @@ export class ManagepointsComponent implements OnInit {
         this.sportsService.updatePoint(this._id,janudata);
         this._id = false;
         this.former = { nameofpoint: '', valueofpoint: 0, valueofpointopt: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };
+        setTimeout(() => {
+          this.myClass = 'form-control text-col-md-3 ng-dirty ng-touched ng-valid';          
+        }, 50);
         // this.myForm.reset();
     }
     else {
         this.sportsService.savePoint(janudata);
         this._id = false;
         this.former = { nameofpoint: '', valueofpoint: 0, valueofpointopt: '', colorbtnup: '', colorbtndown: '', hidefromscoreboard: false };    
+        setTimeout(() => {
+          this.myClass = 'form-control text-col-md-3 ng-dirty ng-touched ng-valid';          
+        }, 50);
         // this.myForm.reset();
     }
   }

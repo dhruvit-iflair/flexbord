@@ -11,11 +11,11 @@
               <div class="row">
                   <div class="man col-md-4">
                         <h4 class="text-left">First Name<a style="color:#f00 !important;">*</a></h4>
-                        <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="firstname" placeholder="Enter Name" required>
+                        <input class="text-col-md-3" type="text" pattern="^\s*(\S\s*){3,}" formControlName="firstname" placeholder="Enter Name" required>
                   </div>
                   <div class="man col-md-4">
                     <h4 class="text-left">Last Name<a style="color:#f00 !important;">*</a></h4>
-                    <input class="text-col-md-3" type="text" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" formControlName="lastname" placeholder="Enter Name" required>
+                    <input class="text-col-md-3" type="text" pattern="^\s*(\S\s*){3,}" formControlName="lastname" placeholder="Enter Name" required>
                   </div>
                   <div class="man col-md-4">
                         <h4 class="text-left">Gender</h4>
@@ -85,7 +85,7 @@
            
                   <div class="man col-md-4">
                       <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
-                      <input class="text-col-md-3" pattern=".{1,}" type="text"  formControlName="country" placeholder="Enter Country">
+                      <input class="text-col-md-3" pattern="^\s*(\S\s*){1,}" type="text"  formControlName="country" placeholder="Enter Country">
                   </div>
            
                   <div class="man col-md-4">
@@ -95,7 +95,7 @@
            
                   <div class="man col-md-4">
                       <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
-                      <input class="text-col-md-3" pattern=".{1,}" type="text"  formControlName="city" placeholder="Enter City">
+                      <input class="text-col-md-3" pattern="^\s*(\S\s*){1,}" type="text"  formControlName="city" placeholder="Enter City">
                   </div>
            
                   <div class="man col-md-4">

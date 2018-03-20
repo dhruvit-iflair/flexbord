@@ -8,7 +8,7 @@
       <div class="row">
             <div class="col-md-4">
               <label>Name of Foul<a style="color:#f00 !important;">*</a></label>
-              <input type="text" required #nameoffoul="ngModel" id="nameoffoul" name="nameoffoul" class="form-control" [(ngModel)]="former.nameoffoul"
+              <input type="text" required #nameoffoul="ngModel" id="nameoffoul" name="nameoffoul" class="form-control" [(ngModel)]="former.nameoffoul" placeholder="Name of Foul"
                 [ngModelOptions]="{standalone: true}">
             </div>
  
@@ -55,29 +55,38 @@
             placeholder=" #333FFF " [ngModelOptions]="{standalone: true}">
         </div>
 
-        <div class="col-md-4">
-          <div class=" col-md-4">
+        <div class="man col-md-4">
+          <div class=" col-md-4 per-tabbox">
             <label>Time Penalty</label>
-            <input type="checkbox" class="form-control" [(ngModel)]="former.istimepenalty" [ngModelOptions]="{standalone: true}">
+            <div class="td">
+              <input type="checkbox" class="form-control text-col-md-3" [(ngModel)]="former.istimepenalty" [ngModelOptions]="{standalone: true}">
+              <span></span>
+            </div>
           </div>
-          <div class=" col-md-4">
+          <div class=" col-md-4 per-tabbox">
             <label>Scoring Dependable?</label>
-            <input type="checkbox" class="form-control" [(ngModel)]="former.isscoringdependable" [ngModelOptions]="{standalone: true}" disabled>
+            <div class="td">
+                <input type="checkbox" class="form-control text-col-md-3" [(ngModel)]="former.isscoringdependable" [ngModelOptions]="{standalone: true}" disabled>
+              <span></span>
+            </div>
           </div>
-          <div class=" col-md-4">
+          <div class=" col-md-4 per-tabbox">
             <label>Possession Dependable?</label>
-            <input type="checkbox" class="form-control" [(ngModel)]="former.ispossessiondependable" [ngModelOptions]="{standalone: true}" disabled>
+            <div class="td">
+              <input type="checkbox" class="form-control text-col-md-3" [(ngModel)]="former.ispossessiondependable" [ngModelOptions]="{standalone: true}" disabled>              
+              <span></span>
+            </div>
           </div>
         </div>
       </div>
         <div class="man col-md-6">
           <label>Duration</label>
-          <input type="text" class="form-control" [(ngModel)]="former.duration" placeholder=" " [ngModelOptions]="{standalone: true}">
+          <input type="text"  class="form-control" [(ngModel)]="former.duration" placeholder="Duration" [ngModelOptions]="{standalone: true}">
         </div>
 
         <div class="man col-md-6">
           <label>Minus Time</label>
-          <input type="text" class="form-control" [(ngModel)]="former.minustime" placeholder=" " [ngModelOptions]="{standalone: true}" disabled>
+          <input type="text" class="form-control" [(ngModel)]="former.minustime" placeholder="Minus time" [ngModelOptions]="{standalone: true}" disabled>
         </div>
         
     </form>

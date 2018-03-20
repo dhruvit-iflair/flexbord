@@ -8,17 +8,15 @@
       <div class="row">
         <div class="col-md-6">
           <label>Name of Point<a style="color:#f00 !important;">*</a></label>
-          <input type="text" required #nameofpoint="ngModel" id="nameofpoint" name="nameofpoint" class="form-control" [(ngModel)]="former.nameofpoint" placeholder="Sport Name"
-            [ngModelOptions]="{standalone: true}">
+          <input type="text" [className]="myClass"  required #nameofpoint="ngModel" id="nameofpoint" name="nameofpoint" [(ngModel)]="former.nameofpoint" placeholder="Name of point" [ngModelOptions]="{standalone: true}" pattern="^\s*(\S\s*).{3,}">
         </div>
         <div class="col-md-6">
           <label>Value of Point<a style="color:#f00 !important;">*</a></label>
-          <div class="man1 col-md-4">
-            <input type="number" #valueofpoint="ngModel" id="valueofpoint" name="valueofpoint" [(ngModel)]="former.valueofpoint"
-              [ngModelOptions]="{standalone: true}" min="0" (ngModelChange)="minZero($event)">
+          <div class="col-md-4 noPad">
+            <input type="number" #valueofpoint="ngModel" id="valueofpoint" name="valueofpoint" class="form-control text-col-md-3"  [(ngModel)]="former.valueofpoint" [ngModelOptions]="{standalone: true}" min="0" (ngModelChange)="minZero($event)" pattern="[0-9].{1,}">  
           </div>
-          <div class="man1 col-md-6">
-            <select class="js-example-basic-single text-col-md-3" [(ngModel)]="former.valueofpointopt"
+          <div class="col-md-4 noPad">
+            <select class="js-example-basic-single text-col-md-3" [className]="myClass" [(ngModel)]="former.valueofpointopt"
               [ngModelOptions]="{standalone: true}">
                 <option value="" disabled="true" [selected]="true">Options</option>    
                 <option *ngFor="let ite of items"  [value]="ite">{{ite}}</option>
@@ -28,14 +26,14 @@
 
         <div class="man col-md-4">
           <label>Color Button Up</label>
-          <input type="text" #colorbtnup="ngModel" id="colorbtnup" name="colorbtnup" class="form-control" [(ngModel)]="former.colorbtnup"
-            placeholder=" #333FFF " [ngModelOptions]="{standalone: true}">
+          <input type="text" #colorbtnup="ngModel" id="colorbtnup" name="colorbtnup" class="form-control text-col-md-3" [(ngModel)]="former.colorbtnup"
+            placeholder=" #333FFF " [ngModelOptions]="{standalone: true}" pattern="^\s*(\S\s*){3,}">
         </div>
 
         <div class="man col-md-4">
           <label>Color Button Down</label>
-          <input type="text" #colorbtndown="ngModel" id="colorbtndown" name="colorbtndown" class="form-control" [(ngModel)]="former.colorbtndown"
-            placeholder=" #333FFF " [ngModelOptions]="{standalone: true}">
+          <input type="text" #colorbtndown="ngModel" id="colorbtndown" name="colorbtndown" class="form-control text-col-md-3" [(ngModel)]="former.colorbtndown"
+            placeholder=" #333FFF " [ngModelOptions]="{standalone: true}" pattern="^\s*(\S\s*){3,}">
         </div>
 
         <div class="man col-md-4">

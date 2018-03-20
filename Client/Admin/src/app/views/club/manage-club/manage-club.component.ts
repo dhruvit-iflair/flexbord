@@ -247,45 +247,43 @@ export class ManageClubComponent implements OnInit {
       }
     }
   }
-  addOrg(){      
-    if (this._id) {   
-      this.clubService.updateClub(this._id,this.clubForm.value);
-    } 
-    else {
-      this.clubService.saveClub(this.clubForm.value);
-// =======
-//   addOrg(){
-//     if(this.click){
-//       this.click = false ;
-//       if (this._id) {   
-//         this.clubService.updateClub(this._id,this.clubForm.value);
-//         setTimeout(() => {
-//           this.click=true;
-//         }, 150);
-//       } 
-//       else {
-//         this.clubService.saveClub(this.clubForm.value);
-//         var h = new Date().getHours();
-//         var m = new Date().getMinutes();
-//         var r = new Date();
-//         r.setHours(h);
-//         r.setMinutes(m);                         
-//         this.clubForm.value.registered =r ;                              
-//         this.http.post(environment.api +"/club",this.clubForm.value).subscribe((res)=>{
-//             var d = res.json();
-//             if (d._id) {
-//                 setTimeout(() => {
-//                   this.click=true;
-//                 }, 150);
-//                 this.toastr.success('Club Registered Successfully', 'Success');
-//                 this.router.navigate(['/club/manage/'+d._id]);
-//                 this.clubService.getAllClubList();
-//             }
-//         },(error)=>{
-//             this.toastr.error('Something went wrong !! Please try again later', 'Error');
-//         })
-//       }
-// >>>>>>> e89815ee44cee6fad6abb4e97a92a8a7a30b340f
+  // addOrg(){      
+  //   if (this._id) {   
+  //     this.clubService.updateClub(this._id,this.clubForm.value);
+  //   } 
+  //   else {
+  //     this.clubService.saveClub(this.clubForm.value);
+  addOrg(){
+    if(this.click){
+      this.click = false ;
+      if (this._id) {   
+        this.clubService.updateClub(this._id,this.clubForm.value);
+        setTimeout(() => {
+          this.click=true;
+        }, 150);
+      } 
+      else {
+        this.clubService.saveClub(this.clubForm.value);
+        var h = new Date().getHours();
+        var m = new Date().getMinutes();
+        var r = new Date();
+        r.setHours(h);
+        r.setMinutes(m);                         
+        this.clubForm.value.registered =r ;                              
+        this.http.post(environment.api +"/club",this.clubForm.value).subscribe((res)=>{
+            var d = res.json();
+            if (d._id) {
+                setTimeout(() => {
+                  this.click=true;
+                }, 150);
+                this.toastr.success('Club Registered Successfully', 'Success');
+                this.router.navigate(['/club/manage/'+d._id]);
+                this.clubService.getAllClubList();
+            }
+        },(error)=>{
+            this.toastr.error('Something went wrong !! Please try again later', 'Error');
+        })
+      }
     }
   }
 }

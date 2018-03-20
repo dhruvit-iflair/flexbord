@@ -14,7 +14,7 @@
             <div class="row">
               <div class="man col-md-6">
                 <h4 class="text-left">Name<a style="color:#f00 !important;">*</a></h4>
-                <input class="text-col-md-3" type="text" formControlName="name" required>
+                <input class="text-col-md-3" type="text" formControlName="name" required pattern="^\s*(\S\s*){3,}">
                 <div class="alert alert-danger" role="alert" *ngIf="!teamForm.get('name').valid && teamForm.get('name').touched">
                   Name is required.
                 </div>
@@ -89,7 +89,7 @@
             <div class="row">
               <div class="man col-md-6">
                 <h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
-                <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace>
+                <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace pattern="^\s*(\S\s*){3,}">
                 <div class="alert alert-danger" role="alert" *ngIf="!teamForm.get('address').valid && teamForm.get('address').touched">
                   Address is required.
                 </div>
@@ -107,17 +107,17 @@
 
               <div class="man col-md-6">
                 <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
-                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="country">
+                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="country" pattern="^\s*(\S\s*){3,}">
               </div>
 
               <div class="man col-md-6">
                 <h4 class="text-left">State</h4>
-                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="state">
+                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="state" >
               </div>
 
               <div class="man col-md-6">
                 <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
-                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="city">
+                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="city" pattern="^\s*(\S\s*){3,}">
               </div>
 
               <div class="man col-md-6">

@@ -14,21 +14,21 @@
                     <div class="row">
                         <div class="man col-md-3">
                               <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
-                              <input class="text-col-md-3" type="text" pattern=".{3,}" formControlName="name" placeholder="Enter Full Name">
+                              <input class="text-col-md-3" type="text" pattern="^\s*(\S\s*){3,}" formControlName="name" placeholder="Enter Full Name">
                               <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('name').valid && orgForm.get('name').touched">
                                     Name is required.
                               </div>
                         </div>
                         <div class="man col-md-3">
                               <h4 class="text-left">Sub domain<a style="color:#f00 !important;">*</a></h4>
-                              <input class="text-col-md-3" type="text" formControlName="subDomain" placeholder="Enter Sub Domain">
+                              <input class="text-col-md-3" type="text" formControlName="subDomain" placeholder="Enter Sub Domain" pattern="^\s*(\S\s*){3,}">
                               <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('subDomain').valid && orgForm.get('subDomain').touched">
                                     Sub domain
                               </div>
                         </div>
                         <div class="man col-md-3">
                               <h4 class="text-left">Abbreviation<a style="color:#f00 !important;">*</a></h4>
-                              <input class="text-col-md-3" type="text" formControlName="abbreviation" placeholder="Enter Abbreviation">
+                              <input class="text-col-md-3" type="text" formControlName="abbreviation" placeholder="Enter Abbreviation" pattern="^\s*(\S\s*){3,}">
                               <div class="alert alert-danger" role="alert" *ngIf="!orgForm.get('abbreviation').valid && orgForm.get('abbreviation').touched">
                                     Abbreviation is required.
                               </div>
@@ -100,7 +100,7 @@
                      
                             <div class="man col-md-3">
                                 <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
-                                <input class="text-col-md-3"   type="text"  formControlName="country" placeholder="Country"> 
+                                <input class="text-col-md-3"   type="text"  formControlName="country" placeholder="Country" pattern="^\s*(\S\s*){1,}"> 
                             </div>
                      
                             <div class="man col-md-3">
@@ -110,7 +110,7 @@
                      
                             <div class="man col-md-3">
                                 <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
-                                <input class="text-col-md-3"   type="text"  formControlName="city" placeholder="City" >
+                                <input class="text-col-md-3"   type="text"  formControlName="city" placeholder="City" pattern="^\s*(\S\s*){1,}">
                             </div>
                      
                             <div class="man col-md-3">
@@ -131,12 +131,12 @@
                         
                             <div class="man col-md-3">
                                 <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
-                                <input class="text-col-md-3"  disabled type="text"  formControlName="country" placeholder="Country"> 
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="country" placeholder="Country" pattern="^\s*(\S\s*){1,}"> 
                             </div>
                         
                             <div class="man col-md-3">
                                 <h4 class="text-left">State</h4>
-                                <input class="text-col-md-3"  disabled type="text"  formControlName="state" placeholder="State">
+                                <input class="text-col-md-3"  disabled type="text"  formControlName="state" placeholder="State" pattern="^\s*(\S\s*){1,}">
                             </div>
                         
                             <div class="man col-md-3">

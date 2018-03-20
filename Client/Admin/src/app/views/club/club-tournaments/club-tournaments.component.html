@@ -25,7 +25,7 @@
                 <td style="display:none">{{r._id}}</td>
                 <td>{{r.name}}</td>
                 <td>{{r.description}}</td>
-                <td><span *ngFor="let s of r.sports"> {{s.name}}</span></td>
+                <td>{{r.sports.name}}</td>
                 <td>{{r.clubSeasons.name}}</td>
                 <td>
                   <a class="btn btn_green tab_btn"  (click)="edit(r._id)" *ngIf="hasEditPerm">

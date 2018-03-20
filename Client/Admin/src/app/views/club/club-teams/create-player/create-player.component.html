@@ -17,9 +17,7 @@
                         </div>
                         <div class="man col-md-3" >
                               <h4 class="text-left">Shirt Number*<a style="color:#f00 !important;"></a></h4>
-                              <input class="text-col-md-3" type="number" name="shirt_number" formControlName="shirt_number" 
-                              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                              maxlength="3" required>
+                              <input class="text-col-md-3" type="number" name="shirt_number" formControlName="shirt_number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" required pattern="^\s*(\S\s*){3,}">
                         </div>
                         <div class="man col-md-3">
                               <h4 class="text-left">Captain</h4>

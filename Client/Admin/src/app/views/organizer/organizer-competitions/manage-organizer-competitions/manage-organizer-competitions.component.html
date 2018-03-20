@@ -54,22 +54,24 @@
                         Seasons is required.
                 </div>
             </div>
-            <div class="man col-md-6" *ngFor="let it of classifications; let i = index;" >
-                <label>{{it.name}}<a style="color:#f00 !important;">*</a></label>
-                <select  class=" form-control" [className]="my_Class" name="organizerClassifications"  [(ngModel)]="classificationValues[i]" [ngModelOptions]="{standalone: true}" *ngIf="!classifications == []" (ngModelChange)="getClasValue()" required>
-                    <option disabled="true" value="undefined" selected>Select your Classification Value</option>                  
-                    <option *ngFor="let val of it.value "  [value]="val">{{val}}</option>
-                </select>
-                <div class="add_new row" style="width: 150%;" *ngIf="!classifications" >
-                    <label style="float:left; padding-top: 7px;">Add New Classifications</label>
-                    <button class="btn btn_green" (click)="addClass();" style="float:left;margin-left: 10px;">
-                            <i class="fa fa-plus "></i>
-                    </button>
+            <div *ngIf="!classifications == []"  >
+                <div class="man col-md-6" *ngFor="let it of classifications; let i = index;">
+                    <label>{{it.name}}<a style="color:#f00 !important;">*</a></label>
+                    <select  class=" form-control" [className]="my_Class" name="organizerClassifications"  [(ngModel)]="classificationValues[i]" [ngModelOptions]="{standalone: true}" (ngModelChange)="getClasValue()" required>
+                        <option disabled="true" value="undefined" selected>Select your Classification Value</option>                  
+                        <option *ngFor="let val of it.value "  [value]="val">{{val}}</option>
+                    </select>
                 </div>
-            </div>     
+            </div>    
+            <div class="add_new row" style="width: 150%;" *ngIf="!classifications" >
+                <label style="float:left; padding-top: 7px;">Add New Classifications</label>
+                <button class="btn btn_green" (click)="addClass();" style="float:left;margin-left: 10px;">
+                        <i class="fa fa-plus "></i>
+                </button>
+            </div> 
             <div class="man col-md-6">
                 <label>Competition<a style="color:#f00 !important;">*</a></label>
-                <div class="man col-md-12">
+                <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-6">
                             <input type="radio" class="bgradio-input" id="comp1" name="competition"  value="opened" formControlName="competition">

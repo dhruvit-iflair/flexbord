@@ -7,7 +7,7 @@
                   </div>
                     <div class="man col-md-4">
                         <label>Name<a style="color:#f00 !important;">*</a></label>
-                        <input class="form-control" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" type="text" placeholder="Season Name" formControlName="name">
+                        <input class="form-control"  pattern="^\s*(\S\s*){3,}" type="text" placeholder="Season Name" formControlName="name">
                         <div class="alert alert-danger" role="alert" *ngIf="!seasonForm.get('name').valid && seasonForm.get('name').touched">
                             Name is required.
                         </div>

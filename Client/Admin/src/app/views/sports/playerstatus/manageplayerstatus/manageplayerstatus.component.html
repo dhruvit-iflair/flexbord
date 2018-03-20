@@ -12,21 +12,24 @@
             [ngModelOptions]="{standalone: true}">
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label>Color Button Up</label>
           <input type="text" #colorbtnup="ngModel" id="colorbtnup" name="colorbtnup" class="form-control" [(ngModel)]="former.colorbtnup"
             placeholder=" #333FFF " [ngModelOptions]="{standalone: true}">
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label>Color Button Down</label>
           <input type="text" #colorbtndown="ngModel" id="colorbtndown" name="colorbtndown" class="form-control" [(ngModel)]="former.colorbtndown"
             placeholder=" #333FFF " [ngModelOptions]="{standalone: true}">
         </div>
 
-        <div class="man col-md-12">
+        <div class="col-md-2 per-tabbox">
           <label>Hide from Scoreboard</label>
-          <input class="text-col-md-3" type="checkbox" [(ngModel)]='former.hidefromscoreboard' [ngModelOptions]="{standalone: true}">
+          <div class="td">
+            <input class="text-col-md-3" type="checkbox" [(ngModel)]='former.hidefromscoreboard' [ngModelOptions]="{standalone: true}">
+            <span style="position: relative;margin: -16px;"></span>
+          </div>
         </div>
       </div>
     </form>

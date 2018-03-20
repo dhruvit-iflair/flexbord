@@ -9,7 +9,7 @@
            <div class="row">
             <div class="col-md-6">
                 <label>Name<a style="color:#f00 !important;">*</a></label>
-                <input class=" form-control" type="text" placeholder="Name" formControlName="name">
+                <input class=" form-control" type="text" placeholder="Name" formControlName="name" pattern="^\s*(\S\s*){3,}">
                 <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('name').valid && comForm.get('name').touched">
                         Name is required.
                 </div>
@@ -54,20 +54,26 @@
                         Seasons is required.
                 </div>
             </div>
-            <div class="man col-md-6" *ngFor="let it of clubClassifications; let i = index;" >
-                <label>{{it.name}}<a style="color:#f00 !important;">*</a></label>
-                <select  class=" form-control" [className]="my_Class" name="clubClassifications"  [(ngModel)]="clubClassificationsValue[i]" [ngModelOptions]="{standalone: true}" *ngIf="!clubClassifications == []" (ngModelChange)="getClasValue()" required>
-                    <option disabled="true" value="undefined" selected>Select your Classification Value</option>                  
-                    <option *ngFor="let val of it.value "  [value]="val">{{val}}</option>
-                </select>
-                <div class="add_new row" style="width: 150%;" *ngIf="!clubClassifications" >
+            <div *ngIf="!clubClassifications == []" >
+                <div class="man col-md-6" *ngFor="let it of clubClassifications; let i = index;">
+                    <label>{{it.name}}<a style="color:#f00 !important;">*</a></label>
+                    <select  class=" form-control" [className]="my_Class" name="clubClassifications"  [(ngModel)]="clubClassificationsValue[i]" [ngModelOptions]="{standalone: true}" (ngModelChange)="getClasValue()" required>
+                        <option disabled="true" value="undefined" selected>Select your Classification Value</option>                  
+                        <option *ngFor="let val of it.value "  [value]="val">{{val}}</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="man col-md-6" *ngIf="!clubClassifications.length" >
+                <label>Classifications</label>
+                <div class="add_new row" style="width: 150%;" >
                     <label style="float:left; padding-top: 7px;">Add New Classifications</label>
                     <button class="btn btn_green" (click)="addClass();" style="float:left;margin-left: 10px;">
                             <i class="fa fa-plus "></i>
                     </button>
                 </div>
             </div>
-            <div class="man col-md-12">
+            <div class="man col-md-6">
                 <label>Competition<a style="color:#f00 !important;">*</a></label>                
                 <div class="row">
                     <div class="col-md-6">

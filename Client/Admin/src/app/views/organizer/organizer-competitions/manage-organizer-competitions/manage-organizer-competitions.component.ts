@@ -14,7 +14,7 @@ import { AccessorService } from "../../../../components/common/accessor.service"
   templateUrl: './manage-organizer-competitions.component.html',
   styleUrls: ['./manage-organizer-competitions.component.css']
 })
-export class ManageOrganizerCompetitionsComponent implements OnInit {
+export class ManageOrganizerCompetitionsComponent implements OnInit ,OnDestroy{
 
 
   public comForm: FormGroup;
@@ -29,6 +29,8 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
   public click: Boolean = true;
   public classValue: Array<any>;
   public subscripton: Subscription;
+  public subscripton2: Subscription;
+  public subscripton3: Subscription;
     public hasCreatePerm;
   public my_Class :string = "form-control ng-untouched ng-pristine ng-invalid ";
 
@@ -60,13 +62,13 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
       .subscribe((res) => {
         this.sports = res.json();
       });
-    this.subscripton = this.orgService.getClassificationList().subscribe((res) => {
+    this.subscripton2 = this.orgService.getClassificationList().subscribe((res) => {
       var u = res;
       if (u.length > 0) {
         this.classifications = u;
       }
     });
-    this.subscripton = this.orgService.getSingleCompetitionData().subscribe(res => {
+    this.subscripton3 = this.orgService.getSingleCompetitionData().subscribe(res => {
       this.comForm.patchValue(res[0], { onlySelf: true });
       this.comForm.patchValue({ seasons: res[0].seasons._id }, { onlySelf: true });
       // this.comForm.patchValue({organizerClassifications: res[0].organizerClassifications._id },{onlySelf: true});
@@ -81,6 +83,8 @@ export class ManageOrganizerCompetitionsComponent implements OnInit {
   }
   ngOnDestroy() {
     this.subscripton.unsubscribe();
+    this.subscripton2.unsubscribe();
+    this.subscripton3.unsubscribe();
   }
   addSeason() {
     this.orgService.changeTab(3);

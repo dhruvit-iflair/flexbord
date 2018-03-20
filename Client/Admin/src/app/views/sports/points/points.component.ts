@@ -15,7 +15,7 @@ import { SportsService } from '../../../components/services/sports.service';
 export class PointsComponent implements OnInit {
 
   points; dtOptions; sptid;
-  public dataRenderer = false;
+  public dataRenderer = true;
   public subscription:Subscription;
   public hasEditPerm; hasDeletePerm; hasCreatePerm;hasViewPerm;
 
@@ -42,7 +42,13 @@ export class PointsComponent implements OnInit {
       order: [[0, 'desc']],
       columns: [{ "visible": false }, null, null, null,null, null, { "orderable": false }]
     }
-    this.subscription = this.sportService.getPointsList().subscribe((res) => { this.points = res; });
+    this.subscription = this.sportService.getPointsList().subscribe((res) => { 
+      this.dataRenderer = false;
+      this.points = res; 
+      setTimeout(() => {
+        this.dataRenderer = true;
+      }, 150);
+    });
     this.checkpermissions();
   }
 
