@@ -22,7 +22,7 @@ export class ManageOrganizerCompetitionsComponent implements OnInit ,OnDestroy{
   public _id: any;
   public season: any;
   public amki: Array<any>;
-  public sports: Array<any>;
+  public sports: Array<any> = [];
   public sportsValue: Array<any>;
   public classifications: Array<any>;
   public classificationValues: Array<any> = [];
@@ -46,7 +46,19 @@ export class ManageOrganizerCompetitionsComponent implements OnInit ,OnDestroy{
     })
     this.http.get(environment.api + "/organizer/" + localStorage.getItem('orgid')).subscribe((res) => {
       var r = res.json();
-      this.sportsValue = r[0].sports;
+      this.sportsValue = r[0].sports;     
+      this.http.get(environment.api + '/sports').subscribe((rs) => {
+        var sp = rs.json();
+        var dante = [];
+        for (let i = 0; i < sp.length; i++) {
+          if(this.sportsValue.indexOf(sp[i]._id) > -1){
+            dante.push(sp[i]);
+          };          
+          if (i == sp.length -1 && dante) {
+            this.sports = dante;
+          }
+        }
+      });
     })
   }
 
@@ -58,10 +70,6 @@ export class ManageOrganizerCompetitionsComponent implements OnInit ,OnDestroy{
         this.season = t;
       }
     });
-    this.http.get(environment.api + '/sports')
-      .subscribe((res) => {
-        this.sports = res.json();
-      });
     this.subscripton2 = this.orgService.getClassificationList().subscribe((res) => {
       var u = res;
       if (u.length > 0) {
@@ -82,15 +90,18 @@ export class ManageOrganizerCompetitionsComponent implements OnInit ,OnDestroy{
      this.checkpermissions();
   }
   ngOnDestroy() {
-    this.subscripton.unsubscribe();
-    this.subscripton2.unsubscribe();
-    this.subscripton3.unsubscribe();
+    // this.subscripton.unsubscribe();
+    // this.subscripton2.unsubscribe();
+    // this.subscripton3.unsubscribe();
   }
   addSeason() {
     this.orgService.changeTab(3);
   }
   addClass() {
     this.orgService.changeTab(4);
+  }
+  addSport() {
+    this.orgService.changeTab(1);
   }
   saveVal() {
     if (this.click) {

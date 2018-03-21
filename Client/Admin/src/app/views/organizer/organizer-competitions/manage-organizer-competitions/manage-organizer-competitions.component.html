@@ -1,103 +1,116 @@
 <div *ngIf="hasCreatePerm">
-<div class="manage-box clearfix">  
-  <div class="col-md-12">
-    <label><h2>Manage Competitions</h2></label>
-  </div>
-  <div class="col-md-12">
-    <form [formGroup]="comForm" >
-        <div class="form-group pad">
-           <div class="row">
-            <div class="col-md-6">
-                <label>Name<a style="color:#f00 !important;">*</a></label>
-                <input class=" form-control" type="text" placeholder="Name" formControlName="name" pattern=".{3,}">
-                <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('name').valid && comForm.get('name').touched">
-                        Name is required.
-                </div>
-            </div>
-            <div class="col-md-6">
-                <label>Description</label>
-                <input class=" form-control" type="text" placeholder="Description" formControlName="description">
-                <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('description').valid && comForm.get('description').touched">
-                        Description is required.
-                </div>
-            </div>
-            <div class="man col-md-6">
-                <label>Sport<a style="color:#f00 !important;">*</a></label>
-                <!-- <app-multiselect class="form-control"  [mArray]='sports' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="sports? sports.length > 0 : sports"></app-multiselect> -->
-                <select  class=" form-control" placeholder="Select Sports"  name="sports"  formControlName="sports"  *ngIf="sports? sports.length > 0 : sports" required >
-                        <option disabled="true" [selected]="true" value="null">Select your Sport</option>
-                        <option *ngFor="let it of sports"  [value]="it._id">{{it.name}}</option>
-                      </select>
-                <div class="col-md-12" *ngIf="!sports? sports == [] : sports.length == 0">
-                    <label style="float:left; padding-top: 7px;">Add New Sport</label>
-                    <button class="btn btn_green" routerLink="/sports/manage" style="float:left;margin-left: 10px;">
-                            <i class="fa fa-plus "></i>
-                    </button>
-                </div>
-                <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('sports').valid && comForm.get('sports').touched">
-                        Sport is required.
-                </div>
-            </div>
-            <div class="man col-md-6">
-                <label>Seasons<a style="color:#f00 !important;">*</a></label>
-                <select  class=" form-control" placeholder="Season"  name="seasons"  formControlName="seasons" *ngIf="!season == []" required>
-                  <option disabled="true" [selected]="true" value="null">Select your Season</option>
-                  <option *ngFor="let it of season"  [value]="it._id">{{it.name}}</option>
-                </select>
-                <div class="add_new row" *ngIf="!season" >
-                    <label style="float:left; padding-top: 7px;">Add New Season</label>
-                    <button class="btn btn_green" (click)="addSeason();" style="float:left;margin-left: 10px;">
-                            <i class="fa fa-plus "></i>
-                    </button>
-                </div>
-                <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('seasons').valid && comForm.get('seasons').touched">
-                        Seasons is required.
-                </div>
-            </div>
-            <div *ngIf="!classifications == []"  >
-                <div class="man col-md-6" *ngFor="let it of classifications; let i = index;">
-                    <label>{{it.name}}<a style="color:#f00 !important;">*</a></label>
-                    <select  class=" form-control" [className]="my_Class" name="organizerClassifications"  [(ngModel)]="classificationValues[i]" [ngModelOptions]="{standalone: true}" (ngModelChange)="getClasValue()" required>
-                        <option disabled="true" value="undefined" selected>Select your Classification Value</option>                  
-                        <option *ngFor="let val of it.value "  [value]="val">{{val}}</option>
-                    </select>
-                </div>
-            </div>    
-            <div class="add_new row" style="width: 150%;" *ngIf="!classifications" >
-                <label style="float:left; padding-top: 7px;">Add New Classifications</label>
-                <button class="btn btn_green" (click)="addClass();" style="float:left;margin-left: 10px;">
-                        <i class="fa fa-plus "></i>
-                </button>
-            </div> 
-            <div class="man col-md-6">
-                <label>Competition<a style="color:#f00 !important;">*</a></label>
-                <div class="col-md-12">
+    <div class="manage-box clearfix">
+        <div class="col-md-12">
+            <label>
+                <h2>Manage Competitions</h2>
+            </label>
+        </div>
+        <div class="col-md-12">
+            <form [formGroup]="comForm">
+                <div class="form-group pad">
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="radio" class="bgradio-input" id="comp1" name="competition"  value="opened" formControlName="competition">
-                            <label for="comp1">Opened</label>
+                            <label>Name
+                                <a style="color:#f00 !important;">*</a>
+                            </label>
+                            <input class=" form-control" type="text" placeholder="Name" formControlName="name" pattern=".{3,}">
                         </div>
                         <div class="col-md-6">
-                            <input type="radio" name="competition" class="bgradio-input" id="comp2"  value="closed" formControlName="competition">
-                            <label for="comp2">Closed</label>
+                            <label>Description</label>
+                            <input class=" form-control" type="text" placeholder="Description" formControlName="description">
+                        </div>
+                        <div class="man col-md-6">
+                            <label>Sport
+                                <a style="color:#f00 !important;">*</a>
+                            </label>
+                            <!-- <app-multiselect class="form-control"  [mArray]='sports' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="sports? sports.length > 0 : sports"></app-multiselect> -->
+                            <select class=" form-control" placeholder="Select Sports" name="sports" formControlName="sports" *ngIf="sports.length" required>
+                                <option disabled="true" [selected]="true" value="null">Select your Sport</option>
+                                <option *ngFor="let it of sports" [value]="it._id">{{it.name}}</option>
+                            </select>
+                            <div class="col-md-12" *ngIf="!sports.length" style="height: 30px;">
+                                <label style="float:left; padding-top: 7px;">Add New Sport</label>
+                                <button class="btn btn_green" (click)="addSport();" style="float:left;margin-left: 10px;">
+                                    <i class="fa fa-plus "></i>
+                                </button>
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('sports').valid && comForm.get('sports').touched">
+                                Sport is required.
+                            </div>
+                        </div>
+                        <div class="man col-md-6">
+                            <label>Seasons
+                                <a style="color:#f00 !important;">*</a>
+                            </label>
+                            <select class=" form-control" placeholder="Season" name="seasons" formControlName="seasons" *ngIf="!season == []" required>
+                                <option disabled="true" [selected]="true" value="null">Select your Season</option>
+                                <option *ngFor="let it of season" [value]="it._id">{{it.name}}</option>
+                            </select>
+                            <div class="col-md-12" *ngIf="!season">
+                                <label style="float:left; padding-top: 7px;">Add New Season</label>
+                                <button class="btn btn_green" (click)="addSeason();" style="float:left;margin-left: 10px;">
+                                    <i class="fa fa-plus "></i>
+                                </button>
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="!comForm.get('seasons').valid && comForm.get('seasons').touched">
+                                Seasons is required.
+                            </div>
+                        </div>
+                        <div *ngIf="!classifications == []">
+                            <div class="man col-md-6" *ngFor="let it of classifications; let i = index;">
+                                <label>{{it.name}}
+                                    <a style="color:#f00 !important;">*</a>
+                                </label>
+                                <select class=" form-control" [className]="my_Class" name="organizerClassifications" [(ngModel)]="classificationValues[i]"
+                                    [ngModelOptions]="{standalone: true}" (ngModelChange)="getClasValue()" required>
+                                    <option disabled="true" value="undefined" selected>Select your Classification Value</option>
+                                    <option *ngFor="let val of it.value " [value]="val">{{val}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="man col-md-6" *ngIf="!classifications">
+                            <label>Classifications
+                                <a style="color:#f00 !important;">*</a>
+                            </label>
+                            <div class="col-md-12">
+                                <label style="float:left; padding-top: 7px;">Add New Classifications</label>
+                                <button class="btn btn_green" (click)="addClass();" style="float:left;margin-left: 10px;">
+                                    <i class="fa fa-plus "></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="man col-md-6">
+                            <label>Competition
+                                <a style="color:#f00 !important;">*</a>
+                            </label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="radio" class="bgradio-input" id="comp1" name="competition" value="opened" formControlName="competition">
+                                        <label for="comp1">Opened</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="competition" class="bgradio-input" id="comp2" value="closed" formControlName="competition">
+                                        <label for="comp2">Closed</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>        
-          </div>                              
-        </div>        
-      </form>
-  </div> 
-  </div>
-  <div class="col-md-12"> 
-    <div class="row">
-      <!-- <div class="col-md-6 text-left">
+            </form>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <!-- <div class="col-md-6 text-left">
           <button class="btn" [routerLink]="['/organizer/competitions']">Back</button>
       </div> -->
-      <div class="col-md-6 text-right">
-          <button (click)="saveVal(); my_Class = 'form-control ng-untouched ng-pristine ng-invalid'" [disabled]='!comForm.valid || classificationValues.length != classifications.length'  class="btn btn_green white" >Save</button>        
-          <!-- [disabled]='!orgForm.valid' -->
-      </div> 
-    </div> 
-</div>   
+            <div class="col-md-6 text-right">
+                <button (click)="saveVal(); my_Class = 'form-control ng-untouched ng-pristine ng-invalid'" [disabled]='!comForm.valid || classificationValues.length != classifications.length'
+                    class="btn btn_green white">Save</button>
+                <!-- [disabled]='!orgForm.valid' -->
+            </div>
+        </div>
+    </div>
 </div>

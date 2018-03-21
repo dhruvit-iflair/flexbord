@@ -46,7 +46,7 @@ export class ManageOrganizerComponent implements OnInit {
   public isCity =false;
   public isCountry = false;
   public subscription: Subscription;
-  public tabz: any;
+  public tabz: any = 1;
   public  address = {address:'', phonenumber:'',website:'', zipcode:'', country:'', state:'', city:'', street:'', building:'' };
   
   public click :Boolean = true;
@@ -114,7 +114,7 @@ export class ManageOrganizerComponent implements OnInit {
           });
         }         
     });
-    this.subscription = this.orgService.getTabActive().subscribe(id=>{
+    this.orgService.getTabActive().subscribe(id=>{
       this.tabz = id;
     })
     this.http.get(environment.api + '/sports')
@@ -167,7 +167,9 @@ export class ManageOrganizerComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
+  // tabchange(id){
+  //   this.tabz = id;      
+  // }
   readUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
@@ -291,10 +293,9 @@ export class ManageOrganizerComponent implements OnInit {
           this.toastr.error('Only .jpg, .png, .jpeg type of Image supported ', 'Error');                                  
         }
       }    
-      
     }
   }
-    checkpermissions() {
+  checkpermissions() {
     var perms = this.accr.getUserPermissions();
     for (var z = 0; z < perms.length; z++) {
       if (Object.keys(perms[z]).toString().toLowerCase() == "organizerseasons0" && perms[z][Object.keys(perms[z]).toString()] == true) {
@@ -311,44 +312,63 @@ export class ManageOrganizerComponent implements OnInit {
       }
     }
   }
-    addOrg(){   
-      if (this.click) {
-        this.click = false;
-        var usn = this.user.filter((u)=>{ 
-            return u.username == this.orgForm.value.email;
-        });
-        if (this._id) {
-          this.http.put(environment.api +"/organizer/"+this._id,this.orgForm.value).subscribe((res)=>{
+  addOrg() {
+    if (this.click) {
+      // this.click = false;
+      var usn = this.user.filter((u) => {
+        return u.username == this.orgForm.value.email;
+      });
+      var sub = this.items.filter((u) => {
+        return u.subDomain == this.orgForm.value.subDomain;
+      });
+      if (!sub.length) {
+        if (!usn.length) {
+          if (this._id) {
+            this.http.put(environment.api + "/organizer/" + this._id, this.orgForm.value).subscribe((res) => {
               this.click = true;
               var d = res.json();
               if (d._id) {
-                  this.toastr.success('Organizer Updated Successfully', 'Success');
-                  this.router.navigate(['/organizer']);
+                this.toastr.success('Organizer Updated Successfully', 'Success');
+                this.router.navigate(['/organizer']);
               }
-          },(error)=>{
+            }, (error) => {
               this.click = true
               this.toastr.error('Something went wrong !! Please try again later', 'Error');
-          })
-        } 
-        else {
-          var h = new Date().getHours();
-          var m = new Date().getMinutes();
-          var r = new Date();
-          r.setHours(h);
-          r.setMinutes(m);
-          this.orgForm.patchValue({registered :r});                              
-          this.http.post(environment.api +"/organizer",this.orgForm.value).subscribe((res)=>{
+            })
+          }
+          else {
+            var h = new Date().getHours();
+            var m = new Date().getMinutes();
+            var r = new Date();
+            r.setHours(h);
+            r.setMinutes(m);
+            this.orgForm.patchValue({ registered: r });
+            this.http.post(environment.api + "/organizer", this.orgForm.value).subscribe((res) => {
               this.click = true;
               var d = res.json();
               if (d._id) {
                 this.toastr.success('Organizer Registered Successfully', 'Success');
-                this.router.navigate(['/organizer/manage/'+d._id]);
+                this.router.navigate(['/organizer/manage/' + d._id]);
               }
-          },(error)=>{
+            }, (error) => {
               this.click = true;
               this.toastr.error('Something went wrong !! Please try again later', 'Error');
-          })
+            })
+          }
         }
-      } 
+        else {
+          console.log(this.orgForm.value, sub, usn)
+          if (usn[0]) {
+            this.toastr.error("This Email has already taken", "Error");
+          }
+        }
+      }
+      else {
+        console.log(this.orgForm.value, sub, usn)
+        if (sub[0]) {
+          this.toastr.error("This Sub Domain has already taken", "Error");
+        }
+      }
     }
+  }
 }
