@@ -39,7 +39,11 @@ export class PlayerstatusComponent implements OnInit {
       columns: [{ "visible": false }, null, null, null,null, { "orderable": false }]
     }
     this.subscription = this.sportService.getPlayesStatusList().subscribe((res) => {
+        this.dataRenderer = false;
         this.pstatus = res;
+        setTimeout(() => {
+          this.dataRenderer = true;
+        }, 200);
     });
     this.checkpermissions();
   }

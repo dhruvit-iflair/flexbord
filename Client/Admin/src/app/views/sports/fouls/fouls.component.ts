@@ -38,8 +38,12 @@ export class FoulsComponent implements OnInit {
       columns: [{ "visible": false }, null, null, null,null,null, { "orderable": false }]
     }
     this.subscription = this.sportService.getFoulssList().subscribe((res) => {
+        this.dataRenderer = false;
         this.foulsdata = res;
-      });
+        setTimeout(() => {
+          this.dataRenderer = true;
+        }, 200);
+    });
     this.checkpermissions();
   }
   checkpermissions() {

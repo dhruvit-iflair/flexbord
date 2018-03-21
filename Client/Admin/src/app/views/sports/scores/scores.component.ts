@@ -40,6 +40,10 @@ export class ScoresComponent implements OnInit {
     }
     this.subscription = this.sportService.getScoreList().subscribe((res) => {
       this.scores = res;
+      this.dataRenderer = false;
+      setTimeout(() => {
+        this.dataRenderer = true;
+      }, 200);
     });
     this.checkpermissions();
   }

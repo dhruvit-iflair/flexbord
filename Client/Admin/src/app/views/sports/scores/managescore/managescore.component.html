@@ -8,19 +8,19 @@
       <div class="row">
         <div class="col-md-4">
           <label>Wins<a style="color:#f00 !important;">*</a></label>
-          <input type="number" required #wins="ngModel" id="wins" name="wins" class="form-control" [(ngModel)]="former.wins" placeholder="0"
+          <input type="number" required #wins="ngModel" min="0" id="wins"  value="0" name="wins" class="form-control" [(ngModel)]="former.wins" placeholder="0"
             [ngModelOptions]="{standalone: true}">
         </div>
 
         <div class="col-md-4">
           <label>Draws<a style="color:#f00 !important;">*</a></label>
-          <input type="number" required #draws="ngModel" id="draws" name="draws" class="form-control" [(ngModel)]="former.draws" placeholder="0"
+          <input type="number" required #draws="ngModel" id="draws" value="0" name="draws" min="0"  class="form-control" [(ngModel)]="former.draws" placeholder="0"
             [ngModelOptions]="{standalone: true}">
         </div>
 
         <div class="col-md-4">
           <label>Losses<a style="color:#f00 !important;">*</a></label>
-          <input type="number" required #losses="ngModel" id="losses" name="losses" class="form-control" [(ngModel)]="former.losses" placeholder="0"
+          <input type="number" required #losses="ngModel" id="losses" value="0" name="losses" class="form-control" min="0"  [(ngModel)]="former.losses" placeholder="0"
             [ngModelOptions]="{standalone: true}">
         </div>
       </div>
@@ -33,8 +33,7 @@
       <a class="btn btn-sm btn-white" [routerLink]="['/sports/scores']">Back</a>
     </div> -->
     <div class="col-md-6 text-right">
-      <button class="btn btn_green white"  [disabled]="!former.wins || !former.draws ||!former.losses"
-        (click)="savedata(former)">Save</button>
+      <button class="btn btn_green white" [disabled]="former.wins < 0 || former.draws < 0 || former.losses < 0 " (click)="savedata(former)">Save</button>
     </div>
   </div>
 </div>
