@@ -267,9 +267,14 @@ export class ManageClubComponent implements OnInit {
       this.allClub.splice(spl, 1);
     }
     if (this.click) {
-      var usn = this.allClub.filter((u) => {
-        return u.email == this.clubForm.value.email;
-      });
+      if (this.clubForm.value.email) {
+        var usn = this.allClub.filter((u) => {
+          return u.email == this.clubForm.value.email;
+        });
+      }
+      else{
+        var usn = [];
+      }
       var sub = this.allClub.filter((u) => {
         return u.subDomain == this.clubForm.value.subDomain;
       });
