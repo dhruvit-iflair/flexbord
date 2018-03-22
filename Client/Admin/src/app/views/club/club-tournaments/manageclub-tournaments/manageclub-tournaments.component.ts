@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,OnDestroy} from '@angular/core';
 import { environment } from "../../../../../environments/environment";
 import { FormGroup,FormControl,FormBuilder,Validators,AbstractControl } from "@angular/forms";
 import { Router ,ActivatedRoute} from "@angular/router";
@@ -15,7 +15,7 @@ import { AccessorService } from "../../../../components/common/accessor.service"
   templateUrl: './manageclub-tournaments.component.html',
   styleUrls: ['./manageclub-tournaments.component.css']
 })
-export class ManageclubTournamentsComponent implements OnInit {
+export class ManageclubTournamentsComponent implements OnInit ,OnDestroy{
   public comForm : FormGroup;
   public clubId:any;
   public _id:any;
@@ -25,11 +25,14 @@ export class ManageclubTournamentsComponent implements OnInit {
   public value : Array<any>;
   public fullSports : Array<any>;
   public clubSeasons : Array<any> = [];
-  public clubClassifications : Array <any>;
+  public clubClassifications : Array <any> = [];
   public clubClassificationsValue : Array <any> = [] ;
   
   public sub: any;
   public subscription:Subscription;
+  public subscription2:Subscription;
+  public subscription4:Subscription;
+  public subscription5:Subscription;
   public clubClassificationsValueDisplay :Boolean=false;
   public resS :Boolean=false;
   public hasCreatePerm;
@@ -40,14 +43,17 @@ export class ManageclubTournamentsComponent implements OnInit {
       this.comForm = this.fb.group({ name: ["",[Validators.required]],description: [""],sports: [null,[Validators.required]],clubSeasons: [null,[Validators.required]],clubClassificationsValue: [[]],club:[this.clubId ,[Validators.required]],competition:["opened"]});
       this.subscription = this.clubService.getSeasonList().subscribe((res) => { this.clubSeasons = res; })   
       this.clubService.getAllClassificationsByClub();
-      this.subscription = this.clubService.getClassificationsList().subscribe((res) => {this.clubClassifications = res;})   
+      this.subscription2 = this.clubService.getClassificationsList().subscribe((res) => {this.clubClassifications = res;})   
       this.resS = false;
-      
-      this.subscription = this.sportService.getSportsList().subscribe((res)=>{ this.sports = res; this.fullSports = res;});
+      this.clubService.getSpecificClubSports();
+      this.subscription4 = this.clubService.getSpecificClubSportsList().subscribe((red)=>{ 
+            this.sports = red;
+            this.fullSports = red;
+      });  
   }
 
   ngOnInit() {    
-    this.subscription = this.clubService.getSingleTournamentsData().subscribe(res=>{
+    this.subscription5 = this.clubService.getSingleTournamentsData().subscribe(res=>{
         this.resS = false;
         this.comForm.patchValue(res[0]);
         this.comForm.controls['clubSeasons'].setValue(res[0].clubSeasons._id, {onlySelf: true});
@@ -61,6 +67,9 @@ export class ManageclubTournamentsComponent implements OnInit {
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.subscription2.unsubscribe();
+    this.subscription4.unsubscribe();
+    this.subscription5.unsubscribe();
   }
     checkpermissions() {
     var perms = this.accr.getUserPermissions();
@@ -92,6 +101,9 @@ export class ManageclubTournamentsComponent implements OnInit {
   }
   addClass(){
     this.clubService.changeTab(3);
+  }  
+  addSports(){
+    this.clubService.changeTab(1);
   }
   getClasValue(e:any){
     // this.clubClassificationsValueDisplay = true;

@@ -5,6 +5,7 @@ import { Http,Response,RequestOptions,Headers } from '@angular/http';
 import { environment } from "../../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
+import { forEach } from '@angular/router/src/utils/collection';
 @Injectable()
 export class ClubService {
     public sub: any;
@@ -21,6 +22,7 @@ export class ClubService {
     public singleClubTournaments = new Subject<any>();
     public clubTeamCompetitionsList = new Subject<any>();
     public singleClubTeamCompetition = new Subject<any>();
+    public sportsList = new Subject<any>();
     public tab = new Subject<any>();
     constructor(public http:Http,public toastr:ToastrService,public activeRouter:ActivatedRoute) {
         this.sub = this.activeRouter.params.subscribe(params => {
@@ -33,6 +35,7 @@ export class ClubService {
         localStorage.setItem('clubid', id);
         this.getAllMembersByClub();
         this.getAllSeasonByClub();
+        this.getSpecificClubSports();        
         this.getAllClassificationsByClub();
         this.getAllTournamentsByClub();
     }
@@ -68,7 +71,7 @@ export class ClubService {
           .subscribe((res) => {
             var d = res.json();
             if (d._id) {
-              this.toastr.success('Organizer Deleted Successfully', 'Success');
+              this.toastr.success('Club Deleted Successfully', 'Success');
               this.getAllClubList();
             }
           }, (error) => {
@@ -93,6 +96,7 @@ export class ClubService {
             if (d._id) {
             this.toastr.success('Club Updated Successfully', 'Success');
             this.getAllClubList();
+            this.getSpecificClubSports();            
             }
         },(error)=>{
             this.toastr.error('Something went wrong !! Please try again later', 'Error');
@@ -110,12 +114,35 @@ export class ClubService {
             if (d._id) {
             this.toastr.success('Club Registered Successfully', 'Success');
             this.getAllClubList();
+            this.getSpecificClubSports();
             }
         },(error)=>{
             this.toastr.error('Something went wrong !! Please try again later', 'Error');
         })
       }
+    // ++++++++++++++++++++++++++ Sports ++++++++++++++++++++++++++
 
+    getSpecificClubSports() {
+        this.http.get(environment.api + "/club/" + this.id).map((d: Response) => <any[]>d.json()).subscribe((d) => {
+            this.http.get(environment.api + "/sports").map((s: Response) => <any[]>s.json()).subscribe((s) => {
+                var carlos = [];
+                for(var i =0; i<s.length; i++){
+                    var l = s[i];
+                    d[0].sports.forEach(a=>{
+                        if(l._id == a){
+                            carlos.push(l);
+                        }
+                    });
+                    if(i == s.length -1){
+                        this.sportsList.next(carlos);
+                    }
+                }
+            });
+        });
+    }
+    getSpecificClubSportsList(): Observable<any> {
+        return this.sportsList.asObservable();
+    }
     // ++++++++++++++++++++++++++ Members ++++++++++++++++++++++++++
 
     getAllMembersByClub(){

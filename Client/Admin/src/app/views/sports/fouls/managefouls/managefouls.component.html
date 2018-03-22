@@ -1,105 +1,107 @@
 <div *ngIf="hasCreatePerm">
-<div class="manage-box clearfix">
-  <div class="col-md-12">
-    <label><h2>Manage Foul</h2></label>
+  <div class="manage-box clearfix">
+    <div class="col-md-12">
+      <label>
+        <h2>Manage Foul</h2>
+      </label>
+    </div>
+    <div class="col-md-12">
+      <form class="m-t" role="form" action="#">
+        <div class="row">
+          <div class="col-md-3">
+            <label>Name of Foul
+              <a style="color:#f00 !important;">*</a>
+            </label>
+            <input type="text" required #nameoffoul="ngModel" id="nameoffoul" name="nameoffoul" class="form-control" [(ngModel)]="former.nameoffoul"
+              placeholder="Name of Foul" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="col-md-3">
+            <div class="col-md-4 per-tabbox">
+              <label>Player</label>
+              <div class="td">
+                <input type="checkbox" class="text-col-md-3 " [(ngModel)]="former.isplayer" [ngModelOptions]="{standalone: true}">
+                <span></span>
+              </div>
+            </div>
+            <div class="col-md-4 per-tabbox">
+              <label>Coach</label>
+              <div class="td">
+                <input type="checkbox" class="text-col-md-3" [(ngModel)]="former.iscoach" [ngModelOptions]="{standalone: true}">
+                <span></span>
+              </div>
+            </div>
+            <div class="col-md-4 per-tabbox">
+              <label>Team</label>
+              <div class="td">
+                <input type="checkbox" class="text-col-md-3" [(ngModel)]="former.isteam" [ngModelOptions]="{standalone: true}">
+                <span></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <label>Value of Foul
+              <a style="color:#f00 !important;">*</a>
+            </label>
+            <input type="number" required #valueoffoul="ngModel" id="valueoffoul" name="valueoffoul" class="form-control" [(ngModel)]="former.valueoffoul"
+              placeholder="0" value="0" oninput="validity.valid||(value=0);" [ngModelOptions]="{standalone: true}" min="0"
+              step="1">
+          </div>
+          <div class="col-md-2">
+            <label>Color Button Up</label>
+            <input type="text" #colorbtnup="ngModel" id="colorbtnup" name="colorbtnup" class="form-control" [(ngModel)]="former.colorbtnup"
+              placeholder=" #333FFF " [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="col-md-2">
+            <label>Color Button Down</label>
+            <input type="text" #colorbtndown="ngModel" id="colorbtndown" name="colorbtndown" class="form-control" [(ngModel)]="former.colorbtndown"
+              placeholder=" #333FFF " [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="padTop20">
+            <div class=" col-md-2 per-tabbox">
+              <label>Time Penalty</label>
+              <div class="td">
+                <input type="checkbox" class="text-col-md-3" [(ngModel)]="former.istimepenalty" [ngModelOptions]="{standalone: true}">
+                <span></span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label>Duration</label>
+              <input type="text" class="form-control" [(ngModel)]="former.duration" placeholder="Duration" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class=" col-md-2 per-tabbox">
+              <label>Scoring Dependable?</label>
+              <div class="td">
+                <input type="checkbox" class="text-col-md-3" [(ngModel)]="former.isscoringdependable" [ngModelOptions]="{standalone: true}"
+                  disabled>
+                <span></span>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <label>Minus Time</label>
+              <input type="text" class="form-control" [(ngModel)]="former.minustime" placeholder="Minus time" [ngModelOptions]="{standalone: true}"
+                disabled>
+            </div>
+            <div class=" col-md-3 per-tabbox">
+              <label>Possession Dependable?</label>
+              <div class="td">
+                <input type="checkbox" class="text-col-md-3" [(ngModel)]="former.ispossessiondependable" [ngModelOptions]="{standalone: true}"
+                  disabled>
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="col-md-12">
-    <form class="m-t" role="form" action="#">
-      <div class="row">
-            <div class="col-md-4">
-              <label>Name of Foul<a style="color:#f00 !important;">*</a></label>
-              <input type="text" required #nameoffoul="ngModel" id="nameoffoul" name="nameoffoul" class="form-control" [(ngModel)]="former.nameoffoul" placeholder="Name of Foul"
-                [ngModelOptions]="{standalone: true}">
-            </div>
- 
-            <div class="col-md-4">
-              <div class="col-md-4 per-tabbox">
-                <label>Player</label>
-                <div class="td">
-                    <input type="checkbox" class="form-control text-col-md-3 " [(ngModel)]="former.isplayer" [ngModelOptions]="{standalone: true}">
-                    <span></span>   
-                </div>               
-              </div>
-              <div class="col-md-4 per-tabbox">
-                <label>Coach</label>
-                <div class="td">
-                    <input type="checkbox" class="form-control text-col-md-3" [(ngModel)]="former.iscoach" [ngModelOptions]="{standalone: true}">
-                    <span></span>
-                </div>
-              </div>
-              <div class="col-md-4 per-tabbox">
-                <label>Team</label>
-                <div class="td">
-                    <input type="checkbox" class="form-control text-col-md-3" [(ngModel)]="former.isteam" [ngModelOptions]="{standalone: true}">
-                    <span></span>
-                </div>                
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <label>Value of Foul<a style="color:#f00 !important;">*</a></label>
-              <input type="number" required #valueoffoul="ngModel" id="valueoffoul" name="valueoffoul" class="form-control" [(ngModel)]="former.valueoffoul"
-                placeholder="0" [ngModelOptions]="{standalone: true}" min="0" step="1">
-            </div>
-
-            <div class="col-md-4">
-              <label>Color Button Up</label>
-              <input type="text" #colorbtnup="ngModel" id="colorbtnup" name="colorbtnup" class="form-control" [(ngModel)]="former.colorbtnup"
-                placeholder=" #333FFF " [ngModelOptions]="{standalone: true}">
-            </div>
-        </div>
-       <div class="row">
-        <div class="man col-md-4">
-          <label>Color Button Down</label>
-          <input type="text" #colorbtndown="ngModel" id="colorbtndown" name="colorbtndown" class="form-control" [(ngModel)]="former.colorbtndown"
-            placeholder=" #333FFF " [ngModelOptions]="{standalone: true}">
-        </div>
-
-        <div class="man col-md-4">
-          <div class=" col-md-4 per-tabbox">
-            <label>Time Penalty</label>
-            <div class="td">
-              <input type="checkbox" class="form-control text-col-md-3" [(ngModel)]="former.istimepenalty" [ngModelOptions]="{standalone: true}">
-              <span></span>
-            </div>
-          </div>
-          <div class=" col-md-4 per-tabbox">
-            <label>Scoring Dependable?</label>
-            <div class="td">
-                <input type="checkbox" class="form-control text-col-md-3" [(ngModel)]="former.isscoringdependable" [ngModelOptions]="{standalone: true}" disabled>
-              <span></span>
-            </div>
-          </div>
-          <div class=" col-md-4 per-tabbox">
-            <label>Possession Dependable?</label>
-            <div class="td">
-              <input type="checkbox" class="form-control text-col-md-3" [(ngModel)]="former.ispossessiondependable" [ngModelOptions]="{standalone: true}" disabled>              
-              <span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-        <div class="man col-md-6">
-          <label>Duration</label>
-          <input type="text"  class="form-control" [(ngModel)]="former.duration" placeholder="Duration" [ngModelOptions]="{standalone: true}">
-        </div>
-
-        <div class="man col-md-6">
-          <label>Minus Time</label>
-          <input type="text" class="form-control" [(ngModel)]="former.minustime" placeholder="Minus time" [ngModelOptions]="{standalone: true}" disabled>
-        </div>
-        
-    </form>
-  </div>
-</div>
-<div class="man col-md-12">
+  <div class="man col-md-12">
     <div class="row">
       <!-- <div class="col-md-6 text-left">
         <a class="btn btn-sm btn-white" [routerLink]="['/sports/fouls']">Back</a>
       </div> -->
       <div class="col-md-6 text-right">
-        <button class="btn btn_green white" [disabled]="!former.nameoffoul || !former.valueoffoul" (click)="savedata(former)">Save</button>
+        <button class="btn btn_green white" [disabled]="!former.nameoffoul || former.valueoffoul < 0" (click)="savedata(former)">Save</button>
       </div>
     </div>
-</div>
+  </div>
 </div>

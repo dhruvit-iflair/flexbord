@@ -8,9 +8,10 @@ const options = {
 };
 module.exports = function () {
     console.log(config.connection + config.dbName);
+    mongoose.Promise = require('bluebird');
     var db = mongoose.connect(config.connection + config.dbName,options);    
     mongoose.connection.on('connected', function () {
-        console.log('Mongoose default connection open for: ' + config.dbName);
+        console.log('Mongoose default connection open for:: ' + config.dbName);
     });
     mongoose.connection.on('error', function (err) {
         console.log('Mongoose default connection error: ' + err);

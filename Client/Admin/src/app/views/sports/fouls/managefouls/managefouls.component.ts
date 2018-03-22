@@ -18,7 +18,7 @@ export class ManagefoulsComponent implements OnInit {
   public _id:any;
   public userId;hasCreatePerm;
   public subscription : Subscription;
-  public former = { nameoffoul:'',valueoffoul:'',isplayer:false,iscoach:false,isteam:false,istimepenalty:false,isscoringdependable:false,ispossessiondependable:false,duration:'',minustime:'',colorbtndown:'',colorbtnup:'' };
+  public former = { nameoffoul:'',valueoffoul:0,isplayer:false,iscoach:false,isteam:false,istimepenalty:false,isscoringdependable:false,ispossessiondependable:false,duration:'',minustime:'',colorbtndown:'',colorbtnup:'' };
   
   constructor(private http: Http, 
               private toastr: ToastrService, 
@@ -63,13 +63,13 @@ export class ManagefoulsComponent implements OnInit {
     if (this._id) {
       this.sportService.updateFoul(this._id,janudata);
       this._id = false;
-      this.former = { nameoffoul:'',valueoffoul:'',isplayer:false,iscoach:false,isteam:false,istimepenalty:false,isscoringdependable:false,ispossessiondependable:false,duration:'',minustime:'',colorbtndown:'',colorbtnup:'' };
+      this.former = { nameoffoul:'',valueoffoul:0,isplayer:false,iscoach:false,isteam:false,istimepenalty:false,isscoringdependable:false,ispossessiondependable:false,duration:'',minustime:'',colorbtndown:'',colorbtnup:'' };
       
     }
     else {
       this.sportService.saveFoul(janudata);
       this._id = false;
-      this.former = { nameoffoul:'',valueoffoul:'',isplayer:false,iscoach:false,isteam:false,istimepenalty:false,isscoringdependable:false,ispossessiondependable:false,duration:'',minustime:'',colorbtndown:'',colorbtnup:'' };
+      this.former = { nameoffoul:'',valueoffoul:0,isplayer:false,iscoach:false,isteam:false,istimepenalty:false,isscoringdependable:false,ispossessiondependable:false,duration:'',minustime:'',colorbtndown:'',colorbtnup:'' };
     }
   }
 }

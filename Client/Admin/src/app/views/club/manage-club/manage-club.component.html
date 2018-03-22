@@ -1,209 +1,235 @@
 <div>
     <tabset #staticTabs>
-        <tab heading="Base">
-
-<div class="container manage-container">
-    <div class="row">
-    <form [formGroup]="clubForm" class="manage-component-form">
-      <div class="row1">
-          <div class="manage-box clearfix">
-                <div class="col-md-12">
-                  <label><h2>Manage Club</h2></label>
-                </div>
-                <div class="col-md-12">
+        <tab heading="Base" [active]="tabz == 1">
+            <div class="container manage-container">
                 <div class="row">
-                    <div class="man col-md-3">
-                          <h4 class="text-left">Full Name<a style="color:#f00 !important;">*</a></h4>
-<!-- <<<<<<< HEAD -->
-                          <!-- <input class="text-col-md-3" type="text" pattern=".{3,}" formControlName="name" placeholder="Enter Name" required> -->
-<!-- ======= -->
-                          <input class="text-col-md-3" type="text" pattern="^\s*(\S\s*){3,}" formControlName="name" placeholder="Enter Name" required>
-<!-- >>>>>>> 3a6d279c24dc2f59739a735cc9c9a662c2bac592 -->
-                    </div>
-                    <div class="man col-md-3">
-                          <h4 class="text-left">Sub domain<a style="color:#f00 !important;">*</a></h4>
-                          <input class="text-col-md-3" type="text" formControlName="subDomain" placeholder="Enter Sub Domain" pattern="^\s*(\S\s*){3,}" >
-                    </div>
-                    <div class="man col-md-3">
-                          <h4 class="text-left">Abbreviation<a style="color:#f00 !important;">*</a></h4>
-                          <input class="text-col-md-3" type="text" formControlName="abbreviation" placeholder="Enter Abbreviation" pattern="^\s*(\S\s*){3,}" >
-                    </div>
-                    <div class="man col-md-3">
-                            <h4 class="text-left">Affiliated</h4>
-                            <select class="js-example-basic-single text-col-md-3"  name="affilated" formControlName="affilated" style="height: 30px;">
-                                <option value="" disabled="true" [selected]="true">Select Organizer</option>    
-                                <option *ngFor="let ite of items"  [value]="ite._id">{{ite.name}}</option>
-                            </select>
-                    </div>
-                    <div class="man col-md-12">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <h4 class="text-left">Logo</h4>
-                                <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none" >
-                                <button class="btn btn_green" (click)="file.click()"> Upload</button>   
+                    <form [formGroup]="clubForm" class="manage-component-form">
+                        <div class="row1">
+                            <div class="manage-box clearfix">
+                                <div class="col-md-12">
+                                    <label>
+                                        <h2>Manage Club</h2>
+                                    </label>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="man col-md-3">
+                                            <h4 class="text-left">Full Name
+                                                <a style="color:#f00 !important;">*</a>
+                                            </h4>
+                                            <!-- <<<<<<< HEAD -->
+                                            <!-- <input class="text-col-md-3" type="text" pattern=".{3,}" formControlName="name" placeholder="Enter Name" required> -->
+                                            <!-- ======= -->
+                                            <input class="text-col-md-3" type="text" pattern="^\s*(\S\s*){3,}" formControlName="name" placeholder="Enter Name" required>
+                                            <!-- >>>>>>> 3a6d279c24dc2f59739a735cc9c9a662c2bac592 -->
+                                        </div>
+                                        <div class="man col-md-3">
+                                            <h4 class="text-left">Sub domain
+                                                <a style="color:#f00 !important;">*</a>
+                                            </h4>
+                                            <input class="text-col-md-3" type="text" formControlName="subDomain" placeholder="Enter Sub Domain" pattern="^\s*(\S\s*){3,}">
+                                        </div>
+                                        <div class="man col-md-3">
+                                            <h4 class="text-left">Abbreviation
+                                                <a style="color:#f00 !important;">*</a>
+                                            </h4>
+                                            <input class="text-col-md-3" type="text" formControlName="abbreviation" placeholder="Enter Abbreviation" pattern="^\s*(\S\s*){3,}">
+                                        </div>
+                                        <div class="man col-md-3">
+                                            <h4 class="text-left">Affiliated</h4>
+                                            <select class="js-example-basic-single text-col-md-3" name="affilated" formControlName="affilated" style="height: 30px;">
+                                                <option value="" disabled="true" [selected]="true">Select Organizer</option>
+                                                <option *ngFor="let ite of items" [value]="ite._id">{{ite.name}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="man col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <h4 class="text-left">Logo</h4>
+                                                    <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none">
+                                                    <button class="btn btn_green" (click)="file.click()"> Upload</button>
+                                                </div>
+                                                <div class="col-md-4" *ngIf="logo && !url">
+                                                    <img src="{{picEnv}}{{logo}}" class="image_display" *ngIf="logo && !url">
+                                                    <!-- <img src="assets/noimage.jpg" *ngIf="!logo|| !url"  class="image_display" > -->
+                                                </div>
+                                                <div class="col-md-4" *ngIf="!logo">
+                                                    <img src="assets/noimage.jpg" class="image_display">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <img [src]="url" class="image_display" *ngIf="url">
+                                                    <!-- <img src="assets/noimage.jpg" *ngIf="url == ''" *ngIf="!url" class="image_display">                                       -->
+                                                </div>
+                                                <div class="col-md-12" style="padding-top: 10px;">
+                                                    <p style="font-size: small; color:red;" *ngIf="fileSizeMin">Min Size of image should be 150 Kb.</p>
+                                                    <p style="font-size: small; color:red;" *ngIf="fileSizeMax">Max Size of image should be 2 Mb.</p>
+                                                    <p style="font-size: small; color:red;" *ngIf="fileSupport">Image format .jpg, .jpeg and .png only supported.</p>
+                                                    <p style="font-size: small;" *ngIf="(!fileSupport || !fileSizeMin || !fileSizeMax )&& !clubForm.value.logo">Image format .jpg, .jpeg and .png only supported with min 150 Kb to max
+                                                        2Mb.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-4" *ngIf="logo && !url" >
-                                  <img src="{{picEnv}}{{logo}}" class="image_display" *ngIf="logo && !url">               
-                                  <!-- <img src="assets/noimage.jpg" *ngIf="!logo|| !url"  class="image_display" > -->
-                            </div>
-                            <div class="col-md-4" *ngIf="!logo">
-                                <img src="assets/noimage.jpg"  class="image_display">
-                            </div>
-                              <div class="col-md-4">
-                                  <img [src]="url" class="image_display" *ngIf="url">               
-                                  <!-- <img src="assets/noimage.jpg" *ngIf="url == ''" *ngIf="!url" class="image_display">                                       -->
-                            </div>
-                            <div class="col-md-12" style="padding-top: 10px;">
-                                <p style="font-size: small; color:red;" *ngIf="fileSizeMin" >Min Size of image should be 150 Kb.</p>
-                                <p style="font-size: small; color:red;" *ngIf="fileSizeMax" >Max Size of image should be 2 Mb.</p>
-                                <p style="font-size: small; color:red;" *ngIf="fileSupport">Image format .jpg, .jpeg and .png only supported.</p>
-                                <p style="font-size: small;" *ngIf="(!fileSupport || !fileSizeMin || !fileSizeMax )&& !clubForm.value.logo">Image format .jpg, .jpeg and .png only supported with min 150 Kb to max 2Mb.</p>                            
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </div>
-          <div class="manage-box clearfix">
-               <div class="col-md-12">
-                    <label><h2>Location</h2></label>
-               </div>
-                <div class="col-md-12">
-                    <div class="row">
-                    <div class="man col-md-3"><h4 class="text-left">Address</h4>
-                        <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace placeholder="Enter Address">
-                    </div>             
-                    <div *ngIf="_id" >
-                            <div class="man col-md-3">
-                                <h4 class="text-left">Building</h4>
-                                <input class="text-col-md-3"   type="text"  formControlName="building" placeholder="Building">
-                            </div>
-                     
-                            <div class="man col-md-3">
-                                <h4 class="text-left">Street</h4>
-                                <input class="text-col-md-3"   type="text"  formControlName="street" placeholder="Street">
-                            </div>
-                     
-                            <div class="man col-md-3">
-                                <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
-                                <input class="text-col-md-3"   type="text"  formControlName="country" placeholder="Country" pattern="^\s*(\S\s*){1,}">  
-                            </div>
-                     
-                            <div class="man col-md-3">
-                                <h4 class="text-left">State</h4>
-                                <input class="text-col-md-3"   type="text"  formControlName="state" placeholder="State">
-                            </div>
-                     
-                            <div class="man col-md-3">
-                                <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
-                                <input class="text-col-md-3" pattern="^\s*(\S\s*){1,}" type="text"  formControlName="city" placeholder="City" >
-                            </div>
-                     
-                            <div class="man col-md-3">
-                                <h4 class="text-left">Zipcode</h4>
-                                <input class="text-col-md-3"   type="text"  formControlName="zipcode" placeholder="Zipcode">
-                            </div>
-                        </div>
-                        <div *ngIf="!_id">
-                            <div class="man col-md-3">
-                                <h4 class="text-left">Building</h4>
-                                <input class="text-col-md-3"  disabled type="text"  formControlName="building" placeholder="Building">
-                            </div>
-                        
-                            <div class="man col-md-3">
-                                <h4 class="text-left">Street</h4>
-                                <input class="text-col-md-3"  disabled type="text"  formControlName="street" placeholder="Street">
-                            </div>
-                        
-                            <div class="man col-md-3">
-                                <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
-                                <input class="text-col-md-3"  disabled type="text" pattern="^\s*(\S\s*){3,}" formControlName="country" placeholder="Country"> 
-                            </div>
-                        
-                            <div class="man col-md-3">
-                                <h4 class="text-left">State</h4>
-                                <input class="text-col-md-3"  disabled type="text"  formControlName="state" placeholder="State">
-                            </div>
-                        
-                            <div class="man col-md-3">
-                                <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
-                                <input class="text-col-md-3"  disabled type="text" pattern="^\s*(\S\s*){3,}" formControlName="city" placeholder="City" >
-                            </div>
-                        
-                            <div class="man col-md-3">
-                                <h4 class="text-left">Zipcode</h4>
-                                <input class="text-col-md-3"  disabled type="text"  formControlName="zipcode" placeholder="Zipcode">
-                            </div>
-                        </div>
-                    
-             
-                    <div class="man col-md-3">
-                        <h4 class="text-left">Capacity</h4>
-                        <input class="capacity" minlength="3" maxlength="8" type="number" formControlName="capacity" placeholder="Enter Capacity" min="0" oninput="validity.valid||(value='');">
-                    </div>
-                    <div class="man col-md-12">
-                        <div class="man col-md-2">
-                            <h4 class="text-left">Place Pic</h4>
-                            <input type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)" style="display:none">
-                            <button class="btn btn_green" (click)="file2.click()"> Upload</button>                
-                        </div>
-                        <div class="man col-md-2" *ngIf="placePic" >
-                                <img [src]="placePic" class="image_display">               
-                        </div>
-                        <div class="man col-md-2" *ngIf="logo2 && !placePic" >
-                                <img *ngFor="let item of logo2"  [src]="item" class="image_display">               
-                        </div>
+                            <div class="manage-box clearfix">
+                                <div class="col-md-12">
+                                    <label>
+                                        <h2>Location</h2>
+                                    </label>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="man col-md-3">
+                                            <h4 class="text-left">Address</h4>
+                                            <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace placeholder="Enter Address">
+                                        </div>
+                                        <div *ngIf="_id">
+                                            <div class="man col-md-3">
+                                                <h4 class="text-left">Building</h4>
+                                                <input class="text-col-md-3" type="text" formControlName="building" placeholder="Building">
+                                            </div>
 
-                        <div class="col-md-12" style="padding-top: 10px;">
-                            <p style="font-size: small; color:red;" *ngIf="fileSizeMin2" >Min Size of image should be 150 Kb.</p>
-                            <p style="font-size: small; color:red;" *ngIf="fileSizeMax2" >Max Size of image should be 2 Mb.</p>
-                            <p style="font-size: small; color:red;" *ngIf="fileSupport2">Image format .jpg, .jpeg and .png only supported.</p>
-                            <p style="font-size: small;" *ngIf="(!fileSupport2 || !fileSizeMin2 || !fileSizeMax2 )&& !clubForm.value.placePic">Image format .jpg, .jpeg and .png only supported with min 150 Kb to max 2Mb.</p>                            
-                        </div>
-                    </div>
-                        
-                   </div>
-                   </div>
-          </div>
-    
-            <div class="manage-box clearfix">
-                <div class="col-md-12">
-                    <label><h2>Contact</h2></label>
-                </div>
-                <div class="col-md-12">
-                    <div class="row">
-                     <div class="man col-md-4">
-                        <h4 class="text-left">Website</h4>
-                        <input class="text-col-md-3" type="text" formControlName="website" placeholder="Enter Website" pattern="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})">
-                     </div>
-                     <div class="man col-md-4">
-                        <h4 class="text-left">Email</h4>
-                        <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email" placeholder="Enter Email">
-                    </div>
-                    <div class="man col-md-4">
-                        <h4 class="text-left">Telephone</h4>
-                        <input class="text-col-md-3" type="text" formControlName="phonenumber" placeholder="Enter Telephone">
-                    </div>
-                </div>
-              </div>
-            </div>
-             
-            <div class="manage-box clearfix">    
-                <div class="col-md-12">
-                     <label><h2>Sports</h2></label>
-                </div>
-                 <div class="man col-md-12">
-                        <h4 class="text-left">Choose</h4>
-                        <app-multiselect [mArray]='spots' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="spots? spots.length > 0 : spots"></app-multiselect>
-                        <div class="col-md-12" *ngIf="!spots? spots == [] : spots.length == 0">
-                            <h4 class="text-left col-md-4">Add Sport</h4>                        
-                            <button class="btn btn_green" [routerLink]="['/sports/manage']"> 
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
-                </div>                
-            </div>    
-            <!-- <div class="manage-box radio-box clearfix"> 
+                                            <div class="man col-md-3">
+                                                <h4 class="text-left">Street</h4>
+                                                <input class="text-col-md-3" type="text" formControlName="street" placeholder="Street">
+                                            </div>
+
+                                            <div class="man col-md-3">
+                                                <h4 class="text-left">Country
+                                                    <a style="color:#f00 !important;">*</a>
+                                                </h4>
+                                                <input class="text-col-md-3" type="text" formControlName="country" placeholder="Country" pattern="^\s*(\S\s*){1,}">
+                                            </div>
+
+                                            <div class="man col-md-3">
+                                                <h4 class="text-left">State</h4>
+                                                <input class="text-col-md-3" type="text" formControlName="state" placeholder="State">
+                                            </div>
+
+                                            <div class="man col-md-3">
+                                                <h4 class="text-left">City
+                                                    <a style="color:#f00 !important;">*</a>
+                                                </h4>
+                                                <input class="text-col-md-3" pattern="^\s*(\S\s*){1,}" type="text" formControlName="city" placeholder="City">
+                                            </div>
+
+                                            <div class="man col-md-3">
+                                                <h4 class="text-left">Zipcode</h4>
+                                                <input class="text-col-md-3" type="text" formControlName="zipcode" placeholder="Zipcode">
+                                            </div>
+                                        </div>
+                                        <div *ngIf="!_id">
+                                            <div class="man col-md-3">
+                                                <h4 class="text-left">Building</h4>
+                                                <input class="text-col-md-3" disabled type="text" formControlName="building" placeholder="Building">
+                                            </div>
+
+                                            <div class="man col-md-3">
+                                                <h4 class="text-left">Street</h4>
+                                                <input class="text-col-md-3" disabled type="text" formControlName="street" placeholder="Street">
+                                            </div>
+
+                                            <div class="man col-md-3">
+                                                <h4 class="text-left">Country
+                                                    <a style="color:#f00 !important;">*</a>
+                                                </h4>
+                                                <input class="text-col-md-3" disabled type="text" pattern="^\s*(\S\s*){3,}" formControlName="country" placeholder="Country">
+                                            </div>
+
+                                            <div class="man col-md-3">
+                                                <h4 class="text-left">State</h4>
+                                                <input class="text-col-md-3" disabled type="text" formControlName="state" placeholder="State">
+                                            </div>
+
+                                            <div class="man col-md-3">
+                                                <h4 class="text-left">City
+                                                    <a style="color:#f00 !important;">*</a>
+                                                </h4>
+                                                <input class="text-col-md-3" disabled type="text" pattern="^\s*(\S\s*){3,}" formControlName="city" placeholder="City">
+                                            </div>
+
+                                            <div class="man col-md-3">
+                                                <h4 class="text-left">Zipcode</h4>
+                                                <input class="text-col-md-3" disabled type="text" formControlName="zipcode" placeholder="Zipcode">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="man col-md-3">
+                                            <h4 class="text-left">Capacity</h4>
+                                            <input class="capacity" minlength="3" maxlength="8" type="number" formControlName="capacity" placeholder="Enter Capacity"
+                                                min="0" oninput="validity.valid||(value='');">
+                                        </div>
+                                        <div class="man col-md-12">
+                                            <div class="man col-md-2">
+                                                <h4 class="text-left">Place Pic</h4>
+                                                <input type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)" style="display:none">
+                                                <button class="btn btn_green" (click)="file2.click()"> Upload</button>
+                                            </div>
+                                            <div class="man col-md-2" *ngIf="placePic">
+                                                <img [src]="placePic" class="image_display">
+                                            </div>
+                                            <div class="man col-md-2" *ngIf="logo2 && !placePic">
+                                                <img *ngFor="let item of logo2" [src]="item" class="image_display">
+                                            </div>
+
+                                            <div class="col-md-12" style="padding-top: 10px;">
+                                                <p style="font-size: small; color:red;" *ngIf="fileSizeMin2">Min Size of image should be 150 Kb.</p>
+                                                <p style="font-size: small; color:red;" *ngIf="fileSizeMax2">Max Size of image should be 2 Mb.</p>
+                                                <p style="font-size: small; color:red;" *ngIf="fileSupport2">Image format .jpg, .jpeg and .png only supported.</p>
+                                                <p style="font-size: small;" *ngIf="(!fileSupport2 || !fileSizeMin2 || !fileSizeMax2 )&& !clubForm.value.placePic">Image format .jpg, .jpeg and .png only supported with min 150 Kb to max 2Mb.</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="manage-box clearfix">
+                                <div class="col-md-12">
+                                    <label>
+                                        <h2>Contact</h2>
+                                    </label>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="man col-md-4">
+                                            <h4 class="text-left">Website</h4>
+                                            <input class="text-col-md-3" type="text" formControlName="website" placeholder="Enter Website" pattern="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})">
+                                        </div>
+                                        <div class="man col-md-4">
+                                            <h4 class="text-left">Email</h4>
+                                            <input class="text-col-md-3" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="email"
+                                                placeholder="Enter Email">
+                                        </div>
+                                        <div class="man col-md-4">
+                                            <h4 class="text-left">Telephone</h4>
+                                            <input class="text-col-md-3" type="text" formControlName="phonenumber" placeholder="Enter Telephone">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="manage-box clearfix">
+                                <div class="col-md-12">
+                                    <label>
+                                        <h2>Sports</h2>
+                                    </label>
+                                </div>
+                                <div class="man col-md-12">
+                                    <h4 class="text-left">Choose</h4>
+                                    <app-multiselect [mArray]='spots' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports"
+                                        *ngIf="spots? spots.length > 0 : spots"></app-multiselect>
+                                    <div class="col-md-12" *ngIf="!spots? spots == [] : spots.length == 0">
+                                        <h4 class="text-left col-md-4">Add Sport</h4>
+                                        <button class="btn btn_green" [routerLink]="['/sports/manage']">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="manage-box radio-box clearfix"> 
                  <div class="col-md-12">
                          <label><h2>Affiliation</h2></label>                               
                  </div>
@@ -220,26 +246,38 @@
                     </div>
                  </div>
             </div> -->
-      </div>
-    </form>
-    
-    <div class="row">
-        <div class="col-md-6">
-            <button class="btn btn-white" [routerLink]="['/club']">Back</button>
-        </div>
-        <div class="col-md-6 text-right">
-            <button class="btn btn_green" [disabled]="!clubForm.valid" (click)='addOrg()'>Save</button>       
-        </div>  
-    </div>
-    
-    </div>
-    </div>
-</tab>
-    <tab heading="Members" [disabled]="!_id" *ngIf="hasMembersPerm"><app-manage-club-members></app-manage-club-members><app-club-members></app-club-members></tab>
-    <tab heading="Seasons" [disabled]="!_id" *ngIf="hasSeasonsPerm" [active]="tabz == 2"><app-manage-club-seasons></app-manage-club-seasons><app-club-seasons></app-club-seasons></tab>
+                        </div>
+                    </form>
 
-    <tab heading="Classifications" [disabled]="!_id" *ngIf="hasClassificationsPerm" [active]="tabz == 3"><app-manage-club-classifications></app-manage-club-classifications><app-club-classifications></app-club-classifications></tab>
-    <tab heading="Tournaments" [disabled]="!_id" *ngIf="hasTournamentsPerm"><app-manageclub-tournaments></app-manageclub-tournaments><app-club-tournaments></app-club-tournaments></tab>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-white" [routerLink]="['/club']">Back</button>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button class="btn btn_green" [disabled]="!clubForm.valid" (click)='addOrg()'>Save</button>
+                        </div>
+                    </div>
 
-</tabset>
+                </div>
+            </div>
+        </tab>
+        <tab heading="Members" [disabled]="!_id" *ngIf="hasMembersPerm">
+            <app-manage-club-members></app-manage-club-members>
+            <app-club-members></app-club-members>
+        </tab>
+        <tab heading="Seasons" [disabled]="!_id" *ngIf="hasSeasonsPerm" [active]="tabz == 2">
+            <app-manage-club-seasons></app-manage-club-seasons>
+            <app-club-seasons></app-club-seasons>
+        </tab>
+
+        <tab heading="Classifications" [disabled]="!_id" *ngIf="hasClassificationsPerm" [active]="tabz == 3">
+            <app-manage-club-classifications></app-manage-club-classifications>
+            <app-club-classifications></app-club-classifications>
+        </tab>
+        <tab heading="Tournaments" [disabled]="!_id" *ngIf="hasTournamentsPerm">
+            <app-manageclub-tournaments></app-manageclub-tournaments>
+            <app-club-tournaments></app-club-tournaments>
+        </tab>
+
+    </tabset>
 </div>

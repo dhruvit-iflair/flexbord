@@ -30,7 +30,7 @@
                 <!-- <app-multiselect class="form-control" [resS]="resS" [mArray]='sports' [mId]='"_id"' [mValue]='"_id"' [mDisplay]='"name"' formControlName="sports" placeholder="Select Sports" *ngIf="sports? sports.length > 0 : sports"></app-multiselect> -->
                 <div class="col-md-12" *ngIf="!sports? sports == [] : sports.length == 0">
                     <label style="float:left; padding-top: 7px;">Add New Sport</label>
-                    <button class="btn btn_green" routerLink="/sports/manage" style="float:left;margin-left: 10px;">
+                    <button class="btn btn_green" (click)="addSports();" style="float:left;margin-left: 10px;">
                             <i class="fa fa-plus "></i>
                     </button>
                 </div>

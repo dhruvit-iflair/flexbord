@@ -4,3 +4,26 @@ input[type="checkbox"]{
 .col-md-4{
     width: auto !important;
 }
+.padTop20{
+    margin: 7.5% auto;
+}
+.per-tabbox .td span:before
+{
+  top: 35px;
+}
+.per-tabbox .td span::after{
+  left: 6px;
+  top: 35px;
+}
+
+.per-tabbox .td input[type=checkbox] {
+    opacity: 0;
+    z-index: 2;
+    position: absolute;
+    margin-left: 0;
+    width: 100%;
+}
+input[type="checkbox"][_ngcontent-c8] {
+    height: 35px;    
+    width: 100%;
+}

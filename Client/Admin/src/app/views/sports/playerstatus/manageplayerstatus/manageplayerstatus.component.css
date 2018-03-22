@@ -1,0 +1,56 @@
+.per-tabbox[_ngcontent-c10] .td[_ngcontent-c10] input[type=checkbox][_ngcontent-c10] {
+    opacity: 0;
+    z-index: 2;
+    position: absolute;
+    margin-left: 0;
+    width: 10%;
+}
+.per-tabbox .td input[type=checkbox] {
+  opacity: 0;
+  z-index: 1;
+  position: absolute;
+  margin-left: 0;
+  width: 20px;
+  height: 20px;
+}
+  .per-tabbox .td span:before
+  {
+  content: "";
+    display: inline-block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 0;
+    right:0;
+    margin:auto;
+    border: 1px solid #cccccc;
+    background-color: #fff;
+    -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+    transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+  }
+  .per-tabbox .td span::after{
+  display: inline-block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 5px;
+    right: 0;
+    margin: auto;
+    padding-left: 0;
+    padding-top: 0;
+    font-size: 14px;
+    color: #555555;
+  }
+  .per-tabbox .td input[type="checkbox"]:checked + span::after
+  {
+  font-family: "FontAwesome";
+    content: "\f00c";
+  }
+  .col-md-4.per-tabbox .td span {
+    display: inherit;
+    margin-top: -19px;
+  }
+  .col-md-4.per-tabbox label {
+    margin-bottom: 20px;
+  }
