@@ -50,14 +50,14 @@
                                                         <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none">
                                                         <button class="btn btn_green" (click)="file.click()"> Upload</button>
                                                     </div>
-                                                    <div class="col-md-4" *ngIf="logo">
+                                                    <div class="col-md-2" *ngIf="logo">
                                                         <img src="{{picEnv}}{{logo}}" class="image_display" *ngIf="logo && !url">
                                                         <!-- <img src="assets/noimage.jpg" *ngIf="!logo|| !url"  class="image_display" > -->
                                                     </div>
                                                     <div class="spinner" *ngIf="logoUploading">
-                                                        <i class="fa fa-spinner fa-spin"></i>Uploading...
+                                                        <i class="fa fa-spinner fa-spin"></i> Uploading...
                                                     </div>
-                                                    <div class="col-md-4" *ngIf="!clubForm.value.logo && !logo && !logoUploading">
+                                                    <div class="col-md-2" *ngIf="!clubForm.value.logo && !logo && !logoUploading">
                                                         <img src="assets/noimage.jpg" class="image_display">
                                                     </div>
                                                 </div>

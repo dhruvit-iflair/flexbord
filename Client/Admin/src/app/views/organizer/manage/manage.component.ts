@@ -203,7 +203,7 @@ export class ManageOrganizerComponent implements OnInit {
         this.logoUploading = false;
         if (file.type == 'image/jpeg' && file.size > 300000 || file.type == 'image/png' && file.size > 300000) {
           this.fileSizeMax = true;
-          this.toastr.warning('Image should be less than 300 Kb!! ', 'Warning');
+          this.toastr.warning('Image should not be more than 300 Kb!! ', 'Warning');
         }
         else if (file.type == 'image/jpeg' && file.size < 50000 || file.type == 'image/png' && file.size < 50000) {
           this.toastr.warning('Image should be more than 50 Kb!! ', 'Warning');
@@ -273,25 +273,24 @@ export class ManageOrganizerComponent implements OnInit {
         let file = event.target.files[0];
         let up = new FormData();
         up.append('placePic', file);
-        this.http.post(environment.api + "/organizer/upload", up)
-          .subscribe((res) => {
+        this.http.post(environment.api + "/organizer/upload", up).subscribe((res) => {
             if (res) {
               var log = res.json();
               this.photoUploading = false;
               this.orgForm.patchValue({ placePic: log });
             }
-          })
-        var reader = new FileReader();
-        reader.onload = (event: any) => {
-          this.placePic = event.target.result;
-        }
-        reader.readAsDataURL(event.target.files[0]);
+            var reader = new FileReader();
+            reader.onload = (event: any) => {
+              this.placePic = event.target.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        })
       }
       else {
-        this.photoUploading = true;
+        this.photoUploading = false;
         if (file.type == 'image/jpeg' && file.size > 100000 || file.type == 'image/png' && file.size > 100000) {
           this.fileSizeMax2 = true;
-          this.toastr.warning('Image should be less than 100 Kb!! ', 'Warning');
+          this.toastr.warning('Image should not be more than 100 Kb!! ', 'Warning');
         }
         else if (file.type == 'image/jpeg' && file.size < 50000 || file.type == 'image/png' && file.size < 50000) {
           this.toastr.warning('Image should be more than 50 Kb!! ', 'Warning');

@@ -187,22 +187,22 @@
                                                     <input type="file" accept="image/*" #file2 class="logo_upload" (change)="picPlaceUrl($event)">
                                                     <button class="btn btn_green" (click)="file2.click()"> Upload</button>
                                                 </div>
-                                                <div class="col-md-12" style="padding-top: 10px;">
+                                                <div class="man col-md-2" *ngIf="placePic">
+                                                    <img [src]="placePic" class="image_display">
+                                                </div>
+                                                <div class="spinner" *ngIf="photoUploading">
+                                                    <i class="fa fa-spinner fa-spin"></i>  Uploading...
+                                                </div>
+                                                <div class="man col-md-2" *ngIf="logo2 && !placePic">
+                                                    <img *ngFor="let item of logo2" [src]="item" class="image_display">
+                                                </div>
+
+                                                <div class="col-md-12" style="padding-top: 10px;" *ngIf="(fileSupport2 || fileSizeMin2 || fileSizeMax2 ) || !orgForm.value.placePic">
                                                     <p style="font-size: small; color:red;" *ngIf="fileSizeMin2">Min Size of image should be 50 Kb.</p>
                                                     <p style="font-size: small; color:red;" *ngIf="fileSizeMax2">Max Size of image should be 100 Kb.</p>
                                                     <p style="font-size: small; color:red;" *ngIf="fileSupport2">Image format .jpg, .jpeg and .png only supported.</p>
                                                     <p style="font-size: small;" *ngIf="(!fileSupport2 || !fileSizeMin2 || !fileSizeMax2 )&& !orgForm.value.placePic">Image format .jpg, .jpeg and .png only supported with min 50 Kb to max
                                                         100 Kb.</p>
-                                                </div>
-
-                                                <div class="man col-md-2" *ngIf="placePic">
-                                                    <img [src]="placePic" class="image_display">
-                                                </div>
-                                                <div class="spinner" *ngIf="photoUploading">
-                                                    <i class="fa fa-spinner fa-spin"></i>
-                                                </div>
-                                                <div class="man col-md-2" *ngIf="logo2 && !placePic">
-                                                    <img *ngFor="let item of logo2" [src]="item" class="image_display">
                                                 </div>
                                             </div>
                                         </div>

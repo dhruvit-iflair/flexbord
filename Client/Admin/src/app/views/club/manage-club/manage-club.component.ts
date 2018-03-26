@@ -154,10 +154,10 @@ export class ManageClubComponent implements OnInit {
         this.logoUploading = false;
         if (file.type == 'image/jpeg' && file.size > 300000 || file.type == 'image/png' && file.size > 300000) {
           this.fileSizeMax = true;
-          this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');
+          this.toastr.warning('Image should not be less than 300 Kb!! ', 'Warning');
         }
         else if (file.type == 'image/jpeg' && file.size < 50000 || file.type == 'image/png' && file.size < 50000) {
-          this.toastr.warning('Image should be more than 150Kb!! ', 'Warning');
+          this.toastr.warning('Image should be more than 50Kb!! ', 'Warning');
           this.fileSizeMin = true;
         }
         else {
@@ -227,13 +227,13 @@ export class ManageClubComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
       }
       else {
-        this.photoUploading = true;
+        this.photoUploading = false;
         if (file.type == 'image/jpeg' && file.size > 100000 || file.type == 'image/png' && file.size > 100000) {
           this.fileSizeMax2 = true;
-          this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');
+          this.toastr.warning('Image should not be more than 100 Kb!! ', 'Warning');
         }
         else if (file.type == 'image/jpeg' && file.size < 50000 || file.type == 'image/png' && file.size < 50000) {
-          this.toastr.warning('Image should be more than 150Kb!! ', 'Warning');
+          this.toastr.warning('Image should be more than 50Kb!! ', 'Warning');
           this.fileSizeMin2 = true;
         }
         else {
