@@ -174,7 +174,7 @@ export class ManageOrganizerComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
       this.fileSupport = false;this.fileSizeMin = false; this.fileSizeMax = false; 
-      if (file.type == 'image/jpeg' && file.size < 2000000 && file.size > 150000 || file.type == 'image/png' && file.size < 2000000 && file.size > 150000 ) {
+      if (file.type == 'image/jpeg' && file.size < 300000 && file.size > 50000 || file.type == 'image/png' && file.size < 300000 && file.size > 50000 ) {
       this.fileSupport = false;this.fileSizeMin = false; this.fileSizeMax = false; 
         let up = new FormData();
         up.append('logo', file);
@@ -195,12 +195,12 @@ export class ManageOrganizerComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
       } 
       else {
-        if (file.type == 'image/jpeg' &&  file.size > 2000000 || file.type == 'image/png'   &&  file.size > 2000000) {
+        if (file.type == 'image/jpeg' &&  file.size > 300000 || file.type == 'image/png'   &&  file.size > 300000) {
           this.fileSizeMax = true; 
-          this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');                        
+          this.toastr.warning('Image should be less than 300 Kb!! ', 'Warning');                        
         } 
-        else if (file.type == 'image/jpeg' && file.size < 150000 || file.type == 'image/png' && file.size < 150000) {
-          this.toastr.warning('Image should be more than 150Kb!! ', 'Warning');                        
+        else if (file.type == 'image/jpeg' && file.size < 50000 || file.type == 'image/png' && file.size < 50000) {
+          this.toastr.warning('Image should be more than 50 Kb!! ', 'Warning');                        
           this.fileSizeMin = true;           
         }
         else {
@@ -261,7 +261,7 @@ export class ManageOrganizerComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
       this.fileSupport2 = false;this.fileSizeMin2 = false; this.fileSizeMax2 = false; 
-      if (file.type == 'image/jpeg' && file.size < 2000000 && file.size > 150000 || file.type == 'image/png' && file.size < 2000000 && file.size > 150000 ) {
+      if (file.type == 'image/jpeg' && file.size < 100000 && file.size > 50000 || file.type == 'image/png' && file.size < 100000 && file.size > 50000 ) {
       this.fileSupport2 = false;this.fileSizeMin2 = false; this.fileSizeMax2 = false; 
         let file = event.target.files[0];
         let up = new FormData();
@@ -280,12 +280,12 @@ export class ManageOrganizerComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
       } 
       else {
-        if (file.type == 'image/jpeg' &&  file.size > 2000000 || file.type == 'image/png'   &&  file.size > 2000000) {
+        if (file.type == 'image/jpeg' &&  file.size > 100000 || file.type == 'image/png'   &&  file.size > 100000) {
           this.fileSizeMax2 = true; 
-          this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');                        
+          this.toastr.warning('Image should be less than 100 Kb!! ', 'Warning');                        
         } 
-        else if (file.type == 'image/jpeg' && file.size < 150000 || file.type == 'image/png' && file.size < 150000) {
-          this.toastr.warning('Image should be more than 150Kb!! ', 'Warning');                        
+        else if (file.type == 'image/jpeg' && file.size < 50000 || file.type == 'image/png' && file.size < 50000) {
+          this.toastr.warning('Image should be more than 50 Kb!! ', 'Warning');                        
           this.fileSizeMin2 = true;           
         }
         else {
@@ -315,9 +315,14 @@ export class ManageOrganizerComponent implements OnInit {
   addOrg() {
     if (this.click) {
       // this.click = false;
-      var usn = this.user.filter((u) => {
-        return u.username == this.orgForm.value.email;
-      });
+      if (this.orgForm.value.email) {
+        var usn = this.items.filter((u) => {
+          return u.email == this.orgForm.value.email;
+        });
+      }
+      else{
+        var usn = [];
+      }
       var sub = this.items.filter((u) => {
         return u.subDomain == this.orgForm.value.subDomain;
       });

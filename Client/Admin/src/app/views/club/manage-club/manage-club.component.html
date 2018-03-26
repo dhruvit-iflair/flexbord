@@ -44,29 +44,30 @@
                                         </div>
                                         <div class="man col-md-12">
                                             <div class="row">
-                                                <div class="col-md-2">
-                                                    <h4 class="text-left">Logo</h4>
-                                                    <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none">
-                                                    <button class="btn btn_green" (click)="file.click()"> Upload</button>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-2">
+                                                        <h4 class="text-left">Logo</h4>
+                                                        <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none">
+                                                        <button class="btn btn_green" (click)="file.click()"> Upload</button>
+                                                    </div>
+                                                    <div class="col-md-4" *ngIf="logo && !url">
+                                                        <img src="{{picEnv}}{{logo}}" class="image_display" *ngIf="logo && !url">
+                                                        <!-- <img src="assets/noimage.jpg" *ngIf="!logo|| !url"  class="image_display" > -->
+                                                    </div>
+                                                    <div class="col-md-4" *ngIf="!logo">
+                                                        <img src="assets/noimage.jpg" class="image_display">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <img [src]="url" class="image_display" *ngIf="url">
+                                                        <!-- <img src="assets/noimage.jpg" *ngIf="url == ''" *ngIf="!url" class="image_display">                                       -->
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-4" *ngIf="logo && !url">
-                                                    <img src="{{picEnv}}{{logo}}" class="image_display" *ngIf="logo && !url">
-                                                    <!-- <img src="assets/noimage.jpg" *ngIf="!logo|| !url"  class="image_display" > -->
-                                                </div>
-                                                <div class="col-md-4" *ngIf="!logo">
-                                                    <img src="assets/noimage.jpg" class="image_display">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <img [src]="url" class="image_display" *ngIf="url">
-                                                    <!-- <img src="assets/noimage.jpg" *ngIf="url == ''" *ngIf="!url" class="image_display">                                       -->
-                                                </div>
-                                                <div class="col-md-12" style="padding-top: 10px;">
-                                                    <p style="font-size: small; color:red;" *ngIf="fileSizeMin">Min Size of image should be 150 Kb.</p>
-                                                    <p style="font-size: small; color:red;" *ngIf="fileSizeMax">Max Size of image should be 2 Mb.</p>
+                                                <div class="col-md-12" style="padding-top: 10px;" *ngIf="(fileSupport || fileSizeMin || fileSizeMax )&& !clubForm.value.logo">
+                                                    <p style="font-size: small; color:red;" *ngIf="fileSizeMin">Min Size of image should be 50 Kb.</p>
+                                                    <p style="font-size: small; color:red;" *ngIf="fileSizeMax">Max Size of image should be 300 Kb.</p>
                                                     <p style="font-size: small; color:red;" *ngIf="fileSupport">Image format .jpg, .jpeg and .png only supported.</p>
-                                                    <p style="font-size: small;" *ngIf="(!fileSupport || !fileSizeMin || !fileSizeMax )&& !clubForm.value.logo">Image format .jpg, .jpeg and .png only supported with min 150 Kb to max
-                                                        2Mb.</p>
                                                 </div>
+                                                <p style="font-size: small;" *ngIf="(!fileSupport || !fileSizeMin || !fileSizeMax )&& !clubForm.value.logo">Image format .jpg, .jpeg and .png only supported with min 50 Kb to max 300 Kb.</p>                                                
                                             </div>
                                         </div>
                                     </div>
@@ -175,10 +176,11 @@
                                             </div>
 
                                             <div class="col-md-12" style="padding-top: 10px;">
-                                                <p style="font-size: small; color:red;" *ngIf="fileSizeMin2">Min Size of image should be 150 Kb.</p>
-                                                <p style="font-size: small; color:red;" *ngIf="fileSizeMax2">Max Size of image should be 2 Mb.</p>
+                                                <p style="font-size: small; color:red;" *ngIf="fileSizeMin2">Min Size of image should be 50 Kb.</p>
+                                                <p style="font-size: small; color:red;" *ngIf="fileSizeMax2">Max Size of image should be 100 Kb.</p>
                                                 <p style="font-size: small; color:red;" *ngIf="fileSupport2">Image format .jpg, .jpeg and .png only supported.</p>
-                                                <p style="font-size: small;" *ngIf="(!fileSupport2 || !fileSizeMin2 || !fileSizeMax2 )&& !clubForm.value.placePic">Image format .jpg, .jpeg and .png only supported with min 150 Kb to max 2Mb.</p>
+                                                <p style="font-size: small;" *ngIf="(!fileSupport2 || !fileSizeMin2 || !fileSizeMax2 )&& !clubForm.value.placePic">Image format .jpg, .jpeg and .png only supported with min 50 Kb to max 100
+                                                    Kb.</p>
                                             </div>
                                         </div>
 
