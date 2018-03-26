@@ -67,6 +67,9 @@
                                                     <img [src]="logo" class="image_display" *ngIf="logo != ''">
                                                     <img src="assets/noimage.jpg" *ngIf="logo == ''">
                                                 </div>
+                                                <div class="spinner" *ngIf="logoUploading">
+                                                    <i class="fa fa-spinner fa-spin"></i> Uploading...
+                                                </div>
                                                 <div class="man col-md-4" *ngIf="url">
                                                     <img [src]="url" class="image_display" *ngIf="url">
                                                     <img src="assets/noimage.jpg" *ngIf="url == ''">
@@ -194,6 +197,9 @@
 
                                                 <div class="man col-md-2" *ngIf="placePic">
                                                     <img [src]="placePic" class="image_display">
+                                                </div>
+                                                <div class="spinner" *ngIf="photoUploading">
+                                                    <i class="fa fa-spinner fa-spin"></i>
                                                 </div>
                                                 <div class="man col-md-2" *ngIf="logo2 && !placePic">
                                                     <img *ngFor="let item of logo2" [src]="item" class="image_display">

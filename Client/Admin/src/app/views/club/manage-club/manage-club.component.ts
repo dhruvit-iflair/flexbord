@@ -26,13 +26,12 @@ export class ManageClubComponent implements OnInit {
   public items: Array<any>;
   public items2: Array<any>;
   public spots: Array<any> = [];
-  public url: any;
   public placePic: any;
   public value: any;
   public value2: Array<string>;
   public sub: any;
-  public tabz: any =1;
-  public logo: any;
+  public tabz: any = 1;
+  public logo: any = false;
   public picEnv = environment.picpoint + 'clublogos/';
   public logo2: any;
   public _id: any;
@@ -44,6 +43,8 @@ export class ManageClubComponent implements OnInit {
   public fileSizeMax2: Boolean = false;
   public allClub: Array<any> = [];
 
+  public logoUploading: Boolean = false
+  public photoUploading: Boolean = false
   public hasMembersPerm; hasSeasonsPerm; hasClassificationsPerm; hasTournamentsPerm;
   public click: Boolean = true;
 
@@ -77,10 +78,10 @@ export class ManageClubComponent implements OnInit {
       this.items = res;
     });
     this.subscription = this.clubService.getTabActive().subscribe(id => {
-      if(id){
+      if (id) {
         this.tabz = id;
       }
-      else{
+      else {
         this.tabz = 1;
       }
     })
@@ -97,16 +98,17 @@ export class ManageClubComponent implements OnInit {
           if (fagdf.length > 0) {
             var comming = res.json();
             this.orgdata = comming[0];
-            if (comming[0].logo) {
-              this.logo = comming[0].logo;
-            }
+            (comming[0].logo)? this.logo = comming[0].logo : this.logo = false;
             var yaar = [];
             if (comming[0].placePic) {
               comming[0].placePic.forEach((asd) => {
                 yaar.push(environment.picpoint + 'clubplacepics/' + asd);
               })
+              this.logo2 = yaar;              
             }
-            this.logo2 = yaar
+            else{
+              this.logo2 = false;
+            }
             this.clubForm.patchValue(comming[0]);
             this.clubForm.controls['affilated'].setValue(fagdf[0].affilated, { onlySelf: true })
           }
@@ -125,6 +127,7 @@ export class ManageClubComponent implements OnInit {
     this.subscription.unsubscribe();
   }
   readUrl(event: any) {
+    this.logoUploading = true;
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
       this.fileSupport = false; this.fileSizeMin = false; this.fileSizeMax = false;
@@ -135,20 +138,20 @@ export class ManageClubComponent implements OnInit {
         this.http.post(environment.api + "/club/logo", up)
           .subscribe((res) => {
             if (res) {
+              this.logoUploading = false;
               var log = res.json();
+              this.logo = res.json();
               this.clubForm.patchValue({ logo: log });
             }
             else {
+              this.logoUploading = false;
+              this.logo = false;              
               this.toastr.error('Error!! Something went wrong! try again later', 'Error');
             }
           })
-        var reader = new FileReader();
-        reader.onload = (event: any) => {
-          this.url = event.target.result;
-        }
-        reader.readAsDataURL(event.target.files[0]);
       }
       else {
+        this.logoUploading = false;
         if (file.type == 'image/jpeg' && file.size > 300000 || file.type == 'image/png' && file.size > 300000) {
           this.fileSizeMax = true;
           this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');
@@ -201,6 +204,7 @@ export class ManageClubComponent implements OnInit {
     }
   }
   picPlaceUrl(event: any) {
+    this.photoUploading = true;
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
       this.fileSupport2 = false; this.fileSizeMin2 = false; this.fileSizeMax2 = false;
@@ -211,6 +215,7 @@ export class ManageClubComponent implements OnInit {
         up.append('placePic', file);
         this.http.post(environment.api + "/club/upload", up).subscribe((res) => {
           if (res) {
+            this.photoUploading = false;
             var log = res.json();
             this.clubForm.patchValue({ placePic: log });
           }
@@ -222,6 +227,7 @@ export class ManageClubComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
       }
       else {
+        this.photoUploading = true;
         if (file.type == 'image/jpeg' && file.size > 100000 || file.type == 'image/png' && file.size > 100000) {
           this.fileSizeMax2 = true;
           this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');
@@ -272,7 +278,7 @@ export class ManageClubComponent implements OnInit {
           return u.email == this.clubForm.value.email;
         });
       }
-      else{
+      else {
         var usn = [];
       }
       var sub = this.allClub.filter((u) => {

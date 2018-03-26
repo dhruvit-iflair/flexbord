@@ -16,7 +16,7 @@ export class ManageUsersComponent implements OnInit {
   public roles:Array<any>;
   public sub: any;
   public person_photo: any;
-
+  public logoUploading:any = false;
   public _id: any;
   public userForm : FormGroup;
   public memberSince :any = Date.now();
@@ -76,6 +76,7 @@ export class ManageUsersComponent implements OnInit {
    this.userForm.controls['email'].valueChanges.subscribe((data) => { this.userForm.patchValue({username : data}); });
   }
   readUrl(event:any) {
+    this.logoUploading=true;
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
       this.fileSupport = false;this.fileSizeMin = false; this.fileSizeMax = false; 
@@ -83,12 +84,13 @@ export class ManageUsersComponent implements OnInit {
       this.fileSupport = false;this.fileSizeMin = false; this.fileSizeMax = false; 
         let up = new FormData();
         up.append('person_photo', file);
-        this.userService.usersPhoto(up).subscribe((res)=>{ this.userForm.patchValue({person_photo :res}); });
+        this.userService.usersPhoto(up).subscribe((res)=>{ this.userForm.patchValue({person_photo :res}); this.logoUploading = false; });
         var reader = new FileReader();
         reader.onload = (event:any) => { this.person_photo = event.target.result };
         reader.readAsDataURL(event.target.files[0]);
       } 
       else {
+        this.logoUploading=false;    
         if (file.type == 'image/jpeg' &&  file.size > 100000 || file.type == 'image/png'   &&  file.size > 100000) {
           this.fileSizeMax = true; 
           this.toastr.warning('Image should be less than 100 Kb!! ', 'Warning');                        
@@ -102,7 +104,6 @@ export class ManageUsersComponent implements OnInit {
           this.toastr.error('Only .jpg, .png, .jpeg type of Image supported ', 'Error');                                  
         }
       }    
-      
     }
   }  
   addUser(){

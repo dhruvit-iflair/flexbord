@@ -50,16 +50,15 @@
                                                         <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)" style="display:none">
                                                         <button class="btn btn_green" (click)="file.click()"> Upload</button>
                                                     </div>
-                                                    <div class="col-md-4" *ngIf="logo && !url">
+                                                    <div class="col-md-4" *ngIf="logo">
                                                         <img src="{{picEnv}}{{logo}}" class="image_display" *ngIf="logo && !url">
                                                         <!-- <img src="assets/noimage.jpg" *ngIf="!logo|| !url"  class="image_display" > -->
                                                     </div>
-                                                    <div class="col-md-4" *ngIf="!logo">
-                                                        <img src="assets/noimage.jpg" class="image_display">
+                                                    <div class="spinner" *ngIf="logoUploading">
+                                                        <i class="fa fa-spinner fa-spin"></i>Uploading...
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <img [src]="url" class="image_display" *ngIf="url">
-                                                        <!-- <img src="assets/noimage.jpg" *ngIf="url == ''" *ngIf="!url" class="image_display">                                       -->
+                                                    <div class="col-md-4" *ngIf="!clubForm.value.logo && !logo && !logoUploading">
+                                                        <img src="assets/noimage.jpg" class="image_display">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12" style="padding-top: 10px;" *ngIf="(fileSupport || fileSizeMin || fileSizeMax )&& !clubForm.value.logo">
@@ -67,7 +66,9 @@
                                                     <p style="font-size: small; color:red;" *ngIf="fileSizeMax">Max Size of image should be 300 Kb.</p>
                                                     <p style="font-size: small; color:red;" *ngIf="fileSupport">Image format .jpg, .jpeg and .png only supported.</p>
                                                 </div>
-                                                <p style="font-size: small;" *ngIf="(!fileSupport || !fileSizeMin || !fileSizeMax )&& !clubForm.value.logo">Image format .jpg, .jpeg and .png only supported with min 50 Kb to max 300 Kb.</p>                                                
+                                                <p style="font-size: small;" *ngIf="(!fileSupport || !fileSizeMin || !fileSizeMax )&& !clubForm.value.logo">Image format .jpg, .jpeg and .png only supported with min 50 Kb to max 300
+                                                    Kb.
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -155,8 +156,6 @@
                                                 <input class="text-col-md-3" disabled type="text" formControlName="zipcode" placeholder="Zipcode">
                                             </div>
                                         </div>
-
-
                                         <div class="man col-md-3">
                                             <h4 class="text-left">Capacity</h4>
                                             <input class="capacity" minlength="3" maxlength="8" type="number" formControlName="capacity" placeholder="Enter Capacity"
@@ -171,6 +170,9 @@
                                             <div class="man col-md-2" *ngIf="placePic">
                                                 <img [src]="placePic" class="image_display">
                                             </div>
+                                            <div class="man col-md-2 spinner" *ngIf="photoUploading">
+                                                <i class="fa fa-spinner fa-spin"></i> Uploading...
+                                            </div>
                                             <div class="man col-md-2" *ngIf="logo2 && !placePic">
                                                 <img *ngFor="let item of logo2" [src]="item" class="image_display">
                                             </div>
@@ -180,14 +182,13 @@
                                                 <p style="font-size: small; color:red;" *ngIf="fileSizeMax2">Max Size of image should be 100 Kb.</p>
                                                 <p style="font-size: small; color:red;" *ngIf="fileSupport2">Image format .jpg, .jpeg and .png only supported.</p>
                                                 <p style="font-size: small;" *ngIf="(!fileSupport2 || !fileSizeMin2 || !fileSizeMax2 )&& !clubForm.value.placePic">Image format .jpg, .jpeg and .png only supported with min 50 Kb to max 100
-                                                    Kb.</p>
+                                                    Kb.
+                                                </p>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-
                             <div class="manage-box clearfix">
                                 <div class="col-md-12">
                                     <label>
@@ -212,7 +213,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="manage-box clearfix">
                                 <div class="col-md-12">
                                     <label>
@@ -259,7 +259,6 @@
                             <button class="btn btn_green" [disabled]="!clubForm.valid" (click)='addOrg()'>Save</button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </tab>
@@ -280,6 +279,5 @@
             <app-manageclub-tournaments></app-manageclub-tournaments>
             <app-club-tournaments></app-club-tournaments>
         </tab>
-
     </tabset>
 </div>
