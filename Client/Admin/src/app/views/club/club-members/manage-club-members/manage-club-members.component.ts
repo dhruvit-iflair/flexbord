@@ -107,7 +107,7 @@ export class ManageClubMembersComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
       this.fileSupport = false; this.fileSizeMin = false; this.fileSizeMax = false;
-      if (file.type == 'image/jpeg' && file.size < 100000 && file.size > 50000 || file.type == 'image/png' && file.size < 100000 && file.size > 50000) {
+      if (file.type == 'image/jpeg' && file.size <= 102400 && file.size > 50000 || file.type == 'image/png' && file.size <= 102400 && file.size > 50000) {
         this.fileSupport = false; this.fileSizeMin = false; this.fileSizeMax = false;
         let up = new FormData();
         up.append('photo', file);
@@ -133,7 +133,7 @@ export class ManageClubMembersComponent implements OnInit {
       else {
         this.isPhoto = false;
         this.logoUploading = false;
-        if (file.type == 'image/jpeg' && file.size > 100000 || file.type == 'image/png' && file.size > 100000) {
+        if (file.type == 'image/jpeg' && file.size > 102400 || file.type == 'image/png' && file.size > 102400) {
           this.fileSizeMax = true;
           this.toastr.warning('Image should not be more than 100 Kb!! ', 'Warning');
         }

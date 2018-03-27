@@ -131,7 +131,7 @@ export class ManageClubComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
       this.fileSupport = false; this.fileSizeMin = false; this.fileSizeMax = false;
-      if (file.type == 'image/jpeg' && file.size < 300000 && file.size > 50000 || file.type == 'image/png' && file.size < 300000 && file.size > 50000) {
+      if (file.type == 'image/jpeg' && file.size <= 307200 && file.size > 50000 || file.type == 'image/png' && file.size <= 307200 && file.size > 50000) {
         this.fileSupport = false; this.fileSizeMin = false; this.fileSizeMax = false;
         let up = new FormData();
         up.append('logo', file);
@@ -152,7 +152,7 @@ export class ManageClubComponent implements OnInit {
       }
       else {
         this.logoUploading = false;
-        if (file.type == 'image/jpeg' && file.size > 300000 || file.type == 'image/png' && file.size > 300000) {
+        if (file.type == 'image/jpeg' && file.size > 307200 || file.type == 'image/png' && file.size > 307200) {
           this.fileSizeMax = true;
           this.toastr.warning('Image should not be less than 300 Kb!! ', 'Warning');
         }
@@ -208,7 +208,7 @@ export class ManageClubComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
       this.fileSupport2 = false; this.fileSizeMin2 = false; this.fileSizeMax2 = false;
-      if (file.type == 'image/jpeg' && file.size < 100000 && file.size > 50000 || file.type == 'image/png' && file.size < 100000 && file.size > 50000) {
+      if (file.type == 'image/jpeg' && file.size <= 102400 && file.size > 50000 || file.type == 'image/png' && file.size <= 102400 && file.size > 50000) {
         this.fileSupport2 = false; this.fileSizeMin2 = false; this.fileSizeMax2 = false;
         let file = event.target.files[0];
         let up = new FormData();
@@ -228,7 +228,7 @@ export class ManageClubComponent implements OnInit {
       }
       else {
         this.photoUploading = false;
-        if (file.type == 'image/jpeg' && file.size > 100000 || file.type == 'image/png' && file.size > 100000) {
+        if (file.type == 'image/jpeg' && file.size > 102400 || file.type == 'image/png' && file.size > 102400) {
           this.fileSizeMax2 = true;
           this.toastr.warning('Image should not be more than 100 Kb!! ', 'Warning');
         }

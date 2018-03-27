@@ -19,6 +19,10 @@ export class ProfileViewComponent implements OnInit {
   public user;
   public userForm: any;
   public passwords: any;
+  public fileSupport: Boolean = false;
+  public fileSizeMin: Boolean = false;
+  public fileSizeMax: Boolean = false;
+  public logoUploading: any = false;
   constructor(public fb: FormBuilder, private toastr: ToastrService, private router: Router, public userService: UserService) {
     var tokendetails = JSON.parse(localStorage.getItem('uToken'));
     this.userService.getUsersById(tokendetails.user._id).subscribe(resp => {
@@ -73,29 +77,40 @@ export class ProfileViewComponent implements OnInit {
     });
   }
   readUrl(event: any) {
+    this.logoUploading = true;
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
-      if (file.type == 'image/jpeg' || file.type == 'image/png' && file.size < 2000000) {
+      this.fileSupport = false; this.fileSizeMin = false; this.fileSizeMax = false;
+      if (file.type == 'image/jpeg' && file.size <= 102400 && file.size > 50000 || file.type == 'image/png' && file.size <= 102400 && file.size > 50000) {
+        this.fileSupport = false; this.fileSizeMin = false; this.fileSizeMax = false;
         let up = new FormData();
         up.append('person_photo', file);
         this.userService.usersPhoto(up).subscribe((res) => {
+          this.logoUploading = false;
           this.userForm.patchValue({ person_photo: res });
           var reader = new FileReader();
           reader.onload = (event: any) => { this.person_photo = event.target.result };
           reader.readAsDataURL(event.target.files[0]);
         }, (error) => {
+          this.logoUploading = false;
           this.toastr.error('Something went wrong please try again ', 'Error');
         });
       }
       else {
-        if (file.size > 2000000) {
-          this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');
-
-        } else {
+        this.logoUploading = false;
+        if (file.type == 'image/jpeg' && file.size > 102400 || file.type == 'image/png' && file.size > 102400) {
+          this.fileSizeMax = true;
+          this.toastr.warning('Image should not be more than 100 Kb!! ', 'Warning');
+        }
+        else if (file.type == 'image/jpeg' && file.size < 50000 || file.type == 'image/png' && file.size < 50000) {
+          this.toastr.warning('Image should be more than 50 Kb!! ', 'Warning');
+          this.fileSizeMin = true;
+        }
+        else {
+          this.fileSupport = true;
           this.toastr.error('Only .jpg, .png, .jpeg type of Image supported ', 'Error');
         }
       }
-
     }
   }
 }

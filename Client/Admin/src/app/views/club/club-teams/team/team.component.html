@@ -1,163 +1,198 @@
 <div>
   <tabset #staticTabs>
-      <tab heading="Base">
+    <tab heading="Base">
 
-<div class="container manage-container">
-  <div class="row">
-    <form [formGroup]="teamForm" class="manage-component-form">
-      <div class="row1">
-        <div class="manage-box clearfix">
-          <div class="col-md-12">
-            <label><h2>Common Info</h2></label>
-          </div>
-          <div class="col-md-12">
-            <div class="row">
-              <div class="man col-md-6">
-                <h4 class="text-left">Name<a style="color:#f00 !important;">*</a></h4>
-                <input class="text-col-md-3" type="text" formControlName="name" required pattern="^\s*(\S\s*){3,}">
-                <div class="alert alert-danger" role="alert" *ngIf="!teamForm.get('name').valid && teamForm.get('name').touched">
-                  Name is required.
+      <div class="container manage-container">
+        <div class="row">
+          <form [formGroup]="teamForm" class="manage-component-form">
+            <div class="row1">
+              <div class="manage-box clearfix">
+                <div class="col-md-12">
+                  <label>
+                    <h2>Common Info</h2>
+                  </label>
                 </div>
-              </div>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="man col-md-6">
+                      <h4 class="text-left">Name
+                        <a style="color:#f00 !important;">*</a>
+                      </h4>
+                      <input class="text-col-md-3" type="text" formControlName="name" required pattern="^\s*(\S\s*){3,}">
+                      <div class="alert alert-danger" role="alert" *ngIf="!teamForm.get('name').valid && teamForm.get('name').touched">
+                        Name is required.
+                      </div>
+                    </div>
 
-              <div class="man col-md-6">
-                <h4 class="text-left">Sport<a style="color:#f00 !important;">*</a></h4>
-                <select class="js-example-basic-single text-col-md-3" name="sports" formControlName="sports">
-                            <option value="undefined" disabled="true">Select Sport</option>    
-                            <option *ngFor="let ite of sportsdata" [value]="ite._id">{{ite.name}}</option>
-                        </select>
-                <!-- <div class="alert alert-danger" role="alert" *ngIf="!teamForm.get('sports').valid && teamForm.get('sports').touched">
+                    <div class="man col-md-6">
+                      <h4 class="text-left">Sport
+                        <a style="color:#f00 !important;">*</a>
+                      </h4>
+                      <select class="js-example-basic-single text-col-md-3" name="sports" formControlName="sports">
+                        <option value="undefined" disabled="true">Select Sport</option>
+                        <option *ngFor="let ite of sportsdata" [value]="ite._id">{{ite.name}}</option>
+                      </select>
+                      <!-- <div class="alert alert-danger" role="alert" *ngIf="!teamForm.get('sports').valid && teamForm.get('sports').touched">
                   Sport is required.
                 </div> -->
+                    </div>
+                    <div class="man col-md-12">
+                      <div class="row">
+                        <div class="col-md-2">
+                          <h4 class="text-left">Logo</h4>
+                          <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)">
+                          <button class="btn btn_green" (click)="file.click()"> Upload</button>
+                        </div>
+                        <div class="col-md-4" *ngIf="logo && !url">
+                          <img src="{{picEnv}}{{logo}}" class="image_display">
+                        </div>
+                        <div class="spinner" *ngIf="logoUploading">
+                          <i class="fa fa-spinner fa-spin"></i> Uploading...
+                        </div>
+                        <div class="col-md-4" *ngIf="!logo && !url">
+                          <img src="assets/noimage.jpg" class="image_display">
+                        </div>
+                        <div class="col-md-4" *ngIf="url">
+                          <img [src]="url" class="image_display">
+                        </div>
+                        <div class="col-md-12" style="padding-top: 10px; color:red">
+                          <p style="font-size: small; color:red;" *ngIf="fileSizeMin">Min Size of image should be 50 Kb.</p>
+                          <p style="font-size: small; color:red;" *ngIf="fileSizeMax">Max Size of image should be 300 Kb.</p>
+                          <p style="font-size: small; color:red;" *ngIf="fileSupport">Image format .jpg, .jpeg and .png only supported.</p>
+                          <p style="font-size: small;" *ngIf="(!fileSupport || !fileSizeMin || !fileSizeMax )&& !teamForm.value.logo ">Image format .jpg, .jpeg and .png only supported with min 50 Kb to max 300 Kb.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="man col-md-12">
-                <div class="row">
-                  <div class="col-md-2">
-                    <h4 class="text-left">Logo</h4>
-                    <input type="file" accept="image/*" #file class="logo_upload" (change)="readUrl($event)">
-                    <button class="btn btn_green" (click)="file.click()"> Upload</button>
+              <div class="manage-box clearfix">
+                <div class="col-md-12">
+                  <label>
+                    <h2>Availibility</h2>
+                  </label>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="row">
+                    <table style="width:99%">
+                      <thead>
+                        <th style="width:10%;">
+                          <input class="text-col-md-3" type="checkbox" [(ngModel)]='avail.pchecker' (click)="allavail()" [ngModelOptions]="{standalone: true}">
+                        </th>
+                        <th style="width:30%;" class="text-col-md-3 col-md-3">Day</th>
+                        <th style="width:30%;" class="text-col-md-3 col-md-3">From</th>
+                        <th class="text-col-md-3 col-md-3">To</th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let i of dayvalues;index as x;">
+                          <td>
+                            <input class="text-col-md-3" type="checkbox" [(ngModel)]='avail.daychecker[x]' [ngModelOptions]="{standalone: true}">
+                          </td>
+                          <td>
+                            <label>{{i}}</label>
+                          </td>
+                          <td *ngIf="avail.daychecker[x]==true">
+                            <timepicker class="text-col-md-3" style="padding: 0;" [(ngModel)]='avail.fromtimer[x]' [ngModelOptions]="{standalone: true}"></timepicker>
+                          </td>
+                          <td *ngIf="avail.daychecker[x]==true">
+                            <timepicker class="text-col-md-3" style="padding: 0;" [(ngModel)]='avail.totimer[x]' [ngModelOptions]="{standalone: true}"></timepicker>
+                          </td>
+                          <!--<td><input class="text-col-md-3" type="time" [disabled]="avail.daychecker[x]!==true" [(ngModel)]='avail.fromtimer[x]'
+                        [ngModelOptions]="{standalone: true}"></td>-->
+                          <!--<td><input class="text-col-md-3" type="time" [disabled]="avail.daychecker[x]!==true" [(ngModel)]='avail.totimer[x]'
+                        [ngModelOptions]="{standalone: true}"></td>-->
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  <div class="col-md-4"  *ngIf="logo && !url">
-                    <img src="{{picEnv}}{{logo}}" class="image_display">
-                  </div>
-                  <div class="col-md-4" *ngIf="!logo && !url">
-                      <img src="assets/noimage.jpg" class="image_display">                    
-                  </div>
-                  <div class="col-md-4" *ngIf="url">
-                    <img [src]="url" class="image_display">                 
+                </div>
+              </div>
+              <div class="manage-box clearfix">
+                <div class="col-md-12">
+                  <label>
+                    <h2>Location</h2>
+                  </label>
+                </div>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="man col-md-6">
+                      <h4 class="text-left">Address
+                        <a style="color:#f00 !important;">*</a>
+                      </h4>
+                      <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace pattern="^\s*(\S\s*){3,}">
+                      <div class="alert alert-danger" role="alert" *ngIf="!teamForm.get('address').valid && teamForm.get('address').touched">
+                        Address is required.
+                      </div>
+                    </div>
+
+                    <div class="man col-md-6">
+                      <h4 class="text-left">Building</h4>
+                      <input class="text-col-md-3" disabled="disabled" type="text" formControlName="building">
+                    </div>
+
+                    <div class="man col-md-6">
+                      <h4 class="text-left">Street</h4>
+                      <input class="text-col-md-3" disabled="disabled" type="text" formControlName="street">
+                    </div>
+
+                    <div class="man col-md-6">
+                      <h4 class="text-left">Country
+                        <a style="color:#f00 !important;">*</a>
+                      </h4>
+                      <input class="text-col-md-3" disabled="disabled" type="text" formControlName="country" pattern="^\s*(\S\s*){3,}">
+                    </div>
+
+                    <div class="man col-md-6">
+                      <h4 class="text-left">State</h4>
+                      <input class="text-col-md-3" disabled="disabled" type="text" formControlName="state">
+                    </div>
+
+                    <div class="man col-md-6">
+                      <h4 class="text-left">City
+                        <a style="color:#f00 !important;">*</a>
+                      </h4>
+                      <input class="text-col-md-3" disabled="disabled" type="text" formControlName="city" pattern="^\s*(\S\s*){3,}">
+                    </div>
+
+                    <div class="man col-md-6">
+                      <h4 class="text-left">Zipcode</h4>
+                      <input class="text-col-md-3" disabled="disabled" type="text" formControlName="zipcode">
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="manage-box clearfix">
-          <div class="col-md-12">
-            <label><h2>Availibility</h2></label>
-          </div>
+          </form>
 
-          <div class="col-md-12">
-            <div class="row">
-              <table style="width:99%">
-                <thead>
-                  <th style="width:10%;"><input class="text-col-md-3" type="checkbox" [(ngModel)]='avail.pchecker' (click)="allavail()" [ngModelOptions]="{standalone: true}"></th>
-                  <th style="width:30%;" class="text-col-md-3 col-md-3">Day</th>
-                  <th style="width:30%;" class="text-col-md-3 col-md-3">From</th>
-                  <th class="text-col-md-3 col-md-3" >To</th>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let i of dayvalues;index as x;">
-                    <td><input class="text-col-md-3" type="checkbox" [(ngModel)]='avail.daychecker[x]' [ngModelOptions]="{standalone: true}"></td>
-                    <td><label>{{i}}</label></td>
-                    <td *ngIf="avail.daychecker[x]==true"><timepicker class="text-col-md-3" style="padding: 0;" [(ngModel)]='avail.fromtimer[x]' [ngModelOptions]="{standalone: true}" ></timepicker></td>
-                    <td *ngIf="avail.daychecker[x]==true"><timepicker class="text-col-md-3" style="padding: 0;" [(ngModel)]='avail.totimer[x]' [ngModelOptions]="{standalone: true}" ></timepicker></td>
-                    <!--<td><input class="text-col-md-3" type="time" [disabled]="avail.daychecker[x]!==true" [(ngModel)]='avail.fromtimer[x]'
-                        [ngModelOptions]="{standalone: true}"></td>-->
-                    <!--<td><input class="text-col-md-3" type="time" [disabled]="avail.daychecker[x]!==true" [(ngModel)]='avail.totimer[x]'
-                        [ngModelOptions]="{standalone: true}"></td>-->
-                  </tr>
-                </tbody>
-              </table>
+          <div class="row">
+            <div class="col-md-6">
+              <button class="btn btn-white" [routerLink]="['/club/clubteam']">Back</button>
             </div>
-          </div>
-        </div>
-        <div class="manage-box clearfix">
-          <div class="col-md-12">
-            <label><h2>Location</h2></label>
-          </div>
-          <div class="col-md-12">
-            <div class="row">
-              <div class="man col-md-6">
-                <h4 class="text-left">Address<a style="color:#f00 !important;">*</a></h4>
-                <input class="text-col-md-3" type="text" formControlName="address" (setAddress)="setAdd($event)" Googleplace pattern="^\s*(\S\s*){3,}">
-                <div class="alert alert-danger" role="alert" *ngIf="!teamForm.get('address').valid && teamForm.get('address').touched">
-                  Address is required.
-                </div>
-              </div>
-
-              <div class="man col-md-6">
-                <h4 class="text-left">Building</h4>
-                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="building">
-              </div>
-
-              <div class="man col-md-6">
-                <h4 class="text-left">Street</h4>
-                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="street">
-              </div>
-
-              <div class="man col-md-6">
-                <h4 class="text-left">Country<a style="color:#f00 !important;">*</a></h4>
-                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="country" pattern="^\s*(\S\s*){3,}">
-              </div>
-
-              <div class="man col-md-6">
-                <h4 class="text-left">State</h4>
-                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="state" >
-              </div>
-
-              <div class="man col-md-6">
-                <h4 class="text-left">City<a style="color:#f00 !important;">*</a></h4>
-                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="city" pattern="^\s*(\S\s*){3,}">
-              </div>
-
-              <div class="man col-md-6">
-                <h4 class="text-left">Zipcode</h4>
-                <input class="text-col-md-3" disabled="disabled" type="text" formControlName="zipcode">
-              </div>
+            <div class="col-md-6 text-right">
+              <button class="btn btn_green" [disabled]="!teamForm.valid" (click)='getmodeldata(avail);addteam();'>Save</button>
             </div>
           </div>
         </div>
       </div>
-    </form>
-
-    <div class="row">
-      <div class="col-md-6">
-        <button class="btn btn-white" [routerLink]="['/club/clubteam']">Back</button>
-      </div>
-      <div class="col-md-6 text-right">
-        <button class="btn btn_green" [disabled]="!teamForm.valid" (click)='getmodeldata(avail);addteam();'>Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-  </tab>
+    </tab>
     <tab heading="Game" id="gameTab" [active]="tabz == 4">
-        <app-managegame></app-managegame>
-        <app-games></app-games>
+      <app-managegame></app-managegame>
+      <app-games></app-games>
     </tab>
     <tab heading="Ranking" id="rakingTab" [active]="tabz == 6">
-        <!-- <app-manage-club-team-ranking></app-manage-club-team-ranking> -->
-        <app-club-teams-ranking></app-club-teams-ranking>
+      <!-- <app-manage-club-team-ranking></app-manage-club-team-ranking> -->
+      <app-club-teams-ranking></app-club-teams-ranking>
     </tab>
     <tab heading="Players" id="memberTab" [active]="tabz == 2">
       <app-create-player></app-create-player>
     </tab>
     <tab heading="Staff" id="seasonTab" [active]="tabz == 3">
-        <app-create-staff></app-create-staff>
+      <app-create-staff></app-create-staff>
     </tab>
 
     <tab heading="Competitions" id="competitionTab" [active]="tabz == 5">
-        <app-competitions></app-competitions>
+      <app-competitions></app-competitions>
     </tab>
-    </tabset>
+  </tabset>
 </div>

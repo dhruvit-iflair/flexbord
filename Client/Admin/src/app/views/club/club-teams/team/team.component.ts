@@ -25,13 +25,18 @@ export class TeamComponent implements OnInit {
   public teamForm: FormGroup;
   public paramdetails = false;
   public userId; imgdt;
-  public tabz : any;
+  public tabz: any;
   public click = true;
-  public picEnv = environment.picpoint + 'clubteamlogos/' ;
+  public fileSupport: Boolean = false;
+  public fileSizeMin: Boolean = false;
+  public fileSizeMax: Boolean = false;
+  public logoUploading: any = false;
+
+  public picEnv = environment.picpoint + 'clubteamlogos/';
   public avail = { pchecker: false, daychecker: [], fromtimer: [], totimer: [] };
   public finalavailability = { availability: [] };
   public dayvalues = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  constructor(public fb: FormBuilder, private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute,public sportsService:SportsService) {
+  constructor(public fb: FormBuilder, private http: Http, private toastr: ToastrService, private router: Router, public activeRouter: ActivatedRoute, public sportsService: SportsService) {
     this.teamForm = this.fb.group({
       name: ["", [Validators.required]],
       logo: [""],
@@ -48,7 +53,7 @@ export class TeamComponent implements OnInit {
 
   ngOnInit() {
     this.sportsService.getAllSports();
-    this.sportsService.getSportsList().subscribe(res=>{
+    this.sportsService.getSportsList().subscribe(res => {
       this.sportsdata = res;
     })
     this.activeRouter.params.subscribe(params => {
@@ -58,7 +63,7 @@ export class TeamComponent implements OnInit {
         this.http.get(environment.api + '/clubteams/' + this.userId)
           .subscribe(res => {
             var datapatcher = res.json();
-            localStorage.setItem('4tPatcher',datapatcher[0].sports);
+            localStorage.setItem('4tPatcher', datapatcher[0].sports);
             this.teamForm.controls['name'].setValue(datapatcher[0].name);
             this.teamForm.controls['sports'].setValue(datapatcher[0].sports);
             this.teamForm.controls['address'].setValue(datapatcher[0].address);
@@ -68,7 +73,7 @@ export class TeamComponent implements OnInit {
             this.teamForm.controls['state'].setValue(datapatcher[0].state);
             this.teamForm.controls['country'].setValue(datapatcher[0].country);
             this.teamForm.controls['zipcode'].setValue(datapatcher[0].zipcode);
-            this.logo =  datapatcher[0].logo;
+            this.logo = datapatcher[0].logo;
             this.teamForm.value.logo = datapatcher[0].logo;
             this.imgdt = datapatcher[0].logo;
 
@@ -125,33 +130,43 @@ export class TeamComponent implements OnInit {
     }
   }
   readUrl(event: any) {
+    this.logoUploading = true;
     if (event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
-      if (file.type == 'image/jpeg' || file.type == 'image/png' && file.size < 2000000) {
+      this.fileSupport = false; this.fileSizeMin = false; this.fileSizeMax = false;
+      if (file.type == 'image/jpeg' && file.size <= 307200 && file.size > 50000 || file.type == 'image/png' && file.size <= 307200 && file.size > 50000) {
+        this.fileSupport = false; this.fileSizeMin = false; this.fileSizeMax = false;
         let up = new FormData();
         up.append('logo', file);
-        this.http.post(environment.api + "/clubteams/logo", up)
-          .subscribe((res) => {
-            if (res) {
-              var log = res.json();
-              this.teamForm.patchValue({ logo: log });
-              this.imgdt = log;
+        this.http.post(environment.api + "/clubteams/logo", up).subscribe((res) => {
+          this.logoUploading = false;
+          if (res) {
+            var log = res.json();
+            this.teamForm.patchValue({ logo: log });
+            this.imgdt = log;
+            var reader = new FileReader();
+            reader.onload = (event: any) => {
+              this.url = event.target.result;
             }
-            else {
-              this.toastr.error('Error!! Something went wrong! try again later', 'Error');
-            }
-          })
-        var reader = new FileReader();
-        reader.onload = (event: any) => {
-          this.url = event.target.result;
-        }
-        reader.readAsDataURL(event.target.files[0]);
+            reader.readAsDataURL(event.target.files[0]);
+          }
+          else {
+            this.toastr.error('Error!! Something went wrong! try again later', 'Error');
+          }
+        })
       }
       else {
-        if (file.size > 2000000) {
-          this.toastr.warning('Image should be less than 2 Mb!! ', 'Warning');
-
-        } else {
+        this.logoUploading = false;
+        if (file.type == 'image/jpeg' && file.size > 307200 || file.type == 'image/png' && file.size > 307200) {
+          this.fileSizeMax = true;
+          this.toastr.warning('Image should not be more than 100 Kb!! ', 'Warning');
+        }
+        else if (file.type == 'image/jpeg' && file.size < 50000 || file.type == 'image/png' && file.size < 50000) {
+          this.toastr.warning('Image should be more than 50 Kb!! ', 'Warning');
+          this.fileSizeMin = true;
+        }
+        else {
+          this.fileSupport = true;
           this.toastr.error('Only .jpg, .png, .jpeg type of Image supported ', 'Error');
         }
       }
@@ -172,7 +187,7 @@ export class TeamComponent implements OnInit {
     }
   }
   addteam() {
-    if(this.click){
+    if (this.click) {
       this.click = false;
       var clubid = localStorage.getItem('clubid');
       if (this.paramdetails) {
@@ -198,9 +213,9 @@ export class TeamComponent implements OnInit {
               this.toastr.success('Team Updated Successfully', 'Success');
               this.router.navigate(['/club/clubteam']);
             }
-            this.click = true;      
+            this.click = true;
           }, (error) => {
-            this.click = true;                  
+            this.click = true;
             this.toastr.error('Something went wrong !! Please try again later', 'Error');
           })
       }
@@ -225,10 +240,10 @@ export class TeamComponent implements OnInit {
             if (d._id) {
               this.toastr.success('Team added successfully', 'Success');
               this.router.navigate(['/club/clubteam']);
-              this.click = true;                    
+              this.click = true;
             }
           }, (error) => {
-            this.click = true;                  
+            this.click = true;
             this.toastr.error('Something went wrong !! Please try again later', 'Error');
           })
       }
