@@ -34,9 +34,7 @@ input.logo_upload {
     display: none;
 }
 img.image_display {
-    width: 100px;
-    border: 2px solid;
-    
+    width: auto;
     height: 100px;
 }
 #search_places {

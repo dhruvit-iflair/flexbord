@@ -27,7 +27,7 @@ input.logo_upload {
     display: none;
 }
 img.image_display {
-    width: 100px;
+    width: auto;
     height: 100px;
 }
 #search_places {

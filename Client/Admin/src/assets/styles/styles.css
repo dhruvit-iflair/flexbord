@@ -968,9 +968,9 @@ img.image_display_error {
   border: 2px solid #f00;
 }
 
-img.image_display {
+/* img.image_display {
   border: 2px solid rgb(65, 65, 65);
-}
+} */
 
 .nav-header a {
   word-break: break-all;
